@@ -46,6 +46,10 @@ Experiment `setup` 创建临时工作目录和临时 HMAC 密钥，启动 `pytho
 
 `mcp` 同样使用 NiceEval 自定义应用 Adapter，不伪装聊天或模型调用。Adapter 执行固定 `python -m agent_workbench mcp-smoke`，后者通过官方 SDK 完成 initialize、tool discovery、严格 admission、`AgentRuntime` 调用和 stdio server 清理。评估检查唯一 allowlist、命名空间、READ 权限、输出、一次 trace 与参数值脱敏，全程不调用模型。
 
+### Supervisor 消融
+
+`supervisor` 使用自定义应用 Adapter 执行固定 `scripts/benchmark_supervisor.py`。同一份 6 条数据分别运行单一 ResearchAgent 和 Supervisor；评分检查最终引用、无依据拒答或全量 source coverage，不用路由标签代替业务结果。NiceEval 还验证固定分母、成功率提升、平均工具调用下降和每条任务无回退。
+
 终止状态同时检查 Node 的 `exitCode` 和 `signalCode`，避免服务被信号正常终止后重复等待已经发生的 `exit` 事件。
 
 ## 安全边界
@@ -123,4 +127,10 @@ Phase 14 MCP 结果：Experiment `mcp`，Run `d2f75bee-7c98-4dee-a4fb-3d908ada98
 
 ```powershell
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/mcp-run.json"
+```
+
+Phase 15 Supervisor 结果：Experiment `supervisor`，Run `14e019f8-48ce-47c2-a164-fde9cc3b15ac`，Attempt `@15PGA3882A4C2`，`1 passed / 0 failed / 0 errored / 0 reused`，9 条确定性断言通过。固定查询为 `queries/supervisor-run.json`：
+
+```powershell
+wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/supervisor-run.json"
 ```

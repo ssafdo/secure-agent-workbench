@@ -450,14 +450,17 @@ input[type="text"]:focus {
 }
 
 .engine-control {
-  display: flex;
+  display: grid;
+  width: 166px;
   padding: 2px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   background: #eef0f2;
   border: 1px solid #dfe2e5;
   border-radius: 4px;
 }
 
 .engine-option {
+  min-width: 0;
   min-height: 27px;
   padding: 0 9px;
   color: #747981;

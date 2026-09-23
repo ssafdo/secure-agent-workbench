@@ -53,6 +53,14 @@ jobs:
           --require-improvement
           --output artifacts/retrieval/benchmark.json
 
+      - name: Benchmark single agent and routed supervisor
+        env:
+          PYTHONPATH: src
+        run: >-
+          python scripts/benchmark_supervisor.py
+          --require-improvement
+          --output artifacts/supervisor/benchmark.json
+
       - name: Install build tools
         run: sudo apt-get update && sudo apt-get install --yes binutils
 
@@ -120,6 +128,23 @@ jobs:
           python scripts/extract_niceeval_receipt.py
           artifacts/mcp/niceeval.ndjson
 
+      - name: Run supervisor ablation NiceEval gate
+        shell: bash
+        working-directory: niceeval
+        run: |
+          set -o pipefail
+          mkdir -p ../artifacts/supervisor
+          PYTHON="$(command -v python)" \
+          pnpm exec niceeval exp supervisor supervisor/ablation --rerun all --json \
+            --junit ../artifacts/supervisor/niceeval-junit.xml \
+            | tee ../artifacts/supervisor/niceeval.ndjson
+          exit "${PIPESTATUS[0]}"
+
+      - name: Extract supervisor NiceEval receipt
+        run: >-
+          python scripts/extract_niceeval_receipt.py
+          artifacts/supervisor/niceeval.ndjson
+
       - name: Run container NiceEval gate
         shell: bash
         working-directory: niceeval
@@ -162,6 +187,13 @@ jobs:
         with:
           name: mcp-evidence
           path: artifacts/mcp/
+
+      - name: Upload supervisor evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: supervisor-evidence
+          path: artifacts/supervisor/
 
       - name: Attest build proof
         if: github.event_name != 'pull_request' && github.event.repository.visibility == 'public'

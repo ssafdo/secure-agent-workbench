@@ -39,6 +39,24 @@ class AgentRuntime:
         self.model_events: list[dict[str, Any]] = []
         self.context_events: list[dict[str, Any]] = []
         self.reflection_events: list[dict[str, Any]] = []
+        self.routing_events: list[dict[str, Any]] = []
+
+    def record_agent_route(
+        self,
+        supervisor: str,
+        specialist: str,
+        reason: str,
+        signal_count: int,
+    ) -> None:
+        event = {
+            "event": "agent_route",
+            "supervisor": supervisor,
+            "specialist": specialist,
+            "reason": reason,
+            "signalCount": signal_count,
+        }
+        self.routing_events.append(event)
+        self.traces.append(self.context, event)
 
     def record_model_call(
         self,

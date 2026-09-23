@@ -56,7 +56,7 @@
             <h1>研究工作台</h1>
           </div>
           <div class="topbar-meta">
-            <span class="provider-badge"><span></span>DeepSeek</span>
+            <span class="provider-badge"><span></span>Policy Runtime</span>
             <button id="new-session" class="icon-button" type="button" title="新建会话" aria-label="新建会话">↻</button>
           </div>
         </header>
@@ -72,7 +72,8 @@
                   <h2 id="compose-title">任务与资料</h2>
                 </div>
                 <div class="engine-control" role="group" aria-label="执行引擎">
-                  <button class="engine-option active" type="button" data-engine="hosted">DeepSeek</button>
+                  <button class="engine-option active" type="button" data-engine="supervisor">智能路由</button>
+                  <button class="engine-option" type="button" data-engine="hosted">DeepSeek</button>
                   <button class="engine-option" type="button" data-engine="retrieval">检索</button>
                   <button class="engine-option" type="button" data-engine="react">离线</button>
                 </div>
@@ -202,6 +203,7 @@
                   <div><dt>压缩次数</dt><dd id="diag-compactions">—</dd></div>
                   <div><dt>裁剪消息</dt><dd id="diag-truncated">—</dd></div>
                   <div><dt>反思重试</dt><dd id="diag-reflections">—</dd></div>
+                  <div><dt>专业 Agent</dt><dd id="diag-route">—</dd></div>
                 </dl>
               </section>
             </aside>

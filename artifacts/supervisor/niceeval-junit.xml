@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="niceeval" tests="1" failures="0" errors="0" skipped="0" time="11.878">
+    <testcase name="supervisor/ablation [secure-agent-workbench-supervisor-benchmark]" time="0.595"/>
+</testsuite>

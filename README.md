@@ -2,7 +2,7 @@
 
 这是一个从参考架构出发、逐步演进的实习项目。目标不是一次性复制 Open WebUI 或部署一堆服务，而是先建立一个能运行、能测试、能解释安全边界的 Agent 平台内核，再逐步接入 LLM、RAG、MCP、Web UI 和容器执行器。
 
-当前版本为 `0.15.0`，完成 Phase 14：使用官方 Python MCP SDK 接入受控 stdio server，增加显式只读白名单、本地安全描述、严格 JSON Schema、参数复验、调用超时、输出上限、子进程清理与脱敏 trace。项目已发布到私有 GitHub 仓库，Ubuntu CI 执行 Python、检索基准以及 Retrieval、MCP、Container NiceEval 门禁。MCP 与容器能力仍默认关闭，不向 Agent 暴露宿主 Shell。
+当前版本为 `0.16.0`，完成 Phase 15：新增可审计 Supervisor，将证据查证任务交给 Retrieval 专家，将全量资料任务交给 Synthesis 专家；两个专家共享同一个 Runtime、权限、步骤预算和脱敏 trace。6 条混合任务消融中，单 Agent 成功率为 `0.5`，Supervisor 为 `1.0`，平均工具调用从 `4.167` 降至 `3.167`。项目已发布到私有 GitHub 仓库，Ubuntu CI 执行 Python、检索、MCP、Supervisor 与容器 NiceEval 门禁。
 
 ## 已实现
 
@@ -37,6 +37,9 @@
 - 官方 MCP SDK 工具发现只接纳操作员明确列出的只读工具；远端描述不会原样进入模型上下文
 - 严格 MCP schema、调用参数、动态定义指纹、超时、输出上限和子进程回收均有负向测试
 - NiceEval `mcp/mcp/smoke` 使用 9 条确定性断言验证真实 stdio discovery/call，不调用模型
+- Supervisor 只负责意图分类，不拥有工具；Synthesis 与 Retrieval 专家不能绕过统一 Runtime
+- 固定 6 条混合任务同时衡量最终任务成功率和工具调用数，不以路由标签代替业务验收
+- NiceEval `supervisor/supervisor/ablation` 固定验证单 Agent 与 Supervisor 的真实消融结果
 - 模型格式错误、未知工具、无限循环、预算越界和未批准写入回归测试
 - 无模型、无网络即可运行的安全与主流程测试
 
@@ -51,6 +54,7 @@ python -m agent_workbench container-doctor
 python -m agent_workbench container-smoke
 python -m pip install -e ".[mcp]"
 python -m agent_workbench mcp-smoke
+python scripts/benchmark_supervisor.py --require-improvement --output artifacts/supervisor/benchmark.json
 ```
 
 `demo` 会创建隔离项目，放入两份示例资料，调用研究 Agent 生成 `outputs/research-report.md`，并打印项目 ID、报告和 trace 位置。
@@ -58,6 +62,8 @@ python -m agent_workbench mcp-smoke
 HTTP API 的 `/v1/research` 默认使用确定性基线；请求增加 `"engine": "react"` 时走离线模型协议与 ReAct 工具循环。`"engine": "react-recovery"` 是离线故障注入实验路径：首次调用一个不存在的工具，用来证明一次 Reflection 能恢复且不能绕过 Runtime 策略。FakeLLM 不伪造 token 或费用，因此离线 NiceEval 中的 usage 保持 unavailable；hosted 引擎只采用上游实际返回的 token，美元成本保持 `null`。
 
 请求使用 `"engine": "retrieval"` 时走本地检索，不调用托管模型。它只扫描当前项目的 `inputs/*.md|*.txt`，报告与响应中的 citations 会在写入前重新核对源文件和行号。未配置本地模型时使用词法/中文双字基线；配置成功后组合归一化词法分数与余弦相似度。模型缺失、校验失败或编码异常时返回可见的 `lexical-fallback`，不会静默伪装成混合检索。风险模式匹配只提供诊断，不能替代权限、工具白名单和模型侧注入防护。
+
+请求使用 `"engine": "supervisor"` 时，Supervisor 根据任务意图选择 `synthesis` 或 `retrieval` 专家。跨资料汇总信号优先，证据/引用/问句进入检索，无法识别时保守回退到 synthesis。响应的 `routing` 公开专业 Agent、原因码和信号数；trace 只保存这些枚举元数据，不保存任务正文。浏览器工作台默认使用该模式，且该离线路径不会调用 DeepSeek。
 
 ### 可选本地混合检索
 
@@ -199,6 +205,8 @@ wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/nicee
 
 已验证 MCP Run：`d2f75bee-7c98-4dee-a4fb-3d908ada981d`，Attempt `@1KBYF6AT9MVMV`，1/1 通过且 9 条断言全部登记；固定查询为 `niceeval/queries/mcp-run.json`。
 
+已验证 Supervisor 消融 Run：`14e019f8-48ce-47c2-a164-fde9cc3b15ac`，Attempt `@15PGA3882A4C2`，1/1 通过且 9 条断言全部登记；固定查询为 `niceeval/queries/supervisor-run.json`。
+
 第三条命令启动仅监听本机的 Responses 协议模拟器，完整验证 hosted HTTP、function calling、工具策略和报告产物，不访问互联网，也不上报模拟 token。已验证 Run：`43bbf8ac-4dc1-4e4b-ab71-38a546d5e23d`，9/9 断言通过。
 
 第四条命令验证长上下文压缩、超大工具结果裁剪和一次失败恢复。已验证 Run：`4bcba814-fa79-4b30-942f-71e310b6f7dc`，1/1 Attempt 通过；固定查询为 `niceeval/queries/context-recovery-run.json`。
@@ -281,4 +289,4 @@ python -m agent_workbench demo
 
 ## 当前边界
 
-本版本已经实现容器执行器和受控 MCP client，但只有在 `container-doctor` 返回 `ready: true` 后才能把容器视为可运行隔离；MCP server 本身也必须由操作员信任或另行隔离。当前研究 API 不授予 `execute` 权限，也不接受客户端 MCP 配置；不要把宿主 Shell 暴露给模型。hosted Provider 仍是单独的数据出站边界，尚无操作系统级出站白名单。持久化数据库、多 Agent 路由和更强的 microVM 隔离仍在后续阶段。
+本版本已经实现容器执行器、受控 MCP client 和可审计的 Supervisor 专家路由，但只有在 `container-doctor` 返回 `ready: true` 后才能把容器视为可运行隔离；MCP server 本身也必须由操作员信任或另行隔离。当前研究 API 不授予 `execute` 权限，也不接受客户端 MCP 配置；不要把宿主 Shell 暴露给模型。hosted Provider 仍是单独的数据出站边界，尚无操作系统级出站白名单。当前路由收益只在固定的 6 条消融用例上成立，真实领域数据扩展、生产级跨服务编排、持久化数据库和更强的 microVM 隔离仍在后续阶段。

@@ -2,7 +2,7 @@
 
 ## WHAT
 
-Secure Agent Workbench is a small platform core for running specialized agents in isolated project workspaces. Phase 14 adds an optional official-SDK MCP client with explicit read-only admission, local descriptions, strict schemas, bounded calls, subprocess cleanup, and NiceEval evidence on top of the measured hybrid retrieval, private GitHub CI evidence workflow, hard-gated Docker executor, same-origin browser workbench, provider-neutral model loop, versioned sessions, and optional OpenAI-compatible or DeepSeek Responses providers.
+Secure Agent Workbench is a small platform core for running specialized agents in isolated project workspaces. Phase 15 adds an auditable supervisor that routes tasks to synthesis or retrieval specialists through one shared policy runtime, plus a fixed single-agent ablation benchmark and NiceEval gate. It builds on the official-SDK MCP boundary, measured hybrid retrieval, private GitHub CI evidence workflow, hard-gated Docker executor, same-origin browser workbench, provider-neutral model loop, versioned sessions, and optional OpenAI-compatible or DeepSeek Responses providers.
 
 ## WHY
 

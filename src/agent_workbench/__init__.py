@@ -9,6 +9,7 @@ from .providers import (
 )
 from .react import ReActAgent
 from .runtime import AgentRuntime
+from .supervisor import ResearchSupervisor
 from .workspace import WorkspaceManager
 
 __all__ = [
@@ -20,7 +21,8 @@ __all__ = [
     "ReActAgent",
     "ReActResearchAgent",
     "ResearchAgent",
+    "ResearchSupervisor",
     "ResilientModelProvider",
     "WorkspaceManager",
 ]
-__version__ = "0.15.0"
+__version__ = "0.16.0"

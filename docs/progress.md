@@ -175,3 +175,18 @@
 - [x] NiceEval `mcp/mcp/smoke` Run `d2f75bee-7c98-4dee-a4fb-3d908ada981d`、Attempt `@1KBYF6AT9MVMV` 为 1/1 通过，9 条断言全部通过，固定查询无问题。
 - [x] GitHub Actions 增加独立 MCP NiceEval 门禁与 JSON/JUnit/receipt artifact。
 - [ ] 将不可信 MCP server 放入独立容器或 microVM，并在协议 JSON 解析前增加传输字节上限。
+
+## Phase 15：Supervisor 与专业 Agent 路由（本地闭环已完成）
+
+- [x] 新增不拥有工具的 `ResearchSupervisor`，只输出枚举化路由决策。
+- [x] 证据、引用、查证和问句路由到 Retrieval 专家；全量、对比和跨文档任务路由到 Synthesis 专家；未知意图保守回退 Synthesis。
+- [x] 两个专家复用同一个 `AgentRuntime`，步骤预算、项目锁、权限和工具 trace 不因委派重置。
+- [x] 新增 `agent_route` trace，只记录 supervisor、专业 Agent、原因码和信号数，不记录任务正文。
+- [x] HTTP API 和浏览器增加 `supervisor` 引擎，响应公开路由结果，浏览器默认使用离线智能路由。
+- [x] 6 条固定混合集覆盖证据查证、无依据拒答、全量汇总、跨文档比较和保守回退。
+- [x] 单 Agent 成功 `3/6`、Supervisor 成功 `6/6`，成功率差 `+0.5`；平均工具调用 `4.167 -> 3.167`。
+- [x] NiceEval Run `14e019f8-48ce-47c2-a164-fde9cc3b15ac`、Attempt `@15PGA3882A4C2` 为 1/1 通过，9 条断言全部通过，固定查询无问题。
+- [x] Python 完整回归 104 项通过；Supervisor benchmark 可在仓库根目录不设置 `PYTHONPATH` 直接运行。
+- [x] 浏览器实测默认智能路由、禁用不适用的连续会话、显示所选专家；桌面和移动视口的四引擎 2x2 布局无重叠或横向溢出。
+- [x] GitHub Actions 增加 Supervisor benchmark、NiceEval 门禁与独立 evidence artifact。
+- [ ] 扩展到至少 50 条真实领域任务，再决定是否用模型分类器替换规则路由，并比较错误路由成本。

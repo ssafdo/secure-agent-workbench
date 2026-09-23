@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "evidence-api-key",
+      "kind": "evidence",
+      "task": "Which source says the API key must remain in the server environment?",
+      "expectedSpecialist": "retrieval",
+      "expectedPaths": ["inputs/security.md"],
+      "documents": [
+        {"path": "security.md", "content": "The API key must remain in the server environment and must never be returned to the browser."},
+        {"path": "garden.txt", "content": "Tomatoes need full sun and regular watering."}
+      ]
+    },
+    {
+      "id": "evidence-container-network",
+      "kind": "evidence",
+      "task": "Find evidence describing the container network policy.",
+      "expectedSpecialist": "retrieval",
+      "expectedPaths": ["inputs/isolation.md"],
+      "documents": [
+        {"path": "isolation.md", "content": "The execution container runs with network access disabled and a read-only root filesystem."},
+        {"path": "ui.md", "content": "The browser workbench uses a same-origin API."}
+      ]
+    },
+    {
+      "id": "unsupported-backup-schedule",
+      "kind": "unsupported",
+      "task": "Which source states that backups run every minute?",
+      "expectedSpecialist": "retrieval",
+      "expectedPaths": [],
+      "documents": [
+        {"path": "security.md", "content": "Project paths and write approval are enforced by the runtime."},
+        {"path": "ui.md", "content": "The workbench renders reports as text."}
+      ]
+    },
+    {
+      "id": "synthesis-all-sources",
+      "kind": "synthesis",
+      "task": "Summarize all source documents for the project overview.",
+      "expectedSpecialist": "synthesis",
+      "expectedPaths": ["inputs/architecture.md", "inputs/delivery.txt"],
+      "documents": [
+        {"path": "architecture.md", "content": "The runtime owns tool permissions and project locks."},
+        {"path": "delivery.txt", "content": "Every run must preserve an auditable trace."}
+      ]
+    },
+    {
+      "id": "synthesis-comparison",
+      "kind": "synthesis",
+      "task": "Compare every source file and prepare a cross-document overview.",
+      "expectedSpecialist": "synthesis",
+      "expectedPaths": ["inputs/one.md", "inputs/two.md", "inputs/three.txt"],
+      "documents": [
+        {"path": "one.md", "content": "MCP tools require a strict schema."},
+        {"path": "two.md", "content": "Container execution requires explicit approval."},
+        {"path": "three.txt", "content": "Retrieval citations are verified against source lines."}
+      ]
+    },
+    {
+      "id": "synthesis-default",
+      "kind": "synthesis",
+      "task": "Prepare a project briefing.",
+      "expectedSpecialist": "synthesis",
+      "expectedPaths": ["inputs/status.md", "inputs/risks.txt"],
+      "documents": [
+        {"path": "status.md", "content": "The MCP safety phase is complete."},
+        {"path": "risks.txt", "content": "Untrusted servers still require operating-system isolation."}
+      ]
+    }
+  ]
+}

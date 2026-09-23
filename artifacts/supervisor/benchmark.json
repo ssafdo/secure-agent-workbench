@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "dataset": {
+    "path": "benchmarks/supervisor_cases.json",
+    "sha256": "b5d0c8fc3ff9186521850f879fcc985b7634d4fba62d301b371e99eaf41e6cf1"
+  },
+  "single": {
+    "passed": 3,
+    "cases": 6,
+    "successRate": 0.5,
+    "averageToolCalls": 4.167,
+    "averageDurationMs": 10.817,
+    "caseResults": [
+      {
+        "id": "evidence-api-key",
+        "passed": false,
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "toolCalls": 4,
+        "durationMs": 11.66
+      },
+      {
+        "id": "evidence-container-network",
+        "passed": false,
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "toolCalls": 4,
+        "durationMs": 10.402
+      },
+      {
+        "id": "unsupported-backup-schedule",
+        "passed": false,
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "toolCalls": 4,
+        "durationMs": 10.285
+      },
+      {
+        "id": "synthesis-all-sources",
+        "passed": true,
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "toolCalls": 4,
+        "durationMs": 10.525
+      },
+      {
+        "id": "synthesis-comparison",
+        "passed": true,
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "toolCalls": 5,
+        "durationMs": 11.201
+      },
+      {
+        "id": "synthesis-default",
+        "passed": true,
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "toolCalls": 4,
+        "durationMs": 10.83
+      }
+    ]
+  },
+  "supervisor": {
+    "passed": 6,
+    "cases": 6,
+    "successRate": 1.0,
+    "averageToolCalls": 3.167,
+    "averageDurationMs": 10.463,
+    "caseResults": [
+      {
+        "id": "evidence-api-key",
+        "passed": true,
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "toolCalls": 2,
+        "durationMs": 9.655
+      },
+      {
+        "id": "evidence-container-network",
+        "passed": true,
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "toolCalls": 2,
+        "durationMs": 11.76
+      },
+      {
+        "id": "unsupported-backup-schedule",
+        "passed": true,
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "toolCalls": 2,
+        "durationMs": 8.123
+      },
+      {
+        "id": "synthesis-all-sources",
+        "passed": true,
+        "specialist": "synthesis",
+        "routingCorrect": true,
+        "toolCalls": 4,
+        "durationMs": 10.579
+      },
+      {
+        "id": "synthesis-comparison",
+        "passed": true,
+        "specialist": "synthesis",
+        "routingCorrect": true,
+        "toolCalls": 5,
+        "durationMs": 13.9
+      },
+      {
+        "id": "synthesis-default",
+        "passed": true,
+        "specialist": "synthesis",
+        "routingCorrect": true,
+        "toolCalls": 4,
+        "durationMs": 8.762
+      }
+    ]
+  },
+  "successRateDelta": 0.5
+}

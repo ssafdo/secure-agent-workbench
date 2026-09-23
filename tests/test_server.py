@@ -216,6 +216,55 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(body["report"]["citations"], [])
         self.assertIn("cannot provide a source-grounded answer", body["report"]["content"])
 
+    def test_supervisor_routes_to_retrieval_and_exposes_reason(self) -> None:
+        status, body = self.request(
+            "POST",
+            "/v1/research",
+            {
+                "engine": "supervisor",
+                "task": "Which source explains where the API key must remain?",
+                "sources": [
+                    {
+                        "path": "security.md",
+                        "content": "The API key must remain in the server environment.",
+                    },
+                    {"path": "garden.txt", "content": "Tomatoes need full sun."},
+                ],
+            },
+        )
+
+        self.assertEqual(status, 200)
+        self.assertEqual(body["engine"], "supervisor")
+        self.assertEqual(body["routing"]["specialist"], "retrieval")
+        self.assertEqual(body["routing"]["reason"], "evidence-grounded-query")
+        self.assertEqual(body["agentDiagnostics"]["routes"], 1)
+        self.assertEqual(
+            [action["name"] for action in body["actions"]],
+            ["search_text", "write_text"],
+        )
+        self.assertEqual(body["report"]["citations"][0]["path"], "inputs/security.md")
+
+    def test_supervisor_routes_cross_source_summary_to_synthesis(self) -> None:
+        status, body = self.request(
+            "POST",
+            "/v1/research",
+            {
+                "engine": "supervisor",
+                "task": "Summarize all source documents for the project overview.",
+                "sources": [
+                    {"path": "one.md", "content": "First fact."},
+                    {"path": "two.txt", "content": "Second fact."},
+                ],
+            },
+        )
+
+        self.assertEqual(status, 200)
+        self.assertEqual(body["routing"]["specialist"], "synthesis")
+        self.assertEqual(body["routing"]["reason"], "cross-source-synthesis")
+        self.assertEqual(
+            body["report"]["sourceFiles"], ["inputs/one.md", "inputs/two.txt"]
+        )
+
     def test_rejects_unknown_research_engine(self) -> None:
         status, body = self.request(
             "POST",

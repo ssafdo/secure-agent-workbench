@@ -45,6 +45,7 @@ const elements = {
   diagCompactions: document.querySelector("#diag-compactions"),
   diagTruncated: document.querySelector("#diag-truncated"),
   diagReflections: document.querySelector("#diag-reflections"),
+  diagRoute: document.querySelector("#diag-route"),
   serviceDot: document.querySelector("#service-dot"),
   serviceLabel: document.querySelector("#service-label"),
   recentRuns: document.querySelector("#recent-runs"),
@@ -52,7 +53,7 @@ const elements = {
 };
 
 const state = {
-  engine: "hosted",
+  engine: "supervisor",
   sessionId: makeSessionId(),
   sessionVersion: 0,
   controller: null,
@@ -203,6 +204,7 @@ function selectEngine(engine) {
     button.setAttribute("aria-pressed", active ? "true" : "false");
   });
   const labels = {
+    supervisor: "正在选择专业 Agent",
     hosted: "正在调用 DeepSeek",
     retrieval: "正在检索项目资料",
     react: "正在运行离线 ReAct",
@@ -213,7 +215,7 @@ function selectEngine(engine) {
       ? "DeepSeek 模式会将任务和资料内容发送给配置的 DeepSeek API。"
       : "离线模式不会把任务或资料发送到外部模型服务。";
   elements.transferBoundary.classList.toggle("local", engine !== "hosted");
-  const supportsSession = engine !== "retrieval";
+  const supportsSession = engine === "hosted" || engine === "react";
   if (!supportsSession) elements.sessionToggle.checked = false;
   elements.sessionToggle.disabled = !supportsSession;
   elements.resetSession.disabled = !supportsSession;
@@ -240,8 +242,9 @@ function setRunning(running) {
   elements.importFiles.disabled = running || elements.sourceList.children.length >= MAX_SOURCES;
   elements.fileInput.disabled = running;
   elements.engineOptions.forEach((button) => (button.disabled = running));
-  elements.sessionToggle.disabled = running || state.engine === "retrieval";
-  elements.resetSession.disabled = running || state.engine === "retrieval";
+  const supportsSession = state.engine === "hosted" || state.engine === "react";
+  elements.sessionToggle.disabled = running || !supportsSession;
+  elements.resetSession.disabled = running || !supportsSession;
   elements.cancelButton.hidden = !running;
   elements.runLabel.textContent = running ? "正在运行" : "运行研究";
 
@@ -263,6 +266,7 @@ function resetMetrics() {
   elements.diagCompactions.textContent = "—";
   elements.diagTruncated.textContent = "—";
   elements.diagReflections.textContent = "—";
+  elements.diagRoute.textContent = "—";
 }
 
 function renderActions(actions = []) {
@@ -319,6 +323,7 @@ function renderResult(body, durationMs) {
   elements.diagCompactions.textContent = formatNumber(diagnostics.contextCompactions ?? 0);
   elements.diagTruncated.textContent = formatNumber(diagnostics.truncatedMessages ?? 0);
   elements.diagReflections.textContent = formatNumber(diagnostics.reflections ?? 0);
+  elements.diagRoute.textContent = body.routing?.specialist ?? "—";
   renderActions(body.actions);
 
   if (body.session) {
@@ -346,6 +351,7 @@ function addRecentRun(task, engine, durationMs) {
     title.textContent = run.task;
     const meta = document.createElement("span");
     const engineLabel = {
+      supervisor: "智能路由",
       hosted: "DeepSeek",
       retrieval: "检索",
       react: "离线",
@@ -452,7 +458,7 @@ elements.downloadReport.addEventListener("click", () => {
 });
 
 addSource(initialSource);
-selectEngine("hosted");
+selectEngine("supervisor");
 updateTaskCount();
 updateSessionDisplay();
 checkHealth();

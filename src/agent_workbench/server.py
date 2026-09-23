@@ -26,6 +26,7 @@ from .modeling import (
 from .models import WorkbenchError
 from .runtime import AgentRuntime
 from .sessions import SessionConflict, SessionExpired, SessionRecord, SessionStore
+from .supervisor import ResearchSupervisor
 from .tools import build_default_registry
 from .tracing import TraceStore
 from .workspace import WorkspaceManager
@@ -180,9 +181,10 @@ class WorkbenchRequestHandler(BaseHTTPRequestHandler):
             "react",
             "react-recovery",
             "hosted",
+            "supervisor",
         }:
             raise ValueError(
-                "engine must be deterministic, retrieval, react, react-recovery or hosted"
+                "engine must be deterministic, retrieval, react, react-recovery, hosted or supervisor"
             )
         if session_id is None:
             if expected_version is not None:
@@ -193,7 +195,7 @@ class WorkbenchRequestHandler(BaseHTTPRequestHandler):
             self.server.sessions.validate_id(session_id)
             if expected_version is None:
                 raise ValueError("sessionId requires expectedVersion.")
-            if engine in {"deterministic", "retrieval"}:
+            if engine in {"deterministic", "retrieval", "supervisor"}:
                 raise ValueError("sessions require react, react-recovery or hosted engine.")
 
         request_id = uuid.uuid4().hex
@@ -263,6 +265,7 @@ class WorkbenchRequestHandler(BaseHTTPRequestHandler):
             TraceStore(),
             max_steps=MAX_SOURCES + 4,
         )
+        routing: dict[str, str | int] | None = None
         if engine == "hosted":
             if self.server.hosted_provider is None:
                 raise ValueError("hosted engine is not configured on this server")
@@ -283,6 +286,10 @@ class WorkbenchRequestHandler(BaseHTTPRequestHandler):
             )
         elif engine == "retrieval":
             report = RetrievalResearchAgent(runtime).run(task, approve_write=True)
+        elif engine == "supervisor":
+            supervised = ResearchSupervisor(runtime).run(task, approve_write=True)
+            report = supervised.report
+            routing = supervised.routing.response()
         else:
             report = ResearchAgent(runtime).run(task, approve_write=True)
         return {
@@ -312,7 +319,9 @@ class WorkbenchRequestHandler(BaseHTTPRequestHandler):
                     for event in runtime.context_events
                 ),
                 "reflections": len(runtime.reflection_events),
+                "routes": len(runtime.routing_events),
             },
+            **({} if routing is None else {"routing": routing}),
             "actions": [
                 {
                     "id": f"tool-{event['step']}",

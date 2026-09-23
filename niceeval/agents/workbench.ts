@@ -10,7 +10,7 @@ import type { JsonValue, StreamEvent } from "niceeval";
 interface ResearchRequest {
   task: string;
   sources: Array<{ path: string; content: string }>;
-  engine?: "deterministic" | "retrieval" | "react" | "react-recovery" | "hosted";
+  engine?: "deterministic" | "retrieval" | "react" | "react-recovery" | "hosted" | "supervisor";
   persistSession?: boolean;
 }
 
@@ -52,6 +52,12 @@ interface ResearchResponse {
     compactedMessages: number;
     truncatedMessages: number;
     reflections: number;
+    routes?: number;
+  };
+  routing?: {
+    specialist: "synthesis" | "retrieval";
+    reason: string;
+    signalCount: number;
   };
   session?: {
     id: string;
@@ -92,9 +98,10 @@ function parseRequest(text: string): ResearchRequest {
     request.engine !== "react" &&
     request.engine !== "react-recovery" &&
     request.engine !== "hosted"
+    && request.engine !== "supervisor"
   ) {
     throw new TypeError(
-      "Research eval engine must be deterministic, retrieval, react, react-recovery or hosted.",
+      "Research eval engine must be deterministic, retrieval, react, react-recovery, hosted or supervisor.",
     );
   }
   if (
@@ -227,6 +234,7 @@ export function workbenchAgent(options: {
           ...(body.agentDiagnostics === undefined
             ? {}
             : { diagnostics: body.agentDiagnostics }),
+          ...(body.routing === undefined ? {} : { routing: body.routing }),
         },
         ...(options.reportUsage && body.modelUsage
           ? {
