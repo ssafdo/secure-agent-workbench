@@ -17,6 +17,7 @@ class ResearchReport:
     artifact_path: str
     content: str
     model_usage: dict[str, int | float | None] | None = None
+    citations: tuple[dict[str, Any], ...] = ()
 
 
 class ResearchAgent:
@@ -76,6 +77,120 @@ class ResearchAgent:
         if written.status is not ToolStatus.SUCCEEDED:
             raise WorkbenchError(written.error or "Unable to write report.")
         return ResearchReport(task, source_files, str(written.output), content)
+
+
+class RetrievalResearchAgent:
+    """A deterministic retrieval baseline with source-verified citations."""
+
+    artifact_path = "outputs/retrieval-research-report.md"
+
+    def __init__(self, runtime: AgentRuntime) -> None:
+        self.runtime = runtime
+
+    def _verify_match(self, value: object) -> dict[str, Any]:
+        if not isinstance(value, dict):
+            raise WorkbenchError("Retrieval result contains a non-object citation.")
+        path = value.get("path")
+        start = value.get("startLine")
+        end = value.get("endLine")
+        text = value.get("text")
+        if (
+            not isinstance(path, str)
+            or not path.startswith("inputs/")
+            or not isinstance(start, int)
+            or isinstance(start, bool)
+            or not isinstance(end, int)
+            or isinstance(end, bool)
+            or not isinstance(text, str)
+            or start < 1
+            or end < start
+        ):
+            raise WorkbenchError("Retrieval citation shape is invalid.")
+        source = self.runtime.workspace.safe_content_path(self.runtime.context, path)
+        lines = source.read_text(encoding="utf-8").splitlines()
+        if end > len(lines) or "\n".join(lines[start - 1 : end]).strip() != text:
+            raise WorkbenchError("Retrieval citation does not match its source lines.")
+        citation = value.get("citation")
+        expected = f"{path}#L{start}-L{end}"
+        if citation != expected:
+            raise WorkbenchError("Retrieval citation label is invalid.")
+        risks = value.get("riskSignals", [])
+        if not isinstance(risks, list) or any(not isinstance(item, str) for item in risks):
+            raise WorkbenchError("Retrieval risk signals are invalid.")
+        return value
+
+    def run(self, task: str, approve_write: bool = False) -> ResearchReport:
+        if not task.strip():
+            raise ValueError("Research task cannot be empty.")
+        searched = self.runtime.call("search_text", {"query": task, "limit": 5})
+        if searched.status is not ToolStatus.SUCCEEDED or not isinstance(
+            searched.output, dict
+        ):
+            raise WorkbenchError(searched.error or "Unable to search project sources.")
+        raw_matches = searched.output.get("matches")
+        if not isinstance(raw_matches, list):
+            raise WorkbenchError("Retrieval response omitted matches.")
+        citations = tuple(self._verify_match(item) for item in raw_matches)
+        source_files = tuple(dict.fromkeys(str(item["path"]) for item in citations))
+        risky = sum(bool(item.get("instructionRisk")) for item in citations)
+
+        if citations:
+            evidence = [
+                f"- [{item['citation']}] {str(item['text']).replace(chr(10), ' ')}"
+                for item in citations
+            ]
+            conclusion = (
+                "The retrieved passages above are the complete supported evidence for "
+                "this deterministic answer. Claims beyond them require additional sources."
+            )
+        else:
+            evidence = ["- No relevant passage was found in the supplied sources."]
+            conclusion = (
+                "I cannot provide a source-grounded answer because the supplied documents "
+                "contain no relevant evidence."
+            )
+        safety = (
+            f"Detected instruction-like content in {risky} retrieved passage(s); it was "
+            "treated only as untrusted evidence and was not executed."
+            if risky
+            else "No instruction-like content was detected in the retrieved passages."
+        )
+        content = "\n".join(
+            [
+                "# Grounded Research Report",
+                "",
+                "## Task",
+                "",
+                task.strip(),
+                "",
+                "## Retrieved Evidence",
+                "",
+                *evidence,
+                "",
+                "## Safety Review",
+                "",
+                safety,
+                "",
+                "## Grounded Conclusion",
+                "",
+                conclusion,
+                "",
+            ]
+        )
+        written = self.runtime.call(
+            "write_text",
+            {"path": self.artifact_path, "content": content},
+            approved=approve_write,
+        )
+        if written.status is not ToolStatus.SUCCEEDED:
+            raise WorkbenchError(written.error or "Unable to write retrieval report.")
+        return ResearchReport(
+            task,
+            source_files,
+            str(written.output),
+            content,
+            citations=citations,
+        )
 
 
 def _usage() -> dict[str, int | float]:

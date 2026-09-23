@@ -2,7 +2,7 @@
 
 这是一个从参考架构出发、逐步演进的实习项目。目标不是一次性复制 Open WebUI 或部署一堆服务，而是先建立一个能运行、能测试、能解释安全边界的 Agent 平台内核，再逐步接入 LLM、RAG、MCP、Web UI 和容器执行器。
 
-当前版本为 `0.12.0`，完成 Phase 11：项目已发布到私有 GitHub 仓库，Ubuntu CI 从源码重建容器、执行 Python 与 NiceEval 门禁，并上传经过校验的 CycloneDX SBOM 和构建证明。GitHub 不向个人账号的私有仓库提供 Artifact Attestations，只有仓库公开后才执行 OIDC provenance/SBOM 签发。默认路径仍不访问网络或执行进程；只有服务端显式配置执行器和权限后，才会注册容器工具。
+当前版本为 `0.13.0`，完成 Phase 12 首版：新增完全本地的资料分块与检索、可回查到文件行号的结构化引用、无依据拒答和资料内 Prompt Injection 风险标记。项目已发布到私有 GitHub 仓库，Ubuntu CI 从源码重建容器、执行 Python 与 NiceEval 门禁，并上传经过校验的 CycloneDX SBOM 和构建证明。默认路径仍不访问网络或执行进程；只有服务端显式配置执行器和权限后，才会注册容器工具。
 
 ## 已实现
 
@@ -22,6 +22,8 @@
 - DeepSeek Responses API 专用配置、完整历史重放、受控工具调用、重试与熔断
 - 同源浏览器工作台：任务与资料编辑、DeepSeek/离线模式、连续会话、报告、工具轨迹和用量诊断
 - 文本附件桥：浏览器导入 `.md/.txt`、同名更新、20 份/单份 200 KB 边界和 Markdown 报告下载
+- 本地检索引擎：按段落/大小分块、英文词与中文双字检索、BM25 风格排序、`path#Lx-Ly` 引用和逐条源文校验
+- 检索报告在没有相关证据时明确拒答；资料中的指令覆盖、密钥外传和命令执行文本只作为风险信号，不触发额外工具
 - 硬门控容器执行器：摘要锁定镜像、结构化 argv、可执行文件白名单、无网络、只读根文件系统、非 root 和资源上限
 - 容器只挂载当前项目的 `inputs`（只读）、`work` 和 `outputs`；不挂载 `.agent`、Docker socket 或宿主机密钥
 - `container-doctor` 以 JSON 报告 Docker CLI、daemon、镜像摘要、镜像本地可用性与执行器就绪状态
@@ -29,6 +31,7 @@
 - NiceEval `container/container/smoke` 使用 11 条确定性断言验证真实 Docker 执行，不调用模型、不产生 API 费用
 - 生成 CycloneDX SBOM 和包含源文件、二进制、Dockerfile、镜像及 NiceEval 证据哈希的构建证明
 - GitHub Actions 可从源码重建静态 runner 与 scratch 镜像，执行测试和 NiceEval，并上传证据；非 PR 运行配置 OIDC provenance/SBOM attestation
+- GitHub Actions 独立执行 `research/retrieval` NiceEval 门禁并上传 JSON、JUnit 与 receipt 证据
 - 模型格式错误、未知工具、无限循环、预算越界和未批准写入回归测试
 - 无模型、无网络即可运行的安全与主流程测试
 
@@ -46,6 +49,8 @@ python -m agent_workbench container-smoke
 `demo` 会创建隔离项目，放入两份示例资料，调用研究 Agent 生成 `outputs/research-report.md`，并打印项目 ID、报告和 trace 位置。
 
 HTTP API 的 `/v1/research` 默认使用确定性基线；请求增加 `"engine": "react"` 时走离线模型协议与 ReAct 工具循环。`"engine": "react-recovery"` 是离线故障注入实验路径：首次调用一个不存在的工具，用来证明一次 Reflection 能恢复且不能绕过 Runtime 策略。FakeLLM 不伪造 token 或费用，因此离线 NiceEval 中的 usage 保持 unavailable；hosted 引擎只采用上游实际返回的 token，美元成本保持 `null`。
+
+请求使用 `"engine": "retrieval"` 时走本地确定性检索，不调用外部模型。它只扫描当前项目的 `inputs/*.md|*.txt`，报告与响应中的 citations 会在写入前重新核对源文件和行号。当前检索是可复现的词法/中文双字基线，不是向量语义检索；风险模式匹配只提供诊断，不能替代权限、工具白名单和模型侧注入防护。
 
 需要跨请求续接时，为 `react`、`react-recovery` 或 `hosted` 请求增加 `"sessionId"` 和 `"expectedVersion"`。首次版本为 `0`，成功响应会返回 `session.version = 1`；下一次必须传回该版本。陈旧版本返回 HTTP 409，过期会话返回 HTTP 410，客户端随后可用版本 `0` 重新开始。会话正文保存在项目内部 `.agent/sessions/`，因此当前版本不适合在磁盘不可信或多人共享的宿主机上保存敏感内容。
 

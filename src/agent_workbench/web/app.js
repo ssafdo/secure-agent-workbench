@@ -202,12 +202,22 @@ function selectEngine(engine) {
     button.classList.toggle("active", active);
     button.setAttribute("aria-pressed", active ? "true" : "false");
   });
-  elements.loadingLabel.textContent = engine === "hosted" ? "正在调用 DeepSeek" : "正在运行离线 ReAct";
+  const labels = {
+    hosted: "正在调用 DeepSeek",
+    retrieval: "正在检索项目资料",
+    react: "正在运行离线 ReAct",
+  };
+  elements.loadingLabel.textContent = labels[engine] ?? "正在运行研究任务";
   elements.transferBoundary.textContent =
     engine === "hosted"
       ? "DeepSeek 模式会将任务和资料内容发送给配置的 DeepSeek API。"
       : "离线模式不会把任务或资料发送到外部模型服务。";
   elements.transferBoundary.classList.toggle("local", engine !== "hosted");
+  const supportsSession = engine !== "retrieval";
+  if (!supportsSession) elements.sessionToggle.checked = false;
+  elements.sessionToggle.disabled = !supportsSession;
+  elements.resetSession.disabled = !supportsSession;
+  updateSessionDisplay();
 }
 
 function updateSessionDisplay() {
@@ -230,8 +240,8 @@ function setRunning(running) {
   elements.importFiles.disabled = running || elements.sourceList.children.length >= MAX_SOURCES;
   elements.fileInput.disabled = running;
   elements.engineOptions.forEach((button) => (button.disabled = running));
-  elements.sessionToggle.disabled = running;
-  elements.resetSession.disabled = running;
+  elements.sessionToggle.disabled = running || state.engine === "retrieval";
+  elements.resetSession.disabled = running || state.engine === "retrieval";
   elements.cancelButton.hidden = !running;
   elements.runLabel.textContent = running ? "正在运行" : "运行研究";
 
@@ -335,7 +345,12 @@ function addRecentRun(task, engine, durationMs) {
     const title = document.createElement("strong");
     title.textContent = run.task;
     const meta = document.createElement("span");
-    meta.textContent = `${run.engine === "hosted" ? "DeepSeek" : "离线"} · ${(run.durationMs / 1000).toFixed(1)}s · ${run.at.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" })}`;
+    const engineLabel = {
+      hosted: "DeepSeek",
+      retrieval: "检索",
+      react: "离线",
+    }[run.engine] ?? run.engine;
+    meta.textContent = `${engineLabel} · ${(run.durationMs / 1000).toFixed(1)}s · ${run.at.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" })}`;
     item.append(title, meta);
     elements.recentRuns.append(item);
   });

@@ -10,7 +10,7 @@ import type { JsonValue, StreamEvent } from "niceeval";
 interface ResearchRequest {
   task: string;
   sources: Array<{ path: string; content: string }>;
-  engine?: "deterministic" | "react" | "react-recovery" | "hosted";
+  engine?: "deterministic" | "retrieval" | "react" | "react-recovery" | "hosted";
   persistSession?: boolean;
 }
 
@@ -28,6 +28,16 @@ interface ResearchResponse {
     artifactPath: string;
     content: string;
     sourceFiles: string[];
+    citations?: Array<{
+      citation: string;
+      path: string;
+      startLine: number;
+      endLine: number;
+      text: string;
+      score: number;
+      instructionRisk: boolean;
+      riskSignals: string[];
+    }>;
   };
   actions: ResearchAction[];
   modelUsage?: {
@@ -77,12 +87,13 @@ function parseRequest(text: string): ResearchRequest {
   if (
     request.engine !== undefined &&
     request.engine !== "deterministic" &&
+    request.engine !== "retrieval" &&
     request.engine !== "react" &&
     request.engine !== "react-recovery" &&
     request.engine !== "hosted"
   ) {
     throw new TypeError(
-      "Research eval engine must be deterministic, react, react-recovery or hosted.",
+      "Research eval engine must be deterministic, retrieval, react, react-recovery or hosted.",
     );
   }
   if (

@@ -122,7 +122,7 @@
 - [x] 本地证据绑定镜像 ID、runner 源码/二进制/Dockerfile 哈希、11 条断言与 NiceEval Run ID，并通过独立 verifier。
 - [x] 当前 Python 完整回归 69 项通过，NiceEval 配置检查通过，Docker 无残留容器。
 - [x] 工作流已配置 `actions/attest-build-provenance@v2` 与 `actions/attest-sbom@v2`，仅在非 PR 运行签发。
-- [ ] 将当前目录初始化/推送到 GitHub 后运行 workflow，获得首份真实 GitHub OIDC attestation；当前不能声称已经签发。
+- [x] 已推送私有 GitHub 仓库并完成远端 workflow；个人私有仓库不支持的 OIDC attestation 限制在 Phase 11 明确记录。
 
 ## Phase 11：GitHub 发布与远端证明（私有仓库能力范围内已完成）
 
@@ -138,3 +138,15 @@
 ## 每次迭代固定流程
 
 `问题/假设 -> eval case -> 最小实现 -> 回归测试 -> trace 分析 -> 风险台账 -> 决定保留或回滚`
+
+## Phase 12：本地检索、引用与注入防护（首版完成）
+
+- [x] 新增确定性分块与 BM25 风格词法检索，支持英文 token 和中文双字片段。
+- [x] `search_text` 只扫描当前项目 `inputs/*.md|*.txt`，返回最多 10 条带行号的结构化结果。
+- [x] 新增 `retrieval` 引擎和浏览器模式；无相关证据时明确拒答，且不允许持久会话。
+- [x] 报告写入前逐条验证 path、行范围、citation 标签与源文正文，伪造引用测试会失败。
+- [x] 指令覆盖、密钥外传与命令执行模式被标记为风险信号；资料不会引发额外工具调用。
+- [x] NiceEval `research/retrieval` Run `f6f3f22e-db4d-41bb-98a1-f0ec1e3d5ac1` 为 1/1 通过，Attempt `@1S8AM96JEVCA6` 的 8 条断言全部通过。
+- [x] 当前 Python 完整回归 78 项通过，固定查询返回 `issues: []`，NiceEval 配置检查通过。
+- [x] GitHub Actions 增加独立 retrieval NiceEval 门禁与 JSON/JUnit/receipt artifact。
+- [ ] 引入本地 embedding 与混合重排，使用同义表达、跨语言和矛盾资料数据集衡量 Recall@K、MRR 与引用正确率。

@@ -31,6 +31,9 @@
 | EXEC-001 | Mitigated | Critical | 模型可能通过 Shell 字符串、PATH 或任意二进制扩大执行面 | 只接受 argv 数组与纯文件名白名单；镜像摘要锁定；execute 权限和批准双重门控 |
 | EXEC-002 | Partial | High | Docker daemon、镜像供应链或宿主配置错误会削弱容器边界 | 使用 `scratch` 与本地静态 runner；doctor、真实冒烟、SBOM、构建证明与 CI 校验已完成，GitHub OIDC attestation 已配置但待远端首次签发 |
 | CI-001 | Partial | Medium | 个人账号私有仓库不支持 GitHub Artifact Attestations，已验证证据包不能等同于 OIDC 签名 | 私有仓库继续上传校验后的证据 artifact 并明确 notice；仓库公开或迁移到支持该功能的组织后才启用 provenance/SBOM attestation |
+| RAG-001 | Partial | Medium | 当前检索是词法/中文双字基线，同义表达或跨语言问题可能漏召回 | 固定检索 NiceEval 已覆盖相关/无关/注入资料；后续引入本地 embedding 与混合重排并做消融比较 |
+| RAG-002 | Mitigated | High | 检索结果可能伪造路径、行号或正文，造成不可追溯引用 | 写报告前重新读取项目内源文件，逐条核对路径、行范围、citation 标签和正文；伪造引用有负向测试 |
+| RAG-003 | Partial | Critical | 资料中的 Prompt Injection 可能诱导模型泄密或调用高风险工具 | 当前确定性检索引擎不执行资料指令，风险模式只作诊断；权限、工具白名单和无宿主 Shell 仍是安全边界，hosted RAG 需单独攻防评估 |
 | EXEC-003 | Mitigated | High | 容器超时后可能残留进程，输出可能耗尽内存 | 随机容器名、超时 `rm -f`、CPU/内存/PID 限制和 stdout/stderr 截断均有测试 |
 
 ## 记录规则

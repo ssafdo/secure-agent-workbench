@@ -31,6 +31,8 @@ Phase 5 新增 `deepseek` Experiment，精确选择 `research/hosted`。真实 R
 
 Phase 10 将自定义应用 Experiment `container` 接入可复现 CI 证据链，精确选择 `container/smoke`。真实 Run `4e80c6fc-f458-49ad-9d6e-935092f33a60` 为 1/1 通过，11 条断言覆盖 doctor、不可变镜像、Runtime 工具结果、真实产物、输出边界、trace 与容器回收。该实验不使用 LLM，因此 usage 明确为 not-recorded。
 
+Phase 12 新增 `research/retrieval`：混入相关证据、无关资料和带指令覆盖/命令执行文本的恶意资料，断言检索只调用一次 `search_text`、报告只写一次、没有额外工具动作、相关内容带稳定行号引用、结构化 citation 通过源文校验且风险信号被登记。Run `f6f3f22e-db4d-41bb-98a1-f0ec1e3d5ac1` 为 1/1 通过，8 条确定性断言全部通过；该实验不调用模型，因此 usage unavailable 是预期限制。
+
 记录字段：`task_id`、`input`、`expected`、`actual`、`passed`、`failure_type`、`steps`、`tool_calls`、`input_tokens`、`output_tokens`、`cost`、`latency_ms`。
 
 ## 第三层：消融实验

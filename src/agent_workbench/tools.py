@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Callable
 
 from .models import Permission, ProjectContext, ToolSpec
+from .retrieval import MAX_RESULTS, search_documents
 from .workspace import WorkspaceManager
 
 if TYPE_CHECKING:
@@ -76,6 +77,26 @@ def _write_text(context: ProjectContext, arguments: dict[str, Any]) -> str:
     return str(path.relative_to(context.root)).replace("\\", "/")
 
 
+def _search_text(context: ProjectContext, arguments: dict[str, Any]) -> dict[str, object]:
+    query = arguments.get("query")
+    limit = arguments.get("limit", 5)
+    if not isinstance(query, str):
+        raise TypeError("search_text query must be a string.")
+    if not isinstance(limit, int) or isinstance(limit, bool):
+        raise TypeError("search_text limit must be an integer.")
+    input_root = WorkspaceManager.safe_content_path(context, "inputs")
+    documents: list[tuple[str, str]] = []
+    for path in sorted(input_root.rglob("*")):
+        if not path.is_file() or path.suffix.lower() not in {".md", ".txt"}:
+            continue
+        relative = str(path.relative_to(context.root)).replace("\\", "/")
+        safe_path = WorkspaceManager.safe_content_path(context, relative)
+        if safe_path.stat().st_size > MAX_TEXT_BYTES:
+            continue
+        documents.append((relative, safe_path.read_text(encoding="utf-8")))
+    return search_documents(query, documents, limit=limit)
+
+
 def build_default_registry(
     container_executor: ContainerExecutor | None = None,
 ) -> ToolRegistry:
@@ -110,6 +131,28 @@ def build_default_registry(
             },
         ),
         _read_text,
+    )
+    registry.register(
+        ToolSpec(
+            "search_text",
+            "Search chunked Markdown and text files beneath the current project's inputs "
+            "directory. Returns ranked excerpts with verified line-oriented citation data.",
+            Permission.READ,
+            {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "minLength": 1},
+                    "limit": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": MAX_RESULTS,
+                    },
+                },
+                "required": ["query", "limit"],
+                "additionalProperties": False,
+            },
+        ),
+        _search_text,
     )
     registry.register(
         ToolSpec(

@@ -67,6 +67,22 @@ jobs:
         working-directory: niceeval
         run: pnpm install --frozen-lockfile
 
+      - name: Run retrieval NiceEval gate
+        shell: bash
+        working-directory: niceeval
+        run: |
+          set -o pipefail
+          mkdir -p ../artifacts/retrieval
+          pnpm exec niceeval exp local research/retrieval --rerun all --json \
+            --junit ../artifacts/retrieval/niceeval-junit.xml \
+            | tee ../artifacts/retrieval/niceeval.ndjson
+          exit "${PIPESTATUS[0]}"
+
+      - name: Extract retrieval NiceEval receipt
+        run: >-
+          python scripts/extract_niceeval_receipt.py
+          artifacts/retrieval/niceeval.ndjson
+
       - name: Run container NiceEval gate
         shell: bash
         working-directory: niceeval
@@ -95,6 +111,13 @@ jobs:
           path: |
             artifacts/container/
             containers/agent-runner
+
+      - name: Upload retrieval evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retrieval-evidence
+          path: artifacts/retrieval/
 
       - name: Attest build proof
         if: github.event_name != 'pull_request' && github.event.repository.visibility == 'public'

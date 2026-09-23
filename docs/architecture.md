@@ -32,6 +32,8 @@
 - `cli`：命令行入口和 loopback HTTP 服务启动器。
 - `web`：由同一 HTTP 服务提供的静态工作台；只调用同源 API，不接触模型密钥。
 - `ContainerExecutor`：可选的 Docker CLI 适配层；要求摘要锁定镜像和 argv 白名单，并以无网络、只读、非 root、资源受限配置运行。
+- `search_text`：固定读取当前项目 `inputs` 的本地检索工具；分块、排序并返回行号引用与风险信号。
+- `RetrievalResearchAgent`：只消费 `search_text` 的结构化结果，重新核对源文后生成有引用的报告或无依据拒答。
 
 ## 信任边界
 
@@ -63,6 +65,8 @@ Phase 7 的附件桥只处理 UTF-8 文本：浏览器读取用户选择的 `.md
 Phase 8 的执行器默认不注册，也不会改变 `ProjectContext` 默认只允许读写的策略。只有服务端给出摘要固定的本地镜像和可执行文件白名单后才能构造执行器；实际调用还需要 `execute` 权限与显式批准。容器不使用 Shell 命令字符串，不自动拉取镜像，不联网，并且只看见项目三个内容目录。Windows Docker Desktop 使用固定非 root UID/GID；POSIX 主机映射当前非 root UID/GID，使容器只能按宿主运行账户已有权限写入绑定目录，同时明确拒绝 UID 0。该实现仍依赖 Docker daemon 的可信性；`container-doctor` 未就绪时不能声称具备真实容器隔离。
 
 本机验证镜像以 `scratch` 为根，只包含 9 KB 的静态 `agent-runner`。它没有 Shell、解释器、包管理器、CA 证书或网络客户端，只能执行固定的输入到输出冒烟操作。2026-09-23 的真实验证中，doctor 返回 `ready: true`，Runtime 通过非 root 容器读取只读输入并成功写入输出挂载。该证据证明当前执行链可工作，但不等同于 Docker daemon、Windows/WSL 内核或未来任意运行镜像已通过生产安全审计。
+
+Phase 12 的检索链完全位于应用进程内，不调用 embedding 或外部模型。`search_text` 以英文 token 和中文双字片段做 BM25 风格排序，并只返回当前项目中的 Markdown/TXT 片段。Agent 不信任工具返回的 citation，而是重新读取源文件核对路径、行范围、标签和正文后才写报告。注入模式检测只产生风险信号；它可能漏报或误报，因此不能替代 Runtime 权限、工具白名单、密钥隔离和无宿主 Shell 等强制边界。
 
 ## 项目目录
 

@@ -8,7 +8,12 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
 
-from .agents import HostedResearchAgent, ReActResearchAgent, ResearchAgent
+from .agents import (
+    HostedResearchAgent,
+    ReActResearchAgent,
+    ResearchAgent,
+    RetrievalResearchAgent,
+)
 from .executor import ContainerExecutor
 from .modeling import (
     ModelCircuitOpen,
@@ -167,9 +172,15 @@ class WorkbenchRequestHandler(BaseHTTPRequestHandler):
             raise ValueError(f"task must be a non-empty string up to {MAX_TASK_CHARS} characters")
         if not isinstance(sources, list) or len(sources) > MAX_SOURCES:
             raise ValueError(f"sources must be an array with at most {MAX_SOURCES} entries")
-        if engine not in {"deterministic", "react", "react-recovery", "hosted"}:
+        if engine not in {
+            "deterministic",
+            "retrieval",
+            "react",
+            "react-recovery",
+            "hosted",
+        }:
             raise ValueError(
-                "engine must be deterministic, react, react-recovery or hosted"
+                "engine must be deterministic, retrieval, react, react-recovery or hosted"
             )
         if session_id is None:
             if expected_version is not None:
@@ -180,7 +191,7 @@ class WorkbenchRequestHandler(BaseHTTPRequestHandler):
             self.server.sessions.validate_id(session_id)
             if expected_version is None:
                 raise ValueError("sessionId requires expectedVersion.")
-            if engine == "deterministic":
+            if engine in {"deterministic", "retrieval"}:
                 raise ValueError("sessions require react, react-recovery or hosted engine.")
 
         request_id = uuid.uuid4().hex
@@ -265,6 +276,8 @@ class WorkbenchRequestHandler(BaseHTTPRequestHandler):
                 approve_write=True,
                 history=() if session is None else session.history,
             )
+        elif engine == "retrieval":
+            report = RetrievalResearchAgent(runtime).run(task, approve_write=True)
         else:
             report = ResearchAgent(runtime).run(task, approve_write=True)
         return {
@@ -275,6 +288,7 @@ class WorkbenchRequestHandler(BaseHTTPRequestHandler):
                 "artifactPath": report.artifact_path,
                 "content": report.content,
                 "sourceFiles": list(report.source_files),
+                "citations": list(report.citations),
             },
             "modelUsage": report.model_usage,
             "agentDiagnostics": {

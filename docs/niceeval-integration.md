@@ -59,6 +59,7 @@ Experiment `setup` 创建临时工作目录和临时 HMAC 密钥，启动 `pytho
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && PYTHON=python3 pnpm exec niceeval exp local research/baseline --rerun all"
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && PYTHON=python3 pnpm exec niceeval exp local research/react --rerun all"
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && PYTHON=python3 pnpm exec niceeval exp local research/hosted --rerun all"
+wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm exec niceeval exp local research/retrieval --rerun all"
 ```
 
 真实 hosted 运行必须在 WSL 环境中预先安全配置 `AGENT_WORKBENCH_MODEL_API_KEY` 与 `AGENT_WORKBENCH_MODEL`，然后执行：
@@ -106,4 +107,10 @@ Hosted 模拟结果：Experiment `local`，Run `43bbf8ac-4dc1-4e4b-ab71-38a546d5
 
 ```powershell
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --record .niceeval/record.sqlite --request queries/container-run.json"
+```
+
+Phase 12 检索结果：Experiment `local`，Run `f6f3f22e-db4d-41bb-98a1-f0ec1e3d5ac1`，Attempt `@1S8AM96JEVCA6`，`1 passed / 0 failed / 0 errored / 0 reused`，8 条确定性断言通过。固定查询为 `queries/retrieval-run.json`：
+
+```powershell
+wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --record .niceeval/record.sqlite --request queries/retrieval-run.json"
 ```
