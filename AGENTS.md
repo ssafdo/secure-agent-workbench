@@ -2,7 +2,7 @@
 
 ## WHAT
 
-Secure Agent Workbench is a small platform core for running specialized agents in isolated project workspaces. Phase 10 adds a reproducible CI evidence workflow, NiceEval gate, SBOM/build verification, and configured GitHub OIDC attestations on top of the hard-gated Docker executor, same-origin browser workbench, provider-neutral model loop, versioned sessions, and optional OpenAI-compatible or DeepSeek Responses providers.
+Secure Agent Workbench is a small platform core for running specialized agents in isolated project workspaces. Phase 11 publishes the project to a private GitHub repository with a passing reproducible CI evidence workflow, NiceEval gate, SBOM/build verification, and capability-aware GitHub OIDC attestations on top of the hard-gated Docker executor, same-origin browser workbench, provider-neutral model loop, versioned sessions, and optional OpenAI-compatible or DeepSeek Responses providers.
 
 ## WHY
 

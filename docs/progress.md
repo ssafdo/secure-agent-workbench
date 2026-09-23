@@ -124,14 +124,16 @@
 - [x] 工作流已配置 `actions/attest-build-provenance@v2` 与 `actions/attest-sbom@v2`，仅在非 PR 运行签发。
 - [ ] 将当前目录初始化/推送到 GitHub 后运行 workflow，获得首份真实 GitHub OIDC attestation；当前不能声称已经签发。
 
-## Phase 11：GitHub 发布与远端证明（进行中）
+## Phase 11：GitHub 发布与远端证明（私有仓库能力范围内已完成）
 
 - [x] 初始化 `main` 仓库并创建私有 GitHub 仓库 `ssafdo/secure-agent-workbench`。
 - [x] 首次远端 Run `35810011590` 暴露 Linux bind mount UID 不匹配，容器读取成功但输出写入以 exit 11 失败。
 - [x] POSIX 执行器改为映射当前非 root UID/GID，Windows 保持固定 `65532:65532`，并新增拒绝 root 用户的回归测试。
 - [x] 第二次远端 Run `35810295064` 的构建、70 项测试、容器 smoke、NiceEval、证据校验与上传均通过；远端 NiceEval Run 为 `141ae2b0-c911-4b13-b1de-164a598c8ef3`。
 - [x] 确认 GitHub 不支持个人账号私有仓库 Artifact Attestations；workflow 只在公开仓库签发，私有仓库明确报告 notice，不使用 `continue-on-error` 隐藏失败。
-- [ ] 第三次远端 workflow 在保持仓库私有的前提下完成全部可用门禁。
+- [x] 第三次远端 Run `35810487999` 在 37 秒内完成全部可用门禁；远端 NiceEval Run `4242e5dc-6e39-443e-ba98-46228306a5b2` 为 1/1 通过。
+- [x] `container-evidence` artifact ID `10729492603` 已上传，归档摘要为 `sha256:cc55093b9d4bbfe13a3ba1c3d6b3af88847b3da89db1cfc4a4a2ae58fb176f34`。
+- [ ] 若未来允许公开仓库或迁移到支持 attestations 的组织，再执行真实 GitHub OIDC provenance/SBOM 签发。
 
 ## 每次迭代固定流程
 
