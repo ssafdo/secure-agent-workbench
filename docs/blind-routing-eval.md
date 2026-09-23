@@ -62,6 +62,8 @@ python scripts/blind_routing_review.py `
   --reviewer-id reviewer-a
 ```
 
+审核者需要语言辅助时，可额外传入 `--translations artifacts/private/natural-routing-translations.zh-CN.json`。翻译文件必须位于私有目录并绑定候选集 SHA-256；它只在页面中作为辅助译文展示，不写入标注结果，也不改变原始候选集。审核时仍应以原文含义为准。
+
 它会输出一个仅绑定 `127.0.0.1` 的一次性链接。页面的候选任务读取和保存请求都需要该令牌；任务正文通过 `textContent` 展示，不当作 HTML 执行。未完成的标注写入同目录 `.draft`，全部完成后才生成正式文件。审核工作台不实现远程访问、账号系统、模型调用或 NiceEval 上传。
 
 只有门禁通过且全部分歧解决后，命令才生成符合 `benchmarks/blind_routing_dataset.schema.json` 的 `natural-routing.jsonl`。一致性报告只包含输入文件哈希、匿名 ID 和聚合指标，不包含任务正文或审核者 ID。文件哈希不是密码学匿名化，能访问所有私有输入的人仍可建立关联。

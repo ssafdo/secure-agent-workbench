@@ -46,6 +46,9 @@ HTML = r'''<!doctype html>
     .panel { margin-top: 24px; padding: 24px; background: #fff; border: 1px solid #d8dce1; border-radius: 8px; box-shadow: 0 8px 24px rgba(24, 33, 45, .06); }
     .task-meta { display: flex; justify-content: space-between; gap: 16px; color: #69717b; font-size: 12px; }
     .task { min-height: 150px; margin: 18px 0 26px; padding: 18px; color: #17191d; background: #f7f8f9; border: 1px solid #e0e3e7; border-radius: 6px; white-space: pre-wrap; line-height: 1.65; }
+    .translation-wrap { margin: -10px 0 26px; padding-top: 16px; border-top: 1px solid #e0e3e7; }
+    .translation-label { margin: 0 0 8px; color: #69717b; font-size: 12px; font-weight: 700; }
+    .translation { margin: 0; padding: 16px 18px; color: #29313a; background: #f6f9ff; border-left: 3px solid #1769e0; white-space: pre-wrap; line-height: 1.65; }
     .fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
     label { display: grid; gap: 7px; color: #59616b; font-size: 12px; font-weight: 700; }
     select, button { min-height: 40px; padding: 0 11px; font: inherit; border: 1px solid #c9ced5; border-radius: 5px; background: #fff; }
@@ -67,6 +70,7 @@ HTML = r'''<!doctype html>
   <section class="panel">
     <div class="task-meta"><span id="case-id">—</span><span id="language">—</span></div>
     <div id="task" class="task">正在读取私有候选任务…</div>
+    <div id="translation-wrap" class="translation-wrap" hidden><p class="translation-label">中文辅助译文（原文仍是评估输入）</p><p id="translation" class="translation"></p></div>
     <div class="fields">
       <label>类别<select id="category"><option value="evidence">evidence</option><option value="unsupported">unsupported</option><option value="question">question</option><option value="synthesis">synthesis</option><option value="comparison">comparison</option><option value="conflict">conflict</option><option value="default">default</option><option value="adversarial">adversarial</option><option value="other">other</option></select></label>
       <label>专业 Agent<select id="specialist"><option value="retrieval">retrieval</option><option value="synthesis">synthesis</option></select></label>
@@ -96,6 +100,8 @@ HTML = r'''<!doctype html>
     el("case-id").textContent = `${item.id} · ${state.index + 1} / ${state.cases.length}`;
     el("language").textContent = item.language;
     el("task").textContent = item.task;
+    el("translation-wrap").hidden = !item.translation;
+    el("translation").textContent = item.translation || "";
     el("category").value = label.category || "other";
     el("specialist").value = label.expectedSpecialist || "synthesis";
     el("error-cost").value = String(label.errorCost || 2);
@@ -139,7 +145,14 @@ def _atomic_json(path: Path, value: dict[str, Any]) -> None:
 
 
 class ReviewState:
-    def __init__(self, candidates_path: Path, output_path: Path, reviewer_id: str, minimum_cases: int) -> None:
+    def __init__(
+        self,
+        candidates_path: Path,
+        output_path: Path,
+        reviewer_id: str,
+        minimum_cases: int,
+        translations_path: Path | None = None,
+    ) -> None:
         _require_private_path(candidates_path)
         _require_private_path(output_path)
         if candidates_path.resolve() == output_path.resolve():
@@ -154,6 +167,7 @@ class ReviewState:
         self.candidate_sha256 = hashlib.sha256(candidates_path.read_bytes()).hexdigest()
         self.cases = load_candidates(candidates_path, minimum_cases)
         self.case_ids = {case["id"] for case in self.cases}
+        self.translations = self._load_translations(translations_path)
         self.labels: dict[str, dict[str, Any]] = {}
         self.finalized = False
         self.lock = threading.Lock()
@@ -165,10 +179,61 @@ class ReviewState:
             self.labels = parsed["labels"]
             self.finalized = source == self.output_path
 
+    def _load_translations(self, path: Path | None) -> dict[str, str]:
+        if path is None:
+            return {}
+        _require_private_path(path)
+        if not path.is_file() or path.stat().st_size > 2 * 1024 * 1024:
+            raise ValueError("Translation file must exist and be at most 2 MiB.")
+        try:
+            value = json.loads(path.read_text(encoding="utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise ValueError("Translation file must be valid UTF-8 JSON.") from error
+        if not isinstance(value, dict) or set(value) != {
+            "schemaVersion",
+            "kind",
+            "candidateSha256",
+            "language",
+            "translations",
+        }:
+            raise ValueError("Translation file does not match the schema.")
+        if (
+            value["schemaVersion"] != 1
+            or value["kind"] != "secure-agent-workbench/blind-routing-translations"
+            or value["candidateSha256"] != self.candidate_sha256
+            or value["language"] != "zh-CN"
+            or not isinstance(value["translations"], list)
+        ):
+            raise ValueError("Translation file metadata does not match the candidate dataset.")
+        translations: dict[str, str] = {}
+        for item in value["translations"]:
+            if not isinstance(item, dict) or set(item) != {"id", "text"}:
+                raise ValueError("Translation entry does not match the schema.")
+            case_id = item["id"]
+            text = item["text"]
+            if case_id not in self.case_ids or case_id in translations:
+                raise ValueError("Translation entry has an unknown or duplicate id.")
+            if not isinstance(text, str) or not text.strip() or len(text) > 4000:
+                raise ValueError("Translation entry has invalid text.")
+            translations[case_id] = text
+        return translations
+
     def session(self) -> dict[str, Any]:
         return {
             "reviewerId": self.reviewer_id,
-            "cases": [{"id": c["id"], "language": c["language"], "task": c["task"]} for c in self.cases],
+            "cases": [
+                {
+                    "id": c["id"],
+                    "language": c["language"],
+                    "task": c["task"],
+                    **(
+                        {"translation": self.translations[c["id"]]}
+                        if c["id"] in self.translations
+                        else {}
+                    ),
+                }
+                for c in self.cases
+            ],
             "labels": self.labels,
             "finalized": self.finalized,
         }
@@ -289,10 +354,17 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--reviewer-id", required=True)
     parser.add_argument("--minimum-cases", type=int, default=20)
+    parser.add_argument("--translations", type=Path)
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=0)
     args = parser.parse_args()
-    state = ReviewState(args.candidates, args.output, args.reviewer_id, args.minimum_cases)
+    state = ReviewState(
+        args.candidates,
+        args.output,
+        args.reviewer_id,
+        args.minimum_cases,
+        args.translations,
+    )
     server = create_review_server(state, args.host, args.port)
     host, port = server.server_address[:2]
     print(json.dumps({"status": "ready", "host": host, "port": port, "reviewerId": args.reviewer_id, "url": f"http://{host}:{port}/#token={server.token}"}), flush=True)

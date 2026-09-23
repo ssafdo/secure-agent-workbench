@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import http.client
+import hashlib
 import json
 import tempfile
 import threading
@@ -136,6 +137,65 @@ class BlindRoutingReviewTests(unittest.TestCase):
     def test_output_cannot_overwrite_candidates(self) -> None:
         with self.assertRaisesRegex(ValueError, "overwrite"):
             ReviewState(self.candidates, self.candidates, "reviewer-b", 20)
+
+    def test_private_translations_are_exposed_as_review_aids_only(self) -> None:
+        translations = self.directory / "translations.json"
+        translations.write_text(
+            json.dumps(
+                {
+                    "schemaVersion": 1,
+                    "kind": "secure-agent-workbench/blind-routing-translations",
+                    "candidateSha256": hashlib.sha256(self.candidates.read_bytes()).hexdigest(),
+                    "language": "zh-CN",
+                    "translations": [{"id": "case-001", "text": "查找政策证据。"}],
+                },
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+        state = ReviewState(
+            self.candidates,
+            self.directory / "reviewer-b.json",
+            "reviewer-b",
+            20,
+            translations,
+        )
+        first = state.session()["cases"][0]
+        self.assertEqual(first["translation"], "查找政策证据。")
+        self.assertNotIn("translation", state.session()["cases"][1])
+
+        label = {
+            "id": "case-001",
+            "category": "evidence",
+            "expectedSpecialist": "retrieval",
+            "errorCost": 2,
+        }
+        state.save(label)
+        saved = json.loads(state.draft_path.read_text(encoding="utf-8"))
+        self.assertNotIn("translation", json.dumps(saved, ensure_ascii=False))
+
+    def test_translation_file_must_match_candidate_hash(self) -> None:
+        translations = self.directory / "translations.json"
+        translations.write_text(
+            json.dumps(
+                {
+                    "schemaVersion": 1,
+                    "kind": "secure-agent-workbench/blind-routing-translations",
+                    "candidateSha256": "0" * 64,
+                    "language": "zh-CN",
+                    "translations": [],
+                }
+            ),
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(ValueError, "metadata"):
+            ReviewState(
+                self.candidates,
+                self.directory / "reviewer-b.json",
+                "reviewer-b",
+                20,
+                translations,
+            )
 
 
 if __name__ == "__main__":
