@@ -1,0 +1,12 @@
+.env
+.env.*
+.git
+.gitignore
+runtime
+__pycache__
+*.pyc
+tests
+niceeval
+docs
+*.jsonl
+*.log

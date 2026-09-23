@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#17191d" />
+    <title>Secure Agent Workbench</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="工作台导航">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">A</span>
+          <div>
+            <strong>Agent Workbench</strong>
+            <span>Secure runtime</span>
+          </div>
+        </div>
+
+        <nav class="primary-nav">
+          <button class="nav-item active" type="button" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            <span>研究任务</span>
+          </button>
+          <button class="nav-item" type="button" disabled>
+            <span class="nav-icon" aria-hidden="true">◎</span>
+            <span>评估记录</span>
+          </button>
+        </nav>
+
+        <section class="recent-section" aria-labelledby="recent-heading">
+          <div class="sidebar-heading">
+            <span id="recent-heading">本次运行</span>
+            <span id="run-count">0</span>
+          </div>
+          <div id="recent-runs" class="recent-runs">
+            <p class="sidebar-empty">完成任务后显示记录</p>
+          </div>
+        </section>
+
+        <div class="sidebar-footer">
+          <span id="service-dot" class="status-dot pending" aria-hidden="true"></span>
+          <div>
+            <strong id="service-label">正在检查服务</strong>
+            <span>127.0.0.1:8767</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-shell">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">RESEARCH AGENT</p>
+            <h1>研究工作台</h1>
+          </div>
+          <div class="topbar-meta">
+            <span class="provider-badge"><span></span>DeepSeek</span>
+            <button id="new-session" class="icon-button" type="button" title="新建会话" aria-label="新建会话">↻</button>
+          </div>
+        </header>
+
+        <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+
+        <div class="workspace-frame">
+          <div class="workspace-grid">
+            <section class="pane compose-pane" aria-labelledby="compose-title">
+              <div class="pane-header">
+                <div>
+                  <p class="section-index">01 / INPUT</p>
+                  <h2 id="compose-title">任务与资料</h2>
+                </div>
+                <div class="engine-control" role="group" aria-label="执行引擎">
+                  <button class="engine-option active" type="button" data-engine="hosted">DeepSeek</button>
+                  <button class="engine-option" type="button" data-engine="react">离线</button>
+                </div>
+              </div>
+
+              <form id="research-form">
+                <label class="field-label" for="task">研究任务</label>
+                <textarea id="task" name="task" rows="5" maxlength="10000" required>分析当前 Agent 的安全隔离设计，指出下一项最高优先级改进，并给出基于资料的实施建议。</textarea>
+                <div class="field-meta">
+                  <span>模型只会读取下方资料</span>
+                  <span id="task-count">0 / 10000</span>
+                </div>
+
+                <div class="source-heading">
+                  <div>
+                    <span class="field-label">项目资料</span>
+                    <span id="source-count" class="count-label">1 / 20</span>
+                  </div>
+                  <div class="source-actions">
+                    <input id="file-input" class="visually-hidden" type="file" accept=".md,.txt,text/plain,text/markdown" multiple />
+                    <button id="import-files" class="text-button" type="button"><span aria-hidden="true">⇧</span> 导入文件</button>
+                    <button id="add-source" class="text-button" type="button"><span aria-hidden="true">＋</span> 新建</button>
+                  </div>
+                </div>
+
+                <p id="transfer-boundary" class="transfer-boundary">DeepSeek 模式会将任务和资料内容发送给配置的 DeepSeek API。</p>
+
+                <div id="source-list" class="source-list"></div>
+
+                <div class="session-row">
+                  <label class="switch-label" for="session-toggle">
+                    <input id="session-toggle" type="checkbox" checked />
+                    <span class="switch" aria-hidden="true"></span>
+                    <span>
+                      <strong>连续会话</strong>
+                      <small id="session-detail">版本 0</small>
+                    </span>
+                  </label>
+                  <button id="reset-session" class="icon-button small" type="button" title="重置会话" aria-label="重置会话">↻</button>
+                </div>
+
+                <div class="run-controls">
+                  <button id="run-button" class="primary-button" type="submit">
+                    <span class="run-icon" aria-hidden="true">▶</span>
+                    <span class="run-label">运行研究</span>
+                  </button>
+                  <button id="cancel-button" class="secondary-button" type="button" hidden>停止等待</button>
+                </div>
+              </form>
+            </section>
+
+            <section class="pane report-pane" aria-labelledby="report-title">
+              <div class="pane-header report-header">
+                <div>
+                  <p class="section-index">02 / OUTPUT</p>
+                  <h2 id="report-title">研究报告</h2>
+                </div>
+                <div class="report-actions">
+                  <button id="copy-report" class="icon-button" type="button" title="复制报告" aria-label="复制报告" disabled>▣</button>
+                  <button id="download-report" class="icon-button" type="button" title="下载 Markdown 报告" aria-label="下载 Markdown 报告" disabled>⇩</button>
+                </div>
+              </div>
+
+              <div id="report-empty" class="empty-state">
+                <div class="empty-symbol" aria-hidden="true">⌁</div>
+                <strong>等待运行</strong>
+                <p>报告将在 Agent 完成资料读取与受控写入后显示。</p>
+              </div>
+
+              <div id="report-loading" class="loading-state" hidden>
+                <div class="loading-line"><span></span></div>
+                <div class="loading-line medium"><span></span></div>
+                <div class="loading-line short"><span></span></div>
+                <p id="loading-label">正在调用 DeepSeek</p>
+              </div>
+
+              <article id="report-result" class="report-result" hidden>
+                <div class="report-meta">
+                  <span id="result-status" class="result-status">已完成</span>
+                  <span id="result-project">Project —</span>
+                  <span id="result-artifact">—</span>
+                </div>
+                <pre id="report-content"></pre>
+              </article>
+            </section>
+
+            <aside class="pane inspector-pane" aria-labelledby="inspector-title">
+              <div class="pane-header">
+                <div>
+                  <p class="section-index">03 / TRACE</p>
+                  <h2 id="inspector-title">执行观测</h2>
+                </div>
+              </div>
+
+              <section class="metrics" aria-label="模型用量">
+                <div class="metric">
+                  <span>模型调用</span>
+                  <strong id="metric-calls">—</strong>
+                </div>
+                <div class="metric">
+                  <span>总 Token</span>
+                  <strong id="metric-tokens">—</strong>
+                </div>
+                <div class="metric">
+                  <span>耗时</span>
+                  <strong id="metric-duration">—</strong>
+                </div>
+                <div class="metric">
+                  <span>会话版本</span>
+                  <strong id="metric-version">0</strong>
+                </div>
+              </section>
+
+              <section class="trace-section" aria-labelledby="trace-heading">
+                <div class="subsection-heading">
+                  <h3 id="trace-heading">工具轨迹</h3>
+                  <span id="action-count">0</span>
+                </div>
+                <ol id="action-list" class="action-list">
+                  <li class="trace-empty">尚无工具调用</li>
+                </ol>
+              </section>
+
+              <section class="diagnostic-section" aria-labelledby="diagnostic-heading">
+                <h3 id="diagnostic-heading">上下文诊断</h3>
+                <dl>
+                  <div><dt>压缩次数</dt><dd id="diag-compactions">—</dd></div>
+                  <div><dt>裁剪消息</dt><dd id="diag-truncated">—</dd></div>
+                  <div><dt>反思重试</dt><dd id="diag-reflections">—</dd></div>
+                </dl>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <template id="source-template">
+      <section class="source-editor">
+        <div class="source-toolbar">
+          <input class="source-name" type="text" maxlength="120" aria-label="资料文件名" />
+          <button class="remove-source icon-button small" type="button" title="移除资料" aria-label="移除资料">×</button>
+        </div>
+        <textarea class="source-content" rows="7" maxlength="200000" aria-label="资料内容"></textarea>
+      </section>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

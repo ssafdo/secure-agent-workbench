@@ -1,0 +1,36 @@
+{
+  "schema": "agent-workbench.container-build/v1",
+  "generatedAt": "2026-09-23T01:58:32.549380+00:00",
+  "builder": "Docker BuildKit",
+  "inputs": {
+    "assembly": {
+      "path": "containers/agent-runner.s",
+      "sha256": "9391747a529413e58ac1e6b39456e8ef82ab56a5db266641100a7f2fa40faedd"
+    },
+    "dockerfile": {
+      "path": "containers/runner.Dockerfile",
+      "sha256": "2333cf76188667a35dbb855bdd25272aa2d7df37d40f09fe51e74373fbfc0522"
+    },
+    "binary": {
+      "path": "containers/agent-runner",
+      "sha256": "a684deab532e69ef796e60d2e0af57c3ab48256138014dcce5103d0a8910dc96",
+      "sizeBytes": 9320,
+      "staticallyLinked": true
+    }
+  },
+  "image": {
+    "tag": "secure-agent-runner:dev",
+    "id": "sha256:d13deafc19928eaac8892b5823839e8807ee52f677db67be9ec5edf216f30fa2",
+    "created": "2026-09-23T00:38:54.168518032Z",
+    "base": "scratch",
+    "pullRequired": false
+  },
+  "verification": {
+    "niceevalRunId": "4e80c6fc-f458-49ad-9d6e-935092f33a60",
+    "niceevalAttempt": "@11JV1GJA6FX3M",
+    "assertionCount": 11,
+    "verdict": "passed",
+    "doctorReady": true,
+    "residualContainers": 0
+  }
+}

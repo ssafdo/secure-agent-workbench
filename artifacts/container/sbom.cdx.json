@@ -1,0 +1,53 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:4e80c6fc-f458-49ad-9d6e-935092f33a60",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-23T01:58:32.549380+00:00",
+    "component": {
+      "type": "container",
+      "name": "secure-agent-runner",
+      "version": "sha256:d13deafc19928eaac8892b5823839e8807ee52f677db67be9ec5edf216f30fa2",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d13deafc19928eaac8892b5823839e8807ee52f677db67be9ec5edf216f30fa2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "agent-workbench:base",
+          "value": "scratch"
+        },
+        {
+          "name": "agent-workbench:network-required",
+          "value": "false"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "file",
+      "name": "agent-runner",
+      "version": "a684deab532e69ef796e60d2e0af57c3ab48256138014dcce5103d0a8910dc96",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a684deab532e69ef796e60d2e0af57c3ab48256138014dcce5103d0a8910dc96"
+        }
+      ],
+      "properties": [
+        {
+          "name": "agent-workbench:size-bytes",
+          "value": "9320"
+        },
+        {
+          "name": "agent-workbench:linkage",
+          "value": "static"
+        }
+      ]
+    }
+  ]
+}

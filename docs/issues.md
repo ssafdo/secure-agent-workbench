@@ -1,0 +1,38 @@
+# 问题与风险台账
+
+| ID | 状态 | 严重度 | 问题 | 当前处理 / 下一步 |
+|---|---|---|---|---|
+| SEC-001 | Partial | Critical | Python 主进程不是安全沙盒，所有不可信执行必须留在独立容器 | Docker 真实冒烟已通过；execute 仍默认关闭且绝不暴露宿主 Shell，生产加固仍待完成 |
+| SEC-002 | Mitigated | High | `../`、绝对路径、符号链接可导致目录逃逸 | 使用 resolve + relative_to；已有负向测试 |
+| SEC-003 | Mitigated | High | Agent 未经用户同意写文件 | WRITE 工具要求 `approved=True` |
+| SEC-004 | Open | High | 路径校验与文件打开之间存在 TOCTOU | 容器内只挂载项目卷；后续研究基于文件描述符的安全打开 |
+| SEC-005 | Partial | High | trace 未来可能包含 prompt 或敏感内容 | 当前只记参数键及结果类型/大小；LLM 接入前增加错误与 prompt 脱敏器 |
+| SEC-006 | Mitigated | High | Agent 可能读取或覆盖 `.agent` 内部文件 | 工具仅允许访问 `inputs/outputs/work`，且 Agent 不能写 `inputs` |
+| ID-001 | Mitigated | Medium | 直接拼接用户 ID 会泄露身份且可猜目录 | HMAC 生成 32 位项目 ID |
+| ID-002 | Open | Medium | 开发默认密钥不适合部署 | CLI 警告；部署检查应拒绝默认密钥 |
+| CON-001 | Partial | High | 进程内锁无法覆盖多进程或多节点 | Phase 1 仅支持单进程；后续数据库 advisory lock |
+| REL-001 | Partial | Medium | 外部调用可能超时或雪崩 | 模型 HTTP 已有 timeout、有限重试和进程内熔断；未来工具 executor 与分布式状态待实现 |
+| COST-001 | Mitigated | Medium | 模型调用可能突破 token/金额预算 | ReAct 已按 provider 实测 usage 执行调用数、token 和金额上限；真实 Provider 接入时复验 |
+| FILE-001 | Partial | High | 文本附件已有名称、扩展名、数量、大小和项目路径校验，但尚无恶意内容扫描 | 当前只允许 `.md/.txt` 和单份 200 KB；后续加入内容扫描与真实身份归属 |
+| NET-001 | Open | Critical | 真实 Agent 可能外传数据或遭受 SSRF | hosted Provider 仅接受管理员环境中的固定 Base URL，但进程尚无操作系统级出站白名单 |
+| EVAL-001 | Partial | Medium | 任务质量案例数量不足 | NiceEval 已覆盖 deterministic、ReAct、hosted、会话恢复、DeepSeek 与真实容器基线；后续扩展到至少 20 条业务案例 |
+| MODEL-001 | Mitigated | High | 模型返回畸形 tool call、重复 ID 或未知工具 | 严格解析响应；未知工具进入统一 runtime 失败轨迹；已有负向测试 |
+| MODEL-002 | Mitigated | High | 模型循环可能无限运行或消耗失控 | 已限制调用、工具步数、token、金额和轮次，并加入请求超时、有限重试和熔断 |
+| COST-002 | Open | Medium | Responses API usage 不直接提供美元费用 | `costUSD` 显式为 null；接入受控价格表前不执行美元预算断言 |
+| CTX-001 | Mitigated | High | 长历史或超大工具输出可能超过模型上下文并中断任务 | 8K 确定性预算、旧消息摘要、结构化头尾裁剪；Python 与 NiceEval 均覆盖 |
+| CTX-002 | Open | Medium | 压缩摘要是有损的，旧细节可能丢失或改变后续决策 | trace 记录压缩元数据；后续用任务集做压缩开/关消融并评估引用正确率 |
+| REF-001 | Mitigated | High | Reflection 可能形成无限重试或借重试绕过权限/预算 | 默认最多一次；拒绝和预算错误不触发；Runtime 每次重新执行完整策略检查 |
+| SESSION-001 | Mitigated | Medium | 当前 history 只在单次 ReAct 调用内传入，尚无跨请求持久会话 | 已增加原子文件存储、版本检查、TTL 和多轮 NiceEval；生产数据库待实现 |
+| SESSION-002 | Open | High | 会话正文包含任务与 Agent 回复，当前磁盘存储没有静态加密 | 部署前加入租户鉴权、KMS/信封加密、显式删除与保留策略 |
+| SESSION-003 | Open | High | 进程内项目锁不能协调多进程或多节点会话更新 | 迁移到数据库事务或分布式锁；当前部署限制为单服务进程 |
+| DS-001 | Mitigated | Medium | DeepSeek Responses API 不支持服务端会话和 compaction | 应用层重放有界历史，不发送 `previous_response_id`、`conversation` 或 `context_management` |
+| DS-002 | Open | Medium | DeepSeek API 不直接返回美元成本，且模型与价格可能变化 | 只记录真实 token，`costUSD` 保持 null；价格比较使用受控、带版本的外部价格表 |
+| DS-003 | Mitigated | Medium | 真实账户、配额、区域网络和模型可用性需要运行证据 | 本机真实 DeepSeek NiceEval Run `c642a27e-f821-4d14-afef-cda5288d0765` 已 1/1 通过 |
+| EXEC-001 | Mitigated | Critical | 模型可能通过 Shell 字符串、PATH 或任意二进制扩大执行面 | 只接受 argv 数组与纯文件名白名单；镜像摘要锁定；execute 权限和批准双重门控 |
+| EXEC-002 | Partial | High | Docker daemon、镜像供应链或宿主配置错误会削弱容器边界 | 使用 `scratch` 与本地静态 runner；doctor、真实冒烟、SBOM、构建证明与 CI 校验已完成，GitHub OIDC attestation 已配置但待远端首次签发 |
+| CI-001 | Partial | Medium | 本地证据不能证明 GitHub 托管构建身份，且未运行的 workflow 不能视为已签名 | 工作流采用 GitHub OIDC provenance/SBOM attestation；仓库推送并完成非 PR run 后再把状态升级为 Mitigated |
+| EXEC-003 | Mitigated | High | 容器超时后可能残留进程，输出可能耗尽内存 | 随机容器名、超时 `rm -f`、CPU/内存/PID 限制和 stdout/stderr 截断均有测试 |
+
+## 记录规则
+
+新增功能同时回答：它扩大了哪个信任边界、增加了哪类失败、用哪个测试发现回归。状态只能在有代码或测试证据时改为 `Mitigated` 或 `Closed`。

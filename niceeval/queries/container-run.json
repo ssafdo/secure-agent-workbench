@@ -1,0 +1,7 @@
+{
+  "protocol": "niceeval.query/v1",
+  "operation": {
+    "kind": "run.get",
+    "runId": "4e80c6fc-f458-49ad-9d6e-935092f33a60"
+  }
+}

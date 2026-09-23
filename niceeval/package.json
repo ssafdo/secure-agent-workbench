@@ -1,0 +1,14 @@
+{
+  "name": "secure-agent-workbench-evals",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "eval": "niceeval exp local",
+    "eval:view": "niceeval view",
+    "eval:discover": "niceeval query discover"
+  },
+  "devDependencies": {
+    "niceeval": "^0.15.0"
+  }
+}
