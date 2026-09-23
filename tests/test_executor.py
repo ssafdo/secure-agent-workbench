@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import subprocess
 import tempfile
 import unittest
@@ -68,6 +69,10 @@ class ContainerExecutorTests(unittest.TestCase):
         executor = ContainerExecutor(LOCAL_IMAGE_ID, ["agent-runner"])
         self.assertEqual(executor.image, LOCAL_IMAGE_ID)
 
+    def test_rejects_root_container_user(self) -> None:
+        with self.assertRaises(ContainerConfigurationError):
+            ContainerExecutor(LOCAL_IMAGE_ID, ["agent-runner"], container_user="0:0")
+
     def test_rejects_shell_string_and_non_allowlisted_executable(self) -> None:
         executor = ContainerExecutor(PINNED_IMAGE, ["python"], runner=FakeRunner())
         with self.assertRaises(ContainerExecutionError):
@@ -108,7 +113,12 @@ class ContainerExecutorTests(unittest.TestCase):
         self.assertIn("--read-only", command)
         self.assertIn("--cap-drop ALL", rendered)
         self.assertIn("--security-opt no-new-privileges", rendered)
-        self.assertIn("--user 65532:65532", rendered)
+        expected_user = (
+            f"{os.getuid()}:{os.getgid()}"
+            if hasattr(os, "getuid") and os.getuid() > 0
+            else "65532:65532"
+        )
+        self.assertIn(f"--user {expected_user}", rendered)
         mounts = [command[index + 1] for index, item in enumerate(command) if item == "--mount"]
         self.assertEqual(len(mounts), 3)
         self.assertTrue(any("target=/workspace/inputs,readonly" in item for item in mounts))

@@ -60,7 +60,7 @@ NOT YET ISOLATED: Python process, operating-system user, network, CPU/memory
 
 Phase 7 的附件桥只处理 UTF-8 文本：浏览器读取用户选择的 `.md/.txt` 内容后复用既有 JSON `sources` 契约，服务端只接收安全项目相对路径并再次检查单份 200 KB 限额。浏览器不传递本地绝对路径，服务端也不直接读取用户文件系统。当前没有 MIME 嗅探、病毒扫描或二进制文档解析，因此不能接受不可信的 Office、PDF、压缩包或可执行文件。
 
-Phase 8 的执行器默认不注册，也不会改变 `ProjectContext` 默认只允许读写的策略。只有服务端给出摘要固定的本地镜像和可执行文件白名单后才能构造执行器；实际调用还需要 `execute` 权限与显式批准。容器不使用 Shell 命令字符串，不自动拉取镜像，不联网，并且只看见项目三个内容目录。该实现仍依赖 Docker daemon 的可信性；`container-doctor` 未就绪时不能声称具备真实容器隔离。
+Phase 8 的执行器默认不注册，也不会改变 `ProjectContext` 默认只允许读写的策略。只有服务端给出摘要固定的本地镜像和可执行文件白名单后才能构造执行器；实际调用还需要 `execute` 权限与显式批准。容器不使用 Shell 命令字符串，不自动拉取镜像，不联网，并且只看见项目三个内容目录。Windows Docker Desktop 使用固定非 root UID/GID；POSIX 主机映射当前非 root UID/GID，使容器只能按宿主运行账户已有权限写入绑定目录，同时明确拒绝 UID 0。该实现仍依赖 Docker daemon 的可信性；`container-doctor` 未就绪时不能声称具备真实容器隔离。
 
 本机验证镜像以 `scratch` 为根，只包含 9 KB 的静态 `agent-runner`。它没有 Shell、解释器、包管理器、CA 证书或网络客户端，只能执行固定的输入到输出冒烟操作。2026-09-23 的真实验证中，doctor 返回 `ready: true`，Runtime 通过非 root 容器读取只读输入并成功写入输出挂载。该证据证明当前执行链可工作，但不等同于 Docker daemon、Windows/WSL 内核或未来任意运行镜像已通过生产安全审计。
 

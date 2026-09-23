@@ -124,6 +124,13 @@
 - [x] 工作流已配置 `actions/attest-build-provenance@v2` 与 `actions/attest-sbom@v2`，仅在非 PR 运行签发。
 - [ ] 将当前目录初始化/推送到 GitHub 后运行 workflow，获得首份真实 GitHub OIDC attestation；当前不能声称已经签发。
 
+## Phase 11：GitHub 发布与远端证明（进行中）
+
+- [x] 初始化 `main` 仓库并创建私有 GitHub 仓库 `ssafdo/secure-agent-workbench`。
+- [x] 首次远端 Run `35810011590` 暴露 Linux bind mount UID 不匹配，容器读取成功但输出写入以 exit 11 失败。
+- [x] POSIX 执行器改为映射当前非 root UID/GID，Windows 保持固定 `65532:65532`，并新增拒绝 root 用户的回归测试。
+- [ ] 第二次远端 workflow 全部通过并确认 GitHub OIDC attestations 已实际签发。
+
 ## 每次迭代固定流程
 
 `问题/假设 -> eval case -> 最小实现 -> 回归测试 -> trace 分析 -> 风险台账 -> 决定保留或回滚`

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import subprocess
@@ -14,6 +15,19 @@ PINNED_IMAGE_PATTERN = re.compile(
     r"^(?:[^\s@]+@)?sha256:[0-9a-f]{64}$"
 )
 Runner = Callable[..., subprocess.CompletedProcess[bytes]]
+CONTAINER_USER_PATTERN = re.compile(r"^(?P<uid>[1-9][0-9]*):(?P<gid>[0-9]+)$")
+
+
+def default_container_user() -> str:
+    """Use the owning POSIX user for bind mounts while never selecting root."""
+    getuid = getattr(os, "getuid", None)
+    getgid = getattr(os, "getgid", None)
+    if callable(getuid) and callable(getgid):
+        uid = getuid()
+        gid = getgid()
+        if uid > 0:
+            return f"{uid}:{gid}"
+    return "65532:65532"
 
 
 class ContainerConfigurationError(WorkbenchError):
@@ -65,6 +79,7 @@ class ContainerExecutor:
         allowed_executables: Sequence[str],
         *,
         docker_binary: str = "docker",
+        container_user: str | None = None,
         limits: ContainerLimits | None = None,
         runner: Runner = subprocess.run,
     ) -> None:
@@ -83,9 +98,15 @@ class ContainerExecutor:
             )
         if not docker_binary.strip():
             raise ContainerConfigurationError("Docker binary is required.")
+        selected_user = container_user or default_container_user()
+        if not CONTAINER_USER_PATTERN.fullmatch(selected_user):
+            raise ContainerConfigurationError(
+                "Container user must be a non-root numeric UID:GID pair."
+            )
         self.image = image
         self.allowed_executables = frozenset(normalized)
         self.docker_binary = docker_binary
+        self.container_user = selected_user
         self.limits = limits or ContainerLimits()
         self._runner = runner
 
@@ -158,7 +179,7 @@ class ContainerExecutor:
             "--cpus",
             str(self.limits.cpus),
             "--user",
-            "65532:65532",
+            self.container_user,
             "--workdir",
             "/workspace/work",
             "--tmpfs",
