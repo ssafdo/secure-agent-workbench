@@ -2,7 +2,7 @@
 
 这是一个从参考架构出发、逐步演进的实习项目。目标不是一次性复制 Open WebUI 或部署一堆服务，而是先建立一个能运行、能测试、能解释安全边界的 Agent 平台内核，再逐步接入 LLM、RAG、MCP、Web UI 和容器执行器。
 
-当前版本为 `0.18.0`，完成 Phase 17：在保留 6 条真实 Agent 消融和 50 条中英策划路由集的基础上，增加本地私有自然任务盲测协议。盲测先锁定数据集与路由源码哈希，再评估准确率、加权错误、混淆矩阵和语言切片；任务正文、manifest 和结果均不进入 Git 或 CI。仓库目前没有真实用户任务，策划集 `50/50`、加权错误 `0` 的结果不能代表自然用户流量。
+当前版本为 `0.19.0`，完成 Phase 18：在本地私有自然任务盲测协议前增加双人独立标注、一致率/Cohen's kappa 计算和第三人冲突仲裁。候选任务不含类别、路由或错误成本标签，审核文件不含任务正文；只有 ID 完整匹配、三类一致率达标且冲突全部解决后，才生成 Phase 17 可封存数据集。仓库目前没有真实用户任务，策划集 `50/50`、加权错误 `0` 的结果不能代表自然用户流量。
 
 ## 已实现
 
@@ -42,6 +42,7 @@
 - 50 条中英路由集独立报告混淆矩阵、语言/类别切片、置信度和加权错误，不与端到端成功率混算
 - NiceEval `supervisor/supervisor/ablation` 与 `supervisor/supervisor/routing` 分别验证真实消融和路由可靠性
 - 私有盲测封存路由源码与数据集哈希，结果不回显任务正文；CI 只运行协议安全测试
+- 两位独立审核者分别标注类别、专业 Agent 与错误成本，低一致率或未仲裁冲突不能进入盲测
 - 模型格式错误、未知工具、无限循环、预算越界和未批准写入回归测试
 - 无模型、无网络即可运行的安全与主流程测试
 
@@ -210,7 +211,7 @@ wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/nicee
 
 已验证 Phase 16 Supervisor Run：`95972efb-0202-4794-96a9-3025147cae8d`；端到端消融 Attempt `@1VNXD25FNH1AP` 的 9 条断言和 50 条路由集 Attempt `@17196879B4FBE` 的 12 条断言全部通过。固定查询为 `niceeval/queries/supervisor-run.json`。
 
-自然任务盲测不接入 NiceEval 或 CI，也不会提交私有 JSONL。先由独立审核者完成人工去敏和标签，再在本机执行封存与评估；修改 `supervisor.py` 后旧 manifest 会自动失效。完整格式、命令和解释边界见 `docs/blind-routing-eval.md`。
+自然任务盲测不接入 NiceEval 或 CI，也不会提交私有 JSONL。先由两位独立审核者分别标注，必要时由第三人仲裁，再在本机执行封存与评估；修改 `supervisor.py` 后旧 manifest 会自动失效。完整格式、命令和解释边界见 `docs/blind-routing-eval.md`。
 
 第三条命令启动仅监听本机的 Responses 协议模拟器，完整验证 hosted HTTP、function calling、工具策略和报告产物，不访问互联网，也不上报模拟 token。已验证 Run：`43bbf8ac-4dc1-4e4b-ab71-38a546d5e23d`，9/9 断言通过。
 
@@ -283,6 +284,7 @@ WorkspaceManager -> ProjectContext -> AgentRuntime
 - `docs/issues.md`：已发现的问题、风险和验证方式
 - `docs/eval-plan.md`：评测数据与指标设计
 - `docs/blind-routing-eval.md`：私有自然任务的去敏、封存与本地盲测流程
+- `docs/routing-label-guide.md`：独立审核者使用的类别、专业 Agent 和错误成本口径
 - `docs/hosted-provider.md`：Responses API、可靠性策略与配置边界
 - `docs/progress.md`：每阶段完成项和下一步实施顺序
 

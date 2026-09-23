@@ -111,11 +111,14 @@ def load_dataset(path: Path, minimum_cases: int = 20) -> list[dict[str, Any]]:
         sensitive_reason = _sensitive_reason(task)
         if sensitive_reason is not None:
             raise ValueError(f"Case {case_id} failed the sensitive-data scan: {sensitive_reason}.")
-        if value["language"] not in LANGUAGES:
+        if not isinstance(value["language"], str) or value["language"] not in LANGUAGES:
             raise ValueError(f"Case {case_id} has an unsupported language.")
-        if value["category"] not in CATEGORIES:
+        if not isinstance(value["category"], str) or value["category"] not in CATEGORIES:
             raise ValueError(f"Case {case_id} has an unsupported category.")
-        if value["expectedSpecialist"] not in SPECIALISTS:
+        if (
+            not isinstance(value["expectedSpecialist"], str)
+            or value["expectedSpecialist"] not in SPECIALISTS
+        ):
             raise ValueError(f"Case {case_id} has an invalid expected specialist.")
         error_cost = value["errorCost"]
         if not isinstance(error_cost, int) or isinstance(error_cost, bool) or not 1 <= error_cost <= 5:
