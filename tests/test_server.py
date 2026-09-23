@@ -184,6 +184,7 @@ class ServerTests(unittest.TestCase):
 
         self.assertEqual(status, 200)
         self.assertEqual(body["engine"], "retrieval")
+        self.assertEqual(body["report"]["retrievalMode"], "lexical")
         self.assertEqual(
             [action["name"] for action in body["actions"]],
             ["search_text", "write_text"],

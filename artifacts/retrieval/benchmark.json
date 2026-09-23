@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "dataset": {
+    "path": "benchmarks/retrieval_cases.json",
+    "sha256": "e8fc90b5cb1a12344fe45463e7577d73aa7582258a7f26eba4c5b1cbf64fee5d"
+  },
+  "lexical": {
+    "mode": "lexical",
+    "cases": 8,
+    "recallAt1": 0.571429,
+    "recallAt3": 0.571429,
+    "mrr": 0.571429,
+    "citationCorrectness": 1.0,
+    "unsupportedAccuracy": 1.0,
+    "caseResults": [
+      {
+        "id": "exact-container-policy",
+        "mode": "lexical",
+        "paths": [
+          "inputs/container.md"
+        ],
+        "firstRelevantRank": 1
+      },
+      {
+        "id": "english-credential-paraphrase",
+        "mode": "lexical",
+        "paths": [
+          "inputs/credentials.md"
+        ],
+        "firstRelevantRank": 1
+      },
+      {
+        "id": "chinese-query-english-evidence",
+        "mode": "lexical",
+        "paths": [],
+        "firstRelevantRank": 0
+      },
+      {
+        "id": "english-query-chinese-evidence",
+        "mode": "lexical",
+        "paths": [],
+        "firstRelevantRank": 0
+      },
+      {
+        "id": "execution-policy-paraphrase",
+        "mode": "lexical",
+        "paths": [],
+        "firstRelevantRank": 0
+      },
+      {
+        "id": "unsupported-physics",
+        "mode": "lexical",
+        "paths": [],
+        "firstRelevantRank": 0
+      },
+      {
+        "id": "contradictory-evidence",
+        "mode": "lexical",
+        "paths": [
+          "inputs/contradiction.md",
+          "inputs/policy.md"
+        ],
+        "firstRelevantRank": 1
+      },
+      {
+        "id": "prompt-injection-evidence",
+        "mode": "lexical",
+        "paths": [
+          "inputs/untrusted.md",
+          "inputs/policy.md"
+        ],
+        "firstRelevantRank": 1
+      }
+    ]
+  },
+  "model": {
+    "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+    "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+    "license": "MIT",
+    "fileSha256": {
+      "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+      "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+      "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+    }
+  },
+  "hybrid": {
+    "mode": "hybrid",
+    "cases": 8,
+    "recallAt1": 1.0,
+    "recallAt3": 1.0,
+    "mrr": 1.0,
+    "citationCorrectness": 1.0,
+    "unsupportedAccuracy": 1.0,
+    "caseResults": [
+      {
+        "id": "exact-container-policy",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/container.md"
+        ],
+        "firstRelevantRank": 1
+      },
+      {
+        "id": "english-credential-paraphrase",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/credentials.md"
+        ],
+        "firstRelevantRank": 1
+      },
+      {
+        "id": "chinese-query-english-evidence",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/credentials.md"
+        ],
+        "firstRelevantRank": 1
+      },
+      {
+        "id": "english-query-chinese-evidence",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/isolation-zh.md"
+        ],
+        "firstRelevantRank": 1
+      },
+      {
+        "id": "execution-policy-paraphrase",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/execution.md"
+        ],
+        "firstRelevantRank": 1
+      },
+      {
+        "id": "unsupported-physics",
+        "mode": "hybrid",
+        "paths": [],
+        "firstRelevantRank": 0
+      },
+      {
+        "id": "contradictory-evidence",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/contradiction.md",
+          "inputs/policy.md"
+        ],
+        "firstRelevantRank": 1
+      },
+      {
+        "id": "prompt-injection-evidence",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/untrusted.md",
+          "inputs/policy.md"
+        ],
+        "firstRelevantRank": 1
+      }
+    ]
+  }
+}

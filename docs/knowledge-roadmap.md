@@ -7,7 +7,7 @@
 | 1 | Agent loop、工具系统、Plan-and-Solve、可观测性 | 当前本地 MVP | 工具权限与路径测试通过，demo 可回放 |
 | 2 | LLM 基础、提示工程、结构化输出、ReAct | OpenAI-compatible provider 与 function calling | mock 测试覆盖解析错误、循环上限、超时 |
 | 3 | 上下文工程、短期记忆、Reflection | 会话历史、压缩、失败后反思重试 | 长上下文评测对比成本和成功率 |
-| 4 | RAG、语义记忆、引用 | 已完成词法检索与引用校验首版；后续增加 embedding、混合重排和语义记忆 | 首条检索 NiceEval 已通过；后续量化 Recall@K、MRR、引用正确率和无依据拒答 |
+| 4 | RAG、语义记忆、引用 | 已完成词法基线、可选本地 embedding、混合重排和引用校验；语义记忆待实现 | 8 条固定集已量化 Recall@K、MRR、引用正确率和无依据拒答，混合 NiceEval 已通过 |
 | 5 | MCP 与协议 | MCP client、工具发现、schema gate | 恶意工具描述、参数越权、超时有测试 |
 | 6 | 多 Agent、路由和协作 | supervisor + 专业 Agent | 与单 Agent 做消融实验，证明收益 |
 | 7 | Web 应用与附件桥 | Open WebUI 适配、上传与回传 | 用户/项目/会话归属校验通过 |

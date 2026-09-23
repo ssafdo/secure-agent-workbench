@@ -4,11 +4,16 @@ from collections import Counter
 from dataclasses import dataclass
 import math
 import re
-from typing import Iterable
+from typing import Iterable, Sequence
+
+from .embeddings import EmbeddingProvider
 
 
 MAX_CHUNK_CHARS = 800
 MAX_RESULTS = 10
+SEMANTIC_THRESHOLD = 0.24
+LEXICAL_WEIGHT = 0.45
+SEMANTIC_WEIGHT = 0.55
 
 _ASCII_WORD = re.compile(r"[a-z0-9]+")
 _CJK_RUN = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff]+")
@@ -113,11 +118,24 @@ def instruction_risks(text: str) -> tuple[str, ...]:
     return tuple(name for name, pattern in _INSTRUCTION_PATTERNS if pattern.search(text))
 
 
+def _cosine_similarity(left: Sequence[float], right: Sequence[float]) -> float:
+    if len(left) != len(right) or not left:
+        raise ValueError("Embedding vectors must have the same non-zero dimensions.")
+    dot = sum(a * b for a, b in zip(left, right, strict=True))
+    left_norm = math.sqrt(sum(value * value for value in left))
+    right_norm = math.sqrt(sum(value * value for value in right))
+    if left_norm == 0 or right_norm == 0:
+        return 0.0
+    return dot / (left_norm * right_norm)
+
+
 def search_documents(
     query: str,
     documents: Iterable[tuple[str, str]],
     *,
     limit: int = 5,
+    embedding_provider: EmbeddingProvider | None = None,
+    embedding_fallback_reason: str | None = None,
 ) -> dict[str, object]:
     if not query.strip():
         raise ValueError("Search query cannot be empty.")
@@ -130,15 +148,22 @@ def search_documents(
         for chunk in chunk_document(path, content)
     )
     query_terms = Counter(tokenize(query))
-    if not query_terms or not chunks:
-        return {"chunksScanned": len(chunks), "matches": []}
+    base_mode = "lexical-fallback" if embedding_fallback_reason else "lexical"
+    if not chunks:
+        return {
+            "chunksScanned": 0,
+            "retrievalMode": base_mode,
+            "embeddingProvider": None,
+            "fallbackReason": embedding_fallback_reason,
+            "matches": [],
+        }
 
     tokenized = [Counter(tokenize(chunk.text)) for chunk in chunks]
     document_frequency = {
         term: sum(1 for terms in tokenized if term in terms) for term in query_terms
     }
     average_length = sum(sum(terms.values()) for terms in tokenized) / len(tokenized)
-    ranked: list[tuple[float, DocumentChunk, tuple[str, ...]]] = []
+    lexical_scores: list[float] = []
     for chunk, terms in zip(chunks, tokenized, strict=True):
         length = max(sum(terms.values()), 1)
         score = 0.0
@@ -157,13 +182,60 @@ def search_documents(
             score += inverse_frequency * normalized_frequency * query_frequency
         path_overlap = set(query_terms).intersection(tokenize(chunk.path))
         score += 0.15 * len(path_overlap)
-        if score <= 0:
-            continue
-        ranked.append((score, chunk, instruction_risks(chunk.text)))
+        lexical_scores.append(score)
 
-    ranked.sort(key=lambda item: (-item[0], item[1].path, item[1].start_line))
+    semantic_scores: list[float] | None = None
+    provider_name: str | None = None
+    fallback_reason = embedding_fallback_reason
+    if embedding_provider is not None:
+        try:
+            vectors = embedding_provider.encode([query, *(chunk.text for chunk in chunks)])
+            if len(vectors) != len(chunks) + 1:
+                raise ValueError("Embedding provider returned an unexpected vector count.")
+            semantic_scores = [
+                _cosine_similarity(vectors[0], vector) for vector in vectors[1:]
+            ]
+            provider_name = embedding_provider.name
+        except Exception as error:
+            fallback_reason = f"embedding request failed: {type(error).__name__}"
+
+    retrieval_mode = "hybrid" if semantic_scores is not None else (
+        "lexical-fallback" if fallback_reason else "lexical"
+    )
+    maximum_lexical = max(lexical_scores, default=0.0)
+    ranked: list[
+        tuple[float, float, float | None, DocumentChunk, tuple[str, ...]]
+    ] = []
+    for index, (chunk, lexical_score) in enumerate(
+        zip(chunks, lexical_scores, strict=True)
+    ):
+        normalized_lexical = (
+            lexical_score / maximum_lexical if maximum_lexical > 0 else 0.0
+        )
+        semantic_score = None if semantic_scores is None else semantic_scores[index]
+        if lexical_score <= 0 and (
+            semantic_score is None or semantic_score < SEMANTIC_THRESHOLD
+        ):
+            continue
+        score = normalized_lexical
+        if semantic_score is not None:
+            score = (
+                LEXICAL_WEIGHT * normalized_lexical
+                + SEMANTIC_WEIGHT * max(semantic_score, 0.0)
+            )
+        ranked.append(
+            (
+                score,
+                lexical_score,
+                semantic_score,
+                chunk,
+                instruction_risks(chunk.text),
+            )
+        )
+
+    ranked.sort(key=lambda item: (-item[0], item[3].path, item[3].start_line))
     matches = []
-    for score, chunk, risks in ranked[:limit]:
+    for score, lexical_score, semantic_score, chunk, risks in ranked[:limit]:
         matches.append(
             {
                 "citation": f"{chunk.path}#L{chunk.start_line}-L{chunk.end_line}",
@@ -172,8 +244,18 @@ def search_documents(
                 "endLine": chunk.end_line,
                 "text": chunk.text,
                 "score": round(score, 6),
+                "lexicalScore": round(lexical_score, 6),
+                "semanticScore": (
+                    None if semantic_score is None else round(semantic_score, 6)
+                ),
                 "instructionRisk": bool(risks),
                 "riskSignals": list(risks),
             }
         )
-    return {"chunksScanned": len(chunks), "matches": matches}
+    return {
+        "chunksScanned": len(chunks),
+        "retrievalMode": retrieval_mode,
+        "embeddingProvider": provider_name,
+        "fallbackReason": fallback_reason,
+        "matches": matches,
+    }

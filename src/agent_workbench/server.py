@@ -15,6 +15,7 @@ from .agents import (
     RetrievalResearchAgent,
 )
 from .executor import ContainerExecutor
+from .embeddings import EmbeddingConfiguration
 from .modeling import (
     ModelCircuitOpen,
     ModelProtocolError,
@@ -46,6 +47,7 @@ class WorkbenchHTTPServer(ThreadingHTTPServer):
     hosted_provider: ModelProvider | None
     sessions: SessionStore
     container_executor: ContainerExecutor | None
+    embedding: EmbeddingConfiguration
 
 
 class WorkbenchRequestHandler(BaseHTTPRequestHandler):
@@ -254,7 +256,10 @@ class WorkbenchRequestHandler(BaseHTTPRequestHandler):
         runtime = AgentRuntime(
             context,
             self.server.workspace,
-            build_default_registry(self.server.container_executor),
+            build_default_registry(
+                self.server.container_executor,
+                self.server.embedding,
+            ),
             TraceStore(),
             max_steps=MAX_SOURCES + 4,
         )
@@ -289,6 +294,11 @@ class WorkbenchRequestHandler(BaseHTTPRequestHandler):
                 "content": report.content,
                 "sourceFiles": list(report.source_files),
                 "citations": list(report.citations),
+                **(
+                    {}
+                    if report.retrieval_mode is None
+                    else {"retrievalMode": report.retrieval_mode}
+                ),
             },
             "modelUsage": report.model_usage,
             "agentDiagnostics": {
@@ -322,10 +332,12 @@ def create_server(
     hosted_provider: ModelProvider | None = None,
     session_store: SessionStore | None = None,
     container_executor: ContainerExecutor | None = None,
+    embedding: EmbeddingConfiguration | None = None,
 ) -> WorkbenchHTTPServer:
     server = WorkbenchHTTPServer((host, port), WorkbenchRequestHandler)
     server.workspace = workspace
     server.hosted_provider = hosted_provider
     server.sessions = session_store or SessionStore()
     server.container_executor = container_executor
+    server.embedding = embedding or EmbeddingConfiguration()
     return server

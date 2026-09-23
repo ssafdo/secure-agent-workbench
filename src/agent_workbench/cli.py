@@ -12,6 +12,7 @@ from tempfile import TemporaryDirectory
 
 from .agents import ResearchAgent
 from .executor import ContainerConfigurationError, ContainerExecutor, container_doctor
+from .embeddings import load_embedding_configuration
 from .models import Permission, ToolStatus
 from .providers import (
     DeepSeekResponsesProvider,
@@ -210,6 +211,9 @@ def serve(args: argparse.Namespace) -> int:
         args.port,
         hosted_provider=_hosted_provider(),
         container_executor=_container_executor(),
+        embedding=load_embedding_configuration(
+            os.getenv("AGENT_WORKBENCH_EMBEDDING_MODEL_PATH")
+        ),
     )
     host, port = server.server_address[:2]
     print(json.dumps({"status": "ready", "host": host, "port": port}), flush=True)

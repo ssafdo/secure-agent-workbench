@@ -34,6 +34,25 @@ jobs:
         with:
           version: "11"
 
+      - name: Install Python package with retrieval runtime
+        run: python -m pip install -e ".[retrieval]"
+
+      - name: Download and verify pinned retrieval model
+        env:
+          PYTHONPATH: src
+        run: >-
+          python scripts/download_retrieval_model.py
+          --output runtime/models/potion-multilingual-128M-i8
+
+      - name: Benchmark lexical and hybrid retrieval
+        env:
+          PYTHONPATH: src
+        run: >-
+          python scripts/benchmark_retrieval.py
+          --model-path runtime/models/potion-multilingual-128M-i8
+          --require-improvement
+          --output artifacts/retrieval/benchmark.json
+
       - name: Install build tools
         run: sudo apt-get update && sudo apt-get install --yes binutils
 

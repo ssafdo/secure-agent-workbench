@@ -3,8 +3,10 @@ from __future__ import annotations
 import tempfile
 import unittest
 from pathlib import Path
+from typing import Sequence
 
 from agent_workbench.agents import RetrievalResearchAgent
+from agent_workbench.embeddings import load_embedding_configuration
 from agent_workbench.models import WorkbenchError
 from agent_workbench.retrieval import chunk_document, search_documents, tokenize
 from agent_workbench.runtime import AgentRuntime
@@ -13,6 +15,24 @@ from agent_workbench.workspace import WorkspaceManager
 
 
 class RetrievalTests(unittest.TestCase):
+    class SemanticFixture:
+        name = "fixture-embedding"
+
+        def encode(self, texts: Sequence[str]) -> Sequence[Sequence[float]]:
+            return [
+                [1.0, 0.0]
+                if "credential" in text.lower() or "api keys" in text.lower()
+                else [0.0, 1.0]
+                for text in texts
+            ]
+
+    class FailingFixture:
+        name = "failing-embedding"
+
+        def encode(self, texts: Sequence[str]) -> Sequence[Sequence[float]]:
+            del texts
+            raise RuntimeError("simulated provider failure")
+
     def test_ranks_relevant_chunk_and_returns_line_citation(self) -> None:
         result = search_documents(
             "How should container isolation be enforced?",
@@ -68,6 +88,55 @@ class RetrievalTests(unittest.TestCase):
 
         self.assertEqual(len(chunks), 2)
         self.assertEqual(chunks[1].start_line, 2)
+
+    def test_hybrid_retrieval_recovers_a_paraphrase_and_reports_mode(self) -> None:
+        result = search_documents(
+            "Where should credentials live?",
+            [
+                ("inputs/security.md", "API keys remain in the server environment."),
+                ("inputs/garden.md", "Tomatoes need full sun."),
+            ],
+            embedding_provider=self.SemanticFixture(),
+        )
+
+        self.assertEqual(result["retrievalMode"], "hybrid")
+        self.assertEqual(result["embeddingProvider"], "fixture-embedding")
+        self.assertEqual(result["matches"][0]["path"], "inputs/security.md")
+        self.assertGreater(result["matches"][0]["semanticScore"], 0.99)
+
+    def test_embedding_failure_falls_back_visibly_to_lexical(self) -> None:
+        result = search_documents(
+            "container isolation",
+            [("inputs/security.md", "Container isolation requires a read-only root.")],
+            embedding_provider=self.FailingFixture(),
+        )
+
+        self.assertEqual(result["retrievalMode"], "lexical-fallback")
+        self.assertEqual(result["matches"][0]["path"], "inputs/security.md")
+        self.assertEqual(
+            result["fallbackReason"], "embedding request failed: RuntimeError"
+        )
+
+    def test_missing_local_model_becomes_configuration_fallback(self) -> None:
+        configuration = load_embedding_configuration("missing/model/path")
+
+        self.assertIsNone(configuration.provider)
+        self.assertEqual(
+            configuration.fallback_reason,
+            "embedding initialization failed: FileNotFoundError",
+        )
+
+    def test_tampered_local_model_becomes_configuration_fallback(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            model_path = Path(directory)
+            (model_path / "config.json").write_text("tampered", encoding="utf-8")
+            configuration = load_embedding_configuration(str(model_path))
+
+        self.assertIsNone(configuration.provider)
+        self.assertEqual(
+            configuration.fallback_reason,
+            "embedding initialization failed: ValueError",
+        )
 
 
 class CitationVerificationTests(unittest.TestCase):

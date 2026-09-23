@@ -103,14 +103,14 @@ Phase 4 `0.5.0` 会话回归结果：Experiment `local`，Eval `research/session
 
 Hosted 模拟结果：Experiment `local`，Run `43bbf8ac-4dc1-4e4b-ab71-38a546d5e23d`，Attempt `@15E8DY6TGNKZP`，`1 passed / 0 failed / 0 errored / 0 reused`，9 条业务断言通过。usage 明确为 unavailable，固定查询文件为 `queries/hosted-simulated-run.json`。
 
-真实容器结果：Experiment `container`，Run `4e80c6fc-f458-49ad-9d6e-935092f33a60`，Attempt `@11JV1GJA6FX3M`，`1 passed / 0 failed / 0 errored / 0 reused`，11 条确定性断言通过。usage 为 not-recorded；固定查询文件为 `queries/container-run.json`。本机查询命令显式加 `--record .niceeval/record.sqlite`。
+真实容器结果：Experiment `container`，Run `4e80c6fc-f458-49ad-9d6e-935092f33a60`，Attempt `@11JV1GJA6FX3M`，`1 passed / 0 failed / 0 errored / 0 reused`，11 条确定性断言通过。usage 为 not-recorded；固定查询文件为 `queries/container-run.json`。
 
 ```powershell
-wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --record .niceeval/record.sqlite --request queries/container-run.json"
+wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/container-run.json"
 ```
 
-Phase 12 检索结果：Experiment `local`，Run `f6f3f22e-db4d-41bb-98a1-f0ec1e3d5ac1`，Attempt `@1S8AM96JEVCA6`，`1 passed / 0 failed / 0 errored / 0 reused`，8 条确定性断言通过。固定查询为 `queries/retrieval-run.json`：
+Phase 13 混合检索结果：Experiment `local`，Run `96a91b20-50ca-49f1-8f15-442b09412645`，Attempt `@199AHPWDSV6DG`，`1 passed / 0 failed / 0 errored / 0 reused`，10 条确定性断言通过。固定查询为 `queries/retrieval-run.json`：
 
 ```powershell
-wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --record .niceeval/record.sqlite --request queries/retrieval-run.json"
+wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/retrieval-run.json"
 ```

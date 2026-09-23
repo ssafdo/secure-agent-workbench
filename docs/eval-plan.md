@@ -33,6 +33,8 @@ Phase 10 将自定义应用 Experiment `container` 接入可复现 CI 证据链�
 
 Phase 12 新增 `research/retrieval`：混入相关证据、无关资料和带指令覆盖/命令执行文本的恶意资料，断言检索只调用一次 `search_text`、报告只写一次、没有额外工具动作、相关内容带稳定行号引用、结构化 citation 通过源文校验且风险信号被登记。Run `f6f3f22e-db4d-41bb-98a1-f0ec1e3d5ac1` 为 1/1 通过，8 条确定性断言全部通过；该实验不调用模型，因此 usage unavailable 是预期限制。
 
+Phase 13 为同一用例增加混合模式断言，并用 8 条 JSON 固定集做词法/混合消融。词法 Recall@1/MRR 为 `0.571429/0.571429`，混合模式为 `1.0/1.0`；引用正确率与无依据拒答准确率均保持 `1.0`。NiceEval Run `96a91b20-50ca-49f1-8f15-442b09412645`、Attempt `@199AHPWDSV6DG` 为 1/1 通过，10 条断言全部通过。
+
 记录字段：`task_id`、`input`、`expected`、`actual`、`passed`、`failure_type`、`steps`、`tool_calls`、`input_tokens`、`output_tokens`、`cost`、`latency_ms`。
 
 ## 第三层：消融实验

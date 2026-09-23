@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Callable
 
+from .embeddings import EmbeddingConfiguration
 from .models import Permission, ProjectContext, ToolSpec
 from .retrieval import MAX_RESULTS, search_documents
 from .workspace import WorkspaceManager
@@ -77,7 +78,11 @@ def _write_text(context: ProjectContext, arguments: dict[str, Any]) -> str:
     return str(path.relative_to(context.root)).replace("\\", "/")
 
 
-def _search_text(context: ProjectContext, arguments: dict[str, Any]) -> dict[str, object]:
+def _search_text(
+    context: ProjectContext,
+    arguments: dict[str, Any],
+    embedding: EmbeddingConfiguration,
+) -> dict[str, object]:
     query = arguments.get("query")
     limit = arguments.get("limit", 5)
     if not isinstance(query, str):
@@ -94,12 +99,20 @@ def _search_text(context: ProjectContext, arguments: dict[str, Any]) -> dict[str
         if safe_path.stat().st_size > MAX_TEXT_BYTES:
             continue
         documents.append((relative, safe_path.read_text(encoding="utf-8")))
-    return search_documents(query, documents, limit=limit)
+    return search_documents(
+        query,
+        documents,
+        limit=limit,
+        embedding_provider=embedding.provider,
+        embedding_fallback_reason=embedding.fallback_reason,
+    )
 
 
 def build_default_registry(
     container_executor: ContainerExecutor | None = None,
+    embedding: EmbeddingConfiguration | None = None,
 ) -> ToolRegistry:
+    embedding = embedding or EmbeddingConfiguration()
     registry = ToolRegistry()
     registry.register(
         ToolSpec(
@@ -152,7 +165,7 @@ def build_default_registry(
                 "additionalProperties": False,
             },
         ),
-        _search_text,
+        lambda context, arguments: _search_text(context, arguments, embedding),
     )
     registry.register(
         ToolSpec(

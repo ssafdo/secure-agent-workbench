@@ -149,4 +149,17 @@
 - [x] NiceEval `research/retrieval` Run `f6f3f22e-db4d-41bb-98a1-f0ec1e3d5ac1` 为 1/1 通过，Attempt `@1S8AM96JEVCA6` 的 8 条断言全部通过。
 - [x] 当前 Python 完整回归 78 项通过，固定查询返回 `issues: []`，NiceEval 配置检查通过。
 - [x] GitHub Actions 增加独立 retrieval NiceEval 门禁与 JSON/JUnit/receipt artifact。
-- [ ] 引入本地 embedding 与混合重排，使用同义表达、跨语言和矛盾资料数据集衡量 Recall@K、MRR 与引用正确率。
+- [x] Phase 13 已引入本地 embedding 与混合重排，并用同义表达、跨语言和矛盾资料数据集衡量 Recall@K、MRR 与引用正确率。
+
+## Phase 13：可选本地 embedding 与混合检索（本地闭环已完成）
+
+- [x] 增加可选依赖 `model2vec==0.9.0`；默认安装仍保持零运行依赖。
+- [x] 固定 MIT 多语模型仓库、提交和三个运行文件 SHA-256；普通请求不进行网络下载。
+- [x] 将词法归一化分数与余弦相似度组合，显式返回 `lexical`、`hybrid` 或 `lexical-fallback`。
+- [x] 模型缺失、校验失败和编码失败均可见回退；相关负向测试覆盖且不会阻断词法检索。
+- [x] 新增 8 条固定数据，覆盖精确命中、同义改写、中英跨语言、无关问题、矛盾资料和 Prompt Injection。
+- [x] 词法 Recall@1/Recall@3/MRR 为 `0.571429/0.571429/0.571429`；混合模式为 `1.0/1.0/1.0`，两者引用正确率与无依据拒答准确率均为 `1.0`。
+- [x] Python 完整回归 `82/82` 通过，`niceeval check` 通过。
+- [x] NiceEval Run `96a91b20-50ca-49f1-8f15-442b09412645`、Attempt `@199AHPWDSV6DG` 为 1/1 通过，10 条断言确认混合模式、引用和注入 containment。
+- [x] CI 新增固定模型下载/校验、词法与混合基准比较及 benchmark artifact。
+- [ ] 将固定集扩展到至少 50 条领域样例，再评估 Precision@K、P95 延迟、内存和阈值稳定性。

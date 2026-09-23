@@ -1,4 +1,5 @@
 import { createServer, type Server } from "node:http";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { defineExperiment } from "niceeval";
@@ -173,6 +174,10 @@ export default defineExperiment({
       AGENT_WORKBENCH_MODEL: "niceeval-mock-model",
       AGENT_WORKBENCH_MODEL_BASE_URL: mockBaseUrl,
       AGENT_WORKBENCH_MODEL_TIMEOUT_SECONDS: "5",
+      AGENT_WORKBENCH_EMBEDDING_MODEL_PATH: join(
+        repositoryRoot,
+        "runtime/models/potion-multilingual-128M-i8",
+      ),
     });
   },
   async teardown(ctx) {

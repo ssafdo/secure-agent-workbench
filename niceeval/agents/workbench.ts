@@ -28,6 +28,7 @@ interface ResearchResponse {
     artifactPath: string;
     content: string;
     sourceFiles: string[];
+    retrievalMode?: "lexical" | "hybrid" | "lexical-fallback";
     citations?: Array<{
       citation: string;
       path: string;

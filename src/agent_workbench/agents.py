@@ -18,6 +18,7 @@ class ResearchReport:
     content: str
     model_usage: dict[str, int | float | None] | None = None
     citations: tuple[dict[str, Any], ...] = ()
+    retrieval_mode: str | None = None
 
 
 class ResearchAgent:
@@ -131,6 +132,12 @@ class RetrievalResearchAgent:
         if not isinstance(raw_matches, list):
             raise WorkbenchError("Retrieval response omitted matches.")
         citations = tuple(self._verify_match(item) for item in raw_matches)
+        retrieval_mode = searched.output.get("retrievalMode")
+        if retrieval_mode not in {"lexical", "hybrid", "lexical-fallback"}:
+            raise WorkbenchError("Retrieval response omitted a valid retrieval mode.")
+        fallback_reason = searched.output.get("fallbackReason")
+        if fallback_reason is not None and not isinstance(fallback_reason, str):
+            raise WorkbenchError("Retrieval fallback reason is invalid.")
         source_files = tuple(dict.fromkeys(str(item["path"]) for item in citations))
         risky = sum(bool(item.get("instructionRisk")) for item in citations)
 
@@ -163,6 +170,13 @@ class RetrievalResearchAgent:
                 "",
                 task.strip(),
                 "",
+                "## Retrieval Mode",
+                "",
+                (
+                    f"`{retrieval_mode}`"
+                    + (f" ({fallback_reason})" if fallback_reason else "")
+                ),
+                "",
                 "## Retrieved Evidence",
                 "",
                 *evidence,
@@ -190,6 +204,7 @@ class RetrievalResearchAgent:
             str(written.output),
             content,
             citations=citations,
+            retrieval_mode=retrieval_mode,
         )
 
 

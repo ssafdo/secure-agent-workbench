@@ -2,7 +2,7 @@
 
 这是一个从参考架构出发、逐步演进的实习项目。目标不是一次性复制 Open WebUI 或部署一堆服务，而是先建立一个能运行、能测试、能解释安全边界的 Agent 平台内核，再逐步接入 LLM、RAG、MCP、Web UI 和容器执行器。
 
-当前版本为 `0.13.0`，完成 Phase 12 首版：新增完全本地的资料分块与检索、可回查到文件行号的结构化引用、无依据拒答和资料内 Prompt Injection 风险标记。项目已发布到私有 GitHub 仓库，Ubuntu CI 从源码重建容器、执行 Python 与 NiceEval 门禁，并上传经过校验的 CycloneDX SBOM 和构建证明。默认路径仍不访问网络或执行进程；只有服务端显式配置执行器和权限后，才会注册容器工具。
+当前版本为 `0.14.0`，完成 Phase 13：在 Phase 12 的词法检索和引用校验上增加可选的本地多语 embedding、混合重排、显式回退状态及固定 Recall@K/MRR 基准。项目已发布到私有 GitHub 仓库，Ubuntu CI 从源码重建容器、执行 Python、检索基准与 NiceEval 门禁，并上传经过校验的证据。默认路径仍不访问网络或执行进程；只有服务端显式配置执行器和权限后，才会注册容器工具。
 
 ## 已实现
 
@@ -23,6 +23,8 @@
 - 同源浏览器工作台：任务与资料编辑、DeepSeek/离线模式、连续会话、报告、工具轨迹和用量诊断
 - 文本附件桥：浏览器导入 `.md/.txt`、同名更新、20 份/单份 200 KB 边界和 Markdown 报告下载
 - 本地检索引擎：按段落/大小分块、英文词与中文双字检索、BM25 风格排序、`path#Lx-Ly` 引用和逐条源文校验
+- 可选 `model2vec==0.9.0` 多语 embedding；模型提交与三个运行文件 SHA-256 固定，普通请求绝不自动下载模型
+- 混合检索显式报告 `hybrid`、`lexical` 或 `lexical-fallback`；8 条固定基准比较 Recall@1、Recall@3、MRR、引用正确率和无依据拒答
 - 检索报告在没有相关证据时明确拒答；资料中的指令覆盖、密钥外传和命令执行文本只作为风险信号，不触发额外工具
 - 硬门控容器执行器：摘要锁定镜像、结构化 argv、可执行文件白名单、无网络、只读根文件系统、非 root 和资源上限
 - 容器只挂载当前项目的 `inputs`（只读）、`work` 和 `outputs`；不挂载 `.agent`、Docker socket 或宿主机密钥
@@ -50,7 +52,22 @@ python -m agent_workbench container-smoke
 
 HTTP API 的 `/v1/research` 默认使用确定性基线；请求增加 `"engine": "react"` 时走离线模型协议与 ReAct 工具循环。`"engine": "react-recovery"` 是离线故障注入实验路径：首次调用一个不存在的工具，用来证明一次 Reflection 能恢复且不能绕过 Runtime 策略。FakeLLM 不伪造 token 或费用，因此离线 NiceEval 中的 usage 保持 unavailable；hosted 引擎只采用上游实际返回的 token，美元成本保持 `null`。
 
-请求使用 `"engine": "retrieval"` 时走本地确定性检索，不调用外部模型。它只扫描当前项目的 `inputs/*.md|*.txt`，报告与响应中的 citations 会在写入前重新核对源文件和行号。当前检索是可复现的词法/中文双字基线，不是向量语义检索；风险模式匹配只提供诊断，不能替代权限、工具白名单和模型侧注入防护。
+请求使用 `"engine": "retrieval"` 时走本地检索，不调用托管模型。它只扫描当前项目的 `inputs/*.md|*.txt`，报告与响应中的 citations 会在写入前重新核对源文件和行号。未配置本地模型时使用词法/中文双字基线；配置成功后组合归一化词法分数与余弦相似度。模型缺失、校验失败或编码异常时返回可见的 `lexical-fallback`，不会静默伪装成混合检索。风险模式匹配只提供诊断，不能替代权限、工具白名单和模型侧注入防护。
+
+### 可选本地混合检索
+
+模型下载是显式的准备步骤；HTTP 请求处理阶段只接受已有本地目录：
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m pip install -e ".[retrieval]"
+python scripts/download_retrieval_model.py --output runtime/models/potion-multilingual-128M-i8
+python scripts/benchmark_retrieval.py --model-path runtime/models/potion-multilingual-128M-i8 --require-improvement --output artifacts/retrieval/benchmark.json
+$env:AGENT_WORKBENCH_EMBEDDING_MODEL_PATH = "runtime/models/potion-multilingual-128M-i8"
+python -m agent_workbench serve --port 8767
+```
+
+固定模型为 MIT 许可的 `Tokenade/potion-multilingual-128M-i8-tokenade@ba8c5504...`，是 `minishlab/potion-multilingual-128M` 的 int8 量化版本。当前 8 条基准中，词法与混合检索的 Recall@1/MRR 分别为 `0.571429/0.571429` 和 `1.0/1.0`；这只证明当前固定样例的改进，不代表生产语料上的通用质量。
 
 需要跨请求续接时，为 `react`、`react-recovery` 或 `hosted` 请求增加 `"sessionId"` 和 `"expectedVersion"`。首次版本为 `0`，成功响应会返回 `session.version = 1`；下一次必须传回该版本。陈旧版本返回 HTTP 409，过期会话返回 HTTP 410，客户端随后可用版本 `0` 重新开始。会话正文保存在项目内部 `.agent/sessions/`，因此当前版本不适合在磁盘不可信或多人共享的宿主机上保存敏感内容。
 
@@ -150,6 +167,7 @@ NiceEval 集成位于 `niceeval/`，通过真实的 loopback HTTP 服务评估 `
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && PYTHON=python3 pnpm exec niceeval exp local research/baseline --rerun all"
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && PYTHON=python3 pnpm exec niceeval exp local research/react --rerun all"
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && PYTHON=python3 pnpm exec niceeval exp local research/hosted --rerun all"
+wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && PYTHON=python3 pnpm exec niceeval exp local research/retrieval --rerun all"
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm exec niceeval exp local research/context-recovery --rerun all"
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm exec niceeval exp local research/session --rerun all"
 python scripts/run_container_niceeval.py
@@ -161,10 +179,10 @@ python scripts/run_container_niceeval.py
 
 第五条命令验证两轮续接和独立新会话隔离。已验证 Run：`9b79c979-2169-4481-add3-85694c7973fa`，1/1 Attempt 通过；固定查询为 `niceeval/queries/session-run.json`。
 
-Windows 容器命令会启动只存活于本次运行的受限 HTTP 桥：随机 Bearer token、固定 `/smoke` POST、无请求正文，NiceEval 结束即关闭。这样无需放宽当前 WSL 的 `interop=no` 隔离设置；Linux CI 则由 Adapter 直接运行本机 Docker/Python。已验证 Run：`4e80c6fc-f458-49ad-9d6e-935092f33a60`，Attempt `@11JV1GJA6FX3M`，1/1 通过且 11 条断言全部登记；固定查询为 `niceeval/queries/container-run.json`。机器查询在本机 WSL 中需要显式增加 `--record .niceeval/record.sqlite`。
+Windows 容器命令会启动只存活于本次运行的受限 HTTP 桥：随机 Bearer token、固定 `/smoke` POST、无请求正文，NiceEval 结束即关闭。这样无需放宽当前 WSL 的 `interop=no` 隔离设置；Linux CI 则由 Adapter 直接运行本机 Docker/Python。已验证 Run：`4e80c6fc-f458-49ad-9d6e-935092f33a60`，Attempt `@11JV1GJA6FX3M`，1/1 通过且 11 条断言全部登记；固定查询为 `niceeval/queries/container-run.json`。
 
 ```powershell
-wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --record .niceeval/record.sqlite --request queries/container-run.json"
+wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/container-run.json"
 ```
 
 真实 DeepSeek 评估使用独立 Experiment：
