@@ -97,14 +97,21 @@ jobs:
             containers/agent-runner
 
       - name: Attest build proof
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && github.event.repository.visibility == 'public'
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: artifacts/container/build-proof.json
 
       - name: Attest runner SBOM
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && github.event.repository.visibility == 'public'
         uses: actions/attest-sbom@v2
         with:
           subject-path: containers/agent-runner
           sbom-path: artifacts/container/sbom.cdx.json
+
+      - name: Report private repository attestation limitation
+        if: github.event_name != 'pull_request' && github.event.repository.visibility != 'public'
+        run: >-
+          echo "::notice title=Attestation unavailable::GitHub artifact attestations are
+          unavailable for user-owned private repositories. The verified evidence bundle
+          is available as this run's container-evidence artifact."

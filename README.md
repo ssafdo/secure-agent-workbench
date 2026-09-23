@@ -2,7 +2,7 @@
 
 这是一个从参考架构出发、逐步演进的实习项目。目标不是一次性复制 Open WebUI 或部署一堆服务，而是先建立一个能运行、能测试、能解释安全边界的 Agent 平台内核，再逐步接入 LLM、RAG、MCP、Web UI 和容器执行器。
 
-当前版本为 `0.11.0`，完成 Phase 10：真实 Docker 执行链、NiceEval 门禁、CycloneDX SBOM、构建证明与证据校验已接入 GitHub Actions 工作流。工作流已在本机等价链路验证；仓库尚未推送到 GitHub，因此 OIDC provenance/SBOM attestation 仍待远端首次运行签发。默认路径仍不访问网络或执行进程；只有服务端显式配置执行器和权限后，才会注册容器工具。
+当前版本为 `0.11.0`，完成 Phase 10：真实 Docker 执行链、NiceEval 门禁、CycloneDX SBOM、构建证明与证据校验已接入 GitHub Actions 工作流。私有 GitHub 仓库会上传经过校验的证据包；GitHub 不向个人账号的私有仓库提供 Artifact Attestations，只有仓库公开后才执行 OIDC provenance/SBOM 签发。默认路径仍不访问网络或执行进程；只有服务端显式配置执行器和权限后，才会注册容器工具。
 
 ## 已实现
 

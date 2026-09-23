@@ -129,7 +129,9 @@
 - [x] 初始化 `main` 仓库并创建私有 GitHub 仓库 `ssafdo/secure-agent-workbench`。
 - [x] 首次远端 Run `35810011590` 暴露 Linux bind mount UID 不匹配，容器读取成功但输出写入以 exit 11 失败。
 - [x] POSIX 执行器改为映射当前非 root UID/GID，Windows 保持固定 `65532:65532`，并新增拒绝 root 用户的回归测试。
-- [ ] 第二次远端 workflow 全部通过并确认 GitHub OIDC attestations 已实际签发。
+- [x] 第二次远端 Run `35810295064` 的构建、70 项测试、容器 smoke、NiceEval、证据校验与上传均通过；远端 NiceEval Run 为 `141ae2b0-c911-4b13-b1de-164a598c8ef3`。
+- [x] 确认 GitHub 不支持个人账号私有仓库 Artifact Attestations；workflow 只在公开仓库签发，私有仓库明确报告 notice，不使用 `continue-on-error` 隐藏失败。
+- [ ] 第三次远端 workflow 在保持仓库私有的前提下完成全部可用门禁。
 
 ## 每次迭代固定流程
 

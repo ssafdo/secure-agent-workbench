@@ -30,7 +30,7 @@
 | DS-003 | Mitigated | Medium | 真实账户、配额、区域网络和模型可用性需要运行证据 | 本机真实 DeepSeek NiceEval Run `c642a27e-f821-4d14-afef-cda5288d0765` 已 1/1 通过 |
 | EXEC-001 | Mitigated | Critical | 模型可能通过 Shell 字符串、PATH 或任意二进制扩大执行面 | 只接受 argv 数组与纯文件名白名单；镜像摘要锁定；execute 权限和批准双重门控 |
 | EXEC-002 | Partial | High | Docker daemon、镜像供应链或宿主配置错误会削弱容器边界 | 使用 `scratch` 与本地静态 runner；doctor、真实冒烟、SBOM、构建证明与 CI 校验已完成，GitHub OIDC attestation 已配置但待远端首次签发 |
-| CI-001 | Partial | Medium | 本地证据不能证明 GitHub 托管构建身份，且未运行的 workflow 不能视为已签名 | 工作流采用 GitHub OIDC provenance/SBOM attestation；仓库推送并完成非 PR run 后再把状态升级为 Mitigated |
+| CI-001 | Partial | Medium | 个人账号私有仓库不支持 GitHub Artifact Attestations，已验证证据包不能等同于 OIDC 签名 | 私有仓库继续上传校验后的证据 artifact 并明确 notice；仓库公开或迁移到支持该功能的组织后才启用 provenance/SBOM attestation |
 | EXEC-003 | Mitigated | High | 容器超时后可能残留进程，输出可能耗尽内存 | 随机容器名、超时 `rm -f`、CPU/内存/PID 限制和 stdout/stderr 截断均有测试 |
 
 ## 记录规则
