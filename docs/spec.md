@@ -29,7 +29,7 @@
 - 用户登录和数据库映射
 - 生产级对象存储、签名下载链接和二进制附件解析
 - microVM 执行器与面向不可信公网用户的执行服务
-- RAG、MCP、A2A
+- A2A 与多 Agent supervisor
 - 多租户并发和分布式锁
 
 ### Phase 2 当前增量
@@ -79,6 +79,14 @@
 - 混合分数组合归一化 BM25 风格分数与余弦相似度，并对纯语义候选使用相关阈值
 - API 与报告必须公开实际检索模式；初始化或编码失败必须显示为 `lexical-fallback`
 - 固定基准必须同时报告 Recall@1、Recall@3、MRR、引用正确率和无依据拒答准确率
+
+### Phase 14 当前增量
+
+- 使用官方 Python MCP SDK 接入 stdio server，不实现私有协议变体
+- server 与工具仅能由服务端操作员配置；浏览器/API 不能指定 command、环境或工具
+- 首版只接纳显式 allowlist 中的只读、非破坏、非开放世界工具
+- 远端 description 不进入模型上下文；输入 schema、调用实参和调用前工具指纹都必须验证
+- MCP 调用必须经过 `AgentRuntime`，并受到步骤预算、项目锁、超时、输出上限和脱敏 trace 约束
 
 ## 4. 不可变约束
 

@@ -6,6 +6,7 @@ import os
 import re
 import secrets
 import subprocess
+import sys
 from dataclasses import replace
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -14,6 +15,7 @@ from .agents import ResearchAgent
 from .executor import ContainerConfigurationError, ContainerExecutor, container_doctor
 from .embeddings import load_embedding_configuration
 from .models import Permission, ToolStatus
+from .mcp_client import MCPServerConfig, MCPToolPolicy, register_mcp_server
 from .providers import (
     DeepSeekResponsesProvider,
     OpenAIResponsesProvider,
@@ -335,6 +337,66 @@ def smoke_container(_: argparse.Namespace) -> int:
     return 0 if succeeded else 1
 
 
+def smoke_mcp(_: argparse.Namespace) -> int:
+    server_path = Path(__file__).with_name("mcp_smoke_server.py").resolve()
+    payload: dict[str, object] = {"status": "failed"}
+    mcp_pythonpath = os.getenv("AGENT_WORKBENCH_MCP_PYTHONPATH", "").strip()
+    mcp_environment = {"PYTHONPATH": mcp_pythonpath} if mcp_pythonpath else {}
+    with TemporaryDirectory(prefix="agent-workbench-mcp-smoke-") as directory:
+        workspace = WorkspaceManager(Path(directory), secrets.token_bytes(32))
+        context = workspace.create_project("mcp", "local", "smoke", "smoke")
+        registry = build_default_registry()
+        config = MCPServerConfig(
+            server_id="smoke",
+            command=sys.executable,
+            args=("-B", str(server_path)),
+            tools=(MCPToolPolicy("project_summary"),),
+            timeout_seconds=3,
+            startup_timeout_seconds=20,
+            max_output_bytes=4096,
+            env=mcp_environment,
+        )
+        try:
+            specs = register_mcp_server(registry, config)
+        except Exception as error:
+            payload["error"] = f"{type(error).__name__}: {error}"
+            print(json.dumps(payload, ensure_ascii=False))
+            return 1
+        runtime = AgentRuntime(context, workspace, registry, TraceStore(), max_steps=3)
+        result = runtime.call(
+            "mcp_smoke_project_summary", {"topic": "phase-14-mcp"}
+        )
+        trace_path = TraceStore().path_for(context)
+        trace_text = trace_path.read_text(encoding="utf-8")
+        trace_redacted = "phase-14-mcp" not in trace_text
+        succeeded = (
+            len(specs) == 1
+            and specs[0].permission is Permission.READ
+            and result.status is ToolStatus.SUCCEEDED
+            and isinstance(result.output, str)
+            and "read-only allowlist" in result.output
+            and trace_redacted
+            and len(runtime.tool_events) == 1
+        )
+        payload.update(
+            {
+                "status": "completed" if succeeded else "failed",
+                "server": config.server_id,
+                "sourceTools": [policy.source_name for policy in config.tools],
+                "registeredTools": [spec.name for spec in specs],
+                "permission": specs[0].permission.value if specs else None,
+                "toolStatus": result.status.value,
+                "output": result.output,
+                "traceEvents": len(runtime.tool_events),
+                "traceRedacted": trace_redacted,
+            }
+        )
+        if result.error is not None:
+            payload["error"] = result.error
+    print(json.dumps(payload, ensure_ascii=False))
+    return 0 if succeeded else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Secure Agent Workbench")
     subparsers = parser.add_subparsers(required=True)
@@ -369,6 +431,10 @@ def build_parser() -> argparse.ArgumentParser:
         "container-smoke", help="Run the fixed end-to-end container isolation smoke test."
     )
     smoke_parser.set_defaults(handler=smoke_container)
+    mcp_smoke_parser = subparsers.add_parser(
+        "mcp-smoke", help="Run the fixed official-SDK MCP admission and call smoke test."
+    )
+    mcp_smoke_parser.set_defaults(handler=smoke_mcp)
     return parser
 
 

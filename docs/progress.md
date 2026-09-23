@@ -163,3 +163,15 @@
 - [x] NiceEval Run `96a91b20-50ca-49f1-8f15-442b09412645`、Attempt `@199AHPWDSV6DG` 为 1/1 通过，10 条断言确认混合模式、引用和注入 containment。
 - [x] CI 新增固定模型下载/校验、词法与混合基准比较及 benchmark artifact。
 - [ ] 将固定集扩展到至少 50 条领域样例，再评估 Precision@K、P95 延迟、内存和阈值稳定性。
+
+## Phase 14：官方 SDK MCP 安全接入（本地闭环已完成）
+
+- [x] 增加可选依赖 `mcp==2.2.0`，默认安装和现有 HTTP 服务不加载 MCP runtime。
+- [x] stdio server command 必须是现有绝对文件；工具必须在显式非空 allowlist 中且只允许 READ。
+- [x] 强制严格 JSON Schema、实参验证、只读 annotation、本地安全描述和调用前定义指纹复验。
+- [x] SDK 默认最小环境不继承 DeepSeek/API 密钥；额外环境拒绝 credential-like 名称。
+- [x] 调用有硬超时、JSON 输出上限、错误归一化和子进程清理；Agent 仍只经过统一 Runtime/trace。
+- [x] 新增 12 项 MCP 测试；Python 完整回归当前 94 项通过，`niceeval check` 通过。
+- [x] NiceEval `mcp/mcp/smoke` Run `d2f75bee-7c98-4dee-a4fb-3d908ada981d`、Attempt `@1KBYF6AT9MVMV` 为 1/1 通过，9 条断言全部通过，固定查询无问题。
+- [x] GitHub Actions 增加独立 MCP NiceEval 门禁与 JSON/JUnit/receipt artifact。
+- [ ] 将不可信 MCP server 放入独立容器或 microVM，并在协议 JSON 解析前增加传输字节上限。

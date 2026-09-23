@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="niceeval" tests="1" failures="0" errors="0" skipped="0" time="32.674">
+    <testcase name="mcp/smoke [secure-agent-workbench-mcp]" time="16.727"/>
+</testsuite>

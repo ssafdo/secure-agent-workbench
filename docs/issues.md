@@ -36,6 +36,9 @@
 | RAG-002 | Mitigated | High | 检索结果可能伪造路径、行号或正文，造成不可追溯引用 | 写报告前重新读取项目内源文件，逐条核对路径、行范围、citation 标签和正文；伪造引用有负向测试 |
 | RAG-003 | Partial | Critical | 资料中的 Prompt Injection 可能诱导模型泄密或调用高风险工具 | 当前确定性检索引擎不执行资料指令，风险模式只作诊断；权限、工具白名单和无宿主 Shell 仍是安全边界，hosted RAG 需单独攻防评估 |
 | EXEC-003 | Mitigated | High | 容器超时后可能残留进程，输出可能耗尽内存 | 随机容器名、超时 `rm -f`、CPU/内存/PID 限制和 stdout/stderr 截断均有测试 |
+| MCP-001 | Mitigated | Critical | 恶意工具描述或动态 schema 可能向模型注入指令、扩大参数面 | 远端描述不进入 ToolSpec；严格 schema、显式只读 allowlist、annotation 与调用前定义指纹复验均有负向测试 |
+| MCP-002 | Mitigated | High | MCP 参数越权、密钥环境继承或超时 server 可能绕过 Runtime 边界 | 调用前 JSON Schema 验证，SDK 最小环境加 credential-name 拒绝，所有 handler 经过 Runtime，超时清理子进程有测试 |
+| MCP-003 | Partial | High | 官方 SDK 在解析完整 stdio JSON 行后才执行应用输出上限，恶意 server 仍可能消耗宿主内存或执行任意代码 | MCP server 必须由操作员信任；当前解析后拒绝超大结果，后续将 server 放入有内存/PID/网络限制的容器或 microVM |
 
 ## 记录规则
 

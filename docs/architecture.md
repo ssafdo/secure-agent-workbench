@@ -34,6 +34,7 @@
 - `ContainerExecutor`：可选的 Docker CLI 适配层；要求摘要锁定镜像和 argv 白名单，并以无网络、只读、非 root、资源受限配置运行。
 - `search_text`：固定读取当前项目 `inputs` 的本地检索工具；分块、排序并返回行号引用与风险信号。
 - `RetrievalResearchAgent`：只消费 `search_text` 的结构化结果，重新核对源文后生成有引用的报告或无依据拒答。
+- `mcp_client`：使用官方 SDK 发现 stdio 工具，经本地策略 admission 后注册为同步 Runtime handler。
 
 ## 信任边界
 
@@ -67,6 +68,8 @@ Phase 8 的执行器默认不注册，也不会改变 `ProjectContext` 默认只
 本机验证镜像以 `scratch` 为根，只包含 9 KB 的静态 `agent-runner`。它没有 Shell、解释器、包管理器、CA 证书或网络客户端，只能执行固定的输入到输出冒烟操作。2026-09-23 的真实验证中，doctor 返回 `ready: true`，Runtime 通过非 root 容器读取只读输入并成功写入输出挂载。该证据证明当前执行链可工作，但不等同于 Docker daemon、Windows/WSL 内核或未来任意运行镜像已通过生产安全审计。
 
 Phase 13 的检索链仍完全位于应用进程内，不调用托管模型。`search_text` 先计算英文 token/中文双字 BM25 风格分数；若服务端成功加载校验和固定的本地 model2vec 模型，再批量计算 query/chunk 向量并进行混合重排。模型只在服务启动时从本地路径加载，请求阶段没有 Hub 下载；缺失、篡改或编码失败都显式回退到词法模式。Agent 不信任工具返回的 citation，而是重新读取源文件核对路径、行范围、标签和正文后才写报告。注入模式检测只产生风险信号；它可能漏报或误报，因此不能替代 Runtime 权限、工具白名单、密钥隔离和无宿主 Shell 等强制边界。
+
+Phase 14 的 MCP client 是操作员配置边界，不是任意 server 市场。配置要求现有绝对 executable、非空工具白名单和 READ 权限；发现结果还必须声明只读、非破坏、非开放世界 annotation，并通过严格 schema 与描述风险门禁。远端 description 不进入 ToolSpec，只使用本地安全描述；每次调用在新 stdio 进程中重新发现并核对完整定义指纹，再验证实参。调用最终仍落入 `AgentRuntime`，因此权限、步骤预算、锁和 trace 没有旁路。SDK 只继承运行所需的安全系统环境，项目密钥不会传入 server；超时会关闭 session 并回收子进程。该设计不限制可信 server 自身在宿主账户权限内的行为，也无法在 SDK 解析 JSON 行前限制内存，因此不可信 server 必须另行使用容器/microVM 与 OS 资源配额。
 
 ## 项目目录
 

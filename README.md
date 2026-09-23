@@ -2,7 +2,7 @@
 
 这是一个从参考架构出发、逐步演进的实习项目。目标不是一次性复制 Open WebUI 或部署一堆服务，而是先建立一个能运行、能测试、能解释安全边界的 Agent 平台内核，再逐步接入 LLM、RAG、MCP、Web UI 和容器执行器。
 
-当前版本为 `0.14.0`，完成 Phase 13：在 Phase 12 的词法检索和引用校验上增加可选的本地多语 embedding、混合重排、显式回退状态及固定 Recall@K/MRR 基准。项目已发布到私有 GitHub 仓库，Ubuntu CI 从源码重建容器、执行 Python、检索基准与 NiceEval 门禁，并上传经过校验的证据。默认路径仍不访问网络或执行进程；只有服务端显式配置执行器和权限后，才会注册容器工具。
+当前版本为 `0.15.0`，完成 Phase 14：使用官方 Python MCP SDK 接入受控 stdio server，增加显式只读白名单、本地安全描述、严格 JSON Schema、参数复验、调用超时、输出上限、子进程清理与脱敏 trace。项目已发布到私有 GitHub 仓库，Ubuntu CI 执行 Python、检索基准以及 Retrieval、MCP、Container NiceEval 门禁。MCP 与容器能力仍默认关闭，不向 Agent 暴露宿主 Shell。
 
 ## 已实现
 
@@ -34,6 +34,9 @@
 - 生成 CycloneDX SBOM 和包含源文件、二进制、Dockerfile、镜像及 NiceEval 证据哈希的构建证明
 - GitHub Actions 可从源码重建静态 runner 与 scratch 镜像，执行测试和 NiceEval，并上传证据；非 PR 运行配置 OIDC provenance/SBOM attestation
 - GitHub Actions 独立执行 `research/retrieval` NiceEval 门禁并上传 JSON、JUnit 与 receipt 证据
+- 官方 MCP SDK 工具发现只接纳操作员明确列出的只读工具；远端描述不会原样进入模型上下文
+- 严格 MCP schema、调用参数、动态定义指纹、超时、输出上限和子进程回收均有负向测试
+- NiceEval `mcp/mcp/smoke` 使用 9 条确定性断言验证真实 stdio discovery/call，不调用模型
 - 模型格式错误、未知工具、无限循环、预算越界和未批准写入回归测试
 - 无模型、无网络即可运行的安全与主流程测试
 
@@ -46,6 +49,8 @@ python -m unittest discover -s tests -v
 python -m agent_workbench demo
 python -m agent_workbench container-doctor
 python -m agent_workbench container-smoke
+python -m pip install -e ".[mcp]"
+python -m agent_workbench mcp-smoke
 ```
 
 `demo` 会创建隔离项目，放入两份示例资料，调用研究 Agent 生成 `outputs/research-report.md`，并打印项目 ID、报告和 trace 位置。
@@ -159,6 +164,18 @@ pwsh -NoProfile -File scripts/container-smoke.ps1
 
 执行器还使用 `--pull never`，因此运行阶段不会自动下载镜像。即使工具已注册，项目上下文仍默认没有 `execute` 权限，并且每次执行还必须显式批准。当前浏览器研究接口没有向用户开放执行权限。
 
+### 可选 MCP client（Phase 14）
+
+MCP 是服务端配置能力，不接受浏览器请求传入任意 command、环境变量或工具名。首版只支持操作员明确允许、声明 `readOnlyHint=true`、`destructiveHint=false`、`openWorldHint=false` 的工具；schema 必须是封闭 object，所有属性明确 required，且禁止远程 `$ref` 和组合/动态关键字。远端 description 只做风险检查和定义指纹，本地生成的安全 description 才会注册给 Agent。
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m pip install -e ".[mcp]"
+python -m agent_workbench mcp-smoke
+```
+
+每次调用都会重新启动短生命周期 stdio server、重新核对工具定义，并通过同一个 `AgentRuntime` 执行，因此步骤预算、项目锁、权限和脱敏 trace 仍然有效。MCP server command 必须是现有绝对文件路径。该进程是操作员信任的服务端组件，不是任意第三方代码沙盒；不可信 server 仍需放入容器或 microVM。当前 SDK 在解析后执行输出大小门禁，尚不能把它视为传输层内存配额。
+
 ## NiceEval 评估
 
 NiceEval 集成位于 `niceeval/`，通过真实的 loopback HTTP 服务评估 `ResearchAgent`。NiceEval 0.15.0 的进程协调目前只支持 Linux/macOS；本机 Windows 使用已安装的 `NiceEval-Ubuntu` WSL2 发行版运行：
@@ -172,6 +189,15 @@ wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/nicee
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm exec niceeval exp local research/session --rerun all"
 python scripts/run_container_niceeval.py
 ```
+
+MCP 评估需要 WSL Python 可导入锁定的 `mcp==2.2.0`。本机使用 `runtime/` 下的隔离 target 安装，不改系统 Python：
+
+```powershell
+wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench && python3 -m pip install --target runtime/mcp-site mcp==2.2.0"
+wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && PYTHON=python3 PYTHONPATH=/mnt/e/agent/secure_agent_workbench/runtime/mcp-site AGENT_WORKBENCH_MCP_PYTHONPATH=/mnt/e/agent/secure_agent_workbench/runtime/mcp-site pnpm exec niceeval exp mcp mcp/smoke --rerun all"
+```
+
+已验证 MCP Run：`d2f75bee-7c98-4dee-a4fb-3d908ada981d`，Attempt `@1KBYF6AT9MVMV`，1/1 通过且 9 条断言全部登记；固定查询为 `niceeval/queries/mcp-run.json`。
 
 第三条命令启动仅监听本机的 Responses 协议模拟器，完整验证 hosted HTTP、function calling、工具策略和报告产物，不访问互联网，也不上报模拟 token。已验证 Run：`43bbf8ac-4dc1-4e4b-ab71-38a546d5e23d`，9/9 断言通过。
 
@@ -255,4 +281,4 @@ python -m agent_workbench demo
 
 ## 当前边界
 
-本版本已经实现容器执行器代码和安全回归，但只有在 `container-doctor` 返回 `ready: true` 后才能把它视为可运行的容器隔离。当前研究 API 不授予 `execute` 权限；不要把宿主 Shell 暴露给模型。hosted Provider 仍是单独的数据出站边界，尚无操作系统级出站白名单。持久化数据库、MCP 和更强的 microVM 隔离仍在后续阶段。
+本版本已经实现容器执行器和受控 MCP client，但只有在 `container-doctor` 返回 `ready: true` 后才能把容器视为可运行隔离；MCP server 本身也必须由操作员信任或另行隔离。当前研究 API 不授予 `execute` 权限，也不接受客户端 MCP 配置；不要把宿主 Shell 暴露给模型。hosted Provider 仍是单独的数据出站边界，尚无操作系统级出站白名单。持久化数据库、多 Agent 路由和更强的 microVM 隔离仍在后续阶段。

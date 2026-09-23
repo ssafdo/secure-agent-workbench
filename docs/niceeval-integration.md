@@ -42,6 +42,10 @@ Experiment `setup` 创建临时工作目录和临时 HMAC 密钥，启动 `pytho
 
 `container` 使用 NiceEval 自定义应用 Adapter，不走聊天协议。Windows 本机保留 WSL `interop=no`：`scripts/run_container_niceeval.py` 启动带随机 Bearer token 的短生命周期 HTTP 桥，Adapter 只能向固定 `/smoke` 发送无正文 POST，再由 Windows CLI 执行 `AgentRuntime -> container_exec -> Docker`。桥随 NiceEval 退出而关闭。Linux CI 不走桥，由 Adapter 直接调用本机 Python 与 Docker。评估断言 doctor、不可变镜像、退出码、成功信号、输出边界、固定产物、trace 和无残留容器；全程不调用模型。
 
+### MCP stdio
+
+`mcp` 同样使用 NiceEval 自定义应用 Adapter，不伪装聊天或模型调用。Adapter 执行固定 `python -m agent_workbench mcp-smoke`，后者通过官方 SDK 完成 initialize、tool discovery、严格 admission、`AgentRuntime` 调用和 stdio server 清理。评估检查唯一 allowlist、命名空间、READ 权限、输出、一次 trace 与参数值脱敏，全程不调用模型。
+
 终止状态同时检查 Node 的 `exitCode` 和 `signalCode`，避免服务被信号正常终止后重复等待已经发生的 `exit` 事件。
 
 ## 安全边界
@@ -113,4 +117,10 @@ Phase 13 混合检索结果：Experiment `local`，Run `96a91b20-50ca-49f1-8f15-
 
 ```powershell
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/retrieval-run.json"
+```
+
+Phase 14 MCP 结果：Experiment `mcp`，Run `d2f75bee-7c98-4dee-a4fb-3d908ada981d`，Attempt `@1KBYF6AT9MVMV`，`1 passed / 0 failed / 0 errored / 0 reused`，9 条确定性断言通过，usage 为 not-recorded。固定查询为 `queries/mcp-run.json`：
+
+```powershell
+wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/mcp-run.json"
 ```
