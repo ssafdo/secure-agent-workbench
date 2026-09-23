@@ -2,7 +2,7 @@
 
 这是一个从参考架构出发、逐步演进的实习项目。目标不是一次性复制 Open WebUI 或部署一堆服务，而是先建立一个能运行、能测试、能解释安全边界的 Agent 平台内核，再逐步接入 LLM、RAG、MCP、Web UI 和容器执行器。
 
-当前版本为 `0.17.0`，完成 Phase 16：保留 6 条真实 Agent 消融，并新增 50 条中英双语领域路由集、置信度、竞争信号计数、混淆矩阵、语言/类别切片和加权错误成本。固定集当前路由准确率为 `1.0`、加权错误为 `0`；该结果只说明策划数据集，不代表自然用户流量。项目已发布到私有 GitHub 仓库，Ubuntu CI 执行 Python、检索、MCP、Supervisor 与容器 NiceEval 门禁。
+当前版本为 `0.18.0`，完成 Phase 17：在保留 6 条真实 Agent 消融和 50 条中英策划路由集的基础上，增加本地私有自然任务盲测协议。盲测先锁定数据集与路由源码哈希，再评估准确率、加权错误、混淆矩阵和语言切片；任务正文、manifest 和结果均不进入 Git 或 CI。仓库目前没有真实用户任务，策划集 `50/50`、加权错误 `0` 的结果不能代表自然用户流量。
 
 ## 已实现
 
@@ -41,6 +41,7 @@
 - 固定 6 条混合任务同时衡量最终任务成功率和工具调用数，不以路由标签代替业务验收
 - 50 条中英路由集独立报告混淆矩阵、语言/类别切片、置信度和加权错误，不与端到端成功率混算
 - NiceEval `supervisor/supervisor/ablation` 与 `supervisor/supervisor/routing` 分别验证真实消融和路由可靠性
+- 私有盲测封存路由源码与数据集哈希，结果不回显任务正文；CI 只运行协议安全测试
 - 模型格式错误、未知工具、无限循环、预算越界和未批准写入回归测试
 - 无模型、无网络即可运行的安全与主流程测试
 
@@ -207,7 +208,9 @@ wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/nicee
 
 已验证 MCP Run：`d2f75bee-7c98-4dee-a4fb-3d908ada981d`，Attempt `@1KBYF6AT9MVMV`，1/1 通过且 9 条断言全部登记；固定查询为 `niceeval/queries/mcp-run.json`。
 
-已验证 Phase 16 Supervisor Run：`ea8eed5f-cdc4-4732-ba4f-f126638c04d6`；端到端消融 Attempt `@1G73DC22EFZN3` 的 9 条断言和 50 条路由集 Attempt `@1GVDVQ50ACVPN` 的 12 条断言全部通过。固定查询为 `niceeval/queries/supervisor-run.json`。
+已验证 Phase 16 Supervisor Run：`95972efb-0202-4794-96a9-3025147cae8d`；端到端消融 Attempt `@1VNXD25FNH1AP` 的 9 条断言和 50 条路由集 Attempt `@17196879B4FBE` 的 12 条断言全部通过。固定查询为 `niceeval/queries/supervisor-run.json`。
+
+自然任务盲测不接入 NiceEval 或 CI，也不会提交私有 JSONL。先由独立审核者完成人工去敏和标签，再在本机执行封存与评估；修改 `supervisor.py` 后旧 manifest 会自动失效。完整格式、命令和解释边界见 `docs/blind-routing-eval.md`。
 
 第三条命令启动仅监听本机的 Responses 协议模拟器，完整验证 hosted HTTP、function calling、工具策略和报告产物，不访问互联网，也不上报模拟 token。已验证 Run：`43bbf8ac-4dc1-4e4b-ab71-38a546d5e23d`，9/9 断言通过。
 
@@ -279,6 +282,7 @@ WorkspaceManager -> ProjectContext -> AgentRuntime
 - `docs/knowledge-roadmap.md`：Agent 知识整合路线
 - `docs/issues.md`：已发现的问题、风险和验证方式
 - `docs/eval-plan.md`：评测数据与指标设计
+- `docs/blind-routing-eval.md`：私有自然任务的去敏、封存与本地盲测流程
 - `docs/hosted-provider.md`：Responses API、可靠性策略与配置边界
 - `docs/progress.md`：每阶段完成项和下一步实施顺序
 
@@ -291,4 +295,4 @@ python -m agent_workbench demo
 
 ## 当前边界
 
-本版本已经实现容器执行器、受控 MCP client 和可审计的 Supervisor 专家路由，但只有在 `container-doctor` 返回 `ready: true` 后才能把容器视为可运行隔离；MCP server 本身也必须由操作员信任或另行隔离。当前研究 API 不授予 `execute` 权限，也不接受客户端 MCP 配置；不要把宿主 Shell 暴露给模型。hosted Provider 仍是单独的数据出站边界，尚无操作系统级出站白名单。路由收益只在固定的 6 条端到端消融用例上成立，50 条路由分类数据也是人工策划集；自然任务分布验证、生产级跨服务编排、持久化数据库和更强的 microVM 隔离仍在后续阶段。
+本版本已经实现容器执行器、受控 MCP client、可审计的 Supervisor 专家路由和私有盲测协议，但只有在 `container-doctor` 返回 `ready: true` 后才能把容器视为可运行隔离；MCP server 本身也必须由操作员信任或另行隔离。当前研究 API 不授予 `execute` 权限，也不接受客户端 MCP 配置；不要把宿主 Shell 暴露给模型。hosted Provider 仍是单独的数据出站边界，尚无操作系统级出站白名单。仓库没有真实用户任务，盲测敏感信息扫描也不能替代人工去敏；完成一批独立自然任务评估前，路由收益仍只适用于现有策划集和固定消融。

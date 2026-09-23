@@ -42,6 +42,7 @@
 | ROUTE-001 | Partial | Medium | 确定性 Supervisor 对未覆盖措辞、跨语言和复合意图可能误路由 | 汇总信号优先、未知意图低置信回退 Synthesis；50 条人工策划中英集和 6 条端到端消融已通过，但自然任务分布验证前不声称通用能力 |
 | ROUTE-002 | Mitigated | High | 专业 Agent 委派可能重置预算或绕过权限与 trace | Supervisor 不拥有工具，两个专家接收同一个 Runtime；共享步骤预算和脱敏 route/tool trace 有负向测试 |
 | ROUTE-003 | Partial | Low | 规则置信度可能被误解为统计概率 | 只输出 `high|medium|low` 覆盖诊断和竞争信号计数；文档明确未校准，后续用自然任务盲测校准或改名 |
+| ROUTE-004 | Partial | High | 自然任务盲测可能泄露用户内容，或在看过样本后调参造成评估污染 | 私有目录不进 Git/CI，要求人工去敏并封存数据/路由哈希，结果不回显正文；敏感扫描仍可能漏报，真实数据收集必须另行授权和受控保存 |
 
 ## 记录规则
 

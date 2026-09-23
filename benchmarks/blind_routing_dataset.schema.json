@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secure-agent-workbench.local/schemas/blind-routing-dataset-line.json",
+  "title": "Blind routing dataset JSONL line",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "language",
+    "category",
+    "task",
+    "expectedSpecialist",
+    "errorCost",
+    "deidentified",
+    "reviewedByHuman"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{2,63}$"
+    },
+    "language": {
+      "enum": ["en", "zh", "mixed", "other"]
+    },
+    "category": {
+      "enum": [
+        "evidence",
+        "unsupported",
+        "question",
+        "synthesis",
+        "comparison",
+        "conflict",
+        "default",
+        "adversarial",
+        "other"
+      ]
+    },
+    "task": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "expectedSpecialist": {
+      "enum": ["retrieval", "synthesis"]
+    },
+    "errorCost": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "deidentified": {
+      "const": true
+    },
+    "reviewedByHuman": {
+      "const": true
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 ## WHAT
 
-Secure Agent Workbench is a small platform core for running specialized agents in isolated project workspaces. Phase 16 measures the deterministic supervisor on 50 curated bilingual domain tasks, exposes auditable confidence and competing signal counts, and preserves the separate end-to-end single-agent ablation. It builds on the official-SDK MCP boundary, measured hybrid retrieval, private GitHub CI evidence workflow, hard-gated Docker executor, same-origin browser workbench, provider-neutral model loop, versioned sessions, and optional OpenAI-compatible or DeepSeek Responses providers.
+Secure Agent Workbench is a small platform core for running specialized agents in isolated project workspaces. Phase 17 adds a local-only blind-routing protocol for deidentified natural tasks while preserving the 50 curated bilingual routing set and separate end-to-end single-agent ablation. Private blind datasets, manifests, and results must never enter Git, NiceEval, or CI. It builds on the official-SDK MCP boundary, measured hybrid retrieval, private GitHub CI evidence workflow, hard-gated Docker executor, same-origin browser workbench, provider-neutral model loop, versioned sessions, and optional OpenAI-compatible or DeepSeek Responses providers.
 
 ## WHY
 
@@ -32,3 +32,5 @@ python -m unittest discover -s tests -v
 ```
 
 Security changes require a negative test. File-system changes must cover absolute paths, `..` traversal, and symlink or junction escape where the operating system permits creating one.
+
+Natural-task blind evaluation requires explicit human review and deidentification. Automated sensitive-data scanning is only a secondary guard. Seal the dataset before changing routing code, and never weaken the hash checks or print task text in results.

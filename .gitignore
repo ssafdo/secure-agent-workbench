@@ -11,6 +11,8 @@ build/
 *.egg-info/
 niceeval/.niceeval/
 niceeval/node_modules/
+benchmarks/private/
+artifacts/private/
 .coverage
 htmlcov/
 .mypy_cache/

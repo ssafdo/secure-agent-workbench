@@ -129,7 +129,7 @@ Phase 14 MCP 结果：Experiment `mcp`，Run `d2f75bee-7c98-4dee-a4fb-3d908ada98
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/mcp-run.json"
 ```
 
-Phase 16 Supervisor 结果：Experiment `supervisor`，Run `ea8eed5f-cdc4-4732-ba4f-f126638c04d6`，`2 passed / 0 failed / 0 errored / 0 reused`。端到端消融 Attempt `@1G73DC22EFZN3` 的 9 条断言与 50 条路由集 Attempt `@1GVDVQ50ACVPN` 的 12 条断言全部通过。固定查询为 `queries/supervisor-run.json`：
+Phase 16 最新远程 Supervisor 结果：Experiment `supervisor`，Run `95972efb-0202-4794-96a9-3025147cae8d`，`2 passed / 0 failed / 0 errored / 0 reused`。端到端消融 Attempt `@1VNXD25FNH1AP` 的 9 条断言与 50 条路由集 Attempt `@17196879B4FBE` 的 12 条断言全部通过。固定查询为 `queries/supervisor-run.json`：
 
 ```powershell
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/supervisor-run.json"
