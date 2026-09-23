@@ -48,7 +48,7 @@ Experiment `setup` 创建临时工作目录和临时 HMAC 密钥，启动 `pytho
 
 ### Supervisor 消融
 
-`supervisor` 使用自定义应用 Adapter 执行固定 `scripts/benchmark_supervisor.py`。同一份 6 条数据分别运行单一 ResearchAgent 和 Supervisor；评分检查最终引用、无依据拒答或全量 source coverage，不用路由标签代替业务结果。NiceEval 还验证固定分母、成功率提升、平均工具调用下降和每条任务无回退。
+`supervisor` 使用自定义应用 Adapter 执行两个独立门禁。`scripts/benchmark_supervisor.py` 在同一份 6 条数据上分别运行单一 ResearchAgent 和 Supervisor；评分检查最终引用、无依据拒答或全量 source coverage，不用路由标签代替业务结果。`scripts/benchmark_supervisor_routing.py` 在 50 条人工策划中英任务上检查混淆矩阵、语言/类别切片、加权错误、竞争信号和低置信回退。分类准确率不能替代前一个端到端消融。
 
 终止状态同时检查 Node 的 `exitCode` 和 `signalCode`，避免服务被信号正常终止后重复等待已经发生的 `exit` 事件。
 
@@ -129,7 +129,7 @@ Phase 14 MCP 结果：Experiment `mcp`，Run `d2f75bee-7c98-4dee-a4fb-3d908ada98
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/mcp-run.json"
 ```
 
-Phase 15 Supervisor 结果：Experiment `supervisor`，Run `14e019f8-48ce-47c2-a164-fde9cc3b15ac`，Attempt `@15PGA3882A4C2`，`1 passed / 0 failed / 0 errored / 0 reused`，9 条确定性断言通过。固定查询为 `queries/supervisor-run.json`：
+Phase 16 Supervisor 结果：Experiment `supervisor`，Run `ea8eed5f-cdc4-4732-ba4f-f126638c04d6`，`2 passed / 0 failed / 0 errored / 0 reused`。端到端消融 Attempt `@1G73DC22EFZN3` 的 9 条断言与 50 条路由集 Attempt `@1GVDVQ50ACVPN` 的 12 条断言全部通过。固定查询为 `queries/supervisor-run.json`：
 
 ```powershell
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/supervisor-run.json"

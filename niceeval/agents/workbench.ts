@@ -58,6 +58,9 @@ interface ResearchResponse {
     specialist: "synthesis" | "retrieval";
     reason: string;
     signalCount: number;
+    confidence: "high" | "medium" | "low";
+    synthesisSignalCount: number;
+    retrievalSignalCount: number;
   };
   session?: {
     id: string;

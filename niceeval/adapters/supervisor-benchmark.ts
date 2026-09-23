@@ -27,15 +27,35 @@ export interface SupervisorBenchmarkResult {
   successRateDelta: number;
 }
 
+export interface RoutingBenchmarkResult {
+  schemaVersion: number;
+  cases: number;
+  correct: number;
+  accuracy: number;
+  weightedError: number;
+  weightedAccuracy: number;
+  conflictCases: number;
+  conflictCorrect: number;
+  defaultCases: number;
+  lowConfidenceDefaults: number;
+  errors: unknown[];
+  languageSlices: Record<string, { cases: number; correct: number; accuracy: number }>;
+  confidenceCounts: Record<string, number>;
+}
+
 const repositoryRoot = fileURLToPath(new URL("../..", import.meta.url));
 const MAX_OUTPUT_BYTES = 512 * 1024;
 
-function runBenchmark(signal: AbortSignal): Promise<SupervisorBenchmarkResult> {
+function runPythonJson<T>(
+  script: string,
+  args: string[],
+  signal: AbortSignal,
+): Promise<T> {
   const python = process.env.PYTHON ?? (process.platform === "win32" ? "python" : "python3");
   return new Promise((resolve, reject) => {
     const child = spawn(
       python,
-      ["-B", "scripts/benchmark_supervisor.py", "--require-improvement"],
+      ["-B", script, ...args],
       {
         cwd: repositoryRoot,
         env: {
@@ -82,7 +102,7 @@ function runBenchmark(signal: AbortSignal): Promise<SupervisorBenchmarkResult> {
         return;
       }
       try {
-        resolve(JSON.parse(stdout) as SupervisorBenchmarkResult);
+        resolve(JSON.parse(stdout) as T);
       } catch (error) {
         reject(new Error("Supervisor benchmark returned invalid JSON.", { cause: error }));
       }
@@ -90,10 +110,29 @@ function runBenchmark(signal: AbortSignal): Promise<SupervisorBenchmarkResult> {
   });
 }
 
+function runBenchmark(signal: AbortSignal): Promise<SupervisorBenchmarkResult> {
+  return runPythonJson(
+    "scripts/benchmark_supervisor.py",
+    ["--require-improvement"],
+    signal,
+  );
+}
+
+function runRoutingBenchmark(signal: AbortSignal): Promise<RoutingBenchmarkResult> {
+  return runPythonJson(
+    "scripts/benchmark_supervisor_routing.py",
+    ["--minimum-accuracy", "0.96", "--maximum-weighted-error", "0"],
+    signal,
+  );
+}
+
 export const supervisorBenchmark = defineAdapter({
   name: "secure-agent-workbench-supervisor-benchmark",
-  behaviorRevision: "phase-15-supervisor-v1",
+  behaviorRevision: "phase-16-supervisor-routing-v2",
   create(context) {
-    return { runBenchmark: () => runBenchmark(context.signal) };
+    return {
+      runBenchmark: () => runBenchmark(context.signal),
+      runRoutingBenchmark: () => runRoutingBenchmark(context.signal),
+    };
   },
 });

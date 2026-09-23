@@ -9,7 +9,7 @@
     "cases": 6,
     "successRate": 0.5,
     "averageToolCalls": 4.167,
-    "averageDurationMs": 10.817,
+    "averageDurationMs": 15.64,
     "caseResults": [
       {
         "id": "evidence-api-key",
@@ -17,7 +17,7 @@
         "specialist": "single-research",
         "routingCorrect": false,
         "toolCalls": 4,
-        "durationMs": 11.66
+        "durationMs": 20.388
       },
       {
         "id": "evidence-container-network",
@@ -25,7 +25,7 @@
         "specialist": "single-research",
         "routingCorrect": false,
         "toolCalls": 4,
-        "durationMs": 10.402
+        "durationMs": 11.149
       },
       {
         "id": "unsupported-backup-schedule",
@@ -33,7 +33,7 @@
         "specialist": "single-research",
         "routingCorrect": false,
         "toolCalls": 4,
-        "durationMs": 10.285
+        "durationMs": 21.137
       },
       {
         "id": "synthesis-all-sources",
@@ -41,7 +41,7 @@
         "specialist": "single-research",
         "routingCorrect": false,
         "toolCalls": 4,
-        "durationMs": 10.525
+        "durationMs": 10.651
       },
       {
         "id": "synthesis-comparison",
@@ -49,7 +49,7 @@
         "specialist": "single-research",
         "routingCorrect": false,
         "toolCalls": 5,
-        "durationMs": 11.201
+        "durationMs": 22.96
       },
       {
         "id": "synthesis-default",
@@ -57,7 +57,7 @@
         "specialist": "single-research",
         "routingCorrect": false,
         "toolCalls": 4,
-        "durationMs": 10.83
+        "durationMs": 7.557
       }
     ]
   },
@@ -66,7 +66,7 @@
     "cases": 6,
     "successRate": 1.0,
     "averageToolCalls": 3.167,
-    "averageDurationMs": 10.463,
+    "averageDurationMs": 10.533,
     "caseResults": [
       {
         "id": "evidence-api-key",
@@ -74,7 +74,7 @@
         "specialist": "retrieval",
         "routingCorrect": true,
         "toolCalls": 2,
-        "durationMs": 9.655
+        "durationMs": 11.296
       },
       {
         "id": "evidence-container-network",
@@ -82,7 +82,7 @@
         "specialist": "retrieval",
         "routingCorrect": true,
         "toolCalls": 2,
-        "durationMs": 11.76
+        "durationMs": 8.938
       },
       {
         "id": "unsupported-backup-schedule",
@@ -90,7 +90,7 @@
         "specialist": "retrieval",
         "routingCorrect": true,
         "toolCalls": 2,
-        "durationMs": 8.123
+        "durationMs": 9.68
       },
       {
         "id": "synthesis-all-sources",
@@ -98,7 +98,7 @@
         "specialist": "synthesis",
         "routingCorrect": true,
         "toolCalls": 4,
-        "durationMs": 10.579
+        "durationMs": 11.124
       },
       {
         "id": "synthesis-comparison",
@@ -106,7 +106,7 @@
         "specialist": "synthesis",
         "routingCorrect": true,
         "toolCalls": 5,
-        "durationMs": 13.9
+        "durationMs": 12.467
       },
       {
         "id": "synthesis-default",
@@ -114,7 +114,7 @@
         "specialist": "synthesis",
         "routingCorrect": true,
         "toolCalls": 4,
-        "durationMs": 8.762
+        "durationMs": 9.692
       }
     ]
   },

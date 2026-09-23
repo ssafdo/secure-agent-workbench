@@ -323,7 +323,9 @@ function renderResult(body, durationMs) {
   elements.diagCompactions.textContent = formatNumber(diagnostics.contextCompactions ?? 0);
   elements.diagTruncated.textContent = formatNumber(diagnostics.truncatedMessages ?? 0);
   elements.diagReflections.textContent = formatNumber(diagnostics.reflections ?? 0);
-  elements.diagRoute.textContent = body.routing?.specialist ?? "—";
+  elements.diagRoute.textContent = body.routing
+    ? `${body.routing.specialist} · ${body.routing.confidence}`
+    : "—";
   renderActions(body.actions);
 
   if (body.session) {

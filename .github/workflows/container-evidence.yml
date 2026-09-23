@@ -61,6 +61,13 @@ jobs:
           --require-improvement
           --output artifacts/supervisor/benchmark.json
 
+      - name: Benchmark bilingual supervisor routing
+        run: >-
+          python scripts/benchmark_supervisor_routing.py
+          --minimum-accuracy 0.96
+          --maximum-weighted-error 0
+          --output artifacts/supervisor/routing-benchmark.json
+
       - name: Install build tools
         run: sudo apt-get update && sudo apt-get install --yes binutils
 

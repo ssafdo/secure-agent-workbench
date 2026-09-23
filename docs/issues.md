@@ -39,8 +39,9 @@
 | MCP-001 | Mitigated | Critical | 恶意工具描述或动态 schema 可能向模型注入指令、扩大参数面 | 远端描述不进入 ToolSpec；严格 schema、显式只读 allowlist、annotation 与调用前定义指纹复验均有负向测试 |
 | MCP-002 | Mitigated | High | MCP 参数越权、密钥环境继承或超时 server 可能绕过 Runtime 边界 | 调用前 JSON Schema 验证，SDK 最小环境加 credential-name 拒绝，所有 handler 经过 Runtime，超时清理子进程有测试 |
 | MCP-003 | Partial | High | 官方 SDK 在解析完整 stdio JSON 行后才执行应用输出上限，恶意 server 仍可能消耗宿主内存或执行任意代码 | MCP server 必须由操作员信任；当前解析后拒绝超大结果，后续将 server 放入有内存/PID/网络限制的容器或 microVM |
-| ROUTE-001 | Partial | Medium | 确定性 Supervisor 对未覆盖措辞、跨语言和复合意图可能误路由 | 汇总信号优先、未知意图回退 Synthesis；6 条固定消融已通过，扩到 50 条领域任务前不声称通用路由能力 |
+| ROUTE-001 | Partial | Medium | 确定性 Supervisor 对未覆盖措辞、跨语言和复合意图可能误路由 | 汇总信号优先、未知意图低置信回退 Synthesis；50 条人工策划中英集和 6 条端到端消融已通过，但自然任务分布验证前不声称通用能力 |
 | ROUTE-002 | Mitigated | High | 专业 Agent 委派可能重置预算或绕过权限与 trace | Supervisor 不拥有工具，两个专家接收同一个 Runtime；共享步骤预算和脱敏 route/tool trace 有负向测试 |
+| ROUTE-003 | Partial | Low | 规则置信度可能被误解为统计概率 | 只输出 `high|medium|low` 覆盖诊断和竞争信号计数；文档明确未校准，后续用自然任务盲测校准或改名 |
 
 ## 记录规则
 

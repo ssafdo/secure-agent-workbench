@@ -189,4 +189,15 @@
 - [x] Python 完整回归 104 项通过；Supervisor benchmark 可在仓库根目录不设置 `PYTHONPATH` 直接运行。
 - [x] 浏览器实测默认智能路由、禁用不适用的连续会话、显示所选专家；桌面和移动视口的四引擎 2x2 布局无重叠或横向溢出。
 - [x] GitHub Actions 增加 Supervisor benchmark、NiceEval 门禁与独立 evidence artifact。
-- [ ] 扩展到至少 50 条真实领域任务，再决定是否用模型分类器替换规则路由，并比较错误路由成本。
+- [x] Phase 16 已扩展到 50 条人工策划中英领域路由任务；自然用户任务仍需独立盲测。
+
+## Phase 16：路由可靠性与失败归因（本地实现完成）
+
+- [x] 路由输出增加 `high|medium|low` 置信度及 synthesis/retrieval 竞争信号数；trace 仍不保存任务正文。
+- [x] 新增 50 条中英双语策划集，覆盖证据、无依据问题、比较、综合、复合意图、未知意图和对抗 Agent 名称。
+- [x] 路由准确率 `50/50`，加权错误 `0`；英文和中文均为 `25/25`，复合意图 `4/4`，未知意图低置信回退 `4/4`。
+- [x] 基准输出混淆矩阵、语言/类别切片、置信度分布、逐条结果和错误列表。
+- [x] NiceEval 新增独立 `supervisor/routing` 门禁，原 6 条端到端消融继续保留。
+- [x] NiceEval Run `ea8eed5f-cdc4-4732-ba4f-f126638c04d6` 为 2/2 通过；消融 Attempt `@1G73DC22EFZN3`、路由 Attempt `@1GVDVQ50ACVPN` 共 21 条断言通过。
+- [x] Python 完整回归 106 项通过；两个 Supervisor 基准、依赖检查与 NiceEval 配置检查通过。
+- [ ] 收集去敏后的自然用户任务做盲测，评估分布外措辞，再决定保留规则或引入本地/托管分类器。

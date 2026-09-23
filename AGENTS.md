@@ -2,7 +2,7 @@
 
 ## WHAT
 
-Secure Agent Workbench is a small platform core for running specialized agents in isolated project workspaces. Phase 15 adds an auditable supervisor that routes tasks to synthesis or retrieval specialists through one shared policy runtime, plus a fixed single-agent ablation benchmark and NiceEval gate. It builds on the official-SDK MCP boundary, measured hybrid retrieval, private GitHub CI evidence workflow, hard-gated Docker executor, same-origin browser workbench, provider-neutral model loop, versioned sessions, and optional OpenAI-compatible or DeepSeek Responses providers.
+Secure Agent Workbench is a small platform core for running specialized agents in isolated project workspaces. Phase 16 measures the deterministic supervisor on 50 curated bilingual domain tasks, exposes auditable confidence and competing signal counts, and preserves the separate end-to-end single-agent ablation. It builds on the official-SDK MCP boundary, measured hybrid retrieval, private GitHub CI evidence workflow, hard-gated Docker executor, same-origin browser workbench, provider-neutral model loop, versioned sessions, and optional OpenAI-compatible or DeepSeek Responses providers.
 
 ## WHY
 

@@ -237,6 +237,9 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(body["engine"], "supervisor")
         self.assertEqual(body["routing"]["specialist"], "retrieval")
         self.assertEqual(body["routing"]["reason"], "evidence-grounded-query")
+        self.assertEqual(body["routing"]["confidence"], "high")
+        self.assertEqual(body["routing"]["synthesisSignalCount"], 0)
+        self.assertGreater(body["routing"]["retrievalSignalCount"], 0)
         self.assertEqual(body["agentDiagnostics"]["routes"], 1)
         self.assertEqual(
             [action["name"] for action in body["actions"]],

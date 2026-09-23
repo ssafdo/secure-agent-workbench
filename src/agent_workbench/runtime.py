@@ -47,6 +47,9 @@ class AgentRuntime:
         specialist: str,
         reason: str,
         signal_count: int,
+        confidence: str,
+        synthesis_signal_count: int,
+        retrieval_signal_count: int,
     ) -> None:
         event = {
             "event": "agent_route",
@@ -54,6 +57,9 @@ class AgentRuntime:
             "specialist": specialist,
             "reason": reason,
             "signalCount": signal_count,
+            "confidence": confidence,
+            "synthesisSignalCount": synthesis_signal_count,
+            "retrievalSignalCount": retrieval_signal_count,
         }
         self.routing_events.append(event)
         self.traces.append(self.context, event)
