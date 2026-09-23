@@ -2,7 +2,7 @@
 
 ## WHAT
 
-Secure Agent Workbench is a small platform core for running specialized agents in isolated project workspaces. Phase 18 adds independent dual annotation and third-reviewer adjudication before the local-only blind-routing protocol for deidentified natural tasks. Private candidates, annotations, datasets, manifests, and results must never enter Git, NiceEval, or CI. It preserves the 50 curated bilingual routing set and separate end-to-end single-agent ablation, and builds on the official-SDK MCP boundary, measured hybrid retrieval, private GitHub CI evidence workflow, hard-gated Docker executor, same-origin browser workbench, provider-neutral model loop, versioned sessions, and optional OpenAI-compatible or DeepSeek Responses providers.
+Secure Agent Workbench is a small platform core for running specialized agents in isolated project workspaces. Phase 19 adds a loopback-only private annotation workbench on top of Phase 18 independent dual annotation and third-reviewer adjudication. Private candidates, annotations, datasets, manifests, drafts, and results must never enter Git, NiceEval, or CI. It preserves the 50 curated bilingual routing set and separate end-to-end single-agent ablation, and builds on the official-SDK MCP boundary, measured hybrid retrieval, private GitHub CI evidence workflow, hard-gated Docker executor, same-origin browser workbench, provider-neutral model loop, versioned sessions, and optional OpenAI-compatible or DeepSeek Responses providers.
 
 ## WHY
 
@@ -36,3 +36,5 @@ Security changes require a negative test. File-system changes must cover absolut
 Natural-task blind evaluation requires explicit human review and deidentification. Automated sensitive-data scanning is only a secondary guard. Seal the dataset before changing routing code, and never weaken the hash checks or print task text in results.
 
 Category, routing specialist, and error-cost labels must come from two distinct pseudonymous reviewers who cannot see each other's labels. Every disagreement requires a distinct third adjudicator; do not silently drop difficult cases to improve agreement.
+
+The annotation workbench may bind only to loopback, must require its ephemeral token for candidate and save APIs, must bind saved labels to the candidate SHA-256, and must atomically finalize only after every candidate is labeled. Do not add remote access, model calls, or account/session identifiers to this tool.

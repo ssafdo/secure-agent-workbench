@@ -4,10 +4,17 @@
   "title": "Blind routing reviewer annotations",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "reviewerId", "labels"],
+  "required": ["schemaVersion", "kind", "candidateSha256", "reviewerId", "labels"],
   "properties": {
     "schemaVersion": {
       "const": 1
+    },
+    "kind": {
+      "const": "secure-agent-workbench/blind-routing-annotations"
+    },
+    "candidateSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
     },
     "reviewerId": {
       "type": "string",

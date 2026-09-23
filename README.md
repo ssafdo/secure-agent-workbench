@@ -2,7 +2,7 @@
 
 这是一个从参考架构出发、逐步演进的实习项目。目标不是一次性复制 Open WebUI 或部署一堆服务，而是先建立一个能运行、能测试、能解释安全边界的 Agent 平台内核，再逐步接入 LLM、RAG、MCP、Web UI 和容器执行器。
 
-当前版本为 `0.19.0`，完成 Phase 18：在本地私有自然任务盲测协议前增加双人独立标注、一致率/Cohen's kappa 计算和第三人冲突仲裁。候选任务不含类别、路由或错误成本标签，审核文件不含任务正文；只有 ID 完整匹配、三类一致率达标且冲突全部解决后，才生成 Phase 17 可封存数据集。仓库目前没有真实用户任务，策划集 `50/50`、加权错误 `0` 的结果不能代表自然用户流量。
+当前版本为 `0.20.0`，完成 Phase 19：增加只绑定 loopback 的本地审核工作台。审核者通过一次性令牌逐条查看无标签候选任务，选择类别、专业 Agent 和错误成本；草稿原子保存，全部完成后才生成带候选集哈希的正式标注文件。候选任务不含类别、路由或错误成本标签，审核文件不含任务正文；只有 ID 完整匹配、三类一致率达标且冲突全部解决后，才生成 Phase 17 可封存数据集。仓库目前没有真实用户任务，策划集 `50/50`、加权错误 `0` 的结果不能代表自然用户流量。
 
 ## 已实现
 
@@ -43,6 +43,7 @@
 - NiceEval `supervisor/supervisor/ablation` 与 `supervisor/supervisor/routing` 分别验证真实消融和路由可靠性
 - 私有盲测封存路由源码与数据集哈希，结果不回显任务正文；CI 只运行协议安全测试
 - 两位独立审核者分别标注类别、专业 Agent 与错误成本，低一致率或未仲裁冲突不能进入盲测
+- `blind_routing_review.py` 提供本机逐条标注界面；不接触模型/API，令牌只放在 URL fragment，输入输出强制位于 private 目录
 - 模型格式错误、未知工具、无限循环、预算越界和未批准写入回归测试
 - 无模型、无网络即可运行的安全与主流程测试
 
@@ -213,6 +214,18 @@ wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/nicee
 
 自然任务盲测不接入 NiceEval 或 CI，也不会提交私有 JSONL。先由两位独立审核者分别标注，必要时由第三人仲裁，再在本机执行封存与评估；修改 `supervisor.py` 后旧 manifest 会自动失效。完整格式、命令和解释边界见 `docs/blind-routing-eval.md`。
 
+启动本地审核工作台（每位审核者使用独立输出文件和假名 ID）：
+
+```powershell
+$env:PYTHONPATH = "src"
+python scripts/blind_routing_review.py `
+  --candidates benchmarks/private/natural-routing-candidates.jsonl `
+  --output benchmarks/private/reviewer-a.json `
+  --reviewer-id reviewer-a
+```
+
+命令会打印只监听 `127.0.0.1` 的一次性链接；不要把链接或候选文件发给其他人。浏览器关闭后重新运行命令会生成新令牌，并从 `.draft` 继续。完成后用 `docs/blind-routing-eval.md` 中的独立标注比较和封存命令。
+
 第三条命令启动仅监听本机的 Responses 协议模拟器，完整验证 hosted HTTP、function calling、工具策略和报告产物，不访问互联网，也不上报模拟 token。已验证 Run：`43bbf8ac-4dc1-4e4b-ab71-38a546d5e23d`，9/9 断言通过。
 
 第四条命令验证长上下文压缩、超大工具结果裁剪和一次失败恢复。已验证 Run：`4bcba814-fa79-4b30-942f-71e310b6f7dc`，1/1 Attempt 通过；固定查询为 `niceeval/queries/context-recovery-run.json`。
@@ -285,6 +298,7 @@ WorkspaceManager -> ProjectContext -> AgentRuntime
 - `docs/eval-plan.md`：评测数据与指标设计
 - `docs/blind-routing-eval.md`：私有自然任务的去敏、封存与本地盲测流程
 - `docs/routing-label-guide.md`：独立审核者使用的类别、专业 Agent 和错误成本口径
+- `scripts/blind_routing_review.py`：私有候选任务的 loopback 逐条审核工作台
 - `docs/hosted-provider.md`：Responses API、可靠性策略与配置边界
 - `docs/progress.md`：每阶段完成项和下一步实施顺序
 
@@ -297,4 +311,4 @@ python -m agent_workbench demo
 
 ## 当前边界
 
-本版本已经实现容器执行器、受控 MCP client、可审计的 Supervisor 专家路由和私有盲测协议，但只有在 `container-doctor` 返回 `ready: true` 后才能把容器视为可运行隔离；MCP server 本身也必须由操作员信任或另行隔离。当前研究 API 不授予 `execute` 权限，也不接受客户端 MCP 配置；不要把宿主 Shell 暴露给模型。hosted Provider 仍是单独的数据出站边界，尚无操作系统级出站白名单。仓库没有真实用户任务，盲测敏感信息扫描也不能替代人工去敏；完成一批独立自然任务评估前，路由收益仍只适用于现有策划集和固定消融。
+本版本已经实现容器执行器、受控 MCP client、可审计的 Supervisor 专家路由、私有盲测协议和 loopback 审核工作台，但只有在 `container-doctor` 返回 `ready: true` 后才能把容器视为可运行隔离；MCP server 本身也必须由操作员信任或另行隔离。审核工作台只用于本机私有标注，不提供账号体系、远程访问或密码学盲化。当前研究 API 不授予 `execute` 权限，也不接受客户端 MCP 配置；不要把宿主 Shell 暴露给模型。hosted Provider 仍是单独的数据出站边界，尚无操作系统级出站白名单。仓库没有真实用户任务，盲测敏感信息扫描也不能替代人工去敏；完成一批独立自然任务评估前，路由收益仍只适用于现有策划集和固定消融。

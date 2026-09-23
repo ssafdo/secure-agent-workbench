@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import sys
@@ -34,9 +35,12 @@ def _candidate(index: int, marker: str = "") -> dict[str, object]:
 def _annotation(
     reviewer: str,
     cases: list[dict[str, object]],
+    candidate_sha256: str,
 ) -> dict[str, object]:
     return {
         "schemaVersion": 1,
+        "kind": "secure-agent-workbench/blind-routing-annotations",
+        "candidateSha256": candidate_sha256,
         "reviewerId": reviewer,
         "labels": [
             {
@@ -73,13 +77,14 @@ class BlindRoutingAdjudicationTests(unittest.TestCase):
         cases = [_candidate(index, marker if index == 1 else "") for index in range(1, 21)]
         with tempfile.TemporaryDirectory() as directory:
             candidates_path = self._write_candidates(directory, cases)
-            a_path = self._write_json(directory, "a.json", _annotation("reviewer-a", cases))
-            b_path = self._write_json(directory, "b.json", _annotation("reviewer-b", cases))
+            candidate_sha256 = hashlib.sha256(candidates_path.read_bytes()).hexdigest()
+            a_path = self._write_json(directory, "a.json", _annotation("reviewer-a", cases, candidate_sha256))
+            b_path = self._write_json(directory, "b.json", _annotation("reviewer-b", cases, candidate_sha256))
             candidates = load_candidates(candidates_path)
             expected_ids = {case["id"] for case in candidates}
             primary = (
-                load_annotations(a_path, expected_ids),
-                load_annotations(b_path, expected_ids),
+                load_annotations(a_path, expected_ids, candidate_sha256),
+                load_annotations(b_path, expected_ids, candidate_sha256),
             )
             report = compare_annotations(
                 candidates_path, candidates, (a_path, b_path), primary
@@ -99,19 +104,20 @@ class BlindRoutingAdjudicationTests(unittest.TestCase):
 
     def test_disagreement_requires_distinct_adjudicator_and_exact_conflict_ids(self) -> None:
         cases = [_candidate(index) for index in range(1, 21)]
-        annotation_a = _annotation("reviewer-a", cases)
-        annotation_b = _annotation("reviewer-b", cases)
-        annotation_b["labels"][0]["expectedSpecialist"] = "synthesis"
-        annotation_b["labels"][0]["errorCost"] = 4
         with tempfile.TemporaryDirectory() as directory:
             candidates_path = self._write_candidates(directory, cases)
+            candidate_sha256 = hashlib.sha256(candidates_path.read_bytes()).hexdigest()
+            annotation_a = _annotation("reviewer-a", cases, candidate_sha256)
+            annotation_b = _annotation("reviewer-b", cases, candidate_sha256)
+            annotation_b["labels"][0]["expectedSpecialist"] = "synthesis"
+            annotation_b["labels"][0]["errorCost"] = 4
             a_path = self._write_json(directory, "a.json", annotation_a)
             b_path = self._write_json(directory, "b.json", annotation_b)
             candidates = load_candidates(candidates_path)
             expected_ids = {case["id"] for case in candidates}
             primary = (
-                load_annotations(a_path, expected_ids),
-                load_annotations(b_path, expected_ids),
+                load_annotations(a_path, expected_ids, candidate_sha256),
+                load_annotations(b_path, expected_ids, candidate_sha256),
             )
             report = compare_annotations(
                 candidates_path, candidates, (a_path, b_path), primary
@@ -123,6 +129,8 @@ class BlindRoutingAdjudicationTests(unittest.TestCase):
             conflict_id = cases[0]["id"]
             adjudication_value = {
                 "schemaVersion": 1,
+                "kind": "secure-agent-workbench/blind-routing-annotations",
+                "candidateSha256": candidate_sha256,
                 "reviewerId": "reviewer-c",
                 "labels": [
                     {
@@ -136,7 +144,9 @@ class BlindRoutingAdjudicationTests(unittest.TestCase):
             adjudication_path = self._write_json(
                 directory, "adjudication.json", adjudication_value
             )
-            adjudication = load_annotations(adjudication_path, {conflict_id})
+            adjudication = load_annotations(
+                adjudication_path, {conflict_id}, candidate_sha256
+            )
             adjudication["labels"][conflict_id]["category"] = "other"
             with self.assertRaisesRegex(ValueError, "cannot change fields agreed"):
                 build_consensus_dataset(candidates, primary, report, adjudication)
@@ -156,13 +166,14 @@ class BlindRoutingAdjudicationTests(unittest.TestCase):
         cases = [_candidate(index) for index in range(1, 21)]
         with tempfile.TemporaryDirectory() as directory:
             candidates_path = self._write_candidates(directory, cases)
-            a_path = self._write_json(directory, "a.json", _annotation("reviewer-a", cases))
-            b_path = self._write_json(directory, "b.json", _annotation("reviewer-a", cases))
+            candidate_sha256 = hashlib.sha256(candidates_path.read_bytes()).hexdigest()
+            a_path = self._write_json(directory, "a.json", _annotation("reviewer-a", cases, candidate_sha256))
+            b_path = self._write_json(directory, "b.json", _annotation("reviewer-a", cases, candidate_sha256))
             candidates = load_candidates(candidates_path)
             expected_ids = {case["id"] for case in candidates}
             primary = (
-                load_annotations(a_path, expected_ids),
-                load_annotations(b_path, expected_ids),
+                load_annotations(a_path, expected_ids, candidate_sha256),
+                load_annotations(b_path, expected_ids, candidate_sha256),
             )
             with self.assertRaisesRegex(ValueError, "distinct reviewer"):
                 compare_annotations(
@@ -171,12 +182,24 @@ class BlindRoutingAdjudicationTests(unittest.TestCase):
 
     def test_annotation_ids_must_exactly_match_candidates(self) -> None:
         cases = [_candidate(index) for index in range(1, 21)]
-        annotation = _annotation("reviewer-a", cases)
-        annotation["labels"].pop()
         with tempfile.TemporaryDirectory() as directory:
+            candidates_path = self._write_candidates(directory, cases)
+            candidate_sha256 = hashlib.sha256(candidates_path.read_bytes()).hexdigest()
+            annotation = _annotation("reviewer-a", cases, candidate_sha256)
+            annotation["labels"].pop()
             path = self._write_json(directory, "a.json", annotation)
             with self.assertRaisesRegex(ValueError, "exactly match"):
-                load_annotations(path, {case["id"] for case in cases})
+                load_annotations(
+                    path, {case["id"] for case in cases}, candidate_sha256
+                )
+
+            annotation["labels"].append(annotation["labels"][-1])
+            annotation["candidateSha256"] = "0" * 64
+            path = self._write_json(directory, "wrong-hash.json", annotation)
+            with self.assertRaisesRegex(ValueError, "candidate hash"):
+                load_annotations(
+                    path, {case["id"] for case in cases}, candidate_sha256
+                )
 
     def test_cli_rejects_files_outside_private_directories(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -190,11 +213,12 @@ class BlindRoutingAdjudicationTests(unittest.TestCase):
         private_root.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(dir=private_root) as directory:
             candidates = self._write_candidates(directory, cases)
+            candidate_sha256 = hashlib.sha256(candidates.read_bytes()).hexdigest()
             annotation_a = self._write_json(
-                directory, "a.json", _annotation("reviewer-a", cases)
+                directory, "a.json", _annotation("reviewer-a", cases, candidate_sha256)
             )
             annotation_b = self._write_json(
-                directory, "b.json", _annotation("reviewer-b", cases)
+                directory, "b.json", _annotation("reviewer-b", cases, candidate_sha256)
             )
             dataset = Path(directory) / "dataset.jsonl"
             report = Path(directory) / "report.json"

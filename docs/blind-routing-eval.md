@@ -24,6 +24,8 @@
 ```json
 {
   "schemaVersion": 1,
+  "kind": "secure-agent-workbench/blind-routing-annotations",
+  "candidateSha256": "<64 lowercase hex characters>",
   "reviewerId": "reviewer-a",
   "labels": [
     {
@@ -49,6 +51,18 @@ python scripts/blind_routing_adjudicate.py `
 ```
 
 若任一 `category`、`expectedSpecialist` 或 `errorCost` 不同，命令会写入不含任务正文的冲突报告。若一致率低于预注册门槛，命令以状态码 `1` 停止；否则未仲裁冲突以状态码 `2` 停止。第三位不同审核者只处理报告中的冲突 ID，完整填写标签结构但不得改动两位主审核者已经一致的字段，再通过 `--adjudication benchmarks/private/adjudicator.json` 重跑。不得看到结果后降低门槛，困难案例也不能被删除来提高一致率。
+
+审核者不必手工编辑 JSON，可以启动本地工作台完成一份标注：
+
+```powershell
+$env:PYTHONPATH = "src"
+python scripts/blind_routing_review.py `
+  --candidates benchmarks/private/natural-routing-candidates.jsonl `
+  --output benchmarks/private/reviewer-a.json `
+  --reviewer-id reviewer-a
+```
+
+它会输出一个仅绑定 `127.0.0.1` 的一次性链接。页面的候选任务读取和保存请求都需要该令牌；任务正文通过 `textContent` 展示，不当作 HTML 执行。未完成的标注写入同目录 `.draft`，全部完成后才生成正式文件。审核工作台不实现远程访问、账号系统、模型调用或 NiceEval 上传。
 
 只有门禁通过且全部分歧解决后，命令才生成符合 `benchmarks/blind_routing_dataset.schema.json` 的 `natural-routing.jsonl`。一致性报告只包含输入文件哈希、匿名 ID 和聚合指标，不包含任务正文或审核者 ID。文件哈希不是密码学匿名化，能访问所有私有输入的人仍可建立关联。
 

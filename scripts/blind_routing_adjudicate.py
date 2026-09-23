@@ -31,7 +31,14 @@ CANDIDATE_FIELDS = {
     "deidentified",
     "reviewedByHuman",
 }
-ANNOTATION_FIELDS = {"schemaVersion", "reviewerId", "labels"}
+ANNOTATION_FIELDS = {
+    "schemaVersion",
+    "kind",
+    "candidateSha256",
+    "reviewerId",
+    "labels",
+}
+ANNOTATION_KIND = "secure-agent-workbench/blind-routing-annotations"
 LABEL_FIELDS = {"id", "category", "expectedSpecialist", "errorCost"}
 
 
@@ -88,7 +95,9 @@ def load_candidates(path: Path, minimum_cases: int = 20) -> list[dict[str, Any]]
     return candidates
 
 
-def load_annotations(path: Path, expected_ids: set[str]) -> dict[str, Any]:
+def load_annotations(
+    path: Path, expected_ids: set[str], candidate_sha256: str
+) -> dict[str, Any]:
     try:
         value = json.loads(_read_utf8(path, "Annotation file"))
     except json.JSONDecodeError as error:
@@ -98,11 +107,13 @@ def load_annotations(path: Path, expected_ids: set[str]) -> dict[str, Any]:
     reviewer_id = value["reviewerId"]
     if (
         value["schemaVersion"] != 1
+        or value["kind"] != ANNOTATION_KIND
+        or value["candidateSha256"] != candidate_sha256
         or not isinstance(reviewer_id, str)
         or not ID_PATTERN.fullmatch(reviewer_id)
         or not isinstance(value["labels"], list)
     ):
-        raise ValueError("Annotation metadata is invalid.")
+        raise ValueError("Annotation metadata or candidate hash is invalid.")
     labels: dict[str, dict[str, Any]] = {}
     for item in value["labels"]:
         if not isinstance(item, dict) or set(item) != LABEL_FIELDS:
@@ -127,7 +138,12 @@ def load_annotations(path: Path, expected_ids: set[str]) -> dict[str, Any]:
         labels[case_id] = item
     if set(labels) != expected_ids:
         raise ValueError("Annotation ids must exactly match the required candidate ids.")
-    return {"reviewerId": reviewer_id, "labels": labels}
+    return {
+        "candidateSha256": candidate_sha256,
+        "kind": ANNOTATION_KIND,
+        "reviewerId": reviewer_id,
+        "labels": labels,
+    }
 
 
 def _cohen_kappa(labels_a: list[str], labels_b: list[str]) -> float:
@@ -291,8 +307,11 @@ def main() -> int:
         _require_private_path(path)
     candidates = load_candidates(args.candidates, args.minimum_cases)
     expected_ids = {candidate["id"] for candidate in candidates}
+    candidate_sha256 = _sha256(args.candidates)
     paths = (args.annotation_a, args.annotation_b)
-    primary = tuple(load_annotations(path, expected_ids) for path in paths)
+    primary = tuple(
+        load_annotations(path, expected_ids, candidate_sha256) for path in paths
+    )
     report = compare_annotations(args.candidates, candidates, paths, primary)
     _write_json(args.report, report)
     if (
@@ -305,7 +324,9 @@ def main() -> int:
     adjudication = None
     if args.adjudication is not None:
         conflict_ids = {item["id"] for item in report["conflicts"]}
-        adjudication = load_annotations(args.adjudication, conflict_ids)
+        adjudication = load_annotations(
+            args.adjudication, conflict_ids, candidate_sha256
+        )
     try:
         dataset = build_consensus_dataset(candidates, primary, report, adjudication)
     except ValueError as error:
