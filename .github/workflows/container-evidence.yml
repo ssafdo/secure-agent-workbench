@@ -135,14 +135,14 @@ jobs:
           python scripts/extract_niceeval_receipt.py
           artifacts/mcp/niceeval.ndjson
 
-      - name: Run supervisor ablation NiceEval gate
+      - name: Run supervisor NiceEval gates
         shell: bash
         working-directory: niceeval
         run: |
           set -o pipefail
           mkdir -p ../artifacts/supervisor
           PYTHON="$(command -v python)" \
-          pnpm exec niceeval exp supervisor supervisor/ablation --rerun all --json \
+          pnpm exec niceeval exp supervisor --rerun all --json \
             --junit ../artifacts/supervisor/niceeval-junit.xml \
             | tee ../artifacts/supervisor/niceeval.ndjson
           exit "${PIPESTATUS[0]}"
