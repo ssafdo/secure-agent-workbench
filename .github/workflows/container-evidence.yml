@@ -92,6 +92,7 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p ../artifacts/retrieval
+          PYTHON="$(command -v python)" \
           pnpm exec niceeval exp local research/retrieval --rerun all --json \
             --junit ../artifacts/retrieval/niceeval-junit.xml \
             | tee ../artifacts/retrieval/niceeval.ndjson
