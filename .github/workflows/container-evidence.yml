@@ -68,6 +68,14 @@ jobs:
           --maximum-weighted-error 0
           --output artifacts/supervisor/routing-benchmark.json
 
+      - name: Benchmark naturalistic bilingual supervisor routing
+        run: >-
+          python scripts/benchmark_supervisor_routing.py
+          --dataset benchmarks/supervisor_naturalistic_dev_cases.json
+          --minimum-accuracy 1.0
+          --maximum-weighted-error 0
+          --output artifacts/supervisor/naturalistic-dev-benchmark.json
+
       - name: Install build tools
         run: sudo apt-get update && sudo apt-get install --yes binutils
 

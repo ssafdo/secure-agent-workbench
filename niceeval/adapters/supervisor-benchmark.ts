@@ -126,13 +126,32 @@ function runRoutingBenchmark(signal: AbortSignal): Promise<RoutingBenchmarkResul
   );
 }
 
+function runNaturalisticDevelopmentBenchmark(
+  signal: AbortSignal,
+): Promise<RoutingBenchmarkResult> {
+  return runPythonJson(
+    "scripts/benchmark_supervisor_routing.py",
+    [
+      "--dataset",
+      "benchmarks/supervisor_naturalistic_dev_cases.json",
+      "--minimum-accuracy",
+      "1.0",
+      "--maximum-weighted-error",
+      "0",
+    ],
+    signal,
+  );
+}
+
 export const supervisorBenchmark = defineAdapter({
   name: "secure-agent-workbench-supervisor-benchmark",
-  behaviorRevision: "phase-16-supervisor-routing-v2",
+  behaviorRevision: "phase-20-supervisor-routing-v3",
   create(context) {
     return {
       runBenchmark: () => runBenchmark(context.signal),
       runRoutingBenchmark: () => runRoutingBenchmark(context.signal),
+      runNaturalisticDevelopmentBenchmark: () =>
+        runNaturalisticDevelopmentBenchmark(context.signal),
     };
   },
 });

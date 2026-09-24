@@ -2,7 +2,7 @@
 
 这是一个从参考架构出发、逐步演进的实习项目。目标不是一次性复制 Open WebUI 或部署一堆服务，而是先建立一个能运行、能测试、能解释安全边界的 Agent 平台内核，再逐步接入 LLM、RAG、MCP、Web UI 和容器执行器。
 
-当前版本为 `0.20.0`，完成 Phase 19：增加只绑定 loopback 的本地审核工作台。审核者通过一次性令牌逐条查看无标签候选任务，选择类别、专业 Agent 和错误成本；草稿原子保存，全部完成后才生成带候选集哈希的正式标注文件。候选任务不含类别、路由或错误成本标签，审核文件不含任务正文；只有 ID 完整匹配、三类一致率达标且冲突全部解决后，才生成 Phase 17 可封存数据集。仓库目前没有真实用户任务，策划集 `50/50`、加权错误 `0` 的结果不能代表自然用户流量。
+当前版本为 `0.21.0`，完成 Phase 20：首批 20 条公开许可自然交互任务走通去敏、两份主标注、第三份仲裁、封存与本地评估。工具验证了不同审核者 ID，但不验证操作者真实身份，因此不能仅凭文件声称三名独立自然人。标注门禁通过，但原路由仅达到 `60%` 准确率和 `40%` 加权错误率，因此该批数据已经揭晓并降级为私有诊断集，不能再用于宣称盲测成绩。Supervisor 随后改为强综合、强检索、弱问句三层信号，并新增一套不含诊断集正文的 50 条中英自然措辞开发集；原策划集与新开发集均为 `50/50`、加权错误 `0`。下一次质量声明仍必须使用一批全新的未见私有任务。
 
 ## 已实现
 
@@ -60,6 +60,7 @@ python -m pip install -e ".[mcp]"
 python -m agent_workbench mcp-smoke
 python scripts/benchmark_supervisor.py --require-improvement --output artifacts/supervisor/benchmark.json
 python scripts/benchmark_supervisor_routing.py --minimum-accuracy 0.96 --maximum-weighted-error 0 --output artifacts/supervisor/routing-benchmark.json
+python scripts/benchmark_supervisor_routing.py --dataset benchmarks/supervisor_naturalistic_dev_cases.json --minimum-accuracy 1.0 --maximum-weighted-error 0 --output artifacts/supervisor/naturalistic-dev-benchmark.json
 ```
 
 `demo` 会创建隔离项目，放入两份示例资料，调用研究 Agent 生成 `outputs/research-report.md`，并打印项目 ID、报告和 trace 位置。
@@ -68,7 +69,7 @@ HTTP API 的 `/v1/research` 默认使用确定性基线；请求增加 `"engine"
 
 请求使用 `"engine": "retrieval"` 时走本地检索，不调用托管模型。它只扫描当前项目的 `inputs/*.md|*.txt`，报告与响应中的 citations 会在写入前重新核对源文件和行号。未配置本地模型时使用词法/中文双字基线；配置成功后组合归一化词法分数与余弦相似度。模型缺失、校验失败或编码异常时返回可见的 `lexical-fallback`，不会静默伪装成混合检索。风险模式匹配只提供诊断，不能替代权限、工具白名单和模型侧注入防护。
 
-请求使用 `"engine": "supervisor"` 时，Supervisor 根据任务意图选择 `synthesis` 或 `retrieval` 专家。跨资料汇总信号优先，证据/引用/问句进入检索，无法识别时以 `low` 置信度保守回退到 synthesis。响应的 `routing` 公开专业 Agent、原因码、`high|medium|low` 置信度以及两类信号数；trace 只保存这些枚举/计数元数据，不保存任务正文。浏览器工作台默认使用该模式，且该离线路径不会调用 DeepSeek。
+请求使用 `"engine": "supervisor"` 时，Supervisor 根据任务意图选择 `synthesis` 或 `retrieval` 专家。完整报告、综述、跨资料整合等强综合目标优先；引用、核实、定位等强检索目标其次；普通问句只作为中置信弱检索信号，避免问号覆盖长文交付目标。无法识别时以 `low` 置信度保守回退到 synthesis。响应的 `routing` 公开专业 Agent、原因码、`high|medium|low` 置信度以及两类信号数；trace 只保存这些枚举/计数元数据，不保存任务正文。浏览器工作台默认使用该模式，且该离线路径不会调用 DeepSeek。
 
 ### 可选本地混合检索
 
@@ -210,7 +211,7 @@ wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/nicee
 
 已验证 MCP Run：`d2f75bee-7c98-4dee-a4fb-3d908ada981d`，Attempt `@1KBYF6AT9MVMV`，1/1 通过且 9 条断言全部登记；固定查询为 `niceeval/queries/mcp-run.json`。
 
-已验证 Phase 16 Supervisor Run：`95972efb-0202-4794-96a9-3025147cae8d`；端到端消融 Attempt `@1VNXD25FNH1AP` 的 9 条断言和 50 条路由集 Attempt `@17196879B4FBE` 的 12 条断言全部通过。固定查询为 `niceeval/queries/supervisor-run.json`。
+已验证 Phase 20 Supervisor Run：`a7a8b0ee-f926-469a-b3fe-b33cc407a587`，`3 passed / 0 failed / 0 errored`。端到端消融 Attempt `@1YCKTWP22VRM8`、原 50 条策划路由集 Attempt `@1VQEX48NRBS0D`、新 50 条自然措辞开发集 Attempt `@1JWQBQMZ9M3BY` 均通过；三项均为确定性评估，token 与模型费用为零。新自然措辞集只用于开发回归，不是新的私有盲测结果。固定查询为 `niceeval/queries/supervisor-run.json`。
 
 自然任务盲测不接入 NiceEval 或 CI，也不会提交私有 JSONL。先由两位独立审核者分别标注，必要时由第三人仲裁，再在本机执行封存与评估；修改 `supervisor.py` 后旧 manifest 会自动失效。完整格式、命令和解释边界见 `docs/blind-routing-eval.md`。
 

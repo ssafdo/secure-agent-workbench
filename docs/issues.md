@@ -39,11 +39,11 @@
 | MCP-001 | Mitigated | Critical | 恶意工具描述或动态 schema 可能向模型注入指令、扩大参数面 | 远端描述不进入 ToolSpec；严格 schema、显式只读 allowlist、annotation 与调用前定义指纹复验均有负向测试 |
 | MCP-002 | Mitigated | High | MCP 参数越权、密钥环境继承或超时 server 可能绕过 Runtime 边界 | 调用前 JSON Schema 验证，SDK 最小环境加 credential-name 拒绝，所有 handler 经过 Runtime，超时清理子进程有测试 |
 | MCP-003 | Partial | High | 官方 SDK 在解析完整 stdio JSON 行后才执行应用输出上限，恶意 server 仍可能消耗宿主内存或执行任意代码 | MCP server 必须由操作员信任；当前解析后拒绝超大结果，后续将 server 放入有内存/PID/网络限制的容器或 microVM |
-| ROUTE-001 | Partial | Medium | 确定性 Supervisor 对未覆盖措辞、跨语言和复合意图可能误路由 | 汇总信号优先、未知意图低置信回退 Synthesis；50 条人工策划中英集和 6 条端到端消融已通过，但自然任务分布验证前不声称通用能力 |
+| ROUTE-001 | Partial | Medium | 确定性 Supervisor 对未覆盖措辞、跨语言和复合意图可能误路由 | 首批 20 条公开自然交互盲测仅 `60%`；已按强综合/强检索/弱问句分层，并用两套互不重复的 50 条公开开发集回归，但必须用全新未见私有任务复验 |
 | ROUTE-002 | Mitigated | High | 专业 Agent 委派可能重置预算或绕过权限与 trace | Supervisor 不拥有工具，两个专家接收同一个 Runtime；共享步骤预算和脱敏 route/tool trace 有负向测试 |
 | ROUTE-003 | Partial | Low | 规则置信度可能被误解为统计概率 | 只输出 `high|medium|low` 覆盖诊断和竞争信号计数；文档明确未校准，后续用自然任务盲测校准或改名 |
-| ROUTE-004 | Partial | High | 自然任务盲测可能泄露用户内容，或在看过样本后调参造成评估污染 | 私有目录不进 Git/CI，要求人工去敏并封存数据/路由哈希，结果不回显正文；敏感扫描仍可能漏报，真实数据收集必须另行授权和受控保存 |
-| ROUTE-005 | Partial | Medium | 单人标签或候选集中的预置类别可能带入主观偏差，遗漏困难案例会虚高路由成绩 | 候选集不含任何评估标签；两位独立审核者完整覆盖 ID 并报告一致率/kappa，所有分歧由不同第三人仲裁；标签指南仍待首批数据验证 |
+| ROUTE-004 | Partial | High | 自然任务盲测可能泄露用户内容，或在看过样本后调参造成评估污染 | 私有目录不进 Git/CI，结果不回显正文；首批揭晓结果已明确降级为诊断集，修改路由后旧 manifest 自动失效，下一结论要求全新未见任务 |
+| ROUTE-005 | Partial | Medium | 单人标签或候选集中的预置类别可能带入主观偏差，遗漏困难案例会虚高路由成绩 | 候选集不含任何评估标签；工具强制两个不同审核者 ID 完整覆盖并报告一致率/kappa，所有分歧由第三个 ID 仲裁，但无法验证这些 ID 是否对应三名独立自然人 |
 | ROUTE-006 | Partial | Medium | 本地审核工作台若令牌、草稿或候选集绑定不严，可能泄露任务或套用错误标签 | loopback 绑定、一次性令牌、private 路径约束、候选 SHA-256、原子草稿/正式文件和 9 项测试已覆盖；远程认证与加密存储仍未提供 |
 
 ## 记录规则

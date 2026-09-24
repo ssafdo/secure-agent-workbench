@@ -48,7 +48,7 @@ Experiment `setup` 创建临时工作目录和临时 HMAC 密钥，启动 `pytho
 
 ### Supervisor 消融
 
-`supervisor` 使用自定义应用 Adapter 执行两个独立门禁。`scripts/benchmark_supervisor.py` 在同一份 6 条数据上分别运行单一 ResearchAgent 和 Supervisor；评分检查最终引用、无依据拒答或全量 source coverage，不用路由标签代替业务结果。`scripts/benchmark_supervisor_routing.py` 在 50 条人工策划中英任务上检查混淆矩阵、语言/类别切片、加权错误、竞争信号和低置信回退。分类准确率不能替代前一个端到端消融。
+`supervisor` 使用自定义应用 Adapter 执行三个独立门禁。`scripts/benchmark_supervisor.py` 在同一份 6 条数据上分别运行单一 ResearchAgent 和 Supervisor；评分检查最终引用、无依据拒答或全量 source coverage，不用路由标签代替业务结果。`scripts/benchmark_supervisor_routing.py` 分别在原 50 条人工策划中英任务和新 50 条自然措辞开发任务上检查混淆矩阵、语言/类别切片、加权错误、竞争信号和低置信回退。分类准确率不能替代端到端消融；自然措辞集是看得见的开发回归集，也不能替代全新未见的私有盲测。
 
 终止状态同时检查 Node 的 `exitCode` 和 `signalCode`，避免服务被信号正常终止后重复等待已经发生的 `exit` 事件。
 
@@ -129,7 +129,7 @@ Phase 14 MCP 结果：Experiment `mcp`，Run `d2f75bee-7c98-4dee-a4fb-3d908ada98
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/mcp-run.json"
 ```
 
-Phase 16 最新远程 Supervisor 结果：Experiment `supervisor`，Run `95972efb-0202-4794-96a9-3025147cae8d`，`2 passed / 0 failed / 0 errored / 0 reused`。端到端消融 Attempt `@1VNXD25FNH1AP` 的 9 条断言与 50 条路由集 Attempt `@17196879B4FBE` 的 12 条断言全部通过。固定查询为 `queries/supervisor-run.json`：
+Phase 20 Supervisor 结果：Experiment `supervisor`，Run `a7a8b0ee-f926-469a-b3fe-b33cc407a587`，`3 passed / 0 failed / 0 errored`。端到端消融 Attempt `@1YCKTWP22VRM8`、原 50 条策划路由集 Attempt `@1VQEX48NRBS0D`、新 50 条自然措辞开发集 Attempt `@1JWQBQMZ9M3BY` 均通过。三项均未调用模型，token 与模型费用为零。自然措辞结果属于公开开发回归证据，不是新的盲测质量声明。固定查询为 `queries/supervisor-run.json`：
 
 ```powershell
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/supervisor-run.json"

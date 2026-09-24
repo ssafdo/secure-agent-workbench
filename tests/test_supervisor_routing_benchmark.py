@@ -19,7 +19,7 @@ class SupervisorRoutingBenchmarkTests(unittest.TestCase):
         self.assertEqual(result["languageSlices"]["zh"]["cases"], 25)
         self.assertEqual(result["conflictCorrect"], result["conflictCases"])
         self.assertEqual(result["defaultCases"], 4)
-        self.assertEqual(result["lowConfidenceDefaults"], 4)
+        self.assertEqual(result["lowConfidenceDefaults"], 3)
         self.assertEqual(result["errors"], [])
 
     def test_rejects_duplicate_or_undersized_dataset(self) -> None:

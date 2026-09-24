@@ -69,6 +69,34 @@ class SupervisorRoutingTests(unittest.TestCase):
         decision = ResearchSupervisor.route("根据资料，API 密钥应该如何保护？")
         self.assertEqual(decision.specialist, ResearchSpecialist.RETRIEVAL)
 
+    def test_long_form_deliverable_beats_incidental_question_words(self) -> None:
+        decision = ResearchSupervisor.route(
+            "Read the notes and prepare a report explaining what changed and why."
+        )
+        self.assertEqual(decision.specialist, ResearchSpecialist.SYNTHESIS)
+        self.assertEqual(decision.reason, "cross-source-synthesis")
+        self.assertEqual(decision.confidence, RoutingConfidence.MEDIUM)
+
+    def test_conceptual_difference_is_a_direct_question_not_cross_source_work(self) -> None:
+        decision = ResearchSupervisor.route(
+            "What is the difference between optimistic and pessimistic locking?"
+        )
+        self.assertEqual(decision.specialist, ResearchSpecialist.RETRIEVAL)
+        self.assertEqual(decision.reason, "direct-question")
+        self.assertEqual(decision.confidence, RoutingConfidence.MEDIUM)
+
+    def test_chinese_research_review_beats_question_mark(self) -> None:
+        decision = ResearchSupervisor.route(
+            "请整理这些研究记录并撰写一份综述，说明有哪些共同发现？"
+        )
+        self.assertEqual(decision.specialist, ResearchSpecialist.SYNTHESIS)
+        self.assertGreater(decision.synthesis_signal_count, 0)
+
+    def test_question_about_writing_a_report_is_not_the_report_deliverable(self) -> None:
+        decision = ResearchSupervisor.route("写报告前需要什么权限？")
+        self.assertEqual(decision.specialist, ResearchSpecialist.RETRIEVAL)
+        self.assertEqual(decision.reason, "direct-question")
+
     def test_retrieval_specialist_uses_shared_runtime_and_redacted_route_trace(self) -> None:
         private_task = "Which source says the API key must stay private-value-123?"
         source = self.context.root / "inputs" / "security.md"

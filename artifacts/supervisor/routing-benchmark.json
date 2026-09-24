@@ -20,9 +20,9 @@
     }
   },
   "confidenceCounts": {
-    "high": 42,
-    "low": 4,
-    "medium": 4
+    "high": 36,
+    "low": 3,
+    "medium": 11
   },
   "languageSlices": {
     "en": {
@@ -81,7 +81,7 @@
   "conflictCases": 4,
   "conflictCorrect": 4,
   "defaultCases": 4,
-  "lowConfidenceDefaults": 4,
+  "lowConfidenceDefaults": 3,
   "errors": [],
   "caseResults": [
     {
@@ -95,7 +95,7 @@
       "confidence": "high",
       "reason": "evidence-grounded-query",
       "synthesisSignals": 0,
-      "retrievalSignals": 2
+      "retrievalSignals": 3
     },
     {
       "id": "en-retrieval-02",
@@ -147,7 +147,7 @@
       "confidence": "high",
       "reason": "evidence-grounded-query",
       "synthesisSignals": 0,
-      "retrievalSignals": 1
+      "retrievalSignals": 2
     },
     {
       "id": "en-retrieval-06",
@@ -186,7 +186,7 @@
       "confidence": "high",
       "reason": "evidence-grounded-query",
       "synthesisSignals": 0,
-      "retrievalSignals": 2
+      "retrievalSignals": 3
     },
     {
       "id": "en-retrieval-09",
@@ -212,7 +212,7 @@
       "confidence": "high",
       "reason": "evidence-grounded-query",
       "synthesisSignals": 0,
-      "retrievalSignals": 3
+      "retrievalSignals": 4
     },
     {
       "id": "en-retrieval-11",
@@ -222,8 +222,8 @@
       "actual": "retrieval",
       "correct": true,
       "errorCost": 1,
-      "confidence": "high",
-      "reason": "evidence-grounded-query",
+      "confidence": "medium",
+      "reason": "direct-question",
       "synthesisSignals": 0,
       "retrievalSignals": 2
     },
@@ -235,8 +235,8 @@
       "actual": "retrieval",
       "correct": true,
       "errorCost": 1,
-      "confidence": "high",
-      "reason": "evidence-grounded-query",
+      "confidence": "medium",
+      "reason": "direct-question",
       "synthesisSignals": 0,
       "retrievalSignals": 2
     },
@@ -248,8 +248,8 @@
       "actual": "retrieval",
       "correct": true,
       "errorCost": 1,
-      "confidence": "high",
-      "reason": "evidence-grounded-query",
+      "confidence": "medium",
+      "reason": "direct-question",
       "synthesisSignals": 0,
       "retrievalSignals": 2
     },
@@ -261,8 +261,8 @@
       "actual": "retrieval",
       "correct": true,
       "errorCost": 3,
-      "confidence": "high",
-      "reason": "evidence-grounded-query",
+      "confidence": "medium",
+      "reason": "direct-question",
       "synthesisSignals": 0,
       "retrievalSignals": 2
     },
@@ -302,7 +302,7 @@
       "errorCost": 2,
       "confidence": "high",
       "reason": "cross-source-synthesis",
-      "synthesisSignals": 1,
+      "synthesisSignals": 2,
       "retrievalSignals": 0
     },
     {
@@ -341,7 +341,7 @@
       "errorCost": 2,
       "confidence": "high",
       "reason": "cross-source-synthesis",
-      "synthesisSignals": 2,
+      "synthesisSignals": 1,
       "retrievalSignals": 0
     },
     {
@@ -380,7 +380,7 @@
       "errorCost": 3,
       "confidence": "medium",
       "reason": "cross-source-synthesis",
-      "synthesisSignals": 2,
+      "synthesisSignals": 1,
       "retrievalSignals": 2
     },
     {
@@ -393,7 +393,7 @@
       "errorCost": 1,
       "confidence": "high",
       "reason": "cross-source-synthesis",
-      "synthesisSignals": 1,
+      "synthesisSignals": 2,
       "retrievalSignals": 0
     },
     {
@@ -547,8 +547,8 @@
       "actual": "retrieval",
       "correct": true,
       "errorCost": 1,
-      "confidence": "high",
-      "reason": "evidence-grounded-query",
+      "confidence": "medium",
+      "reason": "direct-question",
       "synthesisSignals": 0,
       "retrievalSignals": 2
     },
@@ -560,8 +560,8 @@
       "actual": "retrieval",
       "correct": true,
       "errorCost": 1,
-      "confidence": "high",
-      "reason": "evidence-grounded-query",
+      "confidence": "medium",
+      "reason": "direct-question",
       "synthesisSignals": 0,
       "retrievalSignals": 2
     },
@@ -573,8 +573,8 @@
       "actual": "retrieval",
       "correct": true,
       "errorCost": 3,
-      "confidence": "high",
-      "reason": "evidence-grounded-query",
+      "confidence": "medium",
+      "reason": "direct-question",
       "synthesisSignals": 0,
       "retrievalSignals": 2
     },
@@ -601,7 +601,7 @@
       "errorCost": 2,
       "confidence": "high",
       "reason": "cross-source-synthesis",
-      "synthesisSignals": 1,
+      "synthesisSignals": 2,
       "retrievalSignals": 0
     },
     {
@@ -614,7 +614,7 @@
       "errorCost": 2,
       "confidence": "high",
       "reason": "cross-source-synthesis",
-      "synthesisSignals": 1,
+      "synthesisSignals": 2,
       "retrievalSignals": 0
     },
     {
@@ -653,7 +653,7 @@
       "errorCost": 2,
       "confidence": "high",
       "reason": "cross-source-synthesis",
-      "synthesisSignals": 1,
+      "synthesisSignals": 2,
       "retrievalSignals": 0
     },
     {
@@ -666,7 +666,7 @@
       "errorCost": 2,
       "confidence": "high",
       "reason": "cross-source-synthesis",
-      "synthesisSignals": 1,
+      "synthesisSignals": 2,
       "retrievalSignals": 0
     },
     {
@@ -729,9 +729,9 @@
       "actual": "synthesis",
       "correct": true,
       "errorCost": 1,
-      "confidence": "low",
-      "reason": "conservative-default",
-      "synthesisSignals": 0,
+      "confidence": "high",
+      "reason": "cross-source-synthesis",
+      "synthesisSignals": 1,
       "retrievalSignals": 0
     }
   ]
