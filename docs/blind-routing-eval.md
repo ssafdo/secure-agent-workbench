@@ -52,6 +52,8 @@ python scripts/blind_routing_adjudicate.py `
 
 若任一 `category`、`expectedSpecialist` 或 `errorCost` 不同，命令会写入不含任务正文的冲突报告。若一致率低于预注册门槛，命令以状态码 `1` 停止；否则未仲裁冲突以状态码 `2` 停止。第三位不同审核者只处理报告中的冲突 ID，完整填写标签结构但不得改动两位主审核者已经一致的字段，再通过 `--adjudication benchmarks/private/adjudicator.json` 重跑。不得看到结果后降低门槛，困难案例也不能被删除来提高一致率。
 
+仲裁页面可重复传入 `--case-id <冲突 ID>`，只显示报告中的分歧任务，同时仍将输出绑定到完整候选集 SHA-256。不得加入报告以外的 ID；两位主审核者已一致的字段必须保持原值。
+
 审核者不必手工编辑 JSON，可以启动本地工作台完成一份标注：
 
 ```powershell

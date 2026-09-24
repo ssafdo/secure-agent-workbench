@@ -200,6 +200,56 @@ class BlindRoutingReviewTests(unittest.TestCase):
                 translations,
             )
 
+    def test_selected_cases_keep_full_candidate_hash_and_filter_translations(self) -> None:
+        translations = self.directory / "translations.json"
+        translations.write_text(
+            json.dumps(
+                {
+                    "schemaVersion": 1,
+                    "kind": "secure-agent-workbench/blind-routing-translations",
+                    "candidateSha256": hashlib.sha256(self.candidates.read_bytes()).hexdigest(),
+                    "language": "zh-CN",
+                    "translations": [
+                        {"id": "case-001", "text": "第一条"},
+                        {"id": "case-002", "text": "第二条"},
+                    ],
+                },
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+        state = ReviewState(
+            self.candidates,
+            self.directory / "adjudicator.json",
+            "adjudicator",
+            20,
+            translations,
+            ["case-002", "case-001"],
+        )
+        session = state.session()
+        self.assertEqual([case["id"] for case in session["cases"]], ["case-001", "case-002"])
+        self.assertEqual([case["translation"] for case in session["cases"]], ["第一条", "第二条"])
+        self.assertEqual(
+            state.candidate_sha256,
+            hashlib.sha256(self.candidates.read_bytes()).hexdigest(),
+        )
+
+    def test_selected_cases_reject_unknown_and_duplicate_ids(self) -> None:
+        for selected, message in (
+            (["missing-case"], "exist"),
+            (["case-001", "case-001"], "unique"),
+        ):
+            with self.subTest(selected=selected):
+                with self.assertRaisesRegex(ValueError, message):
+                    ReviewState(
+                        self.candidates,
+                        self.directory / "adjudicator.json",
+                        "adjudicator",
+                        20,
+                        None,
+                        selected,
+                    )
+
 
 if __name__ == "__main__":
     unittest.main()

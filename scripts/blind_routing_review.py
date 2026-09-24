@@ -152,6 +152,7 @@ class ReviewState:
         reviewer_id: str,
         minimum_cases: int,
         translations_path: Path | None = None,
+        selected_case_ids: list[str] | None = None,
     ) -> None:
         _require_private_path(candidates_path)
         _require_private_path(output_path)
@@ -165,7 +166,18 @@ class ReviewState:
         if not ID_PATTERN.fullmatch(reviewer_id):
             raise ValueError("reviewer-id must be a safe pseudonymous identifier.")
         self.candidate_sha256 = hashlib.sha256(candidates_path.read_bytes()).hexdigest()
-        self.cases = load_candidates(candidates_path, minimum_cases)
+        all_cases = load_candidates(candidates_path, minimum_cases)
+        self.all_case_ids = {case["id"] for case in all_cases}
+        if selected_case_ids is not None:
+            if not selected_case_ids or len(selected_case_ids) != len(set(selected_case_ids)):
+                raise ValueError("Selected case ids must be non-empty and unique.")
+            unknown = set(selected_case_ids) - self.all_case_ids
+            if unknown:
+                raise ValueError("Selected case ids must exist in the candidate dataset.")
+            selected = set(selected_case_ids)
+            self.cases = [case for case in all_cases if case["id"] in selected]
+        else:
+            self.cases = all_cases
         self.case_ids = {case["id"] for case in self.cases}
         self.translations = self._load_translations(translations_path)
         self.labels: dict[str, dict[str, Any]] = {}
@@ -206,16 +218,19 @@ class ReviewState:
         ):
             raise ValueError("Translation file metadata does not match the candidate dataset.")
         translations: dict[str, str] = {}
+        seen: set[str] = set()
         for item in value["translations"]:
             if not isinstance(item, dict) or set(item) != {"id", "text"}:
                 raise ValueError("Translation entry does not match the schema.")
             case_id = item["id"]
             text = item["text"]
-            if case_id not in self.case_ids or case_id in translations:
+            if case_id not in self.all_case_ids or case_id in seen:
                 raise ValueError("Translation entry has an unknown or duplicate id.")
+            seen.add(case_id)
             if not isinstance(text, str) or not text.strip() or len(text) > 4000:
                 raise ValueError("Translation entry has invalid text.")
-            translations[case_id] = text
+            if case_id in self.case_ids:
+                translations[case_id] = text
         return translations
 
     def session(self) -> dict[str, Any]:
@@ -355,6 +370,12 @@ def main() -> int:
     parser.add_argument("--reviewer-id", required=True)
     parser.add_argument("--minimum-cases", type=int, default=20)
     parser.add_argument("--translations", type=Path)
+    parser.add_argument(
+        "--case-id",
+        action="append",
+        dest="case_ids",
+        help="Restrict the review to this candidate id; repeat for multiple ids.",
+    )
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=0)
     args = parser.parse_args()
@@ -364,6 +385,7 @@ def main() -> int:
         args.reviewer_id,
         args.minimum_cases,
         args.translations,
+        args.case_ids,
     )
     server = create_review_server(state, args.host, args.port)
     host, port = server.server_address[:2]
