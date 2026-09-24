@@ -8,6 +8,26 @@
 
 ## 候选任务准备
 
+从固定版本的公开 WildChat 数据集建立新一批候选时，先生成尚未声明人工确认的私有 intake：
+
+```powershell
+$env:PYTHONPATH = "src"
+python scripts/blind_routing_intake.py collect `
+  --output benchmarks/private/batch-2-intake.jsonl `
+  --previous-provenance artifacts/private/natural-routing-provenance.json
+```
+
+随后启动仅监听 loopback 的去敏审核页面。每条任务必须明确批准或排除；批准前可以直接修改正文去除身份、凭证、内部路径和独特业务标识。草稿原子保存在私有目录，全部处理且至少 20 条获批后才生成正式候选集和来源证明：
+
+```powershell
+python scripts/blind_routing_intake.py review `
+  --intake benchmarks/private/batch-2-intake.jsonl `
+  --output benchmarks/private/batch-2-candidates.jsonl `
+  --provenance artifacts/private/batch-2-provenance.json
+```
+
+`collect` 只打印数量、语言分布、扫描行数和固定版本，不打印任务正文。它排除上一批 provenance 中的源行，但自动扫描仍不能替代页面中的人工判断。正式候选生成后，后续两位主审核者必须使用 `batch-2-candidates.jsonl`，并为各自输出、仲裁、manifest 和结果使用独立的 `batch-2-*` 文件名，不能覆盖第一批历史证据。
+
 数据负责人先创建 `benchmarks/private/natural-routing-candidates.jsonl`。每行必须符合 `benchmarks/blind_routing_candidates.schema.json`，此时不得包含 `category`、`expectedSpecialist` 或 `errorCost`：
 
 - 不可反推身份的随机 `id`，不要使用用户 ID、工单号或会话 ID。

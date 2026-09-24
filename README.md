@@ -215,6 +215,19 @@ wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/nicee
 
 自然任务盲测不接入 NiceEval 或 CI，也不会提交私有 JSONL。先由两位独立审核者分别标注，必要时由第三人仲裁，再在本机执行封存与评估；修改 `supervisor.py` 后旧 manifest 会自动失效。完整格式、命令和解释边界见 `docs/blind-routing-eval.md`。
 
+新批次先经过单独的候选收集与人工去敏审核，不能把自动扫描直接当成人工确认：
+
+```powershell
+$env:PYTHONPATH = "src"
+python scripts/blind_routing_intake.py collect `
+  --output benchmarks/private/batch-2-intake.jsonl `
+  --previous-provenance artifacts/private/natural-routing-provenance.json
+python scripts/blind_routing_intake.py review `
+  --intake benchmarks/private/batch-2-intake.jsonl `
+  --output benchmarks/private/batch-2-candidates.jsonl `
+  --provenance artifacts/private/batch-2-provenance.json
+```
+
 启动本地审核工作台（每位审核者使用独立输出文件和假名 ID）：
 
 ```powershell
@@ -299,6 +312,7 @@ WorkspaceManager -> ProjectContext -> AgentRuntime
 - `docs/eval-plan.md`：评测数据与指标设计
 - `docs/blind-routing-eval.md`：私有自然任务的去敏、封存与本地盲测流程
 - `docs/routing-label-guide.md`：独立审核者使用的类别、专业 Agent 和错误成本口径
+- `scripts/blind_routing_intake.py`：固定公开数据版本的候选收集与 loopback 人工去敏审核工作台
 - `scripts/blind_routing_review.py`：私有候选任务的 loopback 逐条审核工作台
 - `docs/hosted-provider.md`：Responses API、可靠性策略与配置边界
 - `docs/progress.md`：每阶段完成项和下一步实施顺序
