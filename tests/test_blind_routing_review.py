@@ -77,7 +77,7 @@ class BlindRoutingReviewTests(unittest.TestCase):
         self.assertEqual(headers["x-frame-options"], "DENY")
         self.assertIn("connect-src 'self'", headers["content-security-policy"])
         self.assertIn("自然任务独立标注", body)
-        self.assertIn("evidence（证据定位）", body)
+        self.assertIn("evidence（定位/核实/引用）", body)
         self.assertIn("retrieval（检索与核实）", body)
         self.assertIn("5（严重）", body)
 

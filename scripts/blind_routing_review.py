@@ -72,7 +72,7 @@ HTML = r'''<!doctype html>
     <div id="task" class="task">正在读取私有候选任务…</div>
     <div id="translation-wrap" class="translation-wrap" hidden><p class="translation-label">中文辅助译文（原文仍是评估输入）</p><p id="translation" class="translation"></p></div>
     <div class="fields">
-      <label>类别<select id="category"><option value="evidence">evidence（证据定位）</option><option value="unsupported">unsupported（资料无依据）</option><option value="question">question（普通问答）</option><option value="synthesis">synthesis（综合总结）</option><option value="comparison">comparison（比较异同）</option><option value="conflict">conflict（目标或资料冲突）</option><option value="default">default（开放任务）</option><option value="adversarial">adversarial（操纵路由）</option><option value="other">other（其他）</option></select></label>
+      <label>类别<select id="category"><option value="evidence">evidence（定位/核实/引用）</option><option value="unsupported">unsupported（指定资料可能无答案）</option><option value="question">question（不属于其他类的普通问答）</option><option value="synthesis">synthesis（整合多份资料/完整报告）</option><option value="comparison">comparison（主要交付物是比较）</option><option value="conflict">conflict（检索+综合或资料矛盾）</option><option value="default">default（无资料目标的开放任务）</option><option value="adversarial">adversarial（操纵 Agent/路由）</option><option value="other">other（确实无法归类）</option></select></label>
       <label>专业 Agent<select id="specialist"><option value="retrieval">retrieval（检索与核实）</option><option value="synthesis">synthesis（总结与整合）</option></select></label>
       <label>错误成本<select id="error-cost"><option value="1">1（轻微）</option><option value="2">2（中等）</option><option value="3">3（较高）</option><option value="4">4（高）</option><option value="5">5（严重）</option></select></label>
     </div>
