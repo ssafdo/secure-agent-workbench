@@ -72,9 +72,9 @@ HTML = r'''<!doctype html>
     <div id="task" class="task">正在读取私有候选任务…</div>
     <div id="translation-wrap" class="translation-wrap" hidden><p class="translation-label">中文辅助译文（原文仍是评估输入）</p><p id="translation" class="translation"></p></div>
     <div class="fields">
-      <label>类别<select id="category"><option value="evidence">evidence</option><option value="unsupported">unsupported</option><option value="question">question</option><option value="synthesis">synthesis</option><option value="comparison">comparison</option><option value="conflict">conflict</option><option value="default">default</option><option value="adversarial">adversarial</option><option value="other">other</option></select></label>
-      <label>专业 Agent<select id="specialist"><option value="retrieval">retrieval</option><option value="synthesis">synthesis</option></select></label>
-      <label>错误成本<select id="error-cost"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+      <label>类别<select id="category"><option value="evidence">evidence（证据定位）</option><option value="unsupported">unsupported（资料无依据）</option><option value="question">question（普通问答）</option><option value="synthesis">synthesis（综合总结）</option><option value="comparison">comparison（比较异同）</option><option value="conflict">conflict（目标或资料冲突）</option><option value="default">default（开放任务）</option><option value="adversarial">adversarial（操纵路由）</option><option value="other">other（其他）</option></select></label>
+      <label>专业 Agent<select id="specialist"><option value="retrieval">retrieval（检索与核实）</option><option value="synthesis">synthesis（总结与整合）</option></select></label>
+      <label>错误成本<select id="error-cost"><option value="1">1（轻微）</option><option value="2">2（中等）</option><option value="3">3（较高）</option><option value="4">4（高）</option><option value="5">5（严重）</option></select></label>
     </div>
     <div class="actions"><div><button id="previous" type="button">上一条</button><button id="next" type="button">下一条</button></div><button id="save" class="primary" type="button">保存这条</button></div>
     <div id="notice" class="notice" role="status" aria-live="polite"></div>
