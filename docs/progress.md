@@ -246,5 +246,6 @@
 
 - [x] 新增固定 WildChat revision 的私有候选收集器，只输出汇总统计并排除第一批 provenance 中的源行。
 - [x] 新增 loopback 人工去敏审核工作台，支持逐条修改、批准或排除，原子保存草稿并重新执行敏感模式扫描。
+- [x] 可选使用 DeepSeek 为 intake 生成双向中英辅助译文；译文绑定 intake 哈希，只展示在审核页，不进入候选集、标签、NiceEval 或 CI。
 - [x] 只有全部 intake 完成且至少 20 条获批后，才生成带 `deidentified: true` 与 `reviewedByHuman: true` 的候选集及独立 provenance。
 - [ ] 完成第二批 intake 的人工审核，再交给两位互不可见对方标签的主审核者独立标注。

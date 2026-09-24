@@ -222,10 +222,14 @@ $env:PYTHONPATH = "src"
 python scripts/blind_routing_intake.py collect `
   --output benchmarks/private/batch-2-intake.jsonl `
   --previous-provenance artifacts/private/natural-routing-provenance.json
+python scripts/blind_routing_intake.py translate `
+  --intake benchmarks/private/batch-2-intake.jsonl `
+  --output artifacts/private/batch-2-translations.json
 python scripts/blind_routing_intake.py review `
   --intake benchmarks/private/batch-2-intake.jsonl `
   --output benchmarks/private/batch-2-candidates.jsonl `
-  --provenance artifacts/private/batch-2-provenance.json
+  --provenance artifacts/private/batch-2-provenance.json `
+  --translations artifacts/private/batch-2-translations.json
 ```
 
 启动本地审核工作台（每位审核者使用独立输出文件和假名 ID）：
