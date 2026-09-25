@@ -9,6 +9,7 @@ from scripts.blind_routing_adjudicate import load_candidates
 from scripts.blind_routing_intake import (
     IntakeState,
     collect_candidates,
+    combine_completed_reviews,
     create_server,
     translate_intake,
 )
@@ -20,16 +21,22 @@ class BlindRoutingIntakeTests(unittest.TestCase):
         private_root.mkdir(parents=True, exist_ok=True)
         return tempfile.TemporaryDirectory(dir=private_root)
 
-    def _write_intake(self, directory: str, cases: int = 21) -> Path:
+    def _write_intake(
+        self,
+        directory: str,
+        cases: int = 21,
+        prefix: str = "b2-case",
+        source_start: int = 900_000,
+    ) -> Path:
         path = Path(directory) / "batch-2-intake.jsonl"
         path.write_text(
             "\n".join(
                 json.dumps(
                     {
-                        "id": f"b2-case-{index:03d}",
+                        "id": f"{prefix}-{index:03d}",
                         "language": "en" if index % 2 else "zh",
-                        "task": f"Find the documented retention rule for case {index}.",
-                        "sourceRow": 900_000 + index,
+                        "task": f"Find the documented retention rule for {prefix} case {index}.",
+                        "sourceRow": source_start + index,
                     }
                 )
                 for index in range(cases)
@@ -107,12 +114,25 @@ class BlindRoutingIntakeTests(unittest.TestCase):
             output = Path(directory) / "batch-2-intake.jsonl"
             previous = Path(directory) / "previous.json"
             previous.write_text(json.dumps({"cases": [{"sourceRow": 800_000}]}), encoding="utf-8")
+            excluded_intake = Path(directory) / "excluded-intake.jsonl"
+            excluded_intake.write_text(
+                json.dumps(
+                    {
+                        "id": "prior-case",
+                        "language": "en",
+                        "task": "Review the prior sample.",
+                        "sourceRow": 800_001,
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
 
             def fetch(url: str) -> object:
                 if "/api/datasets/" in url:
                     return {"sha": "7d6490e462285cf85d91eabea0f9a954fbddcd1f"}
                 rows = []
-                for index, language in enumerate(("English", "English", "Chinese")):
+                for index, language in enumerate(("English", "English", "English", "Chinese")):
                     rows.append(
                         {
                             "row_idx": 800_000 + index,
@@ -133,11 +153,125 @@ class BlindRoutingIntakeTests(unittest.TestCase):
                     )
                 return {"rows": rows}
 
-            summary = collect_candidates(output, previous, 800_000, 1, 1, fetch)
+            summary = collect_candidates(
+                output,
+                previous,
+                800_000,
+                1,
+                1,
+                fetch,
+                exclude_intakes=(excluded_intake,),
+            )
             self.assertEqual(summary["languages"], {"en": 1, "zh": 1})
+            self.assertEqual(summary["excludedSourceRows"], 2)
             self.assertFalse(summary["taskTextPrinted"])
             rows = [json.loads(line) for line in output.read_text(encoding="utf-8").splitlines()]
-            self.assertNotIn(800_000, {row["sourceRow"] for row in rows})
+            self.assertTrue({800_000, 800_001}.isdisjoint({row["sourceRow"] for row in rows}))
+
+    def test_research_domain_filter_skips_unrelated_prompts(self) -> None:
+        with self._temporary_directory() as directory:
+            output = Path(directory) / "research-intake.jsonl"
+
+            def fetch(url: str) -> object:
+                if "/api/datasets/" in url:
+                    return {"sha": "7d6490e462285cf85d91eabea0f9a954fbddcd1f"}
+                return {
+                    "rows": [
+                        {
+                            "row_idx": 810_000,
+                            "row": {
+                                "language": "English",
+                                "toxic": False,
+                                "redacted": False,
+                                "conversation": [{"role": "user", "content": "Write a limerick about rain.", "toxic": False, "redacted": False}],
+                            },
+                        },
+                        {
+                            "row_idx": 810_001,
+                            "row": {
+                                "language": "English",
+                                "toxic": False,
+                                "redacted": False,
+                                "conversation": [{"role": "user", "content": "Summarize the attached research notes.", "toxic": False, "redacted": False}],
+                            },
+                        },
+                        {
+                            "row_idx": 810_002,
+                            "row": {
+                                "language": "Chinese",
+                                "toxic": False,
+                                "redacted": False,
+                                "conversation": [{"role": "user", "content": "请比较两份研究报告的结论。", "toxic": False, "redacted": False}],
+                            },
+                        },
+                    ]
+                }
+
+            summary = collect_candidates(output, None, 810_000, 1, 1, fetch, research_only=True)
+            self.assertTrue(summary["researchDomainFilter"])
+            rows = [json.loads(line) for line in output.read_text(encoding="utf-8").splitlines()]
+            self.assertEqual({row["sourceRow"] for row in rows}, {810_001, 810_002})
+
+    def test_combines_complete_review_drafts_without_rewriting_them(self) -> None:
+        with self._temporary_directory() as directory:
+            root = Path(directory)
+            first_dir = root / "first"
+            second_dir = root / "second"
+            first_dir.mkdir()
+            second_dir.mkdir()
+            first = IntakeState(
+                self._write_intake(str(first_dir), 12, "first", 820_000),
+                first_dir / "candidates.jsonl",
+                first_dir / "provenance.json",
+                minimum_approved=1,
+                defer_finalization=True,
+            )
+            second = IntakeState(
+                self._write_intake(str(second_dir), 12, "second", 830_000),
+                second_dir / "candidates.jsonl",
+                second_dir / "provenance.json",
+                minimum_approved=1,
+                defer_finalization=True,
+            )
+            for state in (first, second):
+                for index, case in enumerate(state.cases):
+                    result = state.save(
+                        {
+                            "id": case["id"],
+                            "decision": "approve" if index < 10 else "exclude",
+                            "task": case["task"],
+                        }
+                    )
+                self.assertTrue(result["readyToCombine"])
+                self.assertTrue(state.draft_path.exists())
+
+            insufficient_output = root / "insufficient-candidates.jsonl"
+            insufficient_provenance = root / "insufficient-provenance.json"
+            with self.assertRaisesRegex(ValueError, "current reviewed batches contain 10"):
+                combine_completed_reviews(
+                    [(first.intake_path, first.draft_path)],
+                    insufficient_output,
+                    insufficient_provenance,
+                )
+            self.assertFalse(insufficient_output.exists())
+            self.assertFalse(insufficient_provenance.exists())
+
+            output = root / "combined-candidates.jsonl"
+            provenance = root / "combined-provenance.json"
+            summary = combine_completed_reviews(
+                [
+                    (first.intake_path, first.draft_path),
+                    (second.intake_path, second.draft_path),
+                ],
+                output,
+                provenance,
+            )
+            self.assertEqual(summary["approvedCases"], 20)
+            self.assertEqual(len(load_candidates(output)), 20)
+            self.assertTrue(first.draft_path.exists())
+            self.assertTrue(second.draft_path.exists())
+            metadata = json.loads(provenance.read_text(encoding="utf-8"))
+            self.assertEqual(len(metadata["reviewedBatches"]), 2)
 
     def test_paths_outside_repository_private_roots_are_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -178,12 +312,14 @@ class BlindRoutingIntakeTests(unittest.TestCase):
                 def complete(self, messages: object, tools: object) -> dict[str, object]:
                     return {
                         "type": "final",
-                        "content": "辅助译文",
+                        "content": json.dumps({"text": "辅助译文"}, ensure_ascii=False),
                         "usage": {"input_tokens": 10, "output_tokens": 3, "cost_usd": None},
                     }
 
             summary = translate_intake(intake, translation_path, Provider(), "test-model")
             self.assertEqual(summary["translations"], 21)
+            stored = json.loads(translation_path.read_text(encoding="utf-8"))
+            self.assertEqual(stored["translations"][0]["text"], "辅助译文")
             state = IntakeState(
                 intake,
                 Path(directory) / "candidates.jsonl",

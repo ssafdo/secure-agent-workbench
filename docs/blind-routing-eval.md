@@ -32,6 +32,36 @@ python scripts/blind_routing_intake.py review `
 
 `collect` 只打印数量、语言分布、扫描行数和固定版本，不打印任务正文。它排除上一批 provenance 中的源行，但自动扫描仍不能替代页面中的人工判断。可选的 `translate` 使用服务端 DeepSeek Key，把英文译为简体中文、中文译为英文；翻译文件绑定 intake SHA-256，只作为理解辅助，不替换原文、不进入最终候选或标签。正式候选生成后，后续两位主审核者必须使用 `batch-2-candidates.jsonl`，并为各自输出、仲裁、manifest 和结果使用独立的 `batch-2-*` 文件名，不能覆盖第一批历史证据。
 
+如果一轮完整审核后获批数量不足，不要改写原 intake 或其哈希绑定草稿。收集补充批次时用 `--exclude-intake` 排除旧 intake 的全部源行；`--research-only` 只按宽泛研究任务词汇筛选领域相关性，不调用当前 Supervisor，也不生成或推断标签：
+
+```powershell
+python scripts/blind_routing_intake.py collect `
+  --output benchmarks/private/batch-2-supplement-1-intake.jsonl `
+  --previous-provenance artifacts/private/natural-routing-provenance.json `
+  --exclude-intake benchmarks/private/batch-2-intake.jsonl `
+  --start-offset 800196 --english 30 --chinese 10 --research-only
+python scripts/blind_routing_intake.py translate `
+  --intake benchmarks/private/batch-2-supplement-1-intake.jsonl `
+  --output artifacts/private/batch-2-supplement-1-translations.json
+python scripts/blind_routing_intake.py review `
+  --intake benchmarks/private/batch-2-supplement-1-intake.jsonl `
+  --output benchmarks/private/batch-2-supplement-1-candidates.jsonl `
+  --provenance artifacts/private/batch-2-supplement-1-provenance.json `
+  --translations artifacts/private/batch-2-supplement-1-translations.json `
+  --minimum-approved 16 --defer-finalization
+```
+
+`--defer-finalization` 让完整审核继续保留为不可变、哈希绑定的待合并草稿。达到跨批次最低数量后再合并；命令会重新验证每批哈希、审核完整性、敏感模式、ID、源行和批准正文是否重复，并且仍不打印正文：
+
+```powershell
+python scripts/blind_routing_intake.py combine `
+  --reviewed-batch benchmarks/private/batch-2-intake.jsonl benchmarks/private/batch-2-candidates.jsonl.intake-draft `
+  --reviewed-batch benchmarks/private/batch-2-supplement-1-intake.jsonl benchmarks/private/batch-2-supplement-1-candidates.jsonl.intake-draft `
+  --output benchmarks/private/batch-2-candidates.jsonl `
+  --provenance artifacts/private/batch-2-provenance.json `
+  --minimum-approved 20
+```
+
 数据负责人先创建 `benchmarks/private/natural-routing-candidates.jsonl`。每行必须符合 `benchmarks/blind_routing_candidates.schema.json`，此时不得包含 `category`、`expectedSpecialist` 或 `errorCost`：
 
 - 不可反推身份的随机 `id`，不要使用用户 ID、工单号或会话 ID。

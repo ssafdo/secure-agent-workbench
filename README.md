@@ -232,6 +232,8 @@ python scripts/blind_routing_intake.py review `
   --translations artifacts/private/batch-2-translations.json
 ```
 
+若首轮完整审核仍不足 20 条，使用 `collect --exclude-intake ... --research-only` 收集不重复的领域相关补充批次，以 `review --defer-finalization` 完成人工审核，再用 `combine --reviewed-batch <intake> <draft>` 合并多轮结果。旧 intake 和哈希绑定草稿不会被改写；完整命令见 `docs/blind-routing-eval.md`。
+
 启动本地审核工作台（每位审核者使用独立输出文件和假名 ID）：
 
 ```powershell

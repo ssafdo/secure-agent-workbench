@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import secrets
 import sys
 import tempfile
@@ -44,7 +45,23 @@ DATASET_API = "https://huggingface.co/api/datasets/allenai/WildChat-1M"
 ROWS_API = "https://datasets-server.huggingface.co/rows"
 INTAKE_FIELDS = {"id", "language", "task", "sourceRow"}
 TRANSLATION_KIND = "secure-agent-workbench/blind-routing-intake-translations"
+REVIEW_KIND = "secure-agent-workbench/blind-routing-intake-review"
 MAX_BODY_BYTES = 32 * 1024
+
+_RESEARCH_ELIGIBILITY_PATTERNS = {
+    "en": re.compile(
+        r"\b(?:analy[sz]e|article|attached|cite|compare|contrast|data|document|evidence|"
+        r"extract|file|find|finding|literature|locate|material|memo|note|paper|policy|"
+        r"quote|report|research|review|source|specification|study|summari[sz]e|survey|"
+        r"verify)\w*\b",
+        re.IGNORECASE,
+    ),
+    "zh": re.compile(
+        r"(?:分析|文章|附件|引用|比较|对比|数据|文档|文件|证据|摘录|提取|查找|"
+        r"定位|材料|备忘录|笔记|论文|政策|报告|研究|审阅|来源|资料|规范|总结|"
+        r"汇总|综述|调查|核实)"
+    ),
+}
 
 HTML = r'''<!doctype html>
 <html lang="zh-CN">
@@ -139,8 +156,10 @@ HTML = r'''<!doctype html>
       notice(
         body.finalized
           ? `审核完成，已生成 ${body.approved} 条正式候选。`
+          : body.readyToCombine
+            ? `审核完成，已保存为待合并批次，共批准 ${body.approved} 条。`
           : body.insufficient
-            ? `30 条已全部审核，但当前只批准 ${body.approved} 条，还差 ${body.shortfall} 条。请返回修改决定，或补充新候选。`
+            ? `${body.total} 条已全部审核，但当前只批准 ${body.approved} 条，还差 ${body.shortfall} 条。请返回修改决定，或补充新候选。`
             : `已保存；当前批准 ${body.approved} 条。`,
         body.insufficient,
       );
@@ -191,6 +210,17 @@ def _normalize_task(text: str) -> str:
     return " ".join(text.split()).strip()
 
 
+def _normalize_translation_text(text: str) -> str:
+    stripped = text.strip()
+    try:
+        value = json.loads(stripped)
+    except json.JSONDecodeError:
+        return stripped
+    if isinstance(value, dict) and set(value) == {"text"} and isinstance(value["text"], str):
+        return value["text"].strip()
+    return stripped
+
+
 def _extract_candidate(row: dict[str, Any], source_row: int) -> tuple[str, str] | None:
     language = {"English": "en", "Chinese": "zh"}.get(row.get("language"))
     if language is None or row.get("toxic") is not False or row.get("redacted") is not False:
@@ -210,6 +240,11 @@ def _extract_candidate(row: dict[str, Any], source_row: int) -> tuple[str, str] 
     return language, task
 
 
+def _is_research_eligible(language: str, task: str) -> bool:
+    pattern = _RESEARCH_ELIGIBILITY_PATTERNS.get(language)
+    return pattern is not None and pattern.search(task) is not None
+
+
 def collect_candidates(
     output: Path,
     previous_provenance: Path | None,
@@ -217,6 +252,8 @@ def collect_candidates(
     english: int,
     chinese: int,
     fetch_json: Callable[[str], Any] = _fetch_json,
+    exclude_intakes: tuple[Path, ...] = (),
+    research_only: bool = False,
 ) -> dict[str, Any]:
     _require_private_path(output)
     if output.exists():
@@ -231,6 +268,9 @@ def collect_candidates(
         for case in previous.get("cases", []):
             if isinstance(case, dict) and isinstance(case.get("sourceRow"), int):
                 excluded_rows.add(case["sourceRow"])
+    for intake_path in exclude_intakes:
+        for case in load_intake(intake_path):
+            excluded_rows.add(case["sourceRow"])
     quotas = {"en": english, "zh": chinese}
     selected: list[dict[str, Any]] = []
     seen_hashes: set[str] = set()
@@ -254,6 +294,8 @@ def collect_candidates(
             if extracted is None:
                 continue
             language, task = extracted
+            if research_only and not _is_research_eligible(language, task):
+                continue
             if sum(item["language"] == language for item in selected) >= quotas[language]:
                 continue
             digest = hashlib.sha256(task.encode("utf-8")).hexdigest()
@@ -272,6 +314,8 @@ def collect_candidates(
         "languages": {language: sum(item["language"] == language for item in selected) for language in quotas},
         "scannedRows": scanned,
         "datasetRevision": DATASET_REVISION,
+        "researchDomainFilter": research_only,
+        "excludedSourceRows": len(excluded_rows),
         "taskTextPrinted": False,
     }
 
@@ -305,6 +349,162 @@ def load_intake(path: Path) -> list[dict[str, Any]]:
     if not values:
         raise ValueError("Intake file is empty.")
     return values
+
+
+def _validate_review_value(review: Any, case_ids: set[str]) -> None:
+    if not isinstance(review, dict) or set(review) != {"id", "decision", "task"}:
+        raise ValueError("Review must contain exactly id, decision and task.")
+    if review["id"] not in case_ids or review["decision"] not in {"approve", "exclude"}:
+        raise ValueError("Review has an unknown id or decision.")
+    task = review["task"]
+    if not isinstance(task, str) or len(task) > MAX_TASK_CHARACTERS:
+        raise ValueError("Reviewed task text is invalid.")
+    if review["decision"] == "approve":
+        if not task.strip():
+            raise ValueError("Approved task text cannot be empty.")
+        reason = _sensitive_reason(task)
+        if reason is not None:
+            raise ValueError(f"Approved task failed the sensitive-data scan: {reason}.")
+
+
+def load_completed_review(intake_path: Path, draft_path: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    for path in (intake_path, draft_path):
+        _require_private_path(path)
+    cases = load_intake(intake_path)
+    if not draft_path.is_file() or draft_path.stat().st_size > MAX_DATASET_BYTES:
+        raise ValueError("Review draft must exist and be at most 2 MiB.")
+    value = json.loads(draft_path.read_text(encoding="utf-8"))
+    if (
+        not isinstance(value, dict)
+        or set(value) != {"schemaVersion", "kind", "intakeSha256", "reviews"}
+        or value["schemaVersion"] != 1
+        or value["kind"] != REVIEW_KIND
+        or value["intakeSha256"] != _sha256(intake_path)
+        or not isinstance(value["reviews"], list)
+    ):
+        raise ValueError("Review draft does not match the intake file.")
+    case_ids = {case["id"] for case in cases}
+    reviews: dict[str, dict[str, Any]] = {}
+    for review in value["reviews"]:
+        _validate_review_value(review, case_ids)
+        if review["id"] in reviews:
+            raise ValueError("Review draft contains a duplicate review id.")
+        reviews[review["id"]] = review
+    if set(reviews) != case_ids:
+        raise ValueError("Every intake case must be reviewed before batches are combined.")
+    return cases, [reviews[case["id"]] for case in cases]
+
+
+def combine_completed_reviews(
+    reviewed_batches: list[tuple[Path, Path]],
+    output_path: Path,
+    provenance_path: Path,
+    minimum_approved: int = 20,
+) -> dict[str, Any]:
+    if not reviewed_batches:
+        raise ValueError("At least one reviewed batch is required.")
+    for path in (output_path, provenance_path):
+        _require_private_path(path)
+    if output_path.resolve() == provenance_path.resolve():
+        raise ValueError("Candidate output and provenance paths must be distinct.")
+    if output_path.exists() or provenance_path.exists():
+        raise ValueError("Combined candidate output or provenance already exists.")
+    if minimum_approved < 1:
+        raise ValueError("minimum-approved must be positive.")
+
+    all_cases: list[dict[str, Any]] = []
+    all_reviews: list[dict[str, Any]] = []
+    batch_metadata: list[dict[str, Any]] = []
+    seen_ids: set[str] = set()
+    seen_source_rows: set[int] = set()
+    for intake_path, draft_path in reviewed_batches:
+        cases, reviews = load_completed_review(intake_path, draft_path)
+        for case in cases:
+            if case["id"] in seen_ids or case["sourceRow"] in seen_source_rows:
+                raise ValueError("Reviewed batches contain a duplicate id or source row.")
+            seen_ids.add(case["id"])
+            seen_source_rows.add(case["sourceRow"])
+        approved_count = sum(review["decision"] == "approve" for review in reviews)
+        batch_metadata.append(
+            {
+                "intakeSha256": _sha256(intake_path),
+                "reviewDraftSha256": _sha256(draft_path),
+                "intakeCases": len(cases),
+                "approvedCases": approved_count,
+                "excludedCases": len(cases) - approved_count,
+            }
+        )
+        all_cases.extend(cases)
+        all_reviews.extend(reviews)
+
+    by_id = {case["id"]: case for case in all_cases}
+    approved = [review for review in all_reviews if review["decision"] == "approve"]
+    if len(approved) < minimum_approved:
+        raise ValueError(
+            f"At least {minimum_approved} approved cases are required; current reviewed batches contain {len(approved)}."
+        )
+    approved_hashes: set[str] = set()
+    for review in approved:
+        digest = hashlib.sha256(review["task"].encode("utf-8")).hexdigest()
+        if digest in approved_hashes:
+            raise ValueError("Approved reviews contain duplicate task text.")
+        approved_hashes.add(digest)
+
+    candidates = [
+        {
+            "id": review["id"],
+            "language": by_id[review["id"]]["language"],
+            "task": review["task"],
+            "deidentified": True,
+            "reviewedByHuman": True,
+        }
+        for review in approved
+    ]
+    _atomic_jsonl(output_path, candidates)
+    provenance = {
+        "schemaVersion": 1,
+        "kind": "secure-agent-workbench/natural-routing-provenance",
+        "createdAt": datetime.now(timezone.utc).isoformat(),
+        "status": "approved-for-blind-labeling",
+        "source": {
+            "dataset": DATASET,
+            "datasetUrl": DATASET_URL,
+            "revision": DATASET_REVISION,
+            "license": DATASET_LICENSE,
+        },
+        "selection": {
+            "intakeCases": len(all_cases),
+            "approvedCases": len(approved),
+            "excludedCases": len(all_cases) - len(approved),
+            "humanReviewRequired": True,
+            "humanReviewCompleted": True,
+        },
+        "reviewedBatches": batch_metadata,
+        "cases": [
+            {
+                "id": review["id"],
+                "sourceRow": by_id[review["id"]]["sourceRow"],
+                "textModifiedDuringReview": review["task"] != by_id[review["id"]]["task"],
+            }
+            for review in approved
+        ],
+        "attestation": {
+            "datasetLicenseVerified": True,
+            "selectedTextHumanReviewed": True,
+            "approvedForBlindEvaluation": True,
+        },
+    }
+    _atomic_json(provenance_path, provenance)
+    return {
+        "status": "combined",
+        "batches": len(reviewed_batches),
+        "intakeCases": len(all_cases),
+        "approvedCases": len(approved),
+        "excludedCases": len(all_cases) - len(approved),
+        "output": str(output_path),
+        "provenance": str(provenance_path),
+        "taskTextPrinted": False,
+    }
 
 
 def translate_intake(
@@ -349,6 +549,9 @@ def translate_intake(
         usage = response.get("usage")
         if not isinstance(text, str) or not text.strip() or len(text) > 4000:
             raise RuntimeError(f"Translation provider returned invalid text for {case['id']}.")
+        text = _normalize_translation_text(text)
+        if not text or len(text) > 4000:
+            raise RuntimeError(f"Translation provider returned invalid text for {case['id']}.")
         if not isinstance(usage, dict):
             raise RuntimeError(f"Translation provider returned no usage for {case['id']}.")
         input_tokens += int(usage.get("input_tokens") or 0)
@@ -358,7 +561,7 @@ def translate_intake(
                 "id": case["id"],
                 "sourceLanguage": case["language"],
                 "targetLanguage": target_language,
-                "text": text.strip(),
+                "text": text,
             }
         )
     payload = {
@@ -398,6 +601,7 @@ class IntakeState:
         provenance: Path,
         minimum_approved: int = 20,
         translations_path: Path | None = None,
+        defer_finalization: bool = False,
     ) -> None:
         for path in (intake, output, provenance):
             _require_private_path(path)
@@ -409,6 +613,7 @@ class IntakeState:
         self.draft_path = output.with_suffix(output.suffix + ".intake-draft")
         _require_private_path(self.draft_path)
         self.minimum_approved = minimum_approved
+        self.defer_finalization = defer_finalization
         self.intake_sha256 = _sha256(intake)
         self.cases = load_intake(intake)
         if minimum_approved < 1 or minimum_approved > len(self.cases):
@@ -424,7 +629,7 @@ class IntakeState:
         self.lock = threading.Lock()
         if self.draft_path.is_file():
             value = json.loads(self.draft_path.read_text(encoding="utf-8"))
-            if value.get("intakeSha256") != self.intake_sha256 or value.get("kind") != "secure-agent-workbench/blind-routing-intake-review":
+            if value.get("intakeSha256") != self.intake_sha256 or value.get("kind") != REVIEW_KIND:
                 raise ValueError("Intake draft does not match the current intake file.")
             reviews = value.get("reviews")
             if not isinstance(reviews, list):
@@ -468,35 +673,24 @@ class IntakeState:
             case_id = item["id"]
             expected_source = next((case["language"] for case in self.cases if case["id"] == case_id), None)
             expected_target = "zh-CN" if expected_source == "en" else "en"
+            normalized_text = _normalize_translation_text(item["text"]) if isinstance(item["text"], str) else ""
             if (
                 case_id in translations
                 or expected_source is None
                 or item["sourceLanguage"] != expected_source
                 or item["targetLanguage"] != expected_target
                 or not isinstance(item["text"], str)
-                or not item["text"].strip()
-                or len(item["text"]) > 4000
+                or not normalized_text
+                or len(normalized_text) > 4000
             ):
                 raise ValueError("Translation entry has invalid content or language metadata.")
-            translations[case_id] = item
+            translations[case_id] = {**item, "text": normalized_text}
         if set(translations) != self.case_ids:
             raise ValueError("Translation entries must exactly cover the intake ids.")
         return translations
 
     def _validate_review(self, review: Any) -> None:
-        if not isinstance(review, dict) or set(review) != {"id", "decision", "task"}:
-            raise ValueError("Review must contain exactly id, decision and task.")
-        if review["id"] not in self.case_ids or review["decision"] not in {"approve", "exclude"}:
-            raise ValueError("Review has an unknown id or decision.")
-        task = review["task"]
-        if not isinstance(task, str) or len(task) > MAX_TASK_CHARACTERS:
-            raise ValueError("Reviewed task text is invalid.")
-        if review["decision"] == "approve":
-            if not task.strip():
-                raise ValueError("Approved task text cannot be empty.")
-            reason = _sensitive_reason(task)
-            if reason is not None:
-                raise ValueError(f"Approved task failed the sensitive-data scan: {reason}.")
+        _validate_review_value(review, self.case_ids)
 
     def session(self) -> dict[str, Any]:
         return {
@@ -533,7 +727,8 @@ class IntakeState:
             complete = set(updated) == self.case_ids
             self.reviews = updated
             insufficient = complete and len(approved) < self.minimum_approved
-            if complete and not insufficient:
+            ready_to_combine = complete and self.defer_finalization and not insufficient
+            if complete and not insufficient and not self.defer_finalization:
                 by_id = {case["id"]: case for case in self.cases}
                 candidates = [
                     {"id": item["id"], "language": by_id[item["id"]]["language"], "task": item["task"], "deidentified": True, "reviewedByHuman": True}
@@ -555,13 +750,14 @@ class IntakeState:
                 self.draft_path.unlink(missing_ok=True)
                 self.finalized = True
             else:
-                _atomic_json(self.draft_path, {"schemaVersion": 1, "kind": "secure-agent-workbench/blind-routing-intake-review", "intakeSha256": self.intake_sha256, "reviews": ordered})
+                _atomic_json(self.draft_path, {"schemaVersion": 1, "kind": REVIEW_KIND, "intakeSha256": self.intake_sha256, "reviews": ordered})
             return {
                 "review": review,
                 "completed": len(self.reviews),
                 "approved": len(approved),
                 "total": len(self.cases),
                 "finalized": self.finalized,
+                "readyToCombine": ready_to_combine,
                 "insufficient": insufficient,
                 "shortfall": max(0, self.minimum_approved - len(approved)),
             }
@@ -652,9 +848,11 @@ def main() -> int:
     collect = commands.add_parser("collect")
     collect.add_argument("--output", type=Path, required=True)
     collect.add_argument("--previous-provenance", type=Path)
+    collect.add_argument("--exclude-intake", type=Path, action="append", default=[])
     collect.add_argument("--start-offset", type=int, default=800_000)
     collect.add_argument("--english", type=int, default=22)
     collect.add_argument("--chinese", type=int, default=8)
+    collect.add_argument("--research-only", action="store_true")
     translate = commands.add_parser("translate")
     translate.add_argument("--intake", type=Path, required=True)
     translate.add_argument("--output", type=Path, required=True)
@@ -666,11 +864,38 @@ def main() -> int:
     review.add_argument("--translations", type=Path)
     review.add_argument("--host", default="127.0.0.1")
     review.add_argument("--port", type=int, default=0)
+    review.add_argument("--defer-finalization", action="store_true")
+    combine = commands.add_parser("combine")
+    combine.add_argument(
+        "--reviewed-batch",
+        action="append",
+        nargs=2,
+        type=Path,
+        required=True,
+        metavar=("INTAKE", "DRAFT"),
+    )
+    combine.add_argument("--output", type=Path, required=True)
+    combine.add_argument("--provenance", type=Path, required=True)
+    combine.add_argument("--minimum-approved", type=int, default=20)
     args = parser.parse_args()
     if args.command == "collect":
         if args.start_offset < 0 or args.english < 1 or args.chinese < 1:
             parser.error("offset must be non-negative and language quotas must be positive")
-        print(json.dumps(collect_candidates(args.output, args.previous_provenance, args.start_offset, args.english, args.chinese), ensure_ascii=False, indent=2))
+        print(
+            json.dumps(
+                collect_candidates(
+                    args.output,
+                    args.previous_provenance,
+                    args.start_offset,
+                    args.english,
+                    args.chinese,
+                    exclude_intakes=tuple(args.exclude_intake),
+                    research_only=args.research_only,
+                ),
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
         return 0
     if args.command == "translate":
         api_key = os.getenv("DEEPSEEK_API_KEY")
@@ -688,12 +913,28 @@ def main() -> int:
         )
         print(json.dumps(translate_intake(args.intake, args.output, provider, model), ensure_ascii=False, indent=2))
         return 0
+    if args.command == "combine":
+        batches = [(values[0], values[1]) for values in args.reviewed_batch]
+        print(
+            json.dumps(
+                combine_completed_reviews(
+                    batches,
+                    args.output,
+                    args.provenance,
+                    args.minimum_approved,
+                ),
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
+        return 0
     state = IntakeState(
         args.intake,
         args.output,
         args.provenance,
         args.minimum_approved,
         args.translations,
+        args.defer_finalization,
     )
     server = create_server(state, args.host, args.port)
     host, port = server.server_address[:2]
