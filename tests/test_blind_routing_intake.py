@@ -89,9 +89,17 @@ class BlindRoutingIntakeTests(unittest.TestCase):
             )
             for case in state.cases[:-1]:
                 state.save({"id": case["id"], "decision": "exclude", "task": case["task"]})
-            with self.assertRaisesRegex(ValueError, "At least 20"):
-                state.save({"id": state.cases[-1]["id"], "decision": "approve", "task": state.cases[-1]["task"]})
-            self.assertNotIn(state.cases[-1]["id"], state.reviews)
+            result = state.save(
+                {
+                    "id": state.cases[-1]["id"],
+                    "decision": "approve",
+                    "task": state.cases[-1]["task"],
+                }
+            )
+            self.assertTrue(result["insufficient"])
+            self.assertEqual(result["shortfall"], 19)
+            self.assertIn(state.cases[-1]["id"], state.reviews)
+            self.assertTrue(state.draft_path.exists())
             self.assertFalse(state.output_path.exists())
 
     def test_collector_pins_revision_excludes_previous_rows_and_prints_no_tasks(self) -> None:

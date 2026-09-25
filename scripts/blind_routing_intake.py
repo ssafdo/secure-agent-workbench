@@ -135,12 +135,25 @@ HTML = r'''<!doctype html>
       const body = await api("/api/review", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify({id: item.id, decision, task: el("task").value})});
       state.reviews[item.id] = body.review;
       render();
-      if (!body.finalized && state.index < state.cases.length - 1) move(1);
-      notice(body.finalized ? `审核完成，已生成 ${body.approved} 条正式候选。` : `已保存；当前批准 ${body.approved} 条。`);
+      if (!body.finalized && !body.insufficient && state.index < state.cases.length - 1) move(1);
+      notice(
+        body.finalized
+          ? `审核完成，已生成 ${body.approved} 条正式候选。`
+          : body.insufficient
+            ? `30 条已全部审核，但当前只批准 ${body.approved} 条，还差 ${body.shortfall} 条。请返回修改决定，或补充新候选。`
+            : `已保存；当前批准 ${body.approved} 条。`,
+        body.insufficient,
+      );
     } catch (error) { notice(error.message, true); }
   });
   if (!state.token) { notice("缺少临时审核令牌，请使用命令输出的本地链接。", true); return; }
-  api("/api/session").then((body) => { state.cases = body.cases; state.reviews = body.reviews; render(); }).catch((error) => notice(error.message, true));
+  api("/api/session").then((body) => {
+    state.cases = body.cases;
+    state.reviews = body.reviews;
+    const firstUnreviewed = state.cases.findIndex((item) => !state.reviews[item.id]);
+    state.index = firstUnreviewed >= 0 ? firstUnreviewed : 0;
+    render();
+  }).catch((error) => notice(error.message, true));
 })();
 </script>
 </body>
@@ -518,10 +531,9 @@ class IntakeState:
             ordered = [updated[case["id"]] for case in self.cases if case["id"] in updated]
             approved = [item for item in ordered if item["decision"] == "approve"]
             complete = set(updated) == self.case_ids
-            if complete and len(approved) < self.minimum_approved:
-                raise ValueError(f"At least {self.minimum_approved} approved cases are required; revise exclusions or collect a larger intake.")
             self.reviews = updated
-            if complete:
+            insufficient = complete and len(approved) < self.minimum_approved
+            if complete and not insufficient:
                 by_id = {case["id"]: case for case in self.cases}
                 candidates = [
                     {"id": item["id"], "language": by_id[item["id"]]["language"], "task": item["task"], "deidentified": True, "reviewedByHuman": True}
@@ -544,7 +556,15 @@ class IntakeState:
                 self.finalized = True
             else:
                 _atomic_json(self.draft_path, {"schemaVersion": 1, "kind": "secure-agent-workbench/blind-routing-intake-review", "intakeSha256": self.intake_sha256, "reviews": ordered})
-            return {"review": review, "completed": len(self.reviews), "approved": len(approved), "total": len(self.cases), "finalized": self.finalized}
+            return {
+                "review": review,
+                "completed": len(self.reviews),
+                "approved": len(approved),
+                "total": len(self.cases),
+                "finalized": self.finalized,
+                "insufficient": insufficient,
+                "shortfall": max(0, self.minimum_approved - len(approved)),
+            }
 
 
 class IntakeServer(ThreadingHTTPServer):
