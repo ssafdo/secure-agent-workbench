@@ -155,4 +155,35 @@ python scripts/blind_routing_eval.py evaluate `
 
 一批盲测只能说明该批样本上的路由表现。它不能替代专业 Agent 的端到端任务成功率、引用正确率、安全门禁或线上影子评估。若门禁失败，先按语言、类别和高错误成本案例归因，再决定扩充确定性规则、增加保守回退，或单独评估本地/托管分类器；不得直接把盲测样本追加到公开回归集后声称问题已解决。
 
+当前 `batch-2-pilot` 按数据负责人决定停止扩充，共保留 18 条获批候选。它可以验证独立标注、仲裁、封存和评估流程，但低于此前预注册的 20 条正式门槛，因此结果只能标记为 pilot/探索性结果，不能用于声称自然任务门禁已经恢复。不得通过把最低数量改成 18 来改写原门槛的含义。
+
+pilot 流程的所有命令都必须显式传入 `--minimum-cases 18`，并使用带 `pilot` 的独立文件名：
+
+```powershell
+python scripts/blind_routing_review.py `
+  --candidates benchmarks/private/batch-2-pilot-candidates.jsonl `
+  --output benchmarks/private/batch-2-pilot-reviewer-a.json `
+  --reviewer-id pilot-reviewer-a --minimum-cases 18
+python scripts/blind_routing_review.py `
+  --candidates benchmarks/private/batch-2-pilot-candidates.jsonl `
+  --output benchmarks/private/batch-2-pilot-reviewer-b.json `
+  --reviewer-id pilot-reviewer-b --minimum-cases 18
+python scripts/blind_routing_adjudicate.py `
+  --candidates benchmarks/private/batch-2-pilot-candidates.jsonl `
+  --annotation-a benchmarks/private/batch-2-pilot-reviewer-a.json `
+  --annotation-b benchmarks/private/batch-2-pilot-reviewer-b.json `
+  --dataset benchmarks/private/batch-2-pilot.jsonl `
+  --report artifacts/private/batch-2-pilot-annotation-report.json `
+  --minimum-cases 18
+python scripts/blind_routing_eval.py seal `
+  --dataset benchmarks/private/batch-2-pilot.jsonl `
+  --manifest artifacts/private/batch-2-pilot-manifest.json `
+  --minimum-cases 18
+python scripts/blind_routing_eval.py evaluate `
+  --dataset benchmarks/private/batch-2-pilot.jsonl `
+  --manifest artifacts/private/batch-2-pilot-manifest.json `
+  --output artifacts/private/batch-2-pilot-result.json `
+  --minimum-cases 18
+```
+
 一旦实现者查看过逐条结果或根据该批错误修改路由，这批任务就成为诊断/开发数据，不再是未见盲测。旧数据、manifest 和结果应保留作为历史证据，但新实现必须使用另一批未见任务、独立标注和新的 manifest 才能形成新的盲测结论。
