@@ -2,43 +2,44 @@
   "schemaVersion": 1,
   "dataset": {
     "path": "benchmarks/supervisor_naturalistic_dev_cases.json",
-    "sha256": "85f69751fcd3df5383e996aaaa51ef98c8086101ab792c2c28bfc6caef227a68"
+    "sha256": "bf33dc42a88b5800d66d3b1b0afae3753f4d637f5545bf1eb0c39e48d9f538ec"
   },
-  "cases": 50,
-  "correct": 50,
+  "cases": 60,
+  "correct": 60,
   "accuracy": 1.0,
   "weightedError": 0,
   "weightedAccuracy": 1.0,
   "confusionMatrix": {
     "retrieval": {
-      "retrieval": 25,
+      "retrieval": 31,
       "synthesis": 0
     },
     "synthesis": {
       "retrieval": 0,
-      "synthesis": 25
+      "synthesis": 29
     }
   },
   "confidenceCounts": {
-    "high": 26,
-    "medium": 24
+    "high": 30,
+    "low": 5,
+    "medium": 25
   },
   "languageSlices": {
     "en": {
-      "cases": 25,
-      "correct": 25,
+      "cases": 30,
+      "correct": 30,
       "accuracy": 1.0
     },
     "zh": {
-      "cases": 25,
-      "correct": 25,
+      "cases": 30,
+      "correct": 30,
       "accuracy": 1.0
     }
   },
   "categorySlices": {
     "comparison": {
-      "cases": 6,
-      "correct": 6,
+      "cases": 10,
+      "correct": 10,
       "accuracy": 1.0
     },
     "conflict": {
@@ -47,18 +48,18 @@
       "accuracy": 1.0
     },
     "evidence": {
-      "cases": 12,
-      "correct": 12,
+      "cases": 14,
+      "correct": 14,
       "accuracy": 1.0
     },
     "question": {
-      "cases": 11,
-      "correct": 11,
+      "cases": 13,
+      "correct": 13,
       "accuracy": 1.0
     },
     "synthesis": {
-      "cases": 19,
-      "correct": 19,
+      "cases": 21,
+      "correct": 21,
       "accuracy": 1.0
     }
   },
@@ -394,6 +395,71 @@
       "retrievalSignals": 0
     },
     {
+      "id": "dev-en-r14",
+      "language": "en",
+      "category": "comparison",
+      "expected": "retrieval",
+      "actual": "retrieval",
+      "correct": true,
+      "errorCost": 2,
+      "confidence": "low",
+      "reason": "bounded-default",
+      "synthesisSignals": 0,
+      "retrievalSignals": 0
+    },
+    {
+      "id": "dev-en-r15",
+      "language": "en",
+      "category": "evidence",
+      "expected": "retrieval",
+      "actual": "retrieval",
+      "correct": true,
+      "errorCost": 2,
+      "confidence": "low",
+      "reason": "bounded-default",
+      "synthesisSignals": 0,
+      "retrievalSignals": 0
+    },
+    {
+      "id": "dev-en-r16",
+      "language": "en",
+      "category": "question",
+      "expected": "retrieval",
+      "actual": "retrieval",
+      "correct": true,
+      "errorCost": 1,
+      "confidence": "low",
+      "reason": "bounded-default",
+      "synthesisSignals": 0,
+      "retrievalSignals": 0
+    },
+    {
+      "id": "dev-en-s13",
+      "language": "en",
+      "category": "comparison",
+      "expected": "synthesis",
+      "actual": "synthesis",
+      "correct": true,
+      "errorCost": 3,
+      "confidence": "high",
+      "reason": "cross-source-synthesis",
+      "synthesisSignals": 2,
+      "retrievalSignals": 0
+    },
+    {
+      "id": "dev-en-s14",
+      "language": "en",
+      "category": "synthesis",
+      "expected": "synthesis",
+      "actual": "synthesis",
+      "correct": true,
+      "errorCost": 3,
+      "confidence": "high",
+      "reason": "cross-source-synthesis",
+      "synthesisSignals": 2,
+      "retrievalSignals": 0
+    },
+    {
       "id": "dev-zh-r01",
       "language": "zh",
       "category": "evidence",
@@ -715,8 +781,73 @@
       "errorCost": 3,
       "confidence": "medium",
       "reason": "cross-source-synthesis",
-      "synthesisSignals": 1,
+      "synthesisSignals": 2,
       "retrievalSignals": 1
+    },
+    {
+      "id": "dev-zh-r13",
+      "language": "zh",
+      "category": "comparison",
+      "expected": "retrieval",
+      "actual": "retrieval",
+      "correct": true,
+      "errorCost": 2,
+      "confidence": "low",
+      "reason": "bounded-default",
+      "synthesisSignals": 0,
+      "retrievalSignals": 0
+    },
+    {
+      "id": "dev-zh-r14",
+      "language": "zh",
+      "category": "evidence",
+      "expected": "retrieval",
+      "actual": "retrieval",
+      "correct": true,
+      "errorCost": 2,
+      "confidence": "medium",
+      "reason": "direct-question",
+      "synthesisSignals": 0,
+      "retrievalSignals": 1
+    },
+    {
+      "id": "dev-zh-r15",
+      "language": "zh",
+      "category": "question",
+      "expected": "retrieval",
+      "actual": "retrieval",
+      "correct": true,
+      "errorCost": 1,
+      "confidence": "low",
+      "reason": "bounded-default",
+      "synthesisSignals": 0,
+      "retrievalSignals": 0
+    },
+    {
+      "id": "dev-zh-s14",
+      "language": "zh",
+      "category": "comparison",
+      "expected": "synthesis",
+      "actual": "synthesis",
+      "correct": true,
+      "errorCost": 3,
+      "confidence": "high",
+      "reason": "cross-source-synthesis",
+      "synthesisSignals": 1,
+      "retrievalSignals": 0
+    },
+    {
+      "id": "dev-zh-s15",
+      "language": "zh",
+      "category": "synthesis",
+      "expected": "synthesis",
+      "actual": "synthesis",
+      "correct": true,
+      "errorCost": 3,
+      "confidence": "high",
+      "reason": "cross-source-synthesis",
+      "synthesisSignals": 2,
+      "retrievalSignals": 0
     }
   ]
 }

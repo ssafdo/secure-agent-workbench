@@ -129,7 +129,7 @@ Phase 14 MCP 结果：Experiment `mcp`，Run `d2f75bee-7c98-4dee-a4fb-3d908ada98
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/mcp-run.json"
 ```
 
-Phase 20 Supervisor 结果：Experiment `supervisor`，Run `a7a8b0ee-f926-469a-b3fe-b33cc407a587`，`3 passed / 0 failed / 0 errored`。端到端消融 Attempt `@1YCKTWP22VRM8`、原 50 条策划路由集 Attempt `@1VQEX48NRBS0D`、新 50 条自然措辞开发集 Attempt `@1JWQBQMZ9M3BY` 均通过。三项均未调用模型，token 与模型费用为零。自然措辞结果属于公开开发回归证据，不是新的盲测质量声明。固定查询为 `queries/supervisor-run.json`：
+Phase 22 Supervisor 结果：Experiment `supervisor`，Run `09f435ff-8908-4a93-bece-b02db265336d`，`3 passed / 0 failed / 0 errored`。端到端消融 Attempt `@15HXF9K292AC2`、原 50 条策划路由集 Attempt `@1K8APKYD3D99C`、扩展后的 60 条自然措辞开发集 Attempt `@18Y2HEFM0QJ9Y` 均通过。三项均为确定性评估；token 与模型费用不可用且没有记录值。自然措辞结果属于公开开发回归证据，不是新的盲测质量声明。固定查询为 `queries/supervisor-run.json`：
 
 ```powershell
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/supervisor-run.json"

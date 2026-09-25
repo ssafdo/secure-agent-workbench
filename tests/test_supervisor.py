@@ -97,6 +97,35 @@ class SupervisorRoutingTests(unittest.TestCase):
         self.assertEqual(decision.specialist, ResearchSpecialist.RETRIEVAL)
         self.assertEqual(decision.reason, "direct-question")
 
+    def test_plain_explanation_uses_bounded_retrieval_default(self) -> None:
+        decision = ResearchSupervisor.route(
+            "Explain cache invalidation in practical terms."
+        )
+        self.assertEqual(decision.specialist, ResearchSpecialist.RETRIEVAL)
+        self.assertEqual(decision.reason, "bounded-default")
+        self.assertEqual(decision.confidence, RoutingConfidence.LOW)
+
+    def test_plain_concept_comparison_is_not_cross_source_synthesis(self) -> None:
+        decision = ResearchSupervisor.route(
+            "Compare optimistic and pessimistic locking in practical terms."
+        )
+        self.assertEqual(decision.specialist, ResearchSpecialist.RETRIEVAL)
+        self.assertEqual(decision.reason, "bounded-default")
+
+    def test_source_scope_before_comparison_routes_to_synthesis(self) -> None:
+        decision = ResearchSupervisor.route(
+            "The reports from both teams need comparison and a consolidated summary."
+        )
+        self.assertEqual(decision.specialist, ResearchSpecialist.SYNTHESIS)
+        self.assertEqual(decision.reason, "cross-source-synthesis")
+
+    def test_complete_plan_deliverable_routes_to_synthesis(self) -> None:
+        decision = ResearchSupervisor.route(
+            "请制定一份完整的迁移计划，包含依赖、风险、上线和回滚步骤。"
+        )
+        self.assertEqual(decision.specialist, ResearchSpecialist.SYNTHESIS)
+        self.assertEqual(decision.reason, "cross-source-synthesis")
+
     def test_retrieval_specialist_uses_shared_runtime_and_redacted_route_trace(self) -> None:
         private_task = "Which source says the API key must stay private-value-123?"
         source = self.context.root / "inputs" / "security.md"

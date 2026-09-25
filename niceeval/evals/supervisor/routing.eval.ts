@@ -34,9 +34,9 @@ export default supervisorBenchmark.defineEval({
     t.check(result.defaultCases, equals(4))
       .gate()
       .label("Unknown-intent denominator is fixed");
-    t.check(result.lowConfidenceDefaults, equals(3))
+    t.check(result.lowConfidenceDefaults, equals(0))
       .gate()
-      .label("Three open-ended defaults expose low-confidence fallback");
+      .label("Known deliverables do not fall through to low-confidence routing");
     t.check(result.errors.length, equals(0)).gate().label("Error list remains empty");
   },
 });

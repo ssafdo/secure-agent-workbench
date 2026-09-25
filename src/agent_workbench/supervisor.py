@@ -60,6 +60,10 @@ _STRONG_SYNTHESIS_PATTERNS = (
         re.IGNORECASE,
     ),
     re.compile(
+        r"\b(?:sources?|documents?|files?|proposals?|reports?|studies|papers?|materials?|notes?)\b.{0,100}\b(?:compare|contrast|comparison|differences?|similarities|summari[sz]e|synthesi[sz]e|integrate)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
         r"\b(?:consolidated|project)\s+(?:briefing|digest|summary|overview)\b",
         re.IGNORECASE,
     ),
@@ -79,16 +83,31 @@ _STRONG_SYNTHESIS_PATTERNS = (
         r"\b(?:analy[sz]e|review)\b.{0,80}\b(?:patterns?|results?|trends?)\b.{0,80}\b(?:notes?|reports?|studies)?\b",
         re.IGNORECASE,
     ),
+    re.compile(
+        r"\b(?:review|assess|analy[sz]e)\b.{0,80}\b(?:supplied|provided|attached)\s+(?:materials?|documents?|files?|notes?|reports?)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:complete|comprehensive|detailed|in-depth|full)\b.{0,80}\b(?:analysis|assessment|briefing|guide|overview|plan|report|review|roadmap|strategy|summary)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:write|draft|prepare|produce|create|organize|develop)\b.{0,80}\b(?:course|framework|guide|lesson|manual|plan|presentation|proposal|roadmap|strategy|tutorial)\b",
+        re.IGNORECASE,
+    ),
     re.compile(r"(?:全部|所有|各份|多份)(?:资料|文档|文件)"),
     re.compile(r"(?:跨|贯穿)(?:资料|文档|文件)"),
     re.compile(r"(?:整体|综合|全局)(?:总结|汇总|概览|综述|盘点|简报)"),
     re.compile(r"(?:比较|对比|异同).*(?:资料|文档|文件)"),
     re.compile(r"(?:资料|文档|文件|报告).{0,40}(?:比较|对比|异同)"),
     re.compile(r"(?:两|三|四|五|六|七|八|九|十|\d+)份(?:资料|文档|文件|报告|方案)"),
-    re.compile(r"(?:写|撰写|编写|整理|形成|生成).{0,40}(?:摘要|文章|简报|综述|报告|论文|文稿|备忘录|概览)(?!前|后|时|需要)"),
+    re.compile(r"(?:写|撰写|编写|准备|整理|形成|生成).{0,40}(?:摘要|文章|简报|综述|报告|论文|文稿|备忘录|概览)(?!前|后|时|需要)"),
     re.compile(r"(?:总结|汇总|综述|整合).{0,40}(?:发现|结果|研究|资料|材料|笔记|记录)"),
     re.compile(r"(?:整合成|汇总成).{0,40}(?:总结|报告|简报|综述)"),
     re.compile(r"(?:分析|审阅).{0,40}(?:趋势|变化|结果|规律).{0,40}(?:报告|资料|记录)?"),
+    re.compile(r"(?:审阅|评估|分析).{0,40}(?:提供|给定|附带|上传)(?:的)?(?:资料|文档|文件|笔记|报告|材料)"),
+    re.compile(r"(?:完整|全面|详细|深入).{0,40}(?:分析|评估|简报|指南|概览|计划|报告|综述|路线图|策略|总结)"),
+    re.compile(r"(?:写|撰写|编写|准备|制定|形成|生成|整理).{0,40}(?:课程|框架|指南|教案|手册|计划|演示|方案|路线图|策略|教程)"),
     re.compile(r"(?:前人研究|研究进展|文献回顾|文献综述|研究综述)"),
 )
 _STRONG_RETRIEVAL_PATTERNS = (
@@ -105,6 +124,13 @@ _WEAK_RETRIEVAL_PATTERNS = (
     re.compile(r"\b(?:which|what|where|when|who|how|why|does|do|is|are|can)\b", re.IGNORECASE),
     re.compile(r"(?:什么|哪里|何时|谁|如何|怎么|为什么|为何|是否|能否|有何)"),
     re.compile(r"[?？]"),
+)
+_ROUTING_MANIPULATION_PATTERNS = (
+    re.compile(
+        r"\b(?:ignore|bypass|override)\b.{0,80}\b(?:agent|policy|router|routing|supervisor)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(r"(?:忽略|绕过|覆盖).{0,40}(?:代理|智能体|策略|路由|主管)"),
 )
 
 
@@ -127,6 +153,10 @@ class ResearchSupervisor:
         )
         weak_retrieval_signals = sum(
             bool(pattern.search(normalized)) for pattern in _WEAK_RETRIEVAL_PATTERNS
+        )
+        routing_manipulation_signals = sum(
+            bool(pattern.search(normalized))
+            for pattern in _ROUTING_MANIPULATION_PATTERNS
         )
         retrieval_signals = strong_retrieval_signals + weak_retrieval_signals
         if synthesis_signals:
@@ -160,9 +190,18 @@ class ResearchSupervisor:
                 synthesis_signals,
                 retrieval_signals,
             )
+        if routing_manipulation_signals:
+            return RoutingDecision(
+                ResearchSpecialist.SYNTHESIS,
+                "conservative-default",
+                0,
+                RoutingConfidence.LOW,
+                synthesis_signals,
+                retrieval_signals,
+            )
         return RoutingDecision(
-            ResearchSpecialist.SYNTHESIS,
-            "conservative-default",
+            ResearchSpecialist.RETRIEVAL,
+            "bounded-default",
             0,
             RoutingConfidence.LOW,
             synthesis_signals,

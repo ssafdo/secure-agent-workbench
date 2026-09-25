@@ -2,7 +2,7 @@
 
 这是一个从参考架构出发、逐步演进的实习项目。目标不是一次性复制 Open WebUI 或部署一堆服务，而是先建立一个能运行、能测试、能解释安全边界的 Agent 平台内核，再逐步接入 LLM、RAG、MCP、Web UI 和容器执行器。
 
-当前版本为 `0.21.0`，完成 Phase 20：首批 20 条公开许可自然交互任务走通去敏、两份主标注、第三份仲裁、封存与本地评估。工具验证了不同审核者 ID，但不验证操作者真实身份，因此不能仅凭文件声称三名独立自然人。标注门禁通过，但原路由仅达到 `60%` 准确率和 `40%` 加权错误率，因此该批数据已经揭晓并降级为私有诊断集，不能再用于宣称盲测成绩。Supervisor 随后改为强综合、强检索、弱问句三层信号，并新增一套不含诊断集正文的 50 条中英自然措辞开发集；原策划集与新开发集均为 `50/50`、加权错误 `0`。下一次质量声明仍必须使用一批全新的未见私有任务。
+当前版本为 `0.22.0`。第二批 20 条公开许可、人工去敏自然任务已经完成重复双轮标注、封存与本地评估；两轮标签完全一致，但若由同一操作者完成，不能表述为两位独立审核者。冻结的 `0.21.0` 路由只达到 `70%` 准确率和 `32.14%` 加权错误率，未通过预注册的 `80%/20%` 门禁，因此该批数据已经揭盲并降级为私有诊断集。Supervisor v2 改为交付物与材料范围优先，并将无明确综合范围的普通任务低置信路由到 retrieval；公开的 50 条策划集和扩展后的 60 条中英自然措辞开发集均为全量通过。下一次质量声明仍必须使用第三批全新的未见私有任务。
 
 ## 已实现
 
@@ -69,7 +69,7 @@ HTTP API 的 `/v1/research` 默认使用确定性基线；请求增加 `"engine"
 
 请求使用 `"engine": "retrieval"` 时走本地检索，不调用托管模型。它只扫描当前项目的 `inputs/*.md|*.txt`，报告与响应中的 citations 会在写入前重新核对源文件和行号。未配置本地模型时使用词法/中文双字基线；配置成功后组合归一化词法分数与余弦相似度。模型缺失、校验失败或编码异常时返回可见的 `lexical-fallback`，不会静默伪装成混合检索。风险模式匹配只提供诊断，不能替代权限、工具白名单和模型侧注入防护。
 
-请求使用 `"engine": "supervisor"` 时，Supervisor 根据任务意图选择 `synthesis` 或 `retrieval` 专家。完整报告、综述、跨资料整合等强综合目标优先；引用、核实、定位等强检索目标其次；普通问句只作为中置信弱检索信号，避免问号覆盖长文交付目标。无法识别时以 `low` 置信度保守回退到 synthesis。响应的 `routing` 公开专业 Agent、原因码、`high|medium|low` 置信度以及两类信号数；trace 只保存这些枚举/计数元数据，不保存任务正文。浏览器工作台默认使用该模式，且该离线路径不会调用 DeepSeek。
+请求使用 `"engine": "supervisor"` 时，Supervisor 根据任务意图选择 `synthesis` 或 `retrieval` 专家。完整报告、计划、综述、跨资料整合等强综合目标优先；引用、核实、定位等强检索目标其次；普通问句只作为中置信弱检索信号，避免问号覆盖长文交付目标。没有综合范围、证据动作或问句信号时，以 `low` 置信度和 `bounded-default` 原因路由到 retrieval；明确的路由操纵且没有真实任务信号时仍保守回退 synthesis。响应的 `routing` 公开专业 Agent、原因码、`high|medium|low` 置信度以及两类信号数；trace 只保存这些枚举/计数元数据，不保存任务正文。浏览器工作台默认使用该模式，且该离线路径不会调用 DeepSeek。
 
 ### 可选本地混合检索
 
@@ -211,7 +211,7 @@ wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/nicee
 
 已验证 MCP Run：`d2f75bee-7c98-4dee-a4fb-3d908ada981d`，Attempt `@1KBYF6AT9MVMV`，1/1 通过且 9 条断言全部登记；固定查询为 `niceeval/queries/mcp-run.json`。
 
-已验证 Phase 20 Supervisor Run：`a7a8b0ee-f926-469a-b3fe-b33cc407a587`，`3 passed / 0 failed / 0 errored`。端到端消融 Attempt `@1YCKTWP22VRM8`、原 50 条策划路由集 Attempt `@1VQEX48NRBS0D`、新 50 条自然措辞开发集 Attempt `@1JWQBQMZ9M3BY` 均通过；三项均为确定性评估，token 与模型费用为零。新自然措辞集只用于开发回归，不是新的私有盲测结果。固定查询为 `niceeval/queries/supervisor-run.json`。
+已验证 Phase 22 Supervisor Run：`09f435ff-8908-4a93-bece-b02db265336d`，`3 passed / 0 failed / 0 errored`。端到端消融 Attempt `@15HXF9K292AC2`、原 50 条策划路由集 Attempt `@1K8APKYD3D99C`、扩展后的 60 条自然措辞开发集 Attempt `@18Y2HEFM0QJ9Y` 均通过；三项均为确定性评估，token 与模型费用不可用且没有记录值。自然措辞集只用于开发回归，不是新的私有盲测结果。固定查询为 `niceeval/queries/supervisor-run.json`。
 
 自然任务盲测不接入 NiceEval 或 CI，也不会提交私有 JSONL。先由两位独立审核者分别标注，必要时由第三人仲裁，再在本机执行封存与评估；修改 `supervisor.py` 后旧 manifest 会自动失效。完整格式、命令和解释边界见 `docs/blind-routing-eval.md`。
 

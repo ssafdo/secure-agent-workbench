@@ -20,8 +20,7 @@
     }
   },
   "confidenceCounts": {
-    "high": 36,
-    "low": 3,
+    "high": 39,
     "medium": 11
   },
   "languageSlices": {
@@ -81,7 +80,7 @@
   "conflictCases": 4,
   "conflictCorrect": 4,
   "defaultCases": 4,
-  "lowConfidenceDefaults": 3,
+  "lowConfidenceDefaults": 0,
   "errors": [],
   "caseResults": [
     {
@@ -380,7 +379,7 @@
       "errorCost": 3,
       "confidence": "medium",
       "reason": "cross-source-synthesis",
-      "synthesisSignals": 1,
+      "synthesisSignals": 2,
       "retrievalSignals": 2
     },
     {
@@ -404,9 +403,9 @@
       "actual": "synthesis",
       "correct": true,
       "errorCost": 1,
-      "confidence": "low",
-      "reason": "conservative-default",
-      "synthesisSignals": 0,
+      "confidence": "high",
+      "reason": "cross-source-synthesis",
+      "synthesisSignals": 1,
       "retrievalSignals": 0
     },
     {
@@ -703,9 +702,9 @@
       "actual": "synthesis",
       "correct": true,
       "errorCost": 1,
-      "confidence": "low",
-      "reason": "conservative-default",
-      "synthesisSignals": 0,
+      "confidence": "high",
+      "reason": "cross-source-synthesis",
+      "synthesisSignals": 1,
       "retrievalSignals": 0
     },
     {
@@ -716,9 +715,9 @@
       "actual": "synthesis",
       "correct": true,
       "errorCost": 1,
-      "confidence": "low",
-      "reason": "conservative-default",
-      "synthesisSignals": 0,
+      "confidence": "high",
+      "reason": "cross-source-synthesis",
+      "synthesisSignals": 1,
       "retrievalSignals": 0
     },
     {

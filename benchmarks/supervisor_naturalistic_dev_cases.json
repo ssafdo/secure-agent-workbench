@@ -26,6 +26,11 @@
     {"id":"dev-en-s10","language":"en","category":"comparison","task":"What are the similarities and differences between the two design documents, and which trade-offs matter most?","expectedSpecialist":"synthesis","errorCost":3},
     {"id":"dev-en-s11","language":"en","category":"synthesis","task":"Create an overview of the research notes for someone joining the project next week.","expectedSpecialist":"synthesis","errorCost":2},
     {"id":"dev-en-s12","language":"en","category":"synthesis","task":"Draft an article that integrates the study results and the reviewers' observations.","expectedSpecialist":"synthesis","errorCost":2},
+    {"id":"dev-en-r14","language":"en","category":"comparison","task":"Compare optimistic and pessimistic locking in practical terms.","expectedSpecialist":"retrieval","errorCost":2},
+    {"id":"dev-en-r15","language":"en","category":"evidence","task":"Review whether this configuration permits anonymous access.","expectedSpecialist":"retrieval","errorCost":2},
+    {"id":"dev-en-r16","language":"en","category":"question","task":"Explain the role of a circuit breaker in this design.","expectedSpecialist":"retrieval","errorCost":1},
+    {"id":"dev-en-s13","language":"en","category":"comparison","task":"The reports from both teams need comparison and a consolidated summary.","expectedSpecialist":"synthesis","errorCost":3},
+    {"id":"dev-en-s14","language":"en","category":"synthesis","task":"Prepare a comprehensive migration plan covering dependencies, risks, rollout, and rollback.","expectedSpecialist":"synthesis","errorCost":3},
     {"id":"dev-zh-r01","language":"zh","category":"evidence","task":"帮我核实一下规范里是否要求每次请求都带版本号？","expectedSpecialist":"retrieval","errorCost":2},
     {"id":"dev-zh-r02","language":"zh","category":"question","task":"这个配置里的只读模式是什么意思？","expectedSpecialist":"retrieval","errorCost":1},
     {"id":"dev-zh-r03","language":"zh","category":"comparison","task":"乐观锁和悲观锁在实际使用中有什么区别？","expectedSpecialist":"retrieval","errorCost":2},
@@ -50,6 +55,11 @@
     {"id":"dev-zh-s10","language":"zh","category":"comparison","task":"两份设计文档有哪些异同，最重要的取舍是什么？","expectedSpecialist":"synthesis","errorCost":3},
     {"id":"dev-zh-s11","language":"zh","category":"synthesis","task":"为下周加入项目的新成员生成一份研究笔记概览。","expectedSpecialist":"synthesis","errorCost":2},
     {"id":"dev-zh-s12","language":"zh","category":"synthesis","task":"写一篇文章，综合研究结果和评审人员的观察。","expectedSpecialist":"synthesis","errorCost":2},
-    {"id":"dev-zh-s13","language":"zh","category":"synthesis","task":"根据各部门材料形成一份完整报告，回答目前进展如何以及主要风险是什么。","expectedSpecialist":"synthesis","errorCost":3}
+    {"id":"dev-zh-s13","language":"zh","category":"synthesis","task":"根据各部门材料形成一份完整报告，回答目前进展如何以及主要风险是什么。","expectedSpecialist":"synthesis","errorCost":3},
+    {"id":"dev-zh-r13","language":"zh","category":"comparison","task":"对比一下轮询和长连接的适用场景。","expectedSpecialist":"retrieval","errorCost":2},
+    {"id":"dev-zh-r14","language":"zh","category":"evidence","task":"审阅该配置是否允许匿名访问。","expectedSpecialist":"retrieval","errorCost":2},
+    {"id":"dev-zh-r15","language":"zh","category":"question","task":"解释一下熔断器在这个设计中的作用。","expectedSpecialist":"retrieval","errorCost":1},
+    {"id":"dev-zh-s14","language":"zh","category":"comparison","task":"把两个团队的报告进行比较并形成一份综合建议。","expectedSpecialist":"synthesis","errorCost":3},
+    {"id":"dev-zh-s15","language":"zh","category":"synthesis","task":"制定一份完整的迁移计划，覆盖依赖、风险、上线和回滚。","expectedSpecialist":"synthesis","errorCost":3}
   ]
 }
