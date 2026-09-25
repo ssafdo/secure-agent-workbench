@@ -9,12 +9,14 @@ import secrets
 import sys
 import tempfile
 import threading
+from time import sleep
 from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Callable
 from urllib.parse import urlencode, urlsplit
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
@@ -117,7 +119,7 @@ HTML = r'''<!doctype html>
 </head>
 <body>
 <main>
-  <header><div><p class="eyebrow">PRIVATE DEIDENTIFICATION REVIEW</p><h1>第二批候选任务审核</h1></div><div id="progress" class="progress">连接中</div></header>
+  <header><div><p class="eyebrow">PRIVATE DEIDENTIFICATION REVIEW</p><h1>私有候选任务审核</h1></div><div id="progress" class="progress">连接中</div></header>
   <section class="panel">
     <div class="meta"><span id="case-id">-</span><span id="language">-</span></div>
     <textarea id="task" maxlength="2000" aria-label="去敏后的任务正文"></textarea>
@@ -231,10 +233,24 @@ def _atomic_jsonl(path: Path, values: list[dict[str, Any]]) -> None:
 
 def _fetch_json(url: str) -> Any:
     request = Request(url, headers={"User-Agent": "secure-agent-workbench/0.22.0"})
-    with urlopen(request, timeout=30) as response:
-        if response.status != HTTPStatus.OK:
-            raise RuntimeError(f"Dataset service returned HTTP {response.status}.")
-        return json.load(response)
+    last_error: Exception | None = None
+    for attempt in range(3):
+        try:
+            with urlopen(request, timeout=30) as response:
+                if response.status != HTTPStatus.OK:
+                    raise RuntimeError(
+                        f"Dataset service returned HTTP {response.status}."
+                    )
+                return json.load(response)
+        except HTTPError as error:
+            if error.code != HTTPStatus.TOO_MANY_REQUESTS and not 500 <= error.code < 600:
+                raise
+            last_error = error
+        except (URLError, TimeoutError, ConnectionError) as error:
+            last_error = error
+        if attempt < 2:
+            sleep(2**attempt)
+    raise RuntimeError("Dataset service remained unavailable after 3 attempts.") from last_error
 
 
 def _normalize_task(text: str) -> str:

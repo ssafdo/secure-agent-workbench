@@ -1,13 +1,17 @@
 from __future__ import annotations
 
+import io
 import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
+from urllib.error import URLError
 
 from scripts.blind_routing_adjudicate import load_candidates
 from scripts.blind_routing_intake import (
     IntakeState,
+    _fetch_json,
     collect_candidates,
     combine_completed_reviews,
     create_server,
@@ -45,6 +49,22 @@ class BlindRoutingIntakeTests(unittest.TestCase):
             encoding="utf-8",
         )
         return path
+
+    def test_fetch_json_retries_transient_connection_failure(self) -> None:
+        response = io.BytesIO(json.dumps({"ok": True}).encode("utf-8"))
+        response.status = 200
+        with (
+            patch(
+                "scripts.blind_routing_intake.urlopen",
+                side_effect=[URLError("temporary disconnect"), response],
+            ) as open_url,
+            patch("scripts.blind_routing_intake.sleep") as pause,
+        ):
+            result = _fetch_json("https://example.invalid/dataset")
+
+        self.assertEqual(result, {"ok": True})
+        self.assertEqual(open_url.call_count, 2)
+        pause.assert_called_once_with(1)
 
     def test_review_requires_every_decision_then_writes_human_reviewed_candidates(self) -> None:
         with self._temporary_directory() as directory:
