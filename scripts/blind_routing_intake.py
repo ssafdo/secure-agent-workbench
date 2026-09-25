@@ -62,6 +62,22 @@ _RESEARCH_ELIGIBILITY_PATTERNS = {
         r"汇总|综述|调查|核实)"
     ),
 }
+_STRONG_RESEARCH_PATTERNS = {
+    "en": re.compile(
+        r"\b(?:analy[sz]e|cite|compare|contrast|document|evidence|extract|literature|"
+        r"locate|paper|quote|report|research|review|source|study|summari[sz]e|verify)\w*\b",
+        re.IGNORECASE,
+    ),
+    "zh": re.compile(
+        r"(?:分析|引用|比较|对比|文档|证据|摘录|提取|文献|定位|论文|报告|研究|"
+        r"审阅|来源|资料|总结|汇总|综述|核实)"
+    ),
+}
+_PRIVACY_RISK_PATTERNS = (
+    (re.compile(r"\b(?:19|20)\d{2}[/-]\d{1,2}[/-]\d{1,2}\b|\b\d{1,2}[/-]\d{1,2}[/-](?:\d{2}|\d{4})\b"), "可能含具体日期"),
+    (re.compile(r"\b(?:Mr|Mrs|Ms|Miss|Dr)\.?\s+[A-Z][A-Za-z'-]+\b"), "可能含个人姓名或称谓"),
+    (re.compile(r"\b(?:dear|sincerely|return receipt|employee|employer)\b", re.IGNORECASE), "可能是个人通信或雇佣记录"),
+)
 
 HTML = r'''<!doctype html>
 <html lang="zh-CN">
@@ -85,6 +101,7 @@ HTML = r'''<!doctype html>
     .translation-wrap { margin: 0 0 18px; padding: 16px 18px; color: #29313a; background: #f6f9ff; border-left: 3px solid #1769e0; }
     .translation-label { margin: 0 0 8px; color: #59616b; font-size: 12px; font-weight: 700; }
     .translation { margin: 0; white-space: pre-wrap; line-height: 1.65; }
+    .recommendation { margin: 0 0 18px; padding: 12px 0; color: #4d5661; border-top: 1px solid #e0e3e7; border-bottom: 1px solid #e0e3e7; font-size: 13px; }
     textarea:focus, button:focus { outline: 3px solid rgba(23, 105, 224, .2); outline-offset: 1px; }
     .decision { display: flex; gap: 22px; padding: 14px 0; border-top: 1px solid #e0e3e7; border-bottom: 1px solid #e0e3e7; }
     label { display: flex; gap: 8px; align-items: center; color: #343a42; font-size: 13px; font-weight: 700; }
@@ -105,6 +122,7 @@ HTML = r'''<!doctype html>
     <div class="meta"><span id="case-id">-</span><span id="language">-</span></div>
     <textarea id="task" maxlength="2000" aria-label="去敏后的任务正文"></textarea>
     <div id="translation-wrap" class="translation-wrap" hidden><p id="translation-label" class="translation-label"></p><p id="translation" class="translation"></p></div>
+    <p id="recommendation" class="recommendation"></p>
     <div class="decision">
       <label><input type="radio" name="decision" value="approve">批准并确认已去敏</label>
       <label><input type="radio" name="decision" value="exclude">排除这条任务</label>
@@ -136,6 +154,7 @@ HTML = r'''<!doctype html>
     el("translation-wrap").hidden = !item.translation;
     el("translation-label").textContent = item.targetLanguage === "zh-CN" ? "中文辅助译文（仅供理解）" : "English reference translation";
     el("translation").textContent = item.translation || "";
+    el("recommendation").textContent = `本地建议：${item.recommendation.label}。${item.recommendation.reason}`;
     document.querySelectorAll('input[name="decision"]').forEach((input) => { input.checked = input.value === review?.decision; });
     el("previous").disabled = state.index === 0;
     el("next").disabled = state.index === state.cases.length - 1;
@@ -144,6 +163,18 @@ HTML = r'''<!doctype html>
   function move(delta) { state.index = Math.max(0, Math.min(state.cases.length - 1, state.index + delta)); render(); notice(""); }
   el("previous").addEventListener("click", () => move(-1));
   el("next").addEventListener("click", () => move(1));
+  document.addEventListener("keydown", (event) => {
+    if (!event.altKey || event.ctrlKey || event.metaKey) return;
+    const key = event.key.toLowerCase();
+    if (key === "a" || key === "x") {
+      event.preventDefault();
+      const value = key === "a" ? "approve" : "exclude";
+      document.querySelector(`input[name="decision"][value="${value}"]`).checked = true;
+    } else if (event.key === "Enter") {
+      event.preventDefault();
+      el("save").click();
+    }
+  });
   el("save").addEventListener("click", async () => {
     const item = state.cases[state.index];
     const decision = document.querySelector('input[name="decision"]:checked')?.value;
@@ -152,7 +183,7 @@ HTML = r'''<!doctype html>
       const body = await api("/api/review", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify({id: item.id, decision, task: el("task").value})});
       state.reviews[item.id] = body.review;
       render();
-      if (!body.finalized && !body.insufficient && state.index < state.cases.length - 1) move(1);
+      if (!body.finalized && !body.readyToCombine && !body.insufficient && state.index < state.cases.length - 1) move(1);
       notice(
         body.finalized
           ? `审核完成，已生成 ${body.approved} 条正式候选。`
@@ -243,6 +274,29 @@ def _extract_candidate(row: dict[str, Any], source_row: int) -> tuple[str, str] 
 def _is_research_eligible(language: str, task: str) -> bool:
     pattern = _RESEARCH_ELIGIBILITY_PATTERNS.get(language)
     return pattern is not None and pattern.search(task) is not None
+
+
+def _review_recommendation(language: str, task: str) -> dict[str, str]:
+    risks = [label for pattern, label in _PRIVACY_RISK_PATTERNS if pattern.search(task)]
+    if risks:
+        return {
+            "level": "exclude",
+            "label": "优先排除或彻底去敏",
+            "reason": "；".join(risks),
+        }
+    strong_pattern = _STRONG_RESEARCH_PATTERNS.get(language)
+    strong_signals = len(strong_pattern.findall(task)) if strong_pattern is not None else 0
+    if strong_signals >= 2:
+        return {
+            "level": "approve",
+            "label": "优先检查是否可批准",
+            "reason": "研究检索或综合意图较明确，仍需人工确认相关性与去敏状态",
+        }
+    return {
+        "level": "review",
+        "label": "重点检查相关性",
+        "reason": "研究任务信号较弱，不相关时直接排除",
+    }
 
 
 def collect_candidates(
@@ -367,7 +421,11 @@ def _validate_review_value(review: Any, case_ids: set[str]) -> None:
             raise ValueError(f"Approved task failed the sensitive-data scan: {reason}.")
 
 
-def load_completed_review(intake_path: Path, draft_path: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def load_completed_review(
+    intake_path: Path,
+    draft_path: Path,
+    allow_prefix_stop: bool = False,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     for path in (intake_path, draft_path):
         _require_private_path(path)
     cases = load_intake(intake_path)
@@ -391,8 +449,12 @@ def load_completed_review(intake_path: Path, draft_path: Path) -> tuple[list[dic
             raise ValueError("Review draft contains a duplicate review id.")
         reviews[review["id"]] = review
     if set(reviews) != case_ids:
-        raise ValueError("Every intake case must be reviewed before batches are combined.")
-    return cases, [reviews[case["id"]] for case in cases]
+        if not allow_prefix_stop:
+            raise ValueError("Every intake case must be reviewed before batches are combined.")
+        prefix_ids = {case["id"] for case in cases[: len(reviews)]}
+        if set(reviews) != prefix_ids:
+            raise ValueError("A partial review must cover a continuous prefix of the intake.")
+    return cases, [reviews[case["id"]] for case in cases if case["id"] in reviews]
 
 
 def combine_completed_reviews(
@@ -400,6 +462,7 @@ def combine_completed_reviews(
     output_path: Path,
     provenance_path: Path,
     minimum_approved: int = 20,
+    allow_prefix_stop: bool = False,
 ) -> dict[str, Any]:
     if not reviewed_batches:
         raise ValueError("At least one reviewed batch is required.")
@@ -418,7 +481,11 @@ def combine_completed_reviews(
     seen_ids: set[str] = set()
     seen_source_rows: set[int] = set()
     for intake_path, draft_path in reviewed_batches:
-        cases, reviews = load_completed_review(intake_path, draft_path)
+        cases, reviews = load_completed_review(
+            intake_path,
+            draft_path,
+            allow_prefix_stop=allow_prefix_stop,
+        )
         for case in cases:
             if case["id"] in seen_ids or case["sourceRow"] in seen_source_rows:
                 raise ValueError("Reviewed batches contain a duplicate id or source row.")
@@ -430,8 +497,10 @@ def combine_completed_reviews(
                 "intakeSha256": _sha256(intake_path),
                 "reviewDraftSha256": _sha256(draft_path),
                 "intakeCases": len(cases),
+                "reviewedCases": len(reviews),
+                "unreviewedCases": len(cases) - len(reviews),
                 "approvedCases": approved_count,
-                "excludedCases": len(cases) - approved_count,
+                "excludedCases": len(reviews) - approved_count,
             }
         )
         all_cases.extend(cases)
@@ -439,6 +508,8 @@ def combine_completed_reviews(
 
     by_id = {case["id"]: case for case in all_cases}
     approved = [review for review in all_reviews if review["decision"] == "approve"]
+    excluded_count = sum(review["decision"] == "exclude" for review in all_reviews)
+    unreviewed_count = len(all_cases) - len(all_reviews)
     if len(approved) < minimum_approved:
         raise ValueError(
             f"At least {minimum_approved} approved cases are required; current reviewed batches contain {len(approved)}."
@@ -474,10 +545,13 @@ def combine_completed_reviews(
         },
         "selection": {
             "intakeCases": len(all_cases),
+            "reviewedCases": len(all_reviews),
+            "unreviewedCases": unreviewed_count,
             "approvedCases": len(approved),
-            "excludedCases": len(all_cases) - len(approved),
+            "excludedCases": excluded_count,
             "humanReviewRequired": True,
-            "humanReviewCompleted": True,
+            "humanReviewCompleted": unreviewed_count == 0,
+            "sequentialPrefixStop": unreviewed_count > 0,
         },
         "reviewedBatches": batch_metadata,
         "cases": [
@@ -499,8 +573,10 @@ def combine_completed_reviews(
         "status": "combined",
         "batches": len(reviewed_batches),
         "intakeCases": len(all_cases),
+        "reviewedCases": len(all_reviews),
+        "unreviewedCases": unreviewed_count,
         "approvedCases": len(approved),
-        "excludedCases": len(all_cases) - len(approved),
+        "excludedCases": excluded_count,
         "output": str(output_path),
         "provenance": str(provenance_path),
         "taskTextPrinted": False,
@@ -699,6 +775,7 @@ class IntakeState:
                     "id": case["id"],
                     "language": case["language"],
                     "task": case["task"],
+                    "recommendation": _review_recommendation(case["language"], case["task"]),
                     **(
                         {
                             "translation": self.translations[case["id"]]["text"],
@@ -727,7 +804,9 @@ class IntakeState:
             complete = set(updated) == self.case_ids
             self.reviews = updated
             insufficient = complete and len(approved) < self.minimum_approved
-            ready_to_combine = complete and self.defer_finalization and not insufficient
+            ready_to_combine = (
+                self.defer_finalization and len(approved) >= self.minimum_approved
+            )
             if complete and not insufficient and not self.defer_finalization:
                 by_id = {case["id"]: case for case in self.cases}
                 candidates = [
@@ -877,6 +956,7 @@ def main() -> int:
     combine.add_argument("--output", type=Path, required=True)
     combine.add_argument("--provenance", type=Path, required=True)
     combine.add_argument("--minimum-approved", type=int, default=20)
+    combine.add_argument("--allow-prefix-stop", action="store_true")
     args = parser.parse_args()
     if args.command == "collect":
         if args.start_offset < 0 or args.english < 1 or args.chinese < 1:
@@ -922,6 +1002,7 @@ def main() -> int:
                     args.output,
                     args.provenance,
                     args.minimum_approved,
+                    args.allow_prefix_stop,
                 ),
                 ensure_ascii=False,
                 indent=2,

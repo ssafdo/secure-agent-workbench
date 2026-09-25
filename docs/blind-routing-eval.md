@@ -51,7 +51,7 @@ python scripts/blind_routing_intake.py review `
   --minimum-approved 16 --defer-finalization
 ```
 
-`--defer-finalization` 让完整审核继续保留为不可变、哈希绑定的待合并草稿。达到跨批次最低数量后再合并；命令会重新验证每批哈希、审核完整性、敏感模式、ID、源行和批准正文是否重复，并且仍不打印正文：
+`--defer-finalization` 让审核结果保留为不可变、哈希绑定的待合并草稿。补充批次按原顺序审核，累计批准 16 条后即可停止，不必处理余下候选；不得跳过中间任务再选择后面的任务。页面中的本地建议只根据宽泛研究意图和隐私风险模式提示优先级，不会自动选择，也不能代替人工确认。达到跨批次最低数量后再合并；`--allow-prefix-stop` 会验证部分审核严格覆盖 intake 的连续前缀，命令还会重新验证每批哈希、敏感模式、ID、源行和批准正文是否重复，并且仍不打印正文：
 
 ```powershell
 python scripts/blind_routing_intake.py combine `
@@ -59,7 +59,7 @@ python scripts/blind_routing_intake.py combine `
   --reviewed-batch benchmarks/private/batch-2-supplement-1-intake.jsonl benchmarks/private/batch-2-supplement-1-candidates.jsonl.intake-draft `
   --output benchmarks/private/batch-2-candidates.jsonl `
   --provenance artifacts/private/batch-2-provenance.json `
-  --minimum-approved 20
+  --minimum-approved 20 --allow-prefix-stop
 ```
 
 数据负责人先创建 `benchmarks/private/natural-routing-candidates.jsonl`。每行必须符合 `benchmarks/blind_routing_candidates.schema.json`，此时不得包含 `category`、`expectedSpecialist` 或 `errorCost`：

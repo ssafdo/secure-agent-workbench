@@ -233,17 +233,22 @@ class BlindRoutingIntakeTests(unittest.TestCase):
                 minimum_approved=1,
                 defer_finalization=True,
             )
-            for state in (first, second):
-                for index, case in enumerate(state.cases):
-                    result = state.save(
-                        {
-                            "id": case["id"],
-                            "decision": "approve" if index < 10 else "exclude",
-                            "task": case["task"],
-                        }
-                    )
-                self.assertTrue(result["readyToCombine"])
-                self.assertTrue(state.draft_path.exists())
+            for index, case in enumerate(first.cases):
+                result = first.save(
+                    {
+                        "id": case["id"],
+                        "decision": "approve" if index < 10 else "exclude",
+                        "task": case["task"],
+                    }
+                )
+            self.assertTrue(result["readyToCombine"])
+            for case in second.cases[:10]:
+                result = second.save(
+                    {"id": case["id"], "decision": "approve", "task": case["task"]}
+                )
+            self.assertTrue(result["readyToCombine"])
+            self.assertTrue(first.draft_path.exists())
+            self.assertTrue(second.draft_path.exists())
 
             insufficient_output = root / "insufficient-candidates.jsonl"
             insufficient_provenance = root / "insufficient-provenance.json"
@@ -258,6 +263,15 @@ class BlindRoutingIntakeTests(unittest.TestCase):
 
             output = root / "combined-candidates.jsonl"
             provenance = root / "combined-provenance.json"
+            with self.assertRaisesRegex(ValueError, "Every intake case"):
+                combine_completed_reviews(
+                    [
+                        (first.intake_path, first.draft_path),
+                        (second.intake_path, second.draft_path),
+                    ],
+                    output,
+                    provenance,
+                )
             summary = combine_completed_reviews(
                 [
                     (first.intake_path, first.draft_path),
@@ -265,13 +279,51 @@ class BlindRoutingIntakeTests(unittest.TestCase):
                 ],
                 output,
                 provenance,
+                allow_prefix_stop=True,
             )
             self.assertEqual(summary["approvedCases"], 20)
+            self.assertEqual(summary["unreviewedCases"], 2)
             self.assertEqual(len(load_candidates(output)), 20)
             self.assertTrue(first.draft_path.exists())
             self.assertTrue(second.draft_path.exists())
             metadata = json.loads(provenance.read_text(encoding="utf-8"))
             self.assertEqual(len(metadata["reviewedBatches"]), 2)
+            self.assertTrue(metadata["selection"]["sequentialPrefixStop"])
+
+    def test_deferred_review_can_stop_at_threshold_but_not_with_gaps(self) -> None:
+        with self._temporary_directory() as directory:
+            root = Path(directory)
+            state = IntakeState(
+                self._write_intake(directory, 5),
+                root / "candidates.jsonl",
+                root / "provenance.json",
+                minimum_approved=2,
+                defer_finalization=True,
+            )
+            first = state.cases[0]
+            third = state.cases[2]
+            state.save({"id": first["id"], "decision": "approve", "task": first["task"]})
+            result = state.save({"id": third["id"], "decision": "approve", "task": third["task"]})
+            self.assertTrue(result["readyToCombine"])
+            with self.assertRaisesRegex(ValueError, "continuous prefix"):
+                combine_completed_reviews(
+                    [(state.intake_path, state.draft_path)],
+                    root / "combined.jsonl",
+                    root / "combined-provenance.json",
+                    minimum_approved=2,
+                    allow_prefix_stop=True,
+                )
+
+    def test_session_includes_advisory_without_changing_review_decisions(self) -> None:
+        with self._temporary_directory() as directory:
+            state = IntakeState(
+                self._write_intake(directory),
+                Path(directory) / "candidates.jsonl",
+                Path(directory) / "provenance.json",
+            )
+            recommendation = state.session()["cases"][0]["recommendation"]
+            self.assertEqual(set(recommendation), {"level", "label", "reason"})
+            self.assertEqual(state.reviews, {})
 
     def test_paths_outside_repository_private_roots_are_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
