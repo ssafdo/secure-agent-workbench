@@ -157,6 +157,8 @@ python scripts/blind_routing_eval.py evaluate `
 
 当前 `batch-2-pilot` 按数据负责人决定停止扩充，共保留 18 条获批候选。它可以验证独立标注、仲裁、封存和评估流程，但低于此前预注册的 20 条正式门槛，因此结果只能标记为 pilot/探索性结果，不能用于声称自然任务门禁已经恢复。不得通过把最低数量改成 18 来改写原门槛的含义。
 
+随后又对 10 条全新补充候选完成了人工审核，其中 2 条获批。三轮 intake 共审核 80 条，最终形成 20 条正式 `batch-2-candidates.jsonl`（英文、中文各 10 条）及三批哈希绑定的 `batch-2-provenance.json`。后续正式标注应使用这两个 `batch-2` 文件；18 条 pilot 文件仅保留为中间历史产物，不再作为正式输入。
+
 pilot 流程的所有命令都必须显式传入 `--minimum-cases 18`，并使用带 `pilot` 的独立文件名：
 
 ```powershell
