@@ -357,9 +357,9 @@ class BlindRoutingIntakeTests(unittest.TestCase):
             "en", "Review the report from Dr. Example and summarize it."
         )
 
-        self.assertEqual((approve["level"], approve["label"]), ("approve", "建议批准"))
-        self.assertEqual((exclude["level"], exclude["label"]), ("exclude", "建议排除"))
-        self.assertEqual((risky["level"], risky["label"]), ("exclude", "建议排除"))
+        self.assertEqual((approve["level"], approve["label"]), ("approve", "批准"))
+        self.assertEqual((exclude["level"], exclude["label"]), ("exclude", "排除"))
+        self.assertEqual((risky["level"], risky["label"]), ("exclude", "排除"))
 
     def test_paths_outside_repository_private_roots_are_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

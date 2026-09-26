@@ -297,7 +297,7 @@ def _review_recommendation(language: str, task: str) -> dict[str, str]:
     if risks:
         return {
             "level": "exclude",
-            "label": "建议排除",
+            "label": "排除",
             "reason": f"检测到隐私风险：{'；'.join(risks)}",
         }
     strong_pattern = _STRONG_RESEARCH_PATTERNS.get(language)
@@ -305,12 +305,12 @@ def _review_recommendation(language: str, task: str) -> dict[str, str]:
     if strong_signals >= 2:
         return {
             "level": "approve",
-            "label": "建议批准",
+            "label": "批准",
             "reason": "研究检索或综合意图较明确，仍需人工确认相关性与去敏状态",
         }
     return {
         "level": "exclude",
-        "label": "建议排除",
+        "label": "排除",
         "reason": "研究任务信号不足或与 Agent 评估范围无关",
     }
 
