@@ -60,6 +60,16 @@
     {"id":"dev-zh-r14","language":"zh","category":"evidence","task":"审阅该配置是否允许匿名访问。","expectedSpecialist":"retrieval","errorCost":2},
     {"id":"dev-zh-r15","language":"zh","category":"question","task":"解释一下熔断器在这个设计中的作用。","expectedSpecialist":"retrieval","errorCost":1},
     {"id":"dev-zh-s14","language":"zh","category":"comparison","task":"把两个团队的报告进行比较并形成一份综合建议。","expectedSpecialist":"synthesis","errorCost":3},
-    {"id":"dev-zh-s15","language":"zh","category":"synthesis","task":"制定一份完整的迁移计划，覆盖依赖、风险、上线和回滚。","expectedSpecialist":"synthesis","errorCost":3}
+    {"id":"dev-zh-s15","language":"zh","category":"synthesis","task":"制定一份完整的迁移计划，覆盖依赖、风险、上线和回滚。","expectedSpecialist":"synthesis","errorCost":3},
+    {"id":"dev-en-s15","language":"en","category":"synthesis","task":"Define the expected project outcomes, separating five interim deliverables from three final deliverables.","expectedSpecialist":"synthesis","errorCost":3},
+    {"id":"dev-en-s16","language":"en","category":"synthesis","task":"Set up a microgrid simulation, observe voltage and power, then analyze how control parameters affect load sharing.","expectedSpecialist":"synthesis","errorCost":3},
+    {"id":"dev-en-r17","language":"en","category":"question","task":"What role does the feature extraction layer play in this image model?","expectedSpecialist":"retrieval","errorCost":1},
+    {"id":"dev-en-r18","language":"en","category":"question","task":"Analyze why this single test report shows an abnormal value.","expectedSpecialist":"retrieval","errorCost":2},
+    {"id":"dev-en-s17","language":"en","category":"synthesis","task":"Design a research proposal with objectives, methods, evaluation criteria, expected results, and limitations.","expectedSpecialist":"synthesis","errorCost":3},
+    {"id":"dev-zh-s16","language":"zh","category":"synthesis","task":"请为研究项目设计预期成果，分别列出五项阶段性成果和三项最终成果。","expectedSpecialist":"synthesis","errorCost":3},
+    {"id":"dev-zh-s17","language":"zh","category":"synthesis","task":"搭建微网仿真系统，观察电压和功率，并分析控制参数对功率分配的影响。","expectedSpecialist":"synthesis","errorCost":3},
+    {"id":"dev-zh-r16","language":"zh","category":"question","task":"图像模型中的特征提取层有什么作用？","expectedSpecialist":"retrieval","errorCost":1},
+    {"id":"dev-zh-r17","language":"zh","category":"question","task":"分析这份检测报告结果异常的原因是什么？","expectedSpecialist":"retrieval","errorCost":2},
+    {"id":"dev-zh-s18","language":"zh","category":"synthesis","task":"围绕研究目标和研究内容，设计技术路线、评价方法、实施步骤和风险措施，形成完整方案。","expectedSpecialist":"synthesis","errorCost":3}
   ]
 }

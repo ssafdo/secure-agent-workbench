@@ -126,6 +126,55 @@ class SupervisorRoutingTests(unittest.TestCase):
         self.assertEqual(decision.specialist, ResearchSpecialist.SYNTHESIS)
         self.assertEqual(decision.reason, "cross-source-synthesis")
 
+    def test_expected_outcomes_are_a_structured_synthesis_deliverable(self) -> None:
+        decision = ResearchSupervisor.route(
+            "请为研究项目设计预期成果，分别列出五项阶段性成果和三项最终成果。"
+        )
+        self.assertEqual(decision.specialist, ResearchSpecialist.SYNTHESIS)
+        self.assertEqual(decision.reason, "structured-synthesis")
+
+    def test_multistep_engineering_analysis_routes_to_synthesis(self) -> None:
+        decision = ResearchSupervisor.route(
+            "搭建微网仿真系统，观察电压和功率，并分析控制参数对功率分配的影响。"
+        )
+        self.assertEqual(decision.specialist, ResearchSpecialist.SYNTHESIS)
+        self.assertEqual(decision.reason, "structured-synthesis")
+
+    def test_multisection_research_scope_routes_to_synthesis(self) -> None:
+        decision = ResearchSupervisor.route(
+            "围绕研究目标和研究内容，设计技术路线、评价方法、实施步骤和风险措施，形成完整方案。"
+        )
+        self.assertEqual(decision.specialist, ResearchSpecialist.SYNTHESIS)
+        self.assertIn(
+            decision.reason, {"cross-source-synthesis", "structured-synthesis"}
+        )
+
+    def test_feature_extraction_question_is_not_evidence_retrieval(self) -> None:
+        decision = ResearchSupervisor.route("图像模型中的特征提取层有什么作用？")
+        self.assertEqual(decision.specialist, ResearchSpecialist.RETRIEVAL)
+        self.assertEqual(decision.reason, "direct-question")
+
+    def test_single_report_result_analysis_is_not_cross_source_synthesis(self) -> None:
+        decision = ResearchSupervisor.route("分析这份检测报告结果异常的原因是什么？")
+        self.assertEqual(decision.specialist, ResearchSpecialist.RETRIEVAL)
+        self.assertEqual(decision.reason, "direct-question")
+
+    def test_long_structured_scope_without_report_noun_routes_to_synthesis(self) -> None:
+        task = (
+            "我们正在梳理一套跨部门业务系统，请先分析现有业务内容和使用现状，"
+            "识别关键目标、约束与风险，再设计数据治理方法、实施步骤和评价指标。"
+            "需要同时考虑权限边界、历史数据迁移、异常处理、人员培训、运行维护、"
+            "阶段验收和后续优化，并比较不同实施顺序可能造成的影响。"
+            "请把这些内容组织成连贯的结构，说明每个阶段的输入、动作和预期结果，"
+            "最后形成可供项目成员讨论的总结。为保证方案可执行，还要描述依赖条件、"
+            "资源安排、质量检查、失败恢复和持续评价方法。"
+        )
+        decision = ResearchSupervisor.route(task)
+        self.assertEqual(decision.specialist, ResearchSpecialist.SYNTHESIS)
+        self.assertIn(
+            decision.reason, {"cross-source-synthesis", "structured-synthesis"}
+        )
+
     def test_retrieval_specialist_uses_shared_runtime_and_redacted_route_trace(self) -> None:
         private_task = "Which source says the API key must stay private-value-123?"
         source = self.context.root / "inputs" / "security.md"

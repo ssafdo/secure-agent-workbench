@@ -145,7 +145,7 @@ function runNaturalisticDevelopmentBenchmark(
 
 export const supervisorBenchmark = defineAdapter({
   name: "secure-agent-workbench-supervisor-benchmark",
-  behaviorRevision: "phase-22-supervisor-routing-v4",
+  behaviorRevision: "phase-24-supervisor-routing-v5",
   create(context) {
     return {
       runBenchmark: () => runBenchmark(context.signal),

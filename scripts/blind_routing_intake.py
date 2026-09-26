@@ -232,7 +232,7 @@ def _atomic_jsonl(path: Path, values: list[dict[str, Any]]) -> None:
 
 
 def _fetch_json(url: str) -> Any:
-    request = Request(url, headers={"User-Agent": "secure-agent-workbench/0.22.0"})
+    request = Request(url, headers={"User-Agent": "secure-agent-workbench/0.23.0"})
     last_error: Exception | None = None
     for attempt in range(3):
         try:

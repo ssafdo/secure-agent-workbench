@@ -131,6 +131,8 @@ wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/nicee
 
 Phase 22 Supervisor 结果：Experiment `supervisor`，Run `09f435ff-8908-4a93-bece-b02db265336d`，`3 passed / 0 failed / 0 errored`。端到端消融 Attempt `@15HXF9K292AC2`、原 50 条策划路由集 Attempt `@1K8APKYD3D99C`、扩展后的 60 条自然措辞开发集 Attempt `@18Y2HEFM0QJ9Y` 均通过。三项均为确定性评估；token 与模型费用不可用且没有记录值。自然措辞结果属于公开开发回归证据，不是新的盲测质量声明。固定查询为 `queries/supervisor-run.json`：
 
+Phase 24 Supervisor v3 结果：Experiment `supervisor`，Run `acc4b834-3b1e-42ac-9900-46354423b6cc`，`3 passed / 0 failed / 0 errored`。端到端消融 Attempt `@17GQBPCD2X4VY`、70 条中英自然措辞开发集 Attempt `@1W761NPDMPQ3H`、50 条策划路由集 Attempt `@1KBQNXA6KKB9V` 均通过。固定查询已更新到该 Run；这组确定性结果属于公开开发回归证据，不是新的私有盲测质量声明。
+
 ```powershell
 wsl -d NiceEval-Ubuntu -- bash -lc "cd /mnt/e/agent/secure_agent_workbench/niceeval && pnpm --silent exec niceeval query run --request queries/supervisor-run.json"
 ```
