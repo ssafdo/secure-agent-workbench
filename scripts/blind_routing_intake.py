@@ -297,21 +297,21 @@ def _review_recommendation(language: str, task: str) -> dict[str, str]:
     if risks:
         return {
             "level": "exclude",
-            "label": "优先排除或彻底去敏",
-            "reason": "；".join(risks),
+            "label": "建议排除",
+            "reason": f"检测到隐私风险：{'；'.join(risks)}",
         }
     strong_pattern = _STRONG_RESEARCH_PATTERNS.get(language)
     strong_signals = len(strong_pattern.findall(task)) if strong_pattern is not None else 0
     if strong_signals >= 2:
         return {
             "level": "approve",
-            "label": "优先检查是否可批准",
+            "label": "建议批准",
             "reason": "研究检索或综合意图较明确，仍需人工确认相关性与去敏状态",
         }
     return {
-        "level": "review",
-        "label": "重点检查相关性",
-        "reason": "研究任务信号较弱，不相关时直接排除",
+        "level": "exclude",
+        "label": "建议排除",
+        "reason": "研究任务信号不足或与 Agent 评估范围无关",
     }
 
 

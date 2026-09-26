@@ -12,6 +12,7 @@ from scripts.blind_routing_adjudicate import load_candidates
 from scripts.blind_routing_intake import (
     IntakeState,
     _fetch_json,
+    _review_recommendation,
     collect_candidates,
     combine_completed_reviews,
     create_server,
@@ -344,6 +345,21 @@ class BlindRoutingIntakeTests(unittest.TestCase):
             recommendation = state.session()["cases"][0]["recommendation"]
             self.assertEqual(set(recommendation), {"level", "label", "reason"})
             self.assertEqual(state.reviews, {})
+
+    def test_review_recommendation_is_a_direct_binary_suggestion(self) -> None:
+        approve = _review_recommendation(
+            "zh", "请比较两份研究报告，分析结论并总结主要差异。"
+        )
+        exclude = _review_recommendation(
+            "en", "Is this travel passage natural and error-free?"
+        )
+        risky = _review_recommendation(
+            "en", "Review the report from Dr. Example and summarize it."
+        )
+
+        self.assertEqual((approve["level"], approve["label"]), ("approve", "建议批准"))
+        self.assertEqual((exclude["level"], exclude["label"]), ("exclude", "建议排除"))
+        self.assertEqual((risky["level"], risky["label"]), ("exclude", "建议排除"))
 
     def test_paths_outside_repository_private_roots_are_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
