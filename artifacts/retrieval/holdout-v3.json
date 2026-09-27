@@ -1,0 +1,4203 @@
+{
+  "schemaVersion": 1,
+  "dataset": {
+    "path": "benchmarks/retrieval_holdout_v3.json",
+    "sha256": "bb1b1a3eddd1a0eb7916e0837bffe01bfbd34e0cede318591933bc11de2afda4"
+  },
+  "lexical": {
+    "mode": "lexical",
+    "cases": 40,
+    "supportedCases": 30,
+    "recallAt1": 0.4,
+    "recallAt3": 0.444444,
+    "top1HitRate": 0.433333,
+    "top1HitRate95CI": {
+      "low": 0.273775,
+      "high": 0.608027
+    },
+    "allRelevantInTop3Rate": 0.433333,
+    "allRelevantInTop3Rate95CI": {
+      "low": 0.273775,
+      "high": 0.608027
+    },
+    "mrr": 0.45,
+    "citationCorrectness": 1.0,
+    "unsupportedAccuracy": 0.5,
+    "passed": 18,
+    "passRate": 0.45,
+    "passRate95CI": {
+      "low": 0.307053,
+      "high": 0.601709
+    },
+    "languageSlices": {
+      "en": {
+        "cases": 20,
+        "passed": 13,
+        "passRate": 0.65,
+        "passRate95CI": {
+          "low": 0.432854,
+          "high": 0.818808
+        }
+      },
+      "zh": {
+        "cases": 20,
+        "passed": 5,
+        "passRate": 0.25,
+        "passRate95CI": {
+          "low": 0.111862,
+          "high": 0.468701
+        }
+      }
+    },
+    "categorySlices": {
+      "cross-language": {
+        "cases": 12,
+        "passed": 0,
+        "passRate": 0.0,
+        "passRate95CI": {
+          "low": 0.0,
+          "high": 0.242494
+        }
+      },
+      "hard-negative": {
+        "cases": 8,
+        "passed": 8,
+        "passRate": 1.0,
+        "passRate95CI": {
+          "low": 0.675592,
+          "high": 1.0
+        }
+      },
+      "multi-evidence": {
+        "cases": 6,
+        "passed": 2,
+        "passRate": 0.333333,
+        "passRate95CI": {
+          "low": 0.096771,
+          "high": 0.700007
+        }
+      },
+      "paraphrase": {
+        "cases": 4,
+        "passed": 3,
+        "passRate": 0.75,
+        "passRate95CI": {
+          "low": 0.300642,
+          "high": 0.954413
+        }
+      },
+      "unsupported": {
+        "cases": 10,
+        "passed": 5,
+        "passRate": 0.5,
+        "passRate95CI": {
+          "low": 0.236593,
+          "high": 0.763407
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "test-001",
+        "mode": "lexical",
+        "paths": [
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md",
+          "inputs/tree-service.md",
+          "inputs/public-records.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 3.474927,
+        "topSemanticScore": null,
+        "scoreMargin": 0.043166,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-002",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-004",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-006",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-008",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-010",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-012",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-014",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-016",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-018",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-020",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-022",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-024",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-026",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-028",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-029",
+        "mode": "lexical",
+        "paths": [
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md",
+          "inputs/noise-report.md",
+          "inputs/food-vendor.md",
+          "inputs/water-leak.md"
+        ],
+        "chunkPaths": [
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md",
+          "inputs/noise-report.md",
+          "inputs/food-vendor.md",
+          "inputs/water-leak.md"
+        ],
+        "firstRelevantRank": 2,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 3.474927,
+        "topSemanticScore": null,
+        "scoreMargin": 0.310556,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-030",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-031",
+        "mode": "lexical",
+        "paths": [
+          "inputs/transit-pass.md",
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/transit-pass.md",
+          "inputs/transit-pass.md",
+          "inputs/accessible-transit.md",
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 14.985413,
+        "topSemanticScore": null,
+        "scoreMargin": 0.579623,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-033",
+        "mode": "lexical",
+        "paths": [
+          "inputs/street-closure.md",
+          "inputs/public-records.md",
+          "inputs/water-billing.md",
+          "inputs/recycling.md",
+          "inputs/snow-emergency.md"
+        ],
+        "chunkPaths": [
+          "inputs/street-closure.md",
+          "inputs/public-records.md",
+          "inputs/water-billing.md",
+          "inputs/recycling.md",
+          "inputs/snow-emergency.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 7.919583,
+        "topSemanticScore": null,
+        "scoreMargin": 0.71006,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-035",
+        "mode": "lexical",
+        "paths": [
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-billing.md",
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 7.242505,
+        "topSemanticScore": null,
+        "scoreMargin": 0.451359,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-037",
+        "mode": "lexical",
+        "paths": [
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md"
+        ],
+        "chunkPaths": [
+          "inputs/noise-report.md",
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 4.138876,
+        "topSemanticScore": null,
+        "scoreMargin": 0.037549,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-039",
+        "mode": "lexical",
+        "paths": [
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md",
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md",
+          "inputs/tree-service.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 7.448461,
+        "topSemanticScore": null,
+        "scoreMargin": 0.190639,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      }
+    ],
+    "caseResults": [
+      {
+        "id": "test-001",
+        "mode": "lexical",
+        "paths": [
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md",
+          "inputs/tree-service.md",
+          "inputs/public-records.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 3.474927,
+        "topSemanticScore": null,
+        "scoreMargin": 0.043166,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-002",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-003",
+        "mode": "lexical",
+        "paths": [
+          "inputs/accessible-transit.md",
+          "inputs/public-records.md",
+          "inputs/snow-emergency.md",
+          "inputs/water-leak.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-transit.md",
+          "inputs/accessible-transit.md",
+          "inputs/public-records.md",
+          "inputs/snow-emergency.md",
+          "inputs/water-leak.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 10.504271,
+        "topSemanticScore": null,
+        "scoreMargin": 0.621722,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-004",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-005",
+        "mode": "lexical",
+        "paths": [
+          "inputs/parking-permit.md",
+          "inputs/snow-emergency.md",
+          "inputs/emergency-shelter.md",
+          "inputs/food-vendor.md"
+        ],
+        "chunkPaths": [
+          "inputs/parking-permit.md",
+          "inputs/parking-permit.md",
+          "inputs/snow-emergency.md",
+          "inputs/emergency-shelter.md",
+          "inputs/food-vendor.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 10.785744,
+        "topSemanticScore": null,
+        "scoreMargin": 0.277095,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-006",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-007",
+        "mode": "lexical",
+        "paths": [
+          "inputs/street-closure.md",
+          "inputs/water-billing.md",
+          "inputs/recycling.md",
+          "inputs/snow-emergency.md",
+          "inputs/building-inspection.md"
+        ],
+        "chunkPaths": [
+          "inputs/street-closure.md",
+          "inputs/water-billing.md",
+          "inputs/recycling.md",
+          "inputs/snow-emergency.md",
+          "inputs/building-inspection.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 8.069583,
+        "topSemanticScore": null,
+        "scoreMargin": 0.857695,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-008",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-009",
+        "mode": "lexical",
+        "paths": [
+          "inputs/recycling.md",
+          "inputs/bulky-waste.md",
+          "inputs/parking-permit.md",
+          "inputs/transit-pass.md",
+          "inputs/water-billing.md"
+        ],
+        "chunkPaths": [
+          "inputs/recycling.md",
+          "inputs/bulky-waste.md",
+          "inputs/parking-permit.md",
+          "inputs/transit-pass.md",
+          "inputs/water-billing.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 9.379715,
+        "topSemanticScore": null,
+        "scoreMargin": 0.865747,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-010",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-011",
+        "mode": "lexical",
+        "paths": [
+          "inputs/bulky-waste.md",
+          "inputs/pet-license.md",
+          "inputs/recycling.md"
+        ],
+        "chunkPaths": [
+          "inputs/bulky-waste.md",
+          "inputs/bulky-waste.md",
+          "inputs/pet-license.md",
+          "inputs/recycling.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 7.647067,
+        "topSemanticScore": null,
+        "scoreMargin": 0.42519,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-012",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-013",
+        "mode": "lexical",
+        "paths": [
+          "inputs/water-leak.md",
+          "inputs/street-closure.md",
+          "inputs/water-billing.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-leak.md",
+          "inputs/water-leak.md",
+          "inputs/street-closure.md",
+          "inputs/water-billing.md",
+          "inputs/water-billing.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 7.947067,
+        "topSemanticScore": null,
+        "scoreMargin": 0.205777,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-014",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-015",
+        "mode": "lexical",
+        "paths": [
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/snow-emergency.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-billing.md",
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/water-leak.md",
+          "inputs/snow-emergency.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 7.242505,
+        "topSemanticScore": null,
+        "scoreMargin": 0.451359,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-016",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-017",
+        "mode": "lexical",
+        "paths": [
+          "inputs/tree-service.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md",
+          "inputs/food-vendor.md"
+        ],
+        "chunkPaths": [
+          "inputs/tree-service.md",
+          "inputs/tree-service.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md",
+          "inputs/food-vendor.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 9.51759,
+        "topSemanticScore": null,
+        "scoreMargin": 0.582506,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-018",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-019",
+        "mode": "lexical",
+        "paths": [
+          "inputs/noise-report.md",
+          "inputs/snow-emergency.md",
+          "inputs/food-vendor.md",
+          "inputs/bulky-waste.md"
+        ],
+        "chunkPaths": [
+          "inputs/noise-report.md",
+          "inputs/noise-report.md",
+          "inputs/snow-emergency.md",
+          "inputs/food-vendor.md",
+          "inputs/bulky-waste.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 4.138876,
+        "topSemanticScore": null,
+        "scoreMargin": 0.037549,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-020",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-021",
+        "mode": "lexical",
+        "paths": [
+          "inputs/pet-license.md",
+          "inputs/tree-service.md",
+          "inputs/building-inspection.md",
+          "inputs/water-leak.md"
+        ],
+        "chunkPaths": [
+          "inputs/pet-license.md",
+          "inputs/tree-service.md",
+          "inputs/building-inspection.md",
+          "inputs/water-leak.md",
+          "inputs/pet-license.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 8.819328,
+        "topSemanticScore": null,
+        "scoreMargin": 0.541367,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-022",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-023",
+        "mode": "lexical",
+        "paths": [
+          "inputs/food-vendor.md",
+          "inputs/recycling.md",
+          "inputs/building-inspection.md",
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/food-vendor.md",
+          "inputs/food-vendor.md",
+          "inputs/recycling.md",
+          "inputs/building-inspection.md",
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 4.820071,
+        "topSemanticScore": null,
+        "scoreMargin": 0.279071,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-024",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-025",
+        "mode": "lexical",
+        "paths": [
+          "inputs/street-closure.md",
+          "inputs/building-inspection.md",
+          "inputs/accessible-transit.md",
+          "inputs/water-billing.md"
+        ],
+        "chunkPaths": [
+          "inputs/street-closure.md",
+          "inputs/building-inspection.md",
+          "inputs/building-inspection.md",
+          "inputs/accessible-transit.md",
+          "inputs/water-billing.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 8.819328,
+        "topSemanticScore": null,
+        "scoreMargin": 0.233294,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-026",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-027",
+        "mode": "lexical",
+        "paths": [
+          "inputs/water-leak.md",
+          "inputs/water-billing.md",
+          "inputs/building-inspection.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-leak.md",
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/water-billing.md",
+          "inputs/building-inspection.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 11.770601,
+        "topSemanticScore": null,
+        "scoreMargin": 0.337581,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-028",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-029",
+        "mode": "lexical",
+        "paths": [
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md",
+          "inputs/noise-report.md",
+          "inputs/food-vendor.md",
+          "inputs/water-leak.md"
+        ],
+        "chunkPaths": [
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md",
+          "inputs/noise-report.md",
+          "inputs/food-vendor.md",
+          "inputs/water-leak.md"
+        ],
+        "firstRelevantRank": 2,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 3.474927,
+        "topSemanticScore": null,
+        "scoreMargin": 0.310556,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-030",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-031",
+        "mode": "lexical",
+        "paths": [
+          "inputs/transit-pass.md",
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/transit-pass.md",
+          "inputs/transit-pass.md",
+          "inputs/accessible-transit.md",
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 14.985413,
+        "topSemanticScore": null,
+        "scoreMargin": 0.579623,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-032",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-033",
+        "mode": "lexical",
+        "paths": [
+          "inputs/street-closure.md",
+          "inputs/public-records.md",
+          "inputs/water-billing.md",
+          "inputs/recycling.md",
+          "inputs/snow-emergency.md"
+        ],
+        "chunkPaths": [
+          "inputs/street-closure.md",
+          "inputs/public-records.md",
+          "inputs/water-billing.md",
+          "inputs/recycling.md",
+          "inputs/snow-emergency.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 7.919583,
+        "topSemanticScore": null,
+        "scoreMargin": 0.71006,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-034",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-035",
+        "mode": "lexical",
+        "paths": [
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-billing.md",
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 7.242505,
+        "topSemanticScore": null,
+        "scoreMargin": 0.451359,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-036",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-037",
+        "mode": "lexical",
+        "paths": [
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md"
+        ],
+        "chunkPaths": [
+          "inputs/noise-report.md",
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 4.138876,
+        "topSemanticScore": null,
+        "scoreMargin": 0.037549,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-038",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-039",
+        "mode": "lexical",
+        "paths": [
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md",
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md",
+          "inputs/tree-service.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 7.448461,
+        "topSemanticScore": null,
+        "scoreMargin": 0.190639,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-040",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      }
+    ]
+  },
+  "model": {
+    "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+    "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+    "license": "MIT",
+    "fileSha256": {
+      "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+      "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+      "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+    }
+  },
+  "hybrid": {
+    "mode": "hybrid",
+    "cases": 40,
+    "supportedCases": 30,
+    "recallAt1": 0.633333,
+    "recallAt3": 0.711111,
+    "top1HitRate": 0.7,
+    "top1HitRate95CI": {
+      "low": 0.521242,
+      "high": 0.833353
+    },
+    "allRelevantInTop3Rate": 0.666667,
+    "allRelevantInTop3Rate95CI": {
+      "low": 0.487801,
+      "high": 0.807695
+    },
+    "mrr": 0.736111,
+    "citationCorrectness": 1.0,
+    "unsupportedAccuracy": 0.2,
+    "passed": 22,
+    "passRate": 0.55,
+    "passRate95CI": {
+      "low": 0.398291,
+      "high": 0.692947
+    },
+    "languageSlices": {
+      "en": {
+        "cases": 20,
+        "passed": 13,
+        "passRate": 0.65,
+        "passRate95CI": {
+          "low": 0.432854,
+          "high": 0.818808
+        }
+      },
+      "zh": {
+        "cases": 20,
+        "passed": 9,
+        "passRate": 0.45,
+        "passRate95CI": {
+          "low": 0.258198,
+          "high": 0.657915
+        }
+      }
+    },
+    "categorySlices": {
+      "cross-language": {
+        "cases": 12,
+        "passed": 7,
+        "passRate": 0.583333,
+        "passRate95CI": {
+          "low": 0.319511,
+          "high": 0.80674
+        }
+      },
+      "hard-negative": {
+        "cases": 8,
+        "passed": 8,
+        "passRate": 1.0,
+        "passRate95CI": {
+          "low": 0.675592,
+          "high": 1.0
+        }
+      },
+      "multi-evidence": {
+        "cases": 6,
+        "passed": 2,
+        "passRate": 0.333333,
+        "passRate95CI": {
+          "low": 0.096771,
+          "high": 0.700007
+        }
+      },
+      "paraphrase": {
+        "cases": 4,
+        "passed": 3,
+        "passRate": 0.75,
+        "passRate95CI": {
+          "low": 0.300642,
+          "high": 0.954413
+        }
+      },
+      "unsupported": {
+        "cases": 10,
+        "passed": 2,
+        "passRate": 0.2,
+        "passRate95CI": {
+          "low": 0.056682,
+          "high": 0.509838
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "test-001",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/public-records.md",
+          "inputs/pet-license.md",
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md",
+          "inputs/pet-license.md",
+          "inputs/tree-service.md",
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md"
+        ],
+        "firstRelevantRank": 4,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.609154,
+        "topLexicalScore": 3.474927,
+        "topSemanticScore": 0.289371,
+        "scoreMargin": 0.017749,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-006",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-transit.md",
+          "inputs/water-billing.md",
+          "inputs/transit-pass.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-transit.md",
+          "inputs/water-billing.md",
+          "inputs/transit-pass.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.155304,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.28237,
+        "scoreMargin": 0.00114,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-008",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/snow-emergency.md"
+        ],
+        "chunkPaths": [
+          "inputs/snow-emergency.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.145992,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.26544,
+        "scoreMargin": 0.145992,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-012",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/snow-emergency.md",
+          "inputs/food-vendor.md",
+          "inputs/pet-license.md",
+          "inputs/transit-pass.md",
+          "inputs/recycling.md"
+        ],
+        "chunkPaths": [
+          "inputs/snow-emergency.md",
+          "inputs/food-vendor.md",
+          "inputs/pet-license.md",
+          "inputs/transit-pass.md",
+          "inputs/recycling.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.213579,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.388325,
+        "scoreMargin": 0.046988,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-014",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-024",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/transit-pass.md",
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/transit-pass.md",
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.168146,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.305719,
+        "scoreMargin": 0.017648,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-026",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/public-records.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.136904,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.248917,
+        "scoreMargin": 0.136904,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-028",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/snow-emergency.md",
+          "inputs/noise-report.md",
+          "inputs/street-closure.md",
+          "inputs/water-leak.md",
+          "inputs/transit-pass.md"
+        ],
+        "chunkPaths": [
+          "inputs/snow-emergency.md",
+          "inputs/noise-report.md",
+          "inputs/street-closure.md",
+          "inputs/water-leak.md",
+          "inputs/transit-pass.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.270548,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.491906,
+        "scoreMargin": 0.0598,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-029",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md",
+          "inputs/food-vendor.md",
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md"
+        ],
+        "chunkPaths": [
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md",
+          "inputs/food-vendor.md",
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md"
+        ],
+        "firstRelevantRank": 2,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.645933,
+        "topLexicalScore": 3.474927,
+        "topSemanticScore": 0.356242,
+        "scoreMargin": 0.018616,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-030",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/building-inspection.md",
+          "inputs/water-leak.md"
+        ],
+        "chunkPaths": [
+          "inputs/building-inspection.md",
+          "inputs/building-inspection.md",
+          "inputs/water-leak.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.263236,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.478612,
+        "scoreMargin": 0.065335,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-031",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/transit-pass.md",
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/noise-report.md"
+        ],
+        "chunkPaths": [
+          "inputs/transit-pass.md",
+          "inputs/transit-pass.md",
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/noise-report.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.698611,
+        "topLexicalScore": 14.985413,
+        "topSemanticScore": 0.45202,
+        "scoreMargin": 0.241455,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-032",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.209502,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.380912,
+        "scoreMargin": 0.209502,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-033",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/street-closure.md",
+          "inputs/recycling.md",
+          "inputs/food-vendor.md",
+          "inputs/parking-permit.md",
+          "inputs/bulky-waste.md"
+        ],
+        "chunkPaths": [
+          "inputs/street-closure.md",
+          "inputs/recycling.md",
+          "inputs/food-vendor.md",
+          "inputs/parking-permit.md",
+          "inputs/bulky-waste.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.767046,
+        "topLexicalScore": 7.919583,
+        "topSemanticScore": 0.576447,
+        "scoreMargin": 0.341196,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-035",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md",
+          "inputs/food-vendor.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md",
+          "inputs/food-vendor.md",
+          "inputs/water-leak.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.839196,
+        "topLexicalScore": 7.242505,
+        "topSemanticScore": 0.707629,
+        "scoreMargin": 0.361998,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-037",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md",
+          "inputs/parking-permit.md",
+          "inputs/food-vendor.md"
+        ],
+        "chunkPaths": [
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md",
+          "inputs/noise-report.md",
+          "inputs/parking-permit.md",
+          "inputs/food-vendor.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.727013,
+        "topLexicalScore": 3.983465,
+        "topSemanticScore": 0.534383,
+        "scoreMargin": 0.167365,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-038",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/public-records.md",
+          "inputs/noise-report.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md",
+          "inputs/public-records.md",
+          "inputs/noise-report.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.143051,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.260093,
+        "scoreMargin": 0.004073,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-039",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md",
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.682274,
+        "topLexicalScore": 7.448461,
+        "topSemanticScore": 0.422317,
+        "scoreMargin": 0.059383,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-040",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/snow-emergency.md",
+          "inputs/noise-report.md",
+          "inputs/street-closure.md",
+          "inputs/water-leak.md"
+        ],
+        "chunkPaths": [
+          "inputs/snow-emergency.md",
+          "inputs/snow-emergency.md",
+          "inputs/noise-report.md",
+          "inputs/street-closure.md",
+          "inputs/water-leak.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.284054,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.516462,
+        "scoreMargin": 0.093189,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      }
+    ],
+    "caseResults": [
+      {
+        "id": "test-001",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/public-records.md",
+          "inputs/pet-license.md",
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md",
+          "inputs/pet-license.md",
+          "inputs/tree-service.md",
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md"
+        ],
+        "firstRelevantRank": 4,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.609154,
+        "topLexicalScore": 3.474927,
+        "topSemanticScore": 0.289371,
+        "scoreMargin": 0.017749,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-002",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/transit-pass.md",
+          "inputs/accessible-transit.md",
+          "inputs/recycling.md",
+          "inputs/snow-emergency.md"
+        ],
+        "chunkPaths": [
+          "inputs/transit-pass.md",
+          "inputs/accessible-transit.md",
+          "inputs/recycling.md",
+          "inputs/accessible-transit.md",
+          "inputs/snow-emergency.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.195553,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.355551,
+        "scoreMargin": 0.00358,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-003",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-transit.md",
+          "inputs/public-records.md",
+          "inputs/snow-emergency.md",
+          "inputs/street-closure.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-transit.md",
+          "inputs/accessible-transit.md",
+          "inputs/public-records.md",
+          "inputs/snow-emergency.md",
+          "inputs/street-closure.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.819789,
+        "topLexicalScore": 10.504271,
+        "topSemanticScore": 0.672343,
+        "scoreMargin": 0.370501,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-004",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-transit.md",
+          "inputs/transit-pass.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-transit.md",
+          "inputs/transit-pass.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.204406,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.371647,
+        "scoreMargin": 0.065194,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-005",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/parking-permit.md",
+          "inputs/food-vendor.md",
+          "inputs/bulky-waste.md",
+          "inputs/recycling.md"
+        ],
+        "chunkPaths": [
+          "inputs/parking-permit.md",
+          "inputs/parking-permit.md",
+          "inputs/food-vendor.md",
+          "inputs/bulky-waste.md",
+          "inputs/recycling.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.878999,
+        "topLexicalScore": 10.785744,
+        "topSemanticScore": 0.779998,
+        "scoreMargin": 0.200891,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-006",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-transit.md",
+          "inputs/water-billing.md",
+          "inputs/transit-pass.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-transit.md",
+          "inputs/water-billing.md",
+          "inputs/transit-pass.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.155304,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.28237,
+        "scoreMargin": 0.00114,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-007",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/street-closure.md",
+          "inputs/recycling.md",
+          "inputs/food-vendor.md",
+          "inputs/parking-permit.md",
+          "inputs/bulky-waste.md"
+        ],
+        "chunkPaths": [
+          "inputs/street-closure.md",
+          "inputs/recycling.md",
+          "inputs/food-vendor.md",
+          "inputs/parking-permit.md",
+          "inputs/bulky-waste.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.734528,
+        "topLexicalScore": 8.069583,
+        "topSemanticScore": 0.517323,
+        "scoreMargin": 0.304325,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-008",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/snow-emergency.md"
+        ],
+        "chunkPaths": [
+          "inputs/snow-emergency.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.145992,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.26544,
+        "scoreMargin": 0.145992,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-009",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/recycling.md",
+          "inputs/bulky-waste.md",
+          "inputs/parking-permit.md",
+          "inputs/public-records.md"
+        ],
+        "chunkPaths": [
+          "inputs/recycling.md",
+          "inputs/bulky-waste.md",
+          "inputs/recycling.md",
+          "inputs/parking-permit.md",
+          "inputs/public-records.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.821371,
+        "topLexicalScore": 9.379715,
+        "topSemanticScore": 0.675219,
+        "scoreMargin": 0.484041,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-010",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/street-closure.md",
+          "inputs/bulky-waste.md",
+          "inputs/recycling.md",
+          "inputs/public-records.md"
+        ],
+        "chunkPaths": [
+          "inputs/street-closure.md",
+          "inputs/bulky-waste.md",
+          "inputs/recycling.md",
+          "inputs/recycling.md",
+          "inputs/public-records.md"
+        ],
+        "firstRelevantRank": 3,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.20831,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.378745,
+        "scoreMargin": 0.029094,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-011",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/bulky-waste.md",
+          "inputs/pet-license.md",
+          "inputs/public-records.md",
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/bulky-waste.md",
+          "inputs/bulky-waste.md",
+          "inputs/pet-license.md",
+          "inputs/public-records.md",
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.581012,
+        "topLexicalScore": 7.647067,
+        "topSemanticScore": 0.238204,
+        "scoreMargin": 0.066877,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-012",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/snow-emergency.md",
+          "inputs/food-vendor.md",
+          "inputs/pet-license.md",
+          "inputs/transit-pass.md",
+          "inputs/recycling.md"
+        ],
+        "chunkPaths": [
+          "inputs/snow-emergency.md",
+          "inputs/food-vendor.md",
+          "inputs/pet-license.md",
+          "inputs/transit-pass.md",
+          "inputs/recycling.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.213579,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.388325,
+        "scoreMargin": 0.046988,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-013",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/water-leak.md",
+          "inputs/water-billing.md",
+          "inputs/tree-service.md",
+          "inputs/street-closure.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-leak.md",
+          "inputs/water-leak.md",
+          "inputs/water-billing.md",
+          "inputs/tree-service.md",
+          "inputs/street-closure.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.74223,
+        "topLexicalScore": 6.311748,
+        "topSemanticScore": 0.69969,
+        "scoreMargin": 0.098403,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-014",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-015",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/water-leak.md",
+          "inputs/water-billing.md",
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.764596,
+        "topLexicalScore": 7.242505,
+        "topSemanticScore": 0.571992,
+        "scoreMargin": 0.279058,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-016",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/water-billing.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-billing.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.146537,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.26643,
+        "scoreMargin": 0.146537,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-017",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/tree-service.md",
+          "inputs/water-leak.md",
+          "inputs/accessible-transit.md",
+          "inputs/building-inspection.md",
+          "inputs/food-vendor.md"
+        ],
+        "chunkPaths": [
+          "inputs/tree-service.md",
+          "inputs/water-leak.md",
+          "inputs/accessible-transit.md",
+          "inputs/building-inspection.md",
+          "inputs/food-vendor.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.812459,
+        "topLexicalScore": 9.51759,
+        "topSemanticScore": 0.659016,
+        "scoreMargin": 0.349297,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-018",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/tree-service.md",
+          "inputs/pet-license.md",
+          "inputs/parking-permit.md"
+        ],
+        "chunkPaths": [
+          "inputs/tree-service.md",
+          "inputs/pet-license.md",
+          "inputs/tree-service.md",
+          "inputs/parking-permit.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.21685,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.394272,
+        "scoreMargin": 0.033961,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-019",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/noise-report.md",
+          "inputs/snow-emergency.md",
+          "inputs/food-vendor.md",
+          "inputs/emergency-shelter.md",
+          "inputs/bulky-waste.md"
+        ],
+        "chunkPaths": [
+          "inputs/noise-report.md",
+          "inputs/snow-emergency.md",
+          "inputs/food-vendor.md",
+          "inputs/emergency-shelter.md",
+          "inputs/bulky-waste.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.69745,
+        "topLexicalScore": 3.983465,
+        "topSemanticScore": 0.480631,
+        "scoreMargin": 0.051099,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-020",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/noise-report.md",
+          "inputs/snow-emergency.md"
+        ],
+        "chunkPaths": [
+          "inputs/noise-report.md",
+          "inputs/snow-emergency.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.280863,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.510659,
+        "scoreMargin": 0.133914,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-021",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/pet-license.md",
+          "inputs/tree-service.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md",
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/pet-license.md",
+          "inputs/tree-service.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md",
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.859723,
+        "topLexicalScore": 8.819328,
+        "topSemanticScore": 0.744952,
+        "scoreMargin": 0.339555,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-022",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/pet-license.md",
+          "inputs/noise-report.md",
+          "inputs/water-leak.md",
+          "inputs/public-records.md"
+        ],
+        "chunkPaths": [
+          "inputs/pet-license.md",
+          "inputs/noise-report.md",
+          "inputs/water-leak.md",
+          "inputs/noise-report.md",
+          "inputs/public-records.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.250783,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.455969,
+        "scoreMargin": 0.043157,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-023",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/food-vendor.md",
+          "inputs/recycling.md",
+          "inputs/building-inspection.md",
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/food-vendor.md",
+          "inputs/recycling.md",
+          "inputs/building-inspection.md",
+          "inputs/accessible-transit.md",
+          "inputs/food-vendor.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.748445,
+        "topLexicalScore": 4.820071,
+        "topSemanticScore": 0.542627,
+        "scoreMargin": 0.226945,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-024",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/transit-pass.md",
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/transit-pass.md",
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.168146,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.305719,
+        "scoreMargin": 0.017648,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-025",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/street-closure.md",
+          "inputs/building-inspection.md",
+          "inputs/food-vendor.md",
+          "inputs/parking-permit.md"
+        ],
+        "chunkPaths": [
+          "inputs/street-closure.md",
+          "inputs/building-inspection.md",
+          "inputs/building-inspection.md",
+          "inputs/food-vendor.md",
+          "inputs/parking-permit.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.801223,
+        "topLexicalScore": 8.819328,
+        "topSemanticScore": 0.638588,
+        "scoreMargin": 0.207923,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-026",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/public-records.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.136904,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.248917,
+        "scoreMargin": 0.136904,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-027",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/water-leak.md",
+          "inputs/water-billing.md",
+          "inputs/bulky-waste.md",
+          "inputs/parking-permit.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-leak.md",
+          "inputs/water-billing.md",
+          "inputs/bulky-waste.md",
+          "inputs/parking-permit.md",
+          "inputs/water-billing.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.638978,
+        "topLexicalScore": 11.770601,
+        "topSemanticScore": 0.343597,
+        "scoreMargin": 0.117316,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-028",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/snow-emergency.md",
+          "inputs/noise-report.md",
+          "inputs/street-closure.md",
+          "inputs/water-leak.md",
+          "inputs/transit-pass.md"
+        ],
+        "chunkPaths": [
+          "inputs/snow-emergency.md",
+          "inputs/noise-report.md",
+          "inputs/street-closure.md",
+          "inputs/water-leak.md",
+          "inputs/transit-pass.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.270548,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.491906,
+        "scoreMargin": 0.0598,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-029",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md",
+          "inputs/food-vendor.md",
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md"
+        ],
+        "chunkPaths": [
+          "inputs/tree-service.md",
+          "inputs/transit-pass.md",
+          "inputs/food-vendor.md",
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md"
+        ],
+        "firstRelevantRank": 2,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.645933,
+        "topLexicalScore": 3.474927,
+        "topSemanticScore": 0.356242,
+        "scoreMargin": 0.018616,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-030",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/building-inspection.md",
+          "inputs/water-leak.md"
+        ],
+        "chunkPaths": [
+          "inputs/building-inspection.md",
+          "inputs/building-inspection.md",
+          "inputs/water-leak.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.263236,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.478612,
+        "scoreMargin": 0.065335,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-031",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/transit-pass.md",
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/noise-report.md"
+        ],
+        "chunkPaths": [
+          "inputs/transit-pass.md",
+          "inputs/transit-pass.md",
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/noise-report.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.698611,
+        "topLexicalScore": 14.985413,
+        "topSemanticScore": 0.45202,
+        "scoreMargin": 0.241455,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-032",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.209502,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.380912,
+        "scoreMargin": 0.209502,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-033",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/street-closure.md",
+          "inputs/recycling.md",
+          "inputs/food-vendor.md",
+          "inputs/parking-permit.md",
+          "inputs/bulky-waste.md"
+        ],
+        "chunkPaths": [
+          "inputs/street-closure.md",
+          "inputs/recycling.md",
+          "inputs/food-vendor.md",
+          "inputs/parking-permit.md",
+          "inputs/bulky-waste.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.767046,
+        "topLexicalScore": 7.919583,
+        "topSemanticScore": 0.576447,
+        "scoreMargin": 0.341196,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-034",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-035",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md",
+          "inputs/food-vendor.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-billing.md",
+          "inputs/water-leak.md",
+          "inputs/building-inspection.md",
+          "inputs/food-vendor.md",
+          "inputs/water-leak.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.839196,
+        "topLexicalScore": 7.242505,
+        "topSemanticScore": 0.707629,
+        "scoreMargin": 0.361998,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-036",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-037",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md",
+          "inputs/parking-permit.md",
+          "inputs/food-vendor.md"
+        ],
+        "chunkPaths": [
+          "inputs/noise-report.md",
+          "inputs/bulky-waste.md",
+          "inputs/noise-report.md",
+          "inputs/parking-permit.md",
+          "inputs/food-vendor.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.727013,
+        "topLexicalScore": 3.983465,
+        "topSemanticScore": 0.534383,
+        "scoreMargin": 0.167365,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-038",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/public-records.md",
+          "inputs/noise-report.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md",
+          "inputs/public-records.md",
+          "inputs/noise-report.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.143051,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.260093,
+        "scoreMargin": 0.004073,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-039",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md"
+        ],
+        "chunkPaths": [
+          "inputs/public-records.md",
+          "inputs/public-records.md",
+          "inputs/tree-service.md",
+          "inputs/tree-service.md",
+          "inputs/pet-license.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.682274,
+        "topLexicalScore": 7.448461,
+        "topSemanticScore": 0.422317,
+        "scoreMargin": 0.059383,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-040",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/snow-emergency.md",
+          "inputs/noise-report.md",
+          "inputs/street-closure.md",
+          "inputs/water-leak.md"
+        ],
+        "chunkPaths": [
+          "inputs/snow-emergency.md",
+          "inputs/snow-emergency.md",
+          "inputs/noise-report.md",
+          "inputs/street-closure.md",
+          "inputs/water-leak.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.284054,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.516462,
+        "scoreMargin": 0.093189,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null
+      }
+    ]
+  },
+  "relevanceModel": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "1427fd652930e4ba29e8149678df786c240d8825",
+    "license": "Apache-2.0",
+    "fileSha256": {
+      "config.json": "cc2cfe51aa3fd759d21d21acf5dfd6994aa67a3c9210636d22e143699d336c77",
+      "model.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "special_tokens_map.json": "378eb3bf733eb16e65792d7e3fda5b8a4631387ca04d2015199c4d4f22ae554d",
+      "tokenizer.json": "62c24cdc13d4c9952d63718d6c9fa4c287974249e16b7ade6d5a85e7bbb75626",
+      "tokenizer_config.json": "e7fbfbfa6347b4e414c1cee50d142e2c2f9a895dad68b068ae83a8b564c3837e"
+    },
+    "threshold": 0.38
+  },
+  "verifiedHybrid": {
+    "mode": "verified-hybrid",
+    "cases": 40,
+    "supportedCases": 30,
+    "recallAt1": 0.433333,
+    "recallAt3": 0.433333,
+    "top1HitRate": 0.433333,
+    "top1HitRate95CI": {
+      "low": 0.273775,
+      "high": 0.608027
+    },
+    "allRelevantInTop3Rate": 0.433333,
+    "allRelevantInTop3Rate95CI": {
+      "low": 0.273775,
+      "high": 0.608027
+    },
+    "mrr": 0.433333,
+    "citationCorrectness": 1.0,
+    "unsupportedAccuracy": 0.9,
+    "passed": 22,
+    "passRate": 0.55,
+    "passRate95CI": {
+      "low": 0.398291,
+      "high": 0.692947
+    },
+    "languageSlices": {
+      "en": {
+        "cases": 20,
+        "passed": 13,
+        "passRate": 0.65,
+        "passRate95CI": {
+          "low": 0.432854,
+          "high": 0.818808
+        }
+      },
+      "zh": {
+        "cases": 20,
+        "passed": 9,
+        "passRate": 0.45,
+        "passRate95CI": {
+          "low": 0.258198,
+          "high": 0.657915
+        }
+      }
+    },
+    "categorySlices": {
+      "cross-language": {
+        "cases": 12,
+        "passed": 4,
+        "passRate": 0.333333,
+        "passRate95CI": {
+          "low": 0.13812,
+          "high": 0.609378
+        }
+      },
+      "hard-negative": {
+        "cases": 8,
+        "passed": 7,
+        "passRate": 0.875,
+        "passRate95CI": {
+          "low": 0.529112,
+          "high": 0.977583
+        }
+      },
+      "multi-evidence": {
+        "cases": 6,
+        "passed": 0,
+        "passRate": 0.0,
+        "passRate95CI": {
+          "low": 0.0,
+          "high": 0.390334
+        }
+      },
+      "paraphrase": {
+        "cases": 4,
+        "passed": 2,
+        "passRate": 0.5,
+        "passRate95CI": {
+          "low": 0.150039,
+          "high": 0.849961
+        }
+      },
+      "unsupported": {
+        "cases": 10,
+        "passed": 9,
+        "passRate": 0.9,
+        "passRate95CI": {
+          "low": 0.59585,
+          "high": 0.982124
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "test-001",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-006",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-007",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-008",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/snow-emergency.md"
+        ],
+        "chunkPaths": [
+          "inputs/snow-emergency.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.145992,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.26544,
+        "scoreMargin": 0.145992,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-010",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-011",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-012",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-014",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-016",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-020",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-024",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-025",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-026",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-027",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-028",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-029",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-030",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-033",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/street-closure.md"
+        ],
+        "chunkPaths": [
+          "inputs/street-closure.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.767046,
+        "topLexicalScore": 7.919583,
+        "topSemanticScore": 0.576447,
+        "scoreMargin": 0.767046,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      }
+    ],
+    "caseResults": [
+      {
+        "id": "test-001",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-002",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/transit-pass.md"
+        ],
+        "chunkPaths": [
+          "inputs/transit-pass.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.150415,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.273482,
+        "scoreMargin": 0.150415,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-003",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.819789,
+        "topLexicalScore": 10.504271,
+        "topSemanticScore": 0.672343,
+        "scoreMargin": 0.819789,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-004",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-transit.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-transit.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.204406,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.371647,
+        "scoreMargin": 0.204406,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-005",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/parking-permit.md"
+        ],
+        "chunkPaths": [
+          "inputs/parking-permit.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.878999,
+        "topLexicalScore": 10.785744,
+        "topSemanticScore": 0.779998,
+        "scoreMargin": 0.878999,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-006",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-007",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-008",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/snow-emergency.md"
+        ],
+        "chunkPaths": [
+          "inputs/snow-emergency.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.145992,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.26544,
+        "scoreMargin": 0.145992,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-009",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/recycling.md"
+        ],
+        "chunkPaths": [
+          "inputs/recycling.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.821371,
+        "topLexicalScore": 9.379715,
+        "topSemanticScore": 0.675219,
+        "scoreMargin": 0.821371,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-010",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-011",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-012",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-013",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/water-leak.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-leak.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.74223,
+        "topLexicalScore": 6.311748,
+        "topSemanticScore": 0.69969,
+        "scoreMargin": 0.74223,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-014",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-015",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/water-billing.md"
+        ],
+        "chunkPaths": [
+          "inputs/water-billing.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.764596,
+        "topLexicalScore": 7.242505,
+        "topSemanticScore": 0.571992,
+        "scoreMargin": 0.764596,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-016",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-017",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/tree-service.md"
+        ],
+        "chunkPaths": [
+          "inputs/tree-service.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.812459,
+        "topLexicalScore": 9.51759,
+        "topSemanticScore": 0.659016,
+        "scoreMargin": 0.812459,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-018",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/tree-service.md"
+        ],
+        "chunkPaths": [
+          "inputs/tree-service.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.173968,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.316306,
+        "scoreMargin": 0.173968,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-019",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/noise-report.md"
+        ],
+        "chunkPaths": [
+          "inputs/noise-report.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.69745,
+        "topLexicalScore": 3.983465,
+        "topSemanticScore": 0.480631,
+        "scoreMargin": 0.69745,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-020",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-021",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/pet-license.md"
+        ],
+        "chunkPaths": [
+          "inputs/pet-license.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.859723,
+        "topLexicalScore": 8.819328,
+        "topSemanticScore": 0.744952,
+        "scoreMargin": 0.859723,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-022",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/pet-license.md"
+        ],
+        "chunkPaths": [
+          "inputs/pet-license.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.250783,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.455969,
+        "scoreMargin": 0.250783,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-023",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/food-vendor.md"
+        ],
+        "chunkPaths": [
+          "inputs/food-vendor.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.748445,
+        "topLexicalScore": 4.820071,
+        "topSemanticScore": 0.542627,
+        "scoreMargin": 0.748445,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-024",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-025",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-026",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-027",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-028",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-029",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-030",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-031",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-032",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-033",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/street-closure.md"
+        ],
+        "chunkPaths": [
+          "inputs/street-closure.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.767046,
+        "topLexicalScore": 7.919583,
+        "topSemanticScore": 0.576447,
+        "scoreMargin": 0.767046,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-034",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-035",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-036",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-037",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-038",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-039",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      },
+      {
+        "id": "test-040",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null
+      }
+    ]
+  }
+}

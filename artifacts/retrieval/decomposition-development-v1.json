@@ -1,0 +1,4888 @@
+{
+  "schemaVersion": 1,
+  "dataset": {
+    "path": "benchmarks/retrieval_decomposition_dev_v1.json",
+    "sha256": "69e9a25f0b88397fcd673c89fab5a0b70e03b6876bd8c1c54480b9a2ac1d3fbb"
+  },
+  "lexical": {
+    "mode": "lexical",
+    "cases": 32,
+    "supportedCases": 20,
+    "recallAt1": 0.35,
+    "recallAt3": 0.5,
+    "top1HitRate": 0.5,
+    "top1HitRate95CI": {
+      "low": 0.299298,
+      "high": 0.700702
+    },
+    "allRelevantInTop3Rate": 0.5,
+    "allRelevantInTop3Rate95CI": {
+      "low": 0.299298,
+      "high": 0.700702
+    },
+    "mrr": 0.5,
+    "citationCorrectness": 1.0,
+    "unsupportedAccuracy": 0.5,
+    "passed": 16,
+    "passRate": 0.5,
+    "passRate95CI": {
+      "low": 0.336309,
+      "high": 0.663691
+    },
+    "languageSlices": {
+      "en": {
+        "cases": 16,
+        "passed": 10,
+        "passRate": 0.625,
+        "passRate95CI": {
+          "low": 0.38641,
+          "high": 0.815188
+        }
+      },
+      "zh": {
+        "cases": 16,
+        "passed": 6,
+        "passRate": 0.375,
+        "passRate95CI": {
+          "low": 0.184812,
+          "high": 0.61359
+        }
+      }
+    },
+    "categorySlices": {
+      "multi-evidence": {
+        "cases": 12,
+        "passed": 6,
+        "passRate": 0.5,
+        "passRate95CI": {
+          "low": 0.253782,
+          "high": 0.746218
+        }
+      },
+      "single-evidence": {
+        "cases": 8,
+        "passed": 4,
+        "passRate": 0.5,
+        "passRate95CI": {
+          "low": 0.215216,
+          "high": 0.784784
+        }
+      },
+      "unsupported": {
+        "cases": 12,
+        "passed": 6,
+        "passRate": 0.5,
+        "passRate95CI": {
+          "low": 0.253782,
+          "high": 0.746218
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "dev-002",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-004",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-006",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-008",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-010",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-012",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-014",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-016",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-018",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-020",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-021",
+        "mode": "lexical",
+        "paths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md",
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 4.132364,
+        "topSemanticScore": null,
+        "scoreMargin": 0.066053,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-023",
+        "mode": "lexical",
+        "paths": [
+          "inputs/incoming-inspection.md"
+        ],
+        "chunkPaths": [
+          "inputs/incoming-inspection.md",
+          "inputs/incoming-inspection.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 8.491909,
+        "topSemanticScore": null,
+        "scoreMargin": 0.470309,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-025",
+        "mode": "lexical",
+        "paths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md",
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 7.59702,
+        "topSemanticScore": null,
+        "scoreMargin": 0.412583,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-027",
+        "mode": "lexical",
+        "paths": [
+          "inputs/injury-reporting.md",
+          "inputs/near-miss.md",
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md",
+          "inputs/rework.md"
+        ],
+        "chunkPaths": [
+          "inputs/injury-reporting.md",
+          "inputs/near-miss.md",
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md",
+          "inputs/rework.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 7.930682,
+        "topSemanticScore": null,
+        "scoreMargin": 0.783734,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-029",
+        "mode": "lexical",
+        "paths": [
+          "inputs/supplier-audit.md"
+        ],
+        "chunkPaths": [
+          "inputs/supplier-audit.md",
+          "inputs/supplier-audit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 6.307117,
+        "topSemanticScore": null,
+        "scoreMargin": 0.364304,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-031",
+        "mode": "lexical",
+        "paths": [
+          "inputs/scrap.md",
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/scrap.md",
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 4.857402,
+        "topSemanticScore": null,
+        "scoreMargin": 0.551387,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      }
+    ],
+    "caseResults": [
+      {
+        "id": "dev-001",
+        "mode": "lexical",
+        "paths": [
+          "inputs/gauge-calibration.md",
+          "inputs/planned-maintenance.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md",
+          "inputs/planned-maintenance.md",
+          "inputs/gauge-calibration.md",
+          "inputs/planned-maintenance.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 8.491909,
+        "topSemanticScore": null,
+        "scoreMargin": 0.0,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-002",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-003",
+        "mode": "lexical",
+        "paths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md",
+          "inputs/near-miss.md",
+          "inputs/injury-reporting.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md",
+          "inputs/welding-safety.md",
+          "inputs/near-miss.md",
+          "inputs/injury-reporting.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 12.953587,
+        "topSemanticScore": null,
+        "scoreMargin": 0.255104,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-004",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-005",
+        "mode": "lexical",
+        "paths": [
+          "inputs/near-miss.md",
+          "inputs/injury-reporting.md"
+        ],
+        "chunkPaths": [
+          "inputs/near-miss.md",
+          "inputs/injury-reporting.md",
+          "inputs/near-miss.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 4.407484,
+        "topSemanticScore": null,
+        "scoreMargin": 0.034033,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-006",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-007",
+        "mode": "lexical",
+        "paths": [
+          "inputs/scrap.md",
+          "inputs/rework.md",
+          "inputs/final-release.md"
+        ],
+        "chunkPaths": [
+          "inputs/scrap.md",
+          "inputs/rework.md",
+          "inputs/final-release.md",
+          "inputs/rework.md",
+          "inputs/scrap.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 11.032867,
+        "topSemanticScore": null,
+        "scoreMargin": 0.070072,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-008",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-009",
+        "mode": "lexical",
+        "paths": [
+          "inputs/change-control.md",
+          "inputs/final-release.md",
+          "inputs/rework.md"
+        ],
+        "chunkPaths": [
+          "inputs/change-control.md",
+          "inputs/final-release.md",
+          "inputs/final-release.md",
+          "inputs/change-control.md",
+          "inputs/rework.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 11.120218,
+        "topSemanticScore": null,
+        "scoreMargin": 0.0,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-010",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-011",
+        "mode": "lexical",
+        "paths": [
+          "inputs/cold-storage.md",
+          "inputs/injury-reporting.md",
+          "inputs/ambient-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md",
+          "inputs/injury-reporting.md",
+          "inputs/ambient-storage.md",
+          "inputs/cold-storage.md",
+          "inputs/ambient-storage.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 8.491909,
+        "topSemanticScore": null,
+        "scoreMargin": 0.498642,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-012",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-013",
+        "mode": "lexical",
+        "paths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md",
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 8.491909,
+        "topSemanticScore": null,
+        "scoreMargin": 0.495712,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-014",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-015",
+        "mode": "lexical",
+        "paths": [
+          "inputs/planned-maintenance.md",
+          "inputs/final-release.md",
+          "inputs/change-control.md",
+          "inputs/welding-safety.md",
+          "inputs/near-miss.md"
+        ],
+        "chunkPaths": [
+          "inputs/planned-maintenance.md",
+          "inputs/final-release.md",
+          "inputs/change-control.md",
+          "inputs/welding-safety.md",
+          "inputs/near-miss.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 10.934553,
+        "topSemanticScore": null,
+        "scoreMargin": 0.715923,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-016",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-017",
+        "mode": "lexical",
+        "paths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 11.305752,
+        "topSemanticScore": null,
+        "scoreMargin": 0.460536,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-018",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-019",
+        "mode": "lexical",
+        "paths": [
+          "inputs/final-release.md",
+          "inputs/planned-maintenance.md",
+          "inputs/rework.md",
+          "inputs/supplier-audit.md",
+          "inputs/near-miss.md"
+        ],
+        "chunkPaths": [
+          "inputs/final-release.md",
+          "inputs/planned-maintenance.md",
+          "inputs/rework.md",
+          "inputs/supplier-audit.md",
+          "inputs/near-miss.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 10.544783,
+        "topSemanticScore": null,
+        "scoreMargin": 0.82899,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-020",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-021",
+        "mode": "lexical",
+        "paths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md",
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 4.132364,
+        "topSemanticScore": null,
+        "scoreMargin": 0.066053,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-022",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-023",
+        "mode": "lexical",
+        "paths": [
+          "inputs/incoming-inspection.md"
+        ],
+        "chunkPaths": [
+          "inputs/incoming-inspection.md",
+          "inputs/incoming-inspection.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 8.491909,
+        "topSemanticScore": null,
+        "scoreMargin": 0.470309,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-024",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-025",
+        "mode": "lexical",
+        "paths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md",
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 7.59702,
+        "topSemanticScore": null,
+        "scoreMargin": 0.412583,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-026",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-027",
+        "mode": "lexical",
+        "paths": [
+          "inputs/injury-reporting.md",
+          "inputs/near-miss.md",
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md",
+          "inputs/rework.md"
+        ],
+        "chunkPaths": [
+          "inputs/injury-reporting.md",
+          "inputs/near-miss.md",
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md",
+          "inputs/rework.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 7.930682,
+        "topSemanticScore": null,
+        "scoreMargin": 0.783734,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-028",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-029",
+        "mode": "lexical",
+        "paths": [
+          "inputs/supplier-audit.md"
+        ],
+        "chunkPaths": [
+          "inputs/supplier-audit.md",
+          "inputs/supplier-audit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 6.307117,
+        "topSemanticScore": null,
+        "scoreMargin": 0.364304,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-030",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-031",
+        "mode": "lexical",
+        "paths": [
+          "inputs/scrap.md",
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/scrap.md",
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 4.857402,
+        "topSemanticScore": null,
+        "scoreMargin": 0.551387,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-032",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      }
+    ]
+  },
+  "model": {
+    "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+    "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+    "license": "MIT",
+    "fileSha256": {
+      "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+      "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+      "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+    }
+  },
+  "hybrid": {
+    "mode": "hybrid",
+    "cases": 32,
+    "supportedCases": 20,
+    "recallAt1": 0.475,
+    "recallAt3": 0.725,
+    "top1HitRate": 0.7,
+    "top1HitRate95CI": {
+      "low": 0.481027,
+      "high": 0.854523
+    },
+    "allRelevantInTop3Rate": 0.65,
+    "allRelevantInTop3Rate95CI": {
+      "low": 0.432854,
+      "high": 0.818808
+    },
+    "mrr": 0.741667,
+    "citationCorrectness": 1.0,
+    "unsupportedAccuracy": 0.083333,
+    "passed": 14,
+    "passRate": 0.4375,
+    "passRate95CI": {
+      "low": 0.281653,
+      "high": 0.606744
+    },
+    "languageSlices": {
+      "en": {
+        "cases": 16,
+        "passed": 10,
+        "passRate": 0.625,
+        "passRate95CI": {
+          "low": 0.38641,
+          "high": 0.815188
+        }
+      },
+      "zh": {
+        "cases": 16,
+        "passed": 4,
+        "passRate": 0.25,
+        "passRate95CI": {
+          "low": 0.101821,
+          "high": 0.494983
+        }
+      }
+    },
+    "categorySlices": {
+      "multi-evidence": {
+        "cases": 12,
+        "passed": 7,
+        "passRate": 0.583333,
+        "passRate95CI": {
+          "low": 0.319511,
+          "high": 0.80674
+        }
+      },
+      "single-evidence": {
+        "cases": 8,
+        "passed": 6,
+        "passRate": 0.75,
+        "passRate95CI": {
+          "low": 0.409275,
+          "high": 0.928521
+        }
+      },
+      "unsupported": {
+        "cases": 12,
+        "passed": 1,
+        "passRate": 0.083333,
+        "passRate95CI": {
+          "low": 0.014865,
+          "high": 0.35388
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "dev-002",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/incoming-inspection.md",
+          "inputs/gauge-calibration.md",
+          "inputs/supplier-audit.md",
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/incoming-inspection.md",
+          "inputs/gauge-calibration.md",
+          "inputs/supplier-audit.md",
+          "inputs/change-control.md",
+          "inputs/supplier-audit.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.216487,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.393612,
+        "scoreMargin": 0.01816,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-006",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md",
+          "inputs/scrap.md",
+          "inputs/rework.md"
+        ],
+        "chunkPaths": [
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md",
+          "inputs/scrap.md",
+          "inputs/rework.md",
+          "inputs/rework.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.176747,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.321358,
+        "scoreMargin": 0.000212,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-008",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/supplier-audit.md",
+          "inputs/final-release.md",
+          "inputs/change-control.md",
+          "inputs/rework.md"
+        ],
+        "chunkPaths": [
+          "inputs/supplier-audit.md",
+          "inputs/final-release.md",
+          "inputs/change-control.md",
+          "inputs/rework.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.177485,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.322699,
+        "scoreMargin": 0.010267,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-010",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md",
+          "inputs/planned-maintenance.md",
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md",
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md",
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 3,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.244969,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.445399,
+        "scoreMargin": 0.038807,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-012",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-014",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-018",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-021",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/gauge-calibration.md",
+          "inputs/ambient-storage.md",
+          "inputs/cold-storage.md",
+          "inputs/near-miss.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md",
+          "inputs/gauge-calibration.md",
+          "inputs/ambient-storage.md",
+          "inputs/cold-storage.md",
+          "inputs/near-miss.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.729071,
+        "topLexicalScore": 4.132364,
+        "topSemanticScore": 0.507401,
+        "scoreMargin": 0.085435,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-022",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md",
+          "inputs/supplier-audit.md"
+        ],
+        "chunkPaths": [
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md",
+          "inputs/supplier-audit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.19402,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.352763,
+        "scoreMargin": 0.02383,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-023",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/incoming-inspection.md",
+          "inputs/cold-storage.md",
+          "inputs/supplier-audit.md",
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/incoming-inspection.md",
+          "inputs/incoming-inspection.md",
+          "inputs/cold-storage.md",
+          "inputs/supplier-audit.md",
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.775363,
+        "topLexicalScore": 8.491909,
+        "topSemanticScore": 0.591569,
+        "scoreMargin": 0.196391,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-025",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md",
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md",
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md",
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.826114,
+        "topLexicalScore": 7.59702,
+        "topSemanticScore": 0.683843,
+        "scoreMargin": 0.149142,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-026",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/cold-storage.md",
+          "inputs/ambient-storage.md",
+          "inputs/scrap.md",
+          "inputs/rework.md",
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md",
+          "inputs/ambient-storage.md",
+          "inputs/scrap.md",
+          "inputs/rework.md",
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.302924,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.55077,
+        "scoreMargin": 0.065727,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-027",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/injury-reporting.md",
+          "inputs/rework.md",
+          "inputs/near-miss.md",
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/injury-reporting.md",
+          "inputs/rework.md",
+          "inputs/near-miss.md",
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.700051,
+        "topLexicalScore": 7.930682,
+        "topSemanticScore": 0.454639,
+        "scoreMargin": 0.371577,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-028",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/cold-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.139051,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.25282,
+        "scoreMargin": 0.139051,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-029",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/supplier-audit.md",
+          "inputs/near-miss.md",
+          "inputs/gauge-calibration.md",
+          "inputs/injury-reporting.md"
+        ],
+        "chunkPaths": [
+          "inputs/supplier-audit.md",
+          "inputs/supplier-audit.md",
+          "inputs/near-miss.md",
+          "inputs/gauge-calibration.md",
+          "inputs/injury-reporting.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.801059,
+        "topLexicalScore": 6.307117,
+        "topSemanticScore": 0.63829,
+        "scoreMargin": 0.405763,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-030",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/rework.md",
+          "inputs/scrap.md",
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md"
+        ],
+        "chunkPaths": [
+          "inputs/rework.md",
+          "inputs/scrap.md",
+          "inputs/change-control.md",
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.200732,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.364967,
+        "scoreMargin": 0.003075,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-031",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/scrap.md",
+          "inputs/gauge-calibration.md",
+          "inputs/cold-storage.md",
+          "inputs/injury-reporting.md",
+          "inputs/near-miss.md"
+        ],
+        "chunkPaths": [
+          "inputs/scrap.md",
+          "inputs/gauge-calibration.md",
+          "inputs/cold-storage.md",
+          "inputs/injury-reporting.md",
+          "inputs/near-miss.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.669948,
+        "topLexicalScore": 4.857402,
+        "topSemanticScore": 0.399905,
+        "scoreMargin": 0.177891,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-032",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/rework.md",
+          "inputs/cold-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/rework.md",
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.156109,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.283834,
+        "scoreMargin": 0.003839,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      }
+    ],
+    "caseResults": [
+      {
+        "id": "dev-001",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/gauge-calibration.md",
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md",
+          "inputs/planned-maintenance.md",
+          "inputs/gauge-calibration.md",
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.720014,
+        "topLexicalScore": 8.491909,
+        "topSemanticScore": 0.490935,
+        "scoreMargin": 0.003396,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-002",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/incoming-inspection.md",
+          "inputs/gauge-calibration.md",
+          "inputs/supplier-audit.md",
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/incoming-inspection.md",
+          "inputs/gauge-calibration.md",
+          "inputs/supplier-audit.md",
+          "inputs/change-control.md",
+          "inputs/supplier-audit.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.216487,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.393612,
+        "scoreMargin": 0.01816,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-003",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md",
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md",
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md",
+          "inputs/change-control.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.802139,
+        "topLexicalScore": 12.953587,
+        "topSemanticScore": 0.640253,
+        "scoreMargin": 0.204226,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-004",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/cold-storage.md",
+          "inputs/ambient-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md",
+          "inputs/ambient-storage.md",
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.303895,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.552537,
+        "scoreMargin": 0.106185,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-005",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/injury-reporting.md",
+          "inputs/near-miss.md",
+          "inputs/cold-storage.md",
+          "inputs/planned-maintenance.md"
+        ],
+        "chunkPaths": [
+          "inputs/injury-reporting.md",
+          "inputs/near-miss.md",
+          "inputs/injury-reporting.md",
+          "inputs/cold-storage.md",
+          "inputs/planned-maintenance.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.719689,
+        "topLexicalScore": 4.257484,
+        "topSemanticScore": 0.518189,
+        "scoreMargin": 0.15619,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-006",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md",
+          "inputs/scrap.md",
+          "inputs/rework.md"
+        ],
+        "chunkPaths": [
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md",
+          "inputs/scrap.md",
+          "inputs/rework.md",
+          "inputs/rework.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.176747,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.321358,
+        "scoreMargin": 0.000212,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-007",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/rework.md",
+          "inputs/scrap.md",
+          "inputs/final-release.md",
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/rework.md",
+          "inputs/scrap.md",
+          "inputs/rework.md",
+          "inputs/final-release.md",
+          "inputs/change-control.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.850736,
+        "topLexicalScore": 10.259772,
+        "topSemanticScore": 0.785943,
+        "scoreMargin": 0.024312,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-008",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/supplier-audit.md",
+          "inputs/final-release.md",
+          "inputs/change-control.md",
+          "inputs/rework.md"
+        ],
+        "chunkPaths": [
+          "inputs/supplier-audit.md",
+          "inputs/final-release.md",
+          "inputs/change-control.md",
+          "inputs/rework.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.177485,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.322699,
+        "scoreMargin": 0.010267,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-009",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/change-control.md",
+          "inputs/final-release.md",
+          "inputs/scrap.md"
+        ],
+        "chunkPaths": [
+          "inputs/change-control.md",
+          "inputs/final-release.md",
+          "inputs/change-control.md",
+          "inputs/final-release.md",
+          "inputs/scrap.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.794378,
+        "topLexicalScore": 11.120218,
+        "topSemanticScore": 0.626142,
+        "scoreMargin": 0.098707,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-010",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md",
+          "inputs/planned-maintenance.md",
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md",
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md",
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 3,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.244969,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.445399,
+        "scoreMargin": 0.038807,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-011",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/cold-storage.md",
+          "inputs/injury-reporting.md",
+          "inputs/ambient-storage.md",
+          "inputs/incoming-inspection.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md",
+          "inputs/injury-reporting.md",
+          "inputs/ambient-storage.md",
+          "inputs/cold-storage.md",
+          "inputs/incoming-inspection.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.723364,
+        "topLexicalScore": 8.491909,
+        "topSemanticScore": 0.497025,
+        "scoreMargin": 0.166934,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-012",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-013",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/gauge-calibration.md",
+          "inputs/near-miss.md",
+          "inputs/change-control.md",
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md",
+          "inputs/gauge-calibration.md",
+          "inputs/near-miss.md",
+          "inputs/change-control.md",
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.725632,
+        "topLexicalScore": 8.491909,
+        "topSemanticScore": 0.501148,
+        "scoreMargin": 0.162109,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-014",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-015",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md",
+          "inputs/injury-reporting.md",
+          "inputs/final-release.md",
+          "inputs/incoming-inspection.md"
+        ],
+        "chunkPaths": [
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md",
+          "inputs/injury-reporting.md",
+          "inputs/final-release.md",
+          "inputs/incoming-inspection.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.853385,
+        "topLexicalScore": 10.934553,
+        "topSemanticScore": 0.733428,
+        "scoreMargin": 0.403897,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-016",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/cold-storage.md",
+          "inputs/ambient-storage.md",
+          "inputs/injury-reporting.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md",
+          "inputs/ambient-storage.md",
+          "inputs/cold-storage.md",
+          "inputs/ambient-storage.md",
+          "inputs/injury-reporting.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.326138,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.592978,
+        "scoreMargin": 0.143397,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-017",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md",
+          "inputs/incoming-inspection.md",
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md",
+          "inputs/incoming-inspection.md",
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.891779,
+        "topLexicalScore": 11.305752,
+        "topSemanticScore": 0.803234,
+        "scoreMargin": 0.380822,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-018",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-019",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/final-release.md",
+          "inputs/rework.md",
+          "inputs/gauge-calibration.md",
+          "inputs/planned-maintenance.md",
+          "inputs/near-miss.md"
+        ],
+        "chunkPaths": [
+          "inputs/final-release.md",
+          "inputs/rework.md",
+          "inputs/gauge-calibration.md",
+          "inputs/planned-maintenance.md",
+          "inputs/near-miss.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.782281,
+        "topLexicalScore": 10.544783,
+        "topSemanticScore": 0.604148,
+        "scoreMargin": 0.494286,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-020",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/scrap.md",
+          "inputs/rework.md"
+        ],
+        "chunkPaths": [
+          "inputs/scrap.md",
+          "inputs/rework.md"
+        ],
+        "firstRelevantRank": 2,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.160511,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.291838,
+        "scoreMargin": 0.017048,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-021",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/gauge-calibration.md",
+          "inputs/ambient-storage.md",
+          "inputs/cold-storage.md",
+          "inputs/near-miss.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md",
+          "inputs/gauge-calibration.md",
+          "inputs/ambient-storage.md",
+          "inputs/cold-storage.md",
+          "inputs/near-miss.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.729071,
+        "topLexicalScore": 4.132364,
+        "topSemanticScore": 0.507401,
+        "scoreMargin": 0.085435,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-022",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md",
+          "inputs/supplier-audit.md"
+        ],
+        "chunkPaths": [
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md",
+          "inputs/supplier-audit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.19402,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.352763,
+        "scoreMargin": 0.02383,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-023",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/incoming-inspection.md",
+          "inputs/cold-storage.md",
+          "inputs/supplier-audit.md",
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/incoming-inspection.md",
+          "inputs/incoming-inspection.md",
+          "inputs/cold-storage.md",
+          "inputs/supplier-audit.md",
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.775363,
+        "topLexicalScore": 8.491909,
+        "topSemanticScore": 0.591569,
+        "scoreMargin": 0.196391,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-024",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-025",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md",
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md",
+          "inputs/paint-booth.md",
+          "inputs/welding-safety.md",
+          "inputs/planned-maintenance.md",
+          "inputs/change-control.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.826114,
+        "topLexicalScore": 7.59702,
+        "topSemanticScore": 0.683843,
+        "scoreMargin": 0.149142,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-026",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/cold-storage.md",
+          "inputs/ambient-storage.md",
+          "inputs/scrap.md",
+          "inputs/rework.md",
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md",
+          "inputs/ambient-storage.md",
+          "inputs/scrap.md",
+          "inputs/rework.md",
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.302924,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.55077,
+        "scoreMargin": 0.065727,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-027",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/injury-reporting.md",
+          "inputs/rework.md",
+          "inputs/near-miss.md",
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/injury-reporting.md",
+          "inputs/rework.md",
+          "inputs/near-miss.md",
+          "inputs/planned-maintenance.md",
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.700051,
+        "topLexicalScore": 7.930682,
+        "topSemanticScore": 0.454639,
+        "scoreMargin": 0.371577,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-028",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/cold-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.139051,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.25282,
+        "scoreMargin": 0.139051,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-029",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/supplier-audit.md",
+          "inputs/near-miss.md",
+          "inputs/gauge-calibration.md",
+          "inputs/injury-reporting.md"
+        ],
+        "chunkPaths": [
+          "inputs/supplier-audit.md",
+          "inputs/supplier-audit.md",
+          "inputs/near-miss.md",
+          "inputs/gauge-calibration.md",
+          "inputs/injury-reporting.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.801059,
+        "topLexicalScore": 6.307117,
+        "topSemanticScore": 0.63829,
+        "scoreMargin": 0.405763,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-030",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/rework.md",
+          "inputs/scrap.md",
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md"
+        ],
+        "chunkPaths": [
+          "inputs/rework.md",
+          "inputs/scrap.md",
+          "inputs/change-control.md",
+          "inputs/change-control.md",
+          "inputs/incoming-inspection.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.200732,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.364967,
+        "scoreMargin": 0.003075,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-031",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/scrap.md",
+          "inputs/gauge-calibration.md",
+          "inputs/cold-storage.md",
+          "inputs/injury-reporting.md",
+          "inputs/near-miss.md"
+        ],
+        "chunkPaths": [
+          "inputs/scrap.md",
+          "inputs/gauge-calibration.md",
+          "inputs/cold-storage.md",
+          "inputs/injury-reporting.md",
+          "inputs/near-miss.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.669948,
+        "topLexicalScore": 4.857402,
+        "topSemanticScore": 0.399905,
+        "scoreMargin": 0.177891,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-032",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/rework.md",
+          "inputs/cold-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/rework.md",
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.156109,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.283834,
+        "scoreMargin": 0.003839,
+        "verificationMode": "disabled",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 0,
+        "matchedQueryVariants": []
+      }
+    ]
+  },
+  "relevanceModel": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "1427fd652930e4ba29e8149678df786c240d8825",
+    "license": "Apache-2.0",
+    "fileSha256": {
+      "config.json": "cc2cfe51aa3fd759d21d21acf5dfd6994aa67a3c9210636d22e143699d336c77",
+      "model.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "special_tokens_map.json": "378eb3bf733eb16e65792d7e3fda5b8a4631387ca04d2015199c4d4f22ae554d",
+      "tokenizer.json": "62c24cdc13d4c9952d63718d6c9fa4c287974249e16b7ade6d5a85e7bbb75626",
+      "tokenizer_config.json": "e7fbfbfa6347b4e414c1cee50d142e2c2f9a895dad68b068ae83a8b564c3837e"
+    },
+    "threshold": 0.38
+  },
+  "verifiedHybrid": {
+    "mode": "verified-hybrid",
+    "cases": 32,
+    "supportedCases": 20,
+    "recallAt1": 0.3,
+    "recallAt3": 0.3,
+    "top1HitRate": 0.35,
+    "top1HitRate95CI": {
+      "low": 0.181192,
+      "high": 0.567146
+    },
+    "allRelevantInTop3Rate": 0.25,
+    "allRelevantInTop3Rate95CI": {
+      "low": 0.111862,
+      "high": 0.468701
+    },
+    "mrr": 0.35,
+    "citationCorrectness": 1.0,
+    "unsupportedAccuracy": 0.75,
+    "passed": 14,
+    "passRate": 0.4375,
+    "passRate95CI": {
+      "low": 0.281653,
+      "high": 0.606744
+    },
+    "languageSlices": {
+      "en": {
+        "cases": 16,
+        "passed": 7,
+        "passRate": 0.4375,
+        "passRate95CI": {
+          "low": 0.230987,
+          "high": 0.668214
+        }
+      },
+      "zh": {
+        "cases": 16,
+        "passed": 7,
+        "passRate": 0.4375,
+        "passRate95CI": {
+          "low": 0.230987,
+          "high": 0.668214
+        }
+      }
+    },
+    "categorySlices": {
+      "multi-evidence": {
+        "cases": 12,
+        "passed": 0,
+        "passRate": 0.0,
+        "passRate95CI": {
+          "low": 0.0,
+          "high": 0.242494
+        }
+      },
+      "single-evidence": {
+        "cases": 8,
+        "passed": 5,
+        "passRate": 0.625,
+        "passRate95CI": {
+          "low": 0.305742,
+          "high": 0.863156
+        }
+      },
+      "unsupported": {
+        "cases": 12,
+        "passed": 9,
+        "passRate": 0.75,
+        "passRate95CI": {
+          "low": 0.467695,
+          "high": 0.911058
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "dev-001",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-002",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-003",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-004",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/cold-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.145209,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.264016,
+        "scoreMargin": 0.145209,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "冷藏存储与常温存储分别要求什么温度和环境控制？"
+        ]
+      },
+      {
+        "id": "dev-005",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-006",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/change-control.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.176747,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.321358,
+        "scoreMargin": 0.176747,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "供应商审核和制造变更控制分别需要哪些批准或后续验证？"
+        ]
+      },
+      {
+        "id": "dev-007",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-008",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-009",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-010",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-011",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-012",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-014",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-016",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-018",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-021",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.729071,
+        "topLexicalScore": 4.132364,
+        "topSemanticScore": 0.507401,
+        "scoreMargin": 0.729071,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "What company calibrates the pressure gauge references?"
+        ]
+      },
+      {
+        "id": "dev-025",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.676972,
+        "topLexicalScore": 4.462618,
+        "topSemanticScore": 0.750245,
+        "scoreMargin": 0.676972,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "Which brand of respirator is used in the paint booth?"
+        ]
+      },
+      {
+        "id": "dev-029",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/supplier-audit.md"
+        ],
+        "chunkPaths": [
+          "inputs/supplier-audit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.801059,
+        "topLexicalScore": 6.307117,
+        "topSemanticScore": 0.63829,
+        "scoreMargin": 0.801059,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "What is the annual fee for a critical supplier audit?"
+        ]
+      }
+    ],
+    "caseResults": [
+      {
+        "id": "dev-001",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-002",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-003",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-004",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/cold-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.145209,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.264016,
+        "scoreMargin": 0.145209,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "冷藏存储与常温存储分别要求什么温度和环境控制？"
+        ]
+      },
+      {
+        "id": "dev-005",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-006",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/change-control.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.176747,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.321358,
+        "scoreMargin": 0.176747,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "供应商审核和制造变更控制分别需要哪些批准或后续验证？"
+        ]
+      },
+      {
+        "id": "dev-007",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-008",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-009",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-010",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-011",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-012",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-013",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.563523,
+        "topLexicalScore": 4.282364,
+        "topSemanticScore": 0.611988,
+        "scoreMargin": 0.563523,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "What happens to a pressure gauge that fails calibration?"
+        ]
+      },
+      {
+        "id": "dev-014",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-015",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/planned-maintenance.md"
+        ],
+        "chunkPaths": [
+          "inputs/planned-maintenance.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.853385,
+        "topLexicalScore": 10.934553,
+        "topSemanticScore": 0.733428,
+        "scoreMargin": 0.853385,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "May production restart before machine guards and the work area are restored?"
+        ]
+      },
+      {
+        "id": "dev-016",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-017",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.891779,
+        "topLexicalScore": 11.305752,
+        "topSemanticScore": 0.803234,
+        "scoreMargin": 0.891779,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "Are a respirator and chemical-resistant gloves required for spray painting?"
+        ]
+      },
+      {
+        "id": "dev-018",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-019",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/final-release.md"
+        ],
+        "chunkPaths": [
+          "inputs/final-release.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.782281,
+        "topLexicalScore": 10.544783,
+        "topSemanticScore": 0.604148,
+        "scoreMargin": 0.782281,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "Who may move a batch from hold to released status?"
+        ]
+      },
+      {
+        "id": "dev-020",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/rework.md"
+        ],
+        "chunkPaths": [
+          "inputs/rework.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.143463,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.260842,
+        "scoreMargin": 0.143463,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "第二次返工需要谁书面批准？"
+        ]
+      },
+      {
+        "id": "dev-021",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.729071,
+        "topLexicalScore": 4.132364,
+        "topSemanticScore": 0.507401,
+        "scoreMargin": 0.729071,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "What company calibrates the pressure gauge references?"
+        ]
+      },
+      {
+        "id": "dev-022",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-023",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-024",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-025",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.676972,
+        "topLexicalScore": 4.462618,
+        "topSemanticScore": 0.750245,
+        "scoreMargin": 0.676972,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "Which brand of respirator is used in the paint booth?"
+        ]
+      },
+      {
+        "id": "dev-026",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-027",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-028",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-029",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/supplier-audit.md"
+        ],
+        "chunkPaths": [
+          "inputs/supplier-audit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.801059,
+        "topLexicalScore": 6.307117,
+        "topSemanticScore": 0.63829,
+        "scoreMargin": 0.801059,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "What is the annual fee for a critical supplier audit?"
+        ]
+      },
+      {
+        "id": "dev-030",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-031",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-032",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      }
+    ]
+  },
+  "decomposedVerifiedHybrid": {
+    "mode": "verified-hybrid",
+    "cases": 32,
+    "supportedCases": 20,
+    "recallAt1": 0.375,
+    "recallAt3": 0.425,
+    "top1HitRate": 0.5,
+    "top1HitRate95CI": {
+      "low": 0.299298,
+      "high": 0.700702
+    },
+    "allRelevantInTop3Rate": 0.35,
+    "allRelevantInTop3Rate95CI": {
+      "low": 0.181192,
+      "high": 0.567146
+    },
+    "mrr": 0.5,
+    "citationCorrectness": 1.0,
+    "unsupportedAccuracy": 0.75,
+    "passed": 16,
+    "passRate": 0.5,
+    "passRate95CI": {
+      "low": 0.336309,
+      "high": 0.663691
+    },
+    "languageSlices": {
+      "en": {
+        "cases": 16,
+        "passed": 8,
+        "passRate": 0.5,
+        "passRate95CI": {
+          "low": 0.279996,
+          "high": 0.720004
+        }
+      },
+      "zh": {
+        "cases": 16,
+        "passed": 8,
+        "passRate": 0.5,
+        "passRate95CI": {
+          "low": 0.279996,
+          "high": 0.720004
+        }
+      }
+    },
+    "categorySlices": {
+      "multi-evidence": {
+        "cases": 12,
+        "passed": 2,
+        "passRate": 0.166667,
+        "passRate95CI": {
+          "low": 0.046965,
+          "high": 0.448031
+        }
+      },
+      "single-evidence": {
+        "cases": 8,
+        "passed": 5,
+        "passRate": 0.625,
+        "passRate95CI": {
+          "low": 0.305742,
+          "high": 0.863156
+        }
+      },
+      "unsupported": {
+        "cases": 12,
+        "passed": 9,
+        "passRate": 0.75,
+        "passRate95CI": {
+          "low": 0.467695,
+          "high": 0.911058
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "dev-001",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-002",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-003",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.451421,
+        "topLexicalScore": 2.033917,
+        "topSemanticScore": 0.692298,
+        "scoreMargin": 0.451421,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": [
+          "What are the protective equipment and operating controls for paint booth safety?"
+        ]
+      },
+      {
+        "id": "dev-005",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-006",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/change-control.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.177168,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.322124,
+        "scoreMargin": 0.177168,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": [
+          "制造变更控制 需要哪些批准或后续验证"
+        ]
+      },
+      {
+        "id": "dev-007",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-008",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-010",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-011",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/cold-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.403221,
+        "topLexicalScore": 2.42451,
+        "topSemanticScore": 0.499532,
+        "scoreMargin": 0.403221,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": [
+          "What are monitoring and escalation for cold storage?"
+        ]
+      },
+      {
+        "id": "dev-012",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-014",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-016",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-018",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-021",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.729071,
+        "topLexicalScore": 4.132364,
+        "topSemanticScore": 0.507401,
+        "scoreMargin": 0.729071,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "What company calibrates the pressure gauge references?"
+        ]
+      },
+      {
+        "id": "dev-025",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.676972,
+        "topLexicalScore": 4.462618,
+        "topSemanticScore": 0.750245,
+        "scoreMargin": 0.676972,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "Which brand of respirator is used in the paint booth?"
+        ]
+      },
+      {
+        "id": "dev-029",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/supplier-audit.md"
+        ],
+        "chunkPaths": [
+          "inputs/supplier-audit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.801059,
+        "topLexicalScore": 6.307117,
+        "topSemanticScore": 0.63829,
+        "scoreMargin": 0.801059,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "What is the annual fee for a critical supplier audit?"
+        ]
+      }
+    ],
+    "caseResults": [
+      {
+        "id": "dev-001",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-002",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-003",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.451421,
+        "topLexicalScore": 2.033917,
+        "topSemanticScore": 0.692298,
+        "scoreMargin": 0.451421,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": [
+          "What are the protective equipment and operating controls for paint booth safety?"
+        ]
+      },
+      {
+        "id": "dev-004",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/ambient-storage.md",
+          "inputs/cold-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/ambient-storage.md",
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.145386,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.264338,
+        "scoreMargin": -0.033138,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": [
+          "冷藏存储 要求什么温度和环境控制",
+          "常温存储 要求什么温度和环境控制"
+        ]
+      },
+      {
+        "id": "dev-005",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-006",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/change-control.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.177168,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.322124,
+        "scoreMargin": 0.177168,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": [
+          "制造变更控制 需要哪些批准或后续验证"
+        ]
+      },
+      {
+        "id": "dev-007",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-008",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-009",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/final-release.md",
+          "inputs/change-control.md"
+        ],
+        "chunkPaths": [
+          "inputs/final-release.md",
+          "inputs/change-control.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.842209,
+        "topLexicalScore": 11.120218,
+        "topSemanticScore": 0.713107,
+        "scoreMargin": -0.071171,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": [
+          "How do final product release",
+          "manufacturing change control"
+        ]
+      },
+      {
+        "id": "dev-010",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-011",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/cold-storage.md"
+        ],
+        "chunkPaths": [
+          "inputs/cold-storage.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.403221,
+        "topLexicalScore": 2.42451,
+        "topSemanticScore": 0.499532,
+        "scoreMargin": 0.403221,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": [
+          "What are monitoring and escalation for cold storage?"
+        ]
+      },
+      {
+        "id": "dev-012",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "decomposed-verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 3,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-013",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.563523,
+        "topLexicalScore": 4.282364,
+        "topSemanticScore": 0.611988,
+        "scoreMargin": 0.563523,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "What happens to a pressure gauge that fails calibration?"
+        ]
+      },
+      {
+        "id": "dev-014",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-015",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/planned-maintenance.md"
+        ],
+        "chunkPaths": [
+          "inputs/planned-maintenance.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.853385,
+        "topLexicalScore": 10.934553,
+        "topSemanticScore": 0.733428,
+        "scoreMargin": 0.853385,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "May production restart before machine guards and the work area are restored?"
+        ]
+      },
+      {
+        "id": "dev-016",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-017",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.891779,
+        "topLexicalScore": 11.305752,
+        "topSemanticScore": 0.803234,
+        "scoreMargin": 0.891779,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "Are a respirator and chemical-resistant gloves required for spray painting?"
+        ]
+      },
+      {
+        "id": "dev-018",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-019",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/final-release.md"
+        ],
+        "chunkPaths": [
+          "inputs/final-release.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.782281,
+        "topLexicalScore": 10.544783,
+        "topSemanticScore": 0.604148,
+        "scoreMargin": 0.782281,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "Who may move a batch from hold to released status?"
+        ]
+      },
+      {
+        "id": "dev-020",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/rework.md"
+        ],
+        "chunkPaths": [
+          "inputs/rework.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "single-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.143463,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.260842,
+        "scoreMargin": 0.143463,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "第二次返工需要谁书面批准？"
+        ]
+      },
+      {
+        "id": "dev-021",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "chunkPaths": [
+          "inputs/gauge-calibration.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.729071,
+        "topLexicalScore": 4.132364,
+        "topSemanticScore": 0.507401,
+        "scoreMargin": 0.729071,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "What company calibrates the pressure gauge references?"
+        ]
+      },
+      {
+        "id": "dev-022",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-023",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-024",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-025",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/paint-booth.md"
+        ],
+        "chunkPaths": [
+          "inputs/paint-booth.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.676972,
+        "topLexicalScore": 4.462618,
+        "topSemanticScore": 0.750245,
+        "scoreMargin": 0.676972,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "Which brand of respirator is used in the paint booth?"
+        ]
+      },
+      {
+        "id": "dev-026",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-027",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-028",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-029",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/supplier-audit.md"
+        ],
+        "chunkPaths": [
+          "inputs/supplier-audit.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.801059,
+        "topLexicalScore": 6.307117,
+        "topSemanticScore": 0.63829,
+        "scoreMargin": 0.801059,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": [
+          "What is the annual fee for a critical supplier audit?"
+        ]
+      },
+      {
+        "id": "dev-030",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-031",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      },
+      {
+        "id": "dev-032",
+        "mode": "hybrid",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null,
+        "verificationMode": "verified",
+        "verificationFailureReason": null,
+        "verificationQueryVariantCount": 1,
+        "matchedQueryVariants": []
+      }
+    ]
+  }
+}

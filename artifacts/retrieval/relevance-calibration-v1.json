@@ -1,0 +1,1397 @@
+{
+  "schemaVersion": 1,
+  "dataset": {
+    "path": "benchmarks/relevance_verifier_dev_v1.json",
+    "sha256": "8d56a6e0954db09081cf7a43151ef38dde9435641bc3a9325ab17d3bdb771056",
+    "split": "development"
+  },
+  "model": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "1427fd652930e4ba29e8149678df786c240d8825",
+    "license": "Apache-2.0",
+    "fileSha256": {
+      "config.json": "cc2cfe51aa3fd759d21d21acf5dfd6994aa67a3c9210636d22e143699d336c77",
+      "model.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "special_tokens_map.json": "378eb3bf733eb16e65792d7e3fda5b8a4631387ca04d2015199c4d4f22ae554d",
+      "tokenizer.json": "62c24cdc13d4c9952d63718d6c9fa4c287974249e16b7ade6d5a85e7bbb75626",
+      "tokenizer_config.json": "e7fbfbfa6347b4e414c1cee50d142e2c2f9a895dad68b068ae83a8b564c3837e"
+    }
+  },
+  "selectionRule": {
+    "thresholds": "0.01 through 0.99 in increments of 0.01",
+    "constraint": "positive recall >= 0.85",
+    "objective": "maximize the smaller of positive recall and negative recall",
+    "tieBreakers": [
+      "higher balanced accuracy",
+      "higher negative recall",
+      "higher threshold"
+    ]
+  },
+  "selected": {
+    "threshold": 0.38,
+    "positiveRecall": 0.958333,
+    "negativeRecall": 1.0,
+    "balancedAccuracy": 0.979167,
+    "worstClassRecall": 0.958333,
+    "correct": 47,
+    "cases": 48
+  },
+  "languageSlices": {
+    "en": {
+      "threshold": 0.38,
+      "positiveRecall": 1.0,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 1.0,
+      "worstClassRecall": 1.0,
+      "correct": 24,
+      "cases": 24
+    },
+    "zh": {
+      "threshold": 0.38,
+      "positiveRecall": 0.916667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.916667,
+      "correct": 23,
+      "cases": 24
+    }
+  },
+  "failures": [
+    {
+      "id": "rel-dev-030",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "申请无障碍支持要向哪个办公室提交证明？",
+      "passage": "Accessibility accommodations\n\nStudents request accommodations through the accessibility office with supporting documentation. Approved exam arrangements should be submitted to instructors at least seven calendar days before the test.",
+      "relevant": true,
+      "score": 0.06764005
+    }
+  ],
+  "cases": [
+    {
+      "id": "rel-dev-001",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "When can a student move a final exam?",
+      "passage": "Final exam scheduling\n\nA final may be rescheduled only for a documented medical emergency or a conflict between two university examinations. Requests must reach the registrar within five business days.",
+      "relevant": true,
+      "score": 0.69954963
+    },
+    {
+      "id": "rel-dev-002",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "学生应在多长时间内申请期末考试改期？",
+      "passage": "Final exam scheduling\n\nA final may be rescheduled only for a documented medical emergency or a conflict between two university examinations. Requests must reach the registrar within five business days.",
+      "relevant": true,
+      "score": 0.96358396
+    },
+    {
+      "id": "rel-dev-003",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "How much tuition is returned after withdrawal in week three?",
+      "passage": "Final exam scheduling\n\nA final may be rescheduled only for a documented medical emergency or a conflict between two university examinations. Requests must reach the registrar within five business days.",
+      "relevant": false,
+      "score": 0.00082731
+    },
+    {
+      "id": "rel-dev-004",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "错过实验课后如何补做安全培训？",
+      "passage": "Final exam scheduling\n\nA final may be rescheduled only for a documented medical emergency or a conflict between two university examinations. Requests must reach the registrar within five business days.",
+      "relevant": false,
+      "score": 0.00450387
+    },
+    {
+      "id": "rel-dev-005",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What refund applies when someone withdraws during the third week?",
+      "passage": "Tuition refunds\n\nWithdrawal before classes begin receives a full tuition refund. During weeks one and two the refund is eighty percent; during weeks three and four it is fifty percent. Fees are nonrefundable.",
+      "relevant": true,
+      "score": 0.44669877
+    },
+    {
+      "id": "rel-dev-006",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "开课前退学能退多少学费？",
+      "passage": "Tuition refunds\n\nWithdrawal before classes begin receives a full tuition refund. During weeks one and two the refund is eighty percent; during weeks three and four it is fifty percent. Fees are nonrefundable.",
+      "relevant": true,
+      "score": 0.9452346
+    },
+    {
+      "id": "rel-dev-007",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "Which medical evidence permits a final exam change?",
+      "passage": "Tuition refunds\n\nWithdrawal before classes begin receives a full tuition refund. During weeks one and two the refund is eighty percent; during weeks three and four it is fifty percent. Fees are nonrefundable.",
+      "relevant": false,
+      "score": 0.0010851
+    },
+    {
+      "id": "rel-dev-008",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "图书逾期每天罚款多少？",
+      "passage": "Tuition refunds\n\nWithdrawal before classes begin receives a full tuition refund. During weeks one and two the refund is eighty percent; during weeks three and four it is fifty percent. Fees are nonrefundable.",
+      "relevant": false,
+      "score": 0.0898136
+    },
+    {
+      "id": "rel-dev-009",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "How long may a graduate student keep a standard library book?",
+      "passage": "Library loans\n\nUndergraduates borrow standard books for twenty-one days. Graduate students receive a forty-two-day loan. Reserved course materials are limited to four hours and cannot leave the library.",
+      "relevant": true,
+      "score": 0.9995361
+    },
+    {
+      "id": "rel-dev-010",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "课程保留资料能否带出图书馆？",
+      "passage": "Library loans\n\nUndergraduates borrow standard books for twenty-one days. Graduate students receive a forty-two-day loan. Reserved course materials are limited to four hours and cannot leave the library.",
+      "relevant": true,
+      "score": 0.907241
+    },
+    {
+      "id": "rel-dev-011",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "Do graduate assistants receive a tuition refund on fees?",
+      "passage": "Library loans\n\nUndergraduates borrow standard books for twenty-one days. Graduate students receive a forty-two-day loan. Reserved course materials are limited to four hours and cannot leave the library.",
+      "relevant": false,
+      "score": 0.00298857
+    },
+    {
+      "id": "rel-dev-012",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "学生宿舍访客最晚几点离开？",
+      "passage": "Library loans\n\nUndergraduates borrow standard books for twenty-one days. Graduate students receive a forty-two-day loan. Reserved course materials are limited to four hours and cannot leave the library.",
+      "relevant": false,
+      "score": 0.00861148
+    },
+    {
+      "id": "rel-dev-013",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What must happen before anyone works alone in the chemistry lab?",
+      "passage": "Laboratory access\n\nResearchers must complete chemical safety training and a supervised orientation before receiving independent laboratory access. Refresher training is required every twelve months.",
+      "relevant": true,
+      "score": 0.48347035
+    },
+    {
+      "id": "rel-dev-014",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "化学安全复训多久进行一次？",
+      "passage": "Laboratory access\n\nResearchers must complete chemical safety training and a supervised orientation before receiving independent laboratory access. Refresher training is required every twelve months.",
+      "relevant": true,
+      "score": 0.81577342
+    },
+    {
+      "id": "rel-dev-015",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "How many hours may reserved books be borrowed?",
+      "passage": "Laboratory access\n\nResearchers must complete chemical safety training and a supervised orientation before receiving independent laboratory access. Refresher training is required every twelve months.",
+      "relevant": false,
+      "score": 0.00070579
+    },
+    {
+      "id": "rel-dev-016",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "忘记校园密码后验证码有效多久？",
+      "passage": "Laboratory access\n\nResearchers must complete chemical safety training and a supervised orientation before receiving independent laboratory access. Refresher training is required every twelve months.",
+      "relevant": false,
+      "score": 0.00365001
+    },
+    {
+      "id": "rel-dev-017",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What is required to recover a campus account?",
+      "passage": "Account recovery\n\nPassword recovery requires the student number and a one-time code sent to the registered phone. The code expires after ten minutes. Support staff never ask for the previous password.",
+      "relevant": true,
+      "score": 0.94978183
+    },
+    {
+      "id": "rel-dev-018",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "校园账户恢复人员会索要旧密码吗？",
+      "passage": "Account recovery\n\nPassword recovery requires the student number and a one-time code sent to the registered phone. The code expires after ten minutes. Support staff never ask for the previous password.",
+      "relevant": true,
+      "score": 0.90873621
+    },
+    {
+      "id": "rel-dev-019",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "How often is chemistry refresher training mandatory?",
+      "passage": "Account recovery\n\nPassword recovery requires the student number and a one-time code sent to the registered phone. The code expires after ten minutes. Support staff never ask for the previous password.",
+      "relevant": false,
+      "score": 0.00034753
+    },
+    {
+      "id": "rel-dev-020",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "成绩单加急处理需要几天？",
+      "passage": "Account recovery\n\nPassword recovery requires the student number and a one-time code sent to the registered phone. The code expires after ten minutes. Support staff never ask for the previous password.",
+      "relevant": false,
+      "score": 0.1941476
+    },
+    {
+      "id": "rel-dev-021",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "When must residence hall visitors leave?",
+      "passage": "Residence hall guests\n\nResidents may host up to two guests after registering them at the front desk. Guests must leave by midnight Sunday through Thursday and by 2 a.m. on Friday and Saturday.",
+      "relevant": true,
+      "score": 0.99992916
+    },
+    {
+      "id": "rel-dev-022",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "每位住宿学生最多可以接待几名访客？",
+      "passage": "Residence hall guests\n\nResidents may host up to two guests after registering them at the front desk. Guests must leave by midnight Sunday through Thursday and by 2 a.m. on Friday and Saturday.",
+      "relevant": true,
+      "score": 0.43790847
+    },
+    {
+      "id": "rel-dev-023",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "Can course reserve materials leave the library after midnight?",
+      "passage": "Residence hall guests\n\nResidents may host up to two guests after registering them at the front desk. Guests must leave by midnight Sunday through Thursday and by 2 a.m. on Friday and Saturday.",
+      "relevant": false,
+      "score": 0.00055784
+    },
+    {
+      "id": "rel-dev-024",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "实习学分要求每周工作多少小时？",
+      "passage": "Residence hall guests\n\nResidents may host up to two guests after registering them at the front desk. Guests must leave by midnight Sunday through Thursday and by 2 a.m. on Friday and Saturday.",
+      "relevant": false,
+      "score": 0.00317948
+    },
+    {
+      "id": "rel-dev-025",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "How much supervised work is needed for one internship credit?",
+      "passage": "Internship credit\n\nOne academic credit requires forty-five hours of supervised internship work and a reflective report. A faculty sponsor must approve the placement before the first workday.",
+      "relevant": true,
+      "score": 0.99823248
+    },
+    {
+      "id": "rel-dev-026",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "实习开始前谁必须批准实习单位？",
+      "passage": "Internship credit\n\nOne academic credit requires forty-five hours of supervised internship work and a reflective report. A faculty sponsor must approve the placement before the first workday.",
+      "relevant": true,
+      "score": 0.69902502
+    },
+    {
+      "id": "rel-dev-027",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "How many guests may a resident register at the front desk?",
+      "passage": "Internship credit\n\nOne academic credit requires forty-five hours of supervised internship work and a reflective report. A faculty sponsor must approve the placement before the first workday.",
+      "relevant": false,
+      "score": 0.0006876
+    },
+    {
+      "id": "rel-dev-028",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "无障碍考试安排需要提前多少天申请？",
+      "passage": "Internship credit\n\nOne academic credit requires forty-five hours of supervised internship work and a reflective report. A faculty sponsor must approve the placement before the first workday.",
+      "relevant": false,
+      "score": 0.00770153
+    },
+    {
+      "id": "rel-dev-029",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "How early should approved exam accommodations be arranged?",
+      "passage": "Accessibility accommodations\n\nStudents request accommodations through the accessibility office with supporting documentation. Approved exam arrangements should be submitted to instructors at least seven calendar days before the test.",
+      "relevant": true,
+      "score": 0.99723886
+    },
+    {
+      "id": "rel-dev-030",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "申请无障碍支持要向哪个办公室提交证明？",
+      "passage": "Accessibility accommodations\n\nStudents request accommodations through the accessibility office with supporting documentation. Approved exam arrangements should be submitted to instructors at least seven calendar days before the test.",
+      "relevant": true,
+      "score": 0.06764005
+    },
+    {
+      "id": "rel-dev-031",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "Does a faculty sponsor approve a placement after the first workday?",
+      "passage": "Accessibility accommodations\n\nStudents request accommodations through the accessibility office with supporting documentation. Approved exam arrangements should be submitted to instructors at least seven calendar days before the test.",
+      "relevant": false,
+      "score": 0.00118323
+    },
+    {
+      "id": "rel-dev-032",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "正式成绩单通过什么方式寄送？",
+      "passage": "Accessibility accommodations\n\nStudents request accommodations through the accessibility office with supporting documentation. Approved exam arrangements should be submitted to instructors at least seven calendar days before the test.",
+      "relevant": false,
+      "score": 0.03500921
+    },
+    {
+      "id": "rel-dev-033",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "How is an official transcript delivered?",
+      "passage": "Official transcripts\n\nOfficial transcripts are sent electronically through the approved credential service or mailed in a sealed envelope. Standard requests take three business days; rush requests take one business day.",
+      "relevant": true,
+      "score": 0.9983135
+    },
+    {
+      "id": "rel-dev-034",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "加急成绩单申请多久处理完？",
+      "passage": "Official transcripts\n\nOfficial transcripts are sent electronically through the approved credential service or mailed in a sealed envelope. Standard requests take three business days; rush requests take one business day.",
+      "relevant": true,
+      "score": 0.80817365
+    },
+    {
+      "id": "rel-dev-035",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "How far ahead must an instructor receive an accommodation notice?",
+      "passage": "Official transcripts\n\nOfficial transcripts are sent electronically through the approved credential service or mailed in a sealed envelope. Standard requests take three business days; rush requests take one business day.",
+      "relevant": false,
+      "score": 0.00323712
+    },
+    {
+      "id": "rel-dev-036",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "研究数据默认保存多少年？",
+      "passage": "Official transcripts\n\nOfficial transcripts are sent electronically through the approved credential service or mailed in a sealed envelope. Standard requests take three business days; rush requests take one business day.",
+      "relevant": false,
+      "score": 0.02785791
+    },
+    {
+      "id": "rel-dev-037",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "When may identifiable research data be destroyed?",
+      "passage": "Research data retention\n\nResearch records are retained for five years after project closure. Identifiable data is encrypted and limited to named study staff. Earlier destruction requires written approval from the ethics office.",
+      "relevant": true,
+      "score": 0.99854829
+    },
+    {
+      "id": "rel-dev-038",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "可识别研究数据允许哪些人访问？",
+      "passage": "Research data retention\n\nResearch records are retained for five years after project closure. Identifiable data is encrypted and limited to named study staff. Earlier destruction requires written approval from the ethics office.",
+      "relevant": true,
+      "score": 0.38995103
+    },
+    {
+      "id": "rel-dev-039",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "How quickly is a rush transcript processed?",
+      "passage": "Research data retention\n\nResearch records are retained for five years after project closure. Identifiable data is encrypted and limited to named study staff. Earlier destruction requires written approval from the ethics office.",
+      "relevant": false,
+      "score": 0.00345246
+    },
+    {
+      "id": "rel-dev-040",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "国内出差餐费是否需要收据？",
+      "passage": "Research data retention\n\nResearch records are retained for five years after project closure. Identifiable data is encrypted and limited to named study staff. Earlier destruction requires written approval from the ethics office.",
+      "relevant": false,
+      "score": 0.00035294
+    },
+    {
+      "id": "rel-dev-041",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "Are receipts required for domestic travel meals?",
+      "passage": "Travel reimbursement\n\nDomestic meals use the published per-diem rate and do not require individual receipts. Airfare and lodging require itemized receipts. Claims must be submitted within thirty days after travel ends.",
+      "relevant": true,
+      "score": 0.99983586
+    },
+    {
+      "id": "rel-dev-042",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "出差结束后最迟多久提交报销？",
+      "passage": "Travel reimbursement\n\nDomestic meals use the published per-diem rate and do not require individual receipts. Airfare and lodging require itemized receipts. Claims must be submitted within thirty days after travel ends.",
+      "relevant": true,
+      "score": 0.57772353
+    },
+    {
+      "id": "rel-dev-043",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "Who authorizes early destruction of identifiable research data?",
+      "passage": "Travel reimbursement\n\nDomestic meals use the published per-diem rate and do not require individual receipts. Airfare and lodging require itemized receipts. Claims must be submitted within thirty days after travel ends.",
+      "relevant": false,
+      "score": 7.67e-05
+    },
+    {
+      "id": "rel-dev-044",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "涉及儿童的研究需要谁同意？",
+      "passage": "Travel reimbursement\n\nDomestic meals use the published per-diem rate and do not require individual receipts. Airfare and lodging require itemized receipts. Claims must be submitted within thirty days after travel ends.",
+      "relevant": false,
+      "score": 7.938e-05
+    },
+    {
+      "id": "rel-dev-045",
+      "language": "en",
+      "category": "paraphrase",
+      "query": "What approvals are needed before enrolling children in a study?",
+      "passage": "Human-subject research\n\nA study may recruit participants only after ethics committee approval. Research involving children requires permission from a guardian and age-appropriate assent from the child.",
+      "relevant": true,
+      "score": 0.95371567
+    },
+    {
+      "id": "rel-dev-046",
+      "language": "zh",
+      "category": "cross-language",
+      "query": "研究在招募参与者之前必须获得什么批准？",
+      "passage": "Human-subject research\n\nA study may recruit participants only after ethics committee approval. Research involving children requires permission from a guardian and age-appropriate assent from the child.",
+      "relevant": true,
+      "score": 0.99678227
+    },
+    {
+      "id": "rel-dev-047",
+      "language": "en",
+      "category": "hard-negative",
+      "query": "Which travel expenses need itemized receipts?",
+      "passage": "Human-subject research\n\nA study may recruit participants only after ethics committee approval. Research involving children requires permission from a guardian and age-appropriate assent from the child.",
+      "relevant": false,
+      "score": 0.00015439
+    },
+    {
+      "id": "rel-dev-048",
+      "language": "zh",
+      "category": "hard-negative-cross-language",
+      "query": "期末考试冲突申请应交给哪个部门？",
+      "passage": "Human-subject research\n\nA study may recruit participants only after ethics committee approval. Research involving children requires permission from a guardian and age-appropriate assent from the child.",
+      "relevant": false,
+      "score": 0.00257976
+    }
+  ],
+  "thresholdMetrics": [
+    {
+      "threshold": 0.01,
+      "positiveRecall": 1.0,
+      "negativeRecall": 0.833333,
+      "balancedAccuracy": 0.916667,
+      "worstClassRecall": 0.833333,
+      "correct": 44,
+      "cases": 48
+    },
+    {
+      "threshold": 0.02,
+      "positiveRecall": 1.0,
+      "negativeRecall": 0.833333,
+      "balancedAccuracy": 0.916667,
+      "worstClassRecall": 0.833333,
+      "correct": 44,
+      "cases": 48
+    },
+    {
+      "threshold": 0.03,
+      "positiveRecall": 1.0,
+      "negativeRecall": 0.875,
+      "balancedAccuracy": 0.9375,
+      "worstClassRecall": 0.875,
+      "correct": 45,
+      "cases": 48
+    },
+    {
+      "threshold": 0.04,
+      "positiveRecall": 1.0,
+      "negativeRecall": 0.916667,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.916667,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.05,
+      "positiveRecall": 1.0,
+      "negativeRecall": 0.916667,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.916667,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.06,
+      "positiveRecall": 1.0,
+      "negativeRecall": 0.916667,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.916667,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.07,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.916667,
+      "balancedAccuracy": 0.9375,
+      "worstClassRecall": 0.916667,
+      "correct": 45,
+      "cases": 48
+    },
+    {
+      "threshold": 0.08,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.916667,
+      "balancedAccuracy": 0.9375,
+      "worstClassRecall": 0.916667,
+      "correct": 45,
+      "cases": 48
+    },
+    {
+      "threshold": 0.09,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.958333,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.958333,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.1,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.958333,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.958333,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.11,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.958333,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.958333,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.12,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.958333,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.958333,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.13,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.958333,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.958333,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.14,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.958333,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.958333,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.15,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.958333,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.958333,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.16,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.958333,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.958333,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.17,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.958333,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.958333,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.18,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.958333,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.958333,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.19,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 0.958333,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.958333,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.2,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.21,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.22,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.23,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.24,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.25,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.26,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.27,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.28,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.29,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.3,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.31,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.32,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.33,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.34,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.35,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.36,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.37,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.38,
+      "positiveRecall": 0.958333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.979167,
+      "worstClassRecall": 0.958333,
+      "correct": 47,
+      "cases": 48
+    },
+    {
+      "threshold": 0.39,
+      "positiveRecall": 0.916667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.916667,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.4,
+      "positiveRecall": 0.916667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.916667,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.41,
+      "positiveRecall": 0.916667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.916667,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.42,
+      "positiveRecall": 0.916667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.916667,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.43,
+      "positiveRecall": 0.916667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.958333,
+      "worstClassRecall": 0.916667,
+      "correct": 46,
+      "cases": 48
+    },
+    {
+      "threshold": 0.44,
+      "positiveRecall": 0.875,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.9375,
+      "worstClassRecall": 0.875,
+      "correct": 45,
+      "cases": 48
+    },
+    {
+      "threshold": 0.45,
+      "positiveRecall": 0.833333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.916667,
+      "worstClassRecall": 0.833333,
+      "correct": 44,
+      "cases": 48
+    },
+    {
+      "threshold": 0.46,
+      "positiveRecall": 0.833333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.916667,
+      "worstClassRecall": 0.833333,
+      "correct": 44,
+      "cases": 48
+    },
+    {
+      "threshold": 0.47,
+      "positiveRecall": 0.833333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.916667,
+      "worstClassRecall": 0.833333,
+      "correct": 44,
+      "cases": 48
+    },
+    {
+      "threshold": 0.48,
+      "positiveRecall": 0.833333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.916667,
+      "worstClassRecall": 0.833333,
+      "correct": 44,
+      "cases": 48
+    },
+    {
+      "threshold": 0.49,
+      "positiveRecall": 0.791667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.895833,
+      "worstClassRecall": 0.791667,
+      "correct": 43,
+      "cases": 48
+    },
+    {
+      "threshold": 0.5,
+      "positiveRecall": 0.791667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.895833,
+      "worstClassRecall": 0.791667,
+      "correct": 43,
+      "cases": 48
+    },
+    {
+      "threshold": 0.51,
+      "positiveRecall": 0.791667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.895833,
+      "worstClassRecall": 0.791667,
+      "correct": 43,
+      "cases": 48
+    },
+    {
+      "threshold": 0.52,
+      "positiveRecall": 0.791667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.895833,
+      "worstClassRecall": 0.791667,
+      "correct": 43,
+      "cases": 48
+    },
+    {
+      "threshold": 0.53,
+      "positiveRecall": 0.791667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.895833,
+      "worstClassRecall": 0.791667,
+      "correct": 43,
+      "cases": 48
+    },
+    {
+      "threshold": 0.54,
+      "positiveRecall": 0.791667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.895833,
+      "worstClassRecall": 0.791667,
+      "correct": 43,
+      "cases": 48
+    },
+    {
+      "threshold": 0.55,
+      "positiveRecall": 0.791667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.895833,
+      "worstClassRecall": 0.791667,
+      "correct": 43,
+      "cases": 48
+    },
+    {
+      "threshold": 0.56,
+      "positiveRecall": 0.791667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.895833,
+      "worstClassRecall": 0.791667,
+      "correct": 43,
+      "cases": 48
+    },
+    {
+      "threshold": 0.57,
+      "positiveRecall": 0.791667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.895833,
+      "worstClassRecall": 0.791667,
+      "correct": 43,
+      "cases": 48
+    },
+    {
+      "threshold": 0.58,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.59,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.6,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.61,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.62,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.63,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.64,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.65,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.66,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.67,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.68,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.69,
+      "positiveRecall": 0.75,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.875,
+      "worstClassRecall": 0.75,
+      "correct": 42,
+      "cases": 48
+    },
+    {
+      "threshold": 0.7,
+      "positiveRecall": 0.666667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.833333,
+      "worstClassRecall": 0.666667,
+      "correct": 40,
+      "cases": 48
+    },
+    {
+      "threshold": 0.71,
+      "positiveRecall": 0.666667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.833333,
+      "worstClassRecall": 0.666667,
+      "correct": 40,
+      "cases": 48
+    },
+    {
+      "threshold": 0.72,
+      "positiveRecall": 0.666667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.833333,
+      "worstClassRecall": 0.666667,
+      "correct": 40,
+      "cases": 48
+    },
+    {
+      "threshold": 0.73,
+      "positiveRecall": 0.666667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.833333,
+      "worstClassRecall": 0.666667,
+      "correct": 40,
+      "cases": 48
+    },
+    {
+      "threshold": 0.74,
+      "positiveRecall": 0.666667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.833333,
+      "worstClassRecall": 0.666667,
+      "correct": 40,
+      "cases": 48
+    },
+    {
+      "threshold": 0.75,
+      "positiveRecall": 0.666667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.833333,
+      "worstClassRecall": 0.666667,
+      "correct": 40,
+      "cases": 48
+    },
+    {
+      "threshold": 0.76,
+      "positiveRecall": 0.666667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.833333,
+      "worstClassRecall": 0.666667,
+      "correct": 40,
+      "cases": 48
+    },
+    {
+      "threshold": 0.77,
+      "positiveRecall": 0.666667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.833333,
+      "worstClassRecall": 0.666667,
+      "correct": 40,
+      "cases": 48
+    },
+    {
+      "threshold": 0.78,
+      "positiveRecall": 0.666667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.833333,
+      "worstClassRecall": 0.666667,
+      "correct": 40,
+      "cases": 48
+    },
+    {
+      "threshold": 0.79,
+      "positiveRecall": 0.666667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.833333,
+      "worstClassRecall": 0.666667,
+      "correct": 40,
+      "cases": 48
+    },
+    {
+      "threshold": 0.8,
+      "positiveRecall": 0.666667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.833333,
+      "worstClassRecall": 0.666667,
+      "correct": 40,
+      "cases": 48
+    },
+    {
+      "threshold": 0.81,
+      "positiveRecall": 0.625,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.8125,
+      "worstClassRecall": 0.625,
+      "correct": 39,
+      "cases": 48
+    },
+    {
+      "threshold": 0.82,
+      "positiveRecall": 0.583333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.791667,
+      "worstClassRecall": 0.583333,
+      "correct": 38,
+      "cases": 48
+    },
+    {
+      "threshold": 0.83,
+      "positiveRecall": 0.583333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.791667,
+      "worstClassRecall": 0.583333,
+      "correct": 38,
+      "cases": 48
+    },
+    {
+      "threshold": 0.84,
+      "positiveRecall": 0.583333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.791667,
+      "worstClassRecall": 0.583333,
+      "correct": 38,
+      "cases": 48
+    },
+    {
+      "threshold": 0.85,
+      "positiveRecall": 0.583333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.791667,
+      "worstClassRecall": 0.583333,
+      "correct": 38,
+      "cases": 48
+    },
+    {
+      "threshold": 0.86,
+      "positiveRecall": 0.583333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.791667,
+      "worstClassRecall": 0.583333,
+      "correct": 38,
+      "cases": 48
+    },
+    {
+      "threshold": 0.87,
+      "positiveRecall": 0.583333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.791667,
+      "worstClassRecall": 0.583333,
+      "correct": 38,
+      "cases": 48
+    },
+    {
+      "threshold": 0.88,
+      "positiveRecall": 0.583333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.791667,
+      "worstClassRecall": 0.583333,
+      "correct": 38,
+      "cases": 48
+    },
+    {
+      "threshold": 0.89,
+      "positiveRecall": 0.583333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.791667,
+      "worstClassRecall": 0.583333,
+      "correct": 38,
+      "cases": 48
+    },
+    {
+      "threshold": 0.9,
+      "positiveRecall": 0.583333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.791667,
+      "worstClassRecall": 0.583333,
+      "correct": 38,
+      "cases": 48
+    },
+    {
+      "threshold": 0.91,
+      "positiveRecall": 0.5,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.75,
+      "worstClassRecall": 0.5,
+      "correct": 36,
+      "cases": 48
+    },
+    {
+      "threshold": 0.92,
+      "positiveRecall": 0.5,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.75,
+      "worstClassRecall": 0.5,
+      "correct": 36,
+      "cases": 48
+    },
+    {
+      "threshold": 0.93,
+      "positiveRecall": 0.5,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.75,
+      "worstClassRecall": 0.5,
+      "correct": 36,
+      "cases": 48
+    },
+    {
+      "threshold": 0.94,
+      "positiveRecall": 0.5,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.75,
+      "worstClassRecall": 0.5,
+      "correct": 36,
+      "cases": 48
+    },
+    {
+      "threshold": 0.95,
+      "positiveRecall": 0.416667,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.708333,
+      "worstClassRecall": 0.416667,
+      "correct": 34,
+      "cases": 48
+    },
+    {
+      "threshold": 0.96,
+      "positiveRecall": 0.375,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.6875,
+      "worstClassRecall": 0.375,
+      "correct": 33,
+      "cases": 48
+    },
+    {
+      "threshold": 0.97,
+      "positiveRecall": 0.333333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.666667,
+      "worstClassRecall": 0.333333,
+      "correct": 32,
+      "cases": 48
+    },
+    {
+      "threshold": 0.98,
+      "positiveRecall": 0.333333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.666667,
+      "worstClassRecall": 0.333333,
+      "correct": 32,
+      "cases": 48
+    },
+    {
+      "threshold": 0.99,
+      "positiveRecall": 0.333333,
+      "negativeRecall": 1.0,
+      "balancedAccuracy": 0.666667,
+      "worstClassRecall": 0.333333,
+      "correct": 32,
+      "cases": 48
+    }
+  ]
+}

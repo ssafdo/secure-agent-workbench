@@ -1,0 +1,1514 @@
+{
+  "schemaVersion": 1,
+  "dataset": {
+    "path": "benchmarks/retrieval_threshold_dev_v1.json",
+    "sha256": "bc1c8bf184de2167f5cbab74f103bcf9f9ace858897b0d1639f416be858d7818",
+    "split": "development"
+  },
+  "selectionRule": {
+    "objective": "maximize mean(all-relevant-in-top3, unsupported-accuracy)",
+    "minimumSupportedCoverage": 0.7,
+    "tieBreakers": [
+      "unsupportedAccuracy",
+      "supportedAllRelevantInTop3",
+      "mrr",
+      "lowerThreshold"
+    ]
+  },
+  "selected": {
+    "model": {
+      "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+      "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+      "license": "MIT",
+      "fileSha256": {
+        "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+        "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+        "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+      }
+    },
+    "threshold": 0.0,
+    "supportedAllRelevantInTop3": 0.75,
+    "unsupportedAccuracy": 0.375,
+    "balancedScore": 0.5625,
+    "mrr": 0.6875,
+    "passRate": 0.625
+  },
+  "candidates": [
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.0,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.0,
+      "balancedScore": 0.375,
+      "mrr": 0.734375,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.02,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.0,
+      "balancedScore": 0.375,
+      "mrr": 0.734375,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.04,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.0,
+      "balancedScore": 0.375,
+      "mrr": 0.734375,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.06,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.0,
+      "balancedScore": 0.375,
+      "mrr": 0.734375,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.08,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.0,
+      "balancedScore": 0.375,
+      "mrr": 0.734375,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.1,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.0,
+      "balancedScore": 0.375,
+      "mrr": 0.734375,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.12,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.0,
+      "balancedScore": 0.375,
+      "mrr": 0.734375,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.14,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.0,
+      "balancedScore": 0.375,
+      "mrr": 0.734375,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.16,
+      "supportedAllRelevantInTop3": 0.6875,
+      "unsupportedAccuracy": 0.375,
+      "balancedScore": 0.53125,
+      "mrr": 0.703125,
+      "passRate": 0.583333
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.18,
+      "supportedAllRelevantInTop3": 0.625,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.5625,
+      "mrr": 0.640625,
+      "passRate": 0.583333
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.2,
+      "supportedAllRelevantInTop3": 0.625,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.5625,
+      "mrr": 0.640625,
+      "passRate": 0.583333
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.22,
+      "supportedAllRelevantInTop3": 0.625,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.5625,
+      "mrr": 0.5625,
+      "passRate": 0.583333
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.24,
+      "supportedAllRelevantInTop3": 0.625,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.5625,
+      "mrr": 0.5625,
+      "passRate": 0.583333
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.26,
+      "supportedAllRelevantInTop3": 0.5,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.5,
+      "mrr": 0.5,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.28,
+      "supportedAllRelevantInTop3": 0.5,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.5,
+      "mrr": 0.5,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.3,
+      "supportedAllRelevantInTop3": 0.5,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.5,
+      "mrr": 0.5,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.32,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.34,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.36,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.38,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.4,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.42,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.44,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.46,
+      "supportedAllRelevantInTop3": 0.3125,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.40625,
+      "mrr": 0.375,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.48,
+      "supportedAllRelevantInTop3": 0.3125,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.40625,
+      "mrr": 0.375,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.5,
+      "supportedAllRelevantInTop3": 0.3125,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.40625,
+      "mrr": 0.375,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.52,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.375,
+      "mrr": 0.34375,
+      "passRate": 0.333333
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.54,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.375,
+      "mrr": 0.34375,
+      "passRate": 0.333333
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.56,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.375,
+      "mrr": 0.34375,
+      "passRate": 0.333333
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.58,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.375,
+      "mrr": 0.34375,
+      "passRate": 0.333333
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.6,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.375,
+      "mrr": 0.34375,
+      "passRate": 0.333333
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.62,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.75,
+      "balancedScore": 0.5,
+      "mrr": 0.34375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.64,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.75,
+      "balancedScore": 0.5,
+      "mrr": 0.34375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.66,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.75,
+      "balancedScore": 0.5,
+      "mrr": 0.34375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.68,
+      "supportedAllRelevantInTop3": 0.1875,
+      "unsupportedAccuracy": 0.875,
+      "balancedScore": 0.53125,
+      "mrr": 0.3125,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.7,
+      "supportedAllRelevantInTop3": 0.1875,
+      "unsupportedAccuracy": 0.875,
+      "balancedScore": 0.53125,
+      "mrr": 0.3125,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.72,
+      "supportedAllRelevantInTop3": 0.1875,
+      "unsupportedAccuracy": 0.875,
+      "balancedScore": 0.53125,
+      "mrr": 0.3125,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.74,
+      "supportedAllRelevantInTop3": 0.1875,
+      "unsupportedAccuracy": 0.875,
+      "balancedScore": 0.53125,
+      "mrr": 0.25,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.76,
+      "supportedAllRelevantInTop3": 0.1875,
+      "unsupportedAccuracy": 0.875,
+      "balancedScore": 0.53125,
+      "mrr": 0.1875,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.78,
+      "supportedAllRelevantInTop3": 0.1875,
+      "unsupportedAccuracy": 0.875,
+      "balancedScore": 0.53125,
+      "mrr": 0.1875,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "Tokenade/potion-multilingual-128M-i8-tokenade",
+        "revision": "ba8c55049669aa4c81211002604fac3afc3a7a89",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "595e4cab2093732efd5dbe084fd5c1826b5eea693b73b4c1fd971672867d2e54",
+          "model.safetensors": "98587b62d9c4040e76b5c5f51d57e69c80b12b78d46fbb6b04f85ddb9b4f5890",
+          "tokenizer.json": "19f1909063da3cfe3bd83a782381f040dccea475f4816de11116444a73e1b6a1"
+        }
+      },
+      "threshold": 0.8,
+      "supportedAllRelevantInTop3": 0.125,
+      "unsupportedAccuracy": 1.0,
+      "balancedScore": 0.5625,
+      "mrr": 0.125,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.0,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.375,
+      "balancedScore": 0.5625,
+      "mrr": 0.6875,
+      "passRate": 0.625
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.02,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.375,
+      "balancedScore": 0.5625,
+      "mrr": 0.6875,
+      "passRate": 0.625
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.04,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.375,
+      "balancedScore": 0.5625,
+      "mrr": 0.6875,
+      "passRate": 0.625
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.06,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.375,
+      "balancedScore": 0.5625,
+      "mrr": 0.6875,
+      "passRate": 0.625
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.08,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.375,
+      "balancedScore": 0.5625,
+      "mrr": 0.6875,
+      "passRate": 0.625
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.1,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.375,
+      "balancedScore": 0.5625,
+      "mrr": 0.6875,
+      "passRate": 0.625
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.12,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.375,
+      "balancedScore": 0.5625,
+      "mrr": 0.6875,
+      "passRate": 0.625
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.14,
+      "supportedAllRelevantInTop3": 0.75,
+      "unsupportedAccuracy": 0.375,
+      "balancedScore": 0.5625,
+      "mrr": 0.6875,
+      "passRate": 0.625
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.16,
+      "supportedAllRelevantInTop3": 0.5625,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.53125,
+      "mrr": 0.53125,
+      "passRate": 0.541667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.18,
+      "supportedAllRelevantInTop3": 0.5625,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.53125,
+      "mrr": 0.5,
+      "passRate": 0.541667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.2,
+      "supportedAllRelevantInTop3": 0.5,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.5,
+      "mrr": 0.4375,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.22,
+      "supportedAllRelevantInTop3": 0.5,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.5,
+      "mrr": 0.4375,
+      "passRate": 0.5
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.24,
+      "supportedAllRelevantInTop3": 0.4375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.46875,
+      "mrr": 0.375,
+      "passRate": 0.458333
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.26,
+      "supportedAllRelevantInTop3": 0.4375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.46875,
+      "mrr": 0.375,
+      "passRate": 0.458333
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.28,
+      "supportedAllRelevantInTop3": 0.4375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.46875,
+      "mrr": 0.375,
+      "passRate": 0.458333
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.3,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.32,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.34,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.36,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.38,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.4,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.42,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.44,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.46,
+      "supportedAllRelevantInTop3": 0.375,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.4375,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.48,
+      "supportedAllRelevantInTop3": 0.3125,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.40625,
+      "mrr": 0.375,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.5,
+      "supportedAllRelevantInTop3": 0.3125,
+      "unsupportedAccuracy": 0.5,
+      "balancedScore": 0.40625,
+      "mrr": 0.375,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.52,
+      "supportedAllRelevantInTop3": 0.3125,
+      "unsupportedAccuracy": 0.625,
+      "balancedScore": 0.46875,
+      "mrr": 0.375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.54,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.625,
+      "balancedScore": 0.4375,
+      "mrr": 0.34375,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.56,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.75,
+      "balancedScore": 0.5,
+      "mrr": 0.34375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.58,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.75,
+      "balancedScore": 0.5,
+      "mrr": 0.34375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.6,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.75,
+      "balancedScore": 0.5,
+      "mrr": 0.34375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.62,
+      "supportedAllRelevantInTop3": 0.25,
+      "unsupportedAccuracy": 0.75,
+      "balancedScore": 0.5,
+      "mrr": 0.34375,
+      "passRate": 0.416667
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.64,
+      "supportedAllRelevantInTop3": 0.1875,
+      "unsupportedAccuracy": 0.75,
+      "balancedScore": 0.46875,
+      "mrr": 0.25,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.66,
+      "supportedAllRelevantInTop3": 0.1875,
+      "unsupportedAccuracy": 0.75,
+      "balancedScore": 0.46875,
+      "mrr": 0.25,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.68,
+      "supportedAllRelevantInTop3": 0.1875,
+      "unsupportedAccuracy": 0.75,
+      "balancedScore": 0.46875,
+      "mrr": 0.25,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.7,
+      "supportedAllRelevantInTop3": 0.125,
+      "unsupportedAccuracy": 0.75,
+      "balancedScore": 0.4375,
+      "mrr": 0.1875,
+      "passRate": 0.333333
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.72,
+      "supportedAllRelevantInTop3": 0.125,
+      "unsupportedAccuracy": 0.875,
+      "balancedScore": 0.5,
+      "mrr": 0.1875,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.74,
+      "supportedAllRelevantInTop3": 0.125,
+      "unsupportedAccuracy": 0.875,
+      "balancedScore": 0.5,
+      "mrr": 0.1875,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.76,
+      "supportedAllRelevantInTop3": 0.125,
+      "unsupportedAccuracy": 0.875,
+      "balancedScore": 0.5,
+      "mrr": 0.125,
+      "passRate": 0.375
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.78,
+      "supportedAllRelevantInTop3": 0.0625,
+      "unsupportedAccuracy": 0.875,
+      "balancedScore": 0.46875,
+      "mrr": 0.0625,
+      "passRate": 0.333333
+    },
+    {
+      "model": {
+        "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+        "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+        "license": "MIT",
+        "fileSha256": {
+          "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+          "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+          "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+        }
+      },
+      "threshold": 0.8,
+      "supportedAllRelevantInTop3": 0.0625,
+      "unsupportedAccuracy": 1.0,
+      "balancedScore": 0.53125,
+      "mrr": 0.0625,
+      "passRate": 0.375
+    }
+  ]
+}

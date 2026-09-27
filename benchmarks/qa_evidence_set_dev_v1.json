@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "name": "qa-evidence-set-answerability-calibration-v1",
+  "provenance": "Author-constructed calibration-only evidence sets created after Phase 33 was closed. No prior calibration, integration, held-out, or real-user text is reused.",
+  "selectionRule": {
+    "thresholdGrid": {
+      "start": 0.001,
+      "stop": 0.999,
+      "step": 0.001
+    },
+    "answerableRecallAtLeast": 0.8,
+    "tieBreakOrder": [
+      "worstClassRecall",
+      "balancedAccuracy",
+      "unanswerableRecall",
+      "higherThreshold"
+    ]
+  },
+  "candidateGate": {
+    "worstClassRecallAtLeast": 0.75,
+    "successfulAnswerRecallAtLeast": 0.7,
+    "topicRelatedMissingRecallAtLeast": 0.75,
+    "minimumLanguageBalancedAccuracyAtLeast": 0.7
+  },
+  "cases": [
+    {
+      "id": "qa-set-dev-001",
+      "language": "en",
+      "category": "multi-passage-answer",
+      "query": "Who signs the emergency purchasing waiver?",
+      "passages": ["Emergency purchases require a waiver before an order is placed.", "The Chief Financial Officer signs the emergency purchasing waiver."],
+      "answerable": true,
+      "expectedAnswers": ["Chief Financial Officer"]
+    },
+    {
+      "id": "qa-set-dev-002",
+      "language": "en",
+      "category": "multi-passage-answer",
+      "query": "Where is the satellite phone kept?",
+      "passages": ["The emergency inventory includes one satellite phone and two spare batteries.", "The satellite phone is kept in the locked cabinet inside Control Room B."],
+      "answerable": true,
+      "expectedAnswers": ["locked cabinet inside Control Room B", "Control Room B"]
+    },
+    {
+      "id": "qa-set-dev-003",
+      "language": "en",
+      "category": "multi-passage-answer",
+      "query": "How long are rejected loan applications retained?",
+      "passages": ["Rejected applications are separated from active customer files.", "Rejected loan applications are retained for 25 months after the decision."],
+      "answerable": true,
+      "expectedAnswers": ["25 months"]
+    },
+    {
+      "id": "qa-set-dev-004",
+      "language": "en",
+      "category": "multi-passage-answer",
+      "query": "Which carrier transports temperature-sensitive samples?",
+      "passages": ["Temperature-sensitive samples must include a calibrated data logger.", "PolarLink Logistics transports all temperature-sensitive samples."],
+      "answerable": true,
+      "expectedAnswers": ["PolarLink Logistics"]
+    },
+    {
+      "id": "qa-set-dev-005",
+      "language": "en",
+      "category": "explicit-negative-answer",
+      "query": "Can temporary staff approve refunds?",
+      "passages": ["Temporary staff may review customer refund requests.", "Temporary staff are not allowed to approve refunds."],
+      "answerable": true,
+      "expectedAnswers": ["not allowed", "not allowed to approve refunds"]
+    },
+    {
+      "id": "qa-set-dev-006",
+      "language": "en",
+      "category": "explicit-negative-answer",
+      "query": "May confidential drafts be sent through personal email?",
+      "passages": ["Confidential drafts carry an internal classification label.", "Confidential drafts must never be sent through personal email."],
+      "answerable": true,
+      "expectedAnswers": ["must never", "must never be sent through personal email"]
+    },
+    {
+      "id": "qa-set-dev-007",
+      "language": "en",
+      "category": "numeric-answer",
+      "query": "What is the maximum cash advance for field work?",
+      "passages": ["Field work cash advances require a project code.", "The maximum field work cash advance is 1,500 dollars per trip."],
+      "answerable": true,
+      "expectedAnswers": ["1,500 dollars", "1,500"]
+    },
+    {
+      "id": "qa-set-dev-008",
+      "language": "en",
+      "category": "numeric-answer",
+      "query": "When does the warehouse night shift begin?",
+      "passages": ["Night-shift staff enter through the east gate.", "The warehouse night shift begins at 22:30 local time."],
+      "answerable": true,
+      "expectedAnswers": ["22:30 local time", "22:30"]
+    },
+    {
+      "id": "qa-set-dev-009",
+      "language": "en",
+      "category": "cross-language-answer",
+      "query": "Which office issues export certificates?",
+      "passages": ["出口证书申请需要附产品编码和目的地。", "出口证书由国际贸易办公室签发。"],
+      "answerable": true,
+      "expectedAnswers": ["国际贸易办公室"]
+    },
+    {
+      "id": "qa-set-dev-010",
+      "language": "en",
+      "category": "cross-language-answer",
+      "query": "How often is the fire suppression system tested?",
+      "passages": ["消防系统测试结果应记录在设施日志中。", "灭火系统每三个月测试一次。"],
+      "answerable": true,
+      "expectedAnswers": ["每三个月", "三个月"]
+    },
+    {
+      "id": "qa-set-dev-011",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Who signs the emergency purchasing waiver?",
+      "passages": ["Emergency purchasing waivers include a supplier name and justification.", "Approved waivers are attached to the purchase order for audit."],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-012",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Where is the satellite phone kept?",
+      "passages": ["The satellite phone battery is charged on the first Monday of each month.", "Emergency equipment is recorded in the resilience inventory."],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-013",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "How long are rejected loan applications retained?",
+      "passages": ["Rejected applications receive a decision code.", "Loan records are accessible only to underwriting and compliance staff."],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-014",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Which carrier transports temperature-sensitive samples?",
+      "passages": ["Temperature-sensitive samples use insulated containers.", "Sample shipments require a chain-of-custody form."],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-015",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Can temporary staff approve refunds?",
+      "passages": ["Temporary staff receive customer-service training.", "Refund requests show the original payment method and order number."],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-016",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "May confidential drafts be sent through personal email?",
+      "passages": ["Confidential drafts use a document watermark.", "Personal email addresses must not be stored in the corporate directory."],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-017",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "What is the maximum cash advance for field work?",
+      "passages": ["Cash advance requests include estimated lodging and transport.", "Unused cash must be returned with the expense report."],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-018",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "When does the warehouse night shift begin?",
+      "passages": ["Night-shift workers wear reflective vests.", "The warehouse schedule is reviewed when seasonal volume changes."],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-019",
+      "language": "en",
+      "category": "cross-language-missing",
+      "query": "Which office issues export certificates?",
+      "passages": ["出口证书申请必须经过完整性检查。", "证书编号会记录在发货文件中。"],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-020",
+      "language": "en",
+      "category": "cross-language-missing",
+      "query": "How often is the fire suppression system tested?",
+      "passages": ["灭火系统测试包括压力和报警联动。", "测试记录由设施团队归档。"],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-021",
+      "language": "zh",
+      "category": "multi-passage-answer",
+      "query": "谁批准关键数据库变更？",
+      "passages": ["关键数据库变更必须先完成回滚演练。", "关键数据库变更由数据平台主管批准。"],
+      "answerable": true,
+      "expectedAnswers": ["数据平台主管"]
+    },
+    {
+      "id": "qa-set-dev-022",
+      "language": "zh",
+      "category": "multi-passage-answer",
+      "query": "急救氧气瓶存放在哪里？",
+      "passages": ["急救物资每月清点一次。", "急救氧气瓶存放在西侧医务室的红色柜子中。"],
+      "answerable": true,
+      "expectedAnswers": ["西侧医务室的红色柜子", "红色柜子"]
+    },
+    {
+      "id": "qa-set-dev-023",
+      "language": "zh",
+      "category": "multi-passage-answer",
+      "query": "离职人员的门禁日志保留多久？",
+      "passages": ["离职人员的账号在最后工作日停用。", "离职人员的门禁日志保留十八个月。"],
+      "answerable": true,
+      "expectedAnswers": ["十八个月"]
+    },
+    {
+      "id": "qa-set-dev-024",
+      "language": "zh",
+      "category": "multi-passage-answer",
+      "query": "哪家公司运输高价值艺术品？",
+      "passages": ["高价值艺术品运输前必须拍照并购买保险。", "高价值艺术品统一由恒安特运承运。"],
+      "answerable": true,
+      "expectedAnswers": ["恒安特运"]
+    },
+    {
+      "id": "qa-set-dev-025",
+      "language": "zh",
+      "category": "explicit-negative-answer",
+      "query": "实习生可以批准采购合同吗？",
+      "passages": ["实习生可以整理采购合同附件。", "实习生不得批准采购合同。"],
+      "answerable": true,
+      "expectedAnswers": ["不得", "不得批准采购合同"]
+    },
+    {
+      "id": "qa-set-dev-026",
+      "language": "zh",
+      "category": "explicit-negative-answer",
+      "query": "内部草稿可以上传到个人网盘吗？",
+      "passages": ["内部草稿带有文档编号。", "内部草稿禁止上传到个人网盘。"],
+      "answerable": true,
+      "expectedAnswers": ["禁止", "禁止上传到个人网盘"]
+    },
+    {
+      "id": "qa-set-dev-027",
+      "language": "zh",
+      "category": "numeric-answer",
+      "query": "现场维修预付款最高是多少？",
+      "passages": ["维修预付款申请需要填写设备编号。", "现场维修预付款最高为八千元。"],
+      "answerable": true,
+      "expectedAnswers": ["八千元"]
+    },
+    {
+      "id": "qa-set-dev-028",
+      "language": "zh",
+      "category": "numeric-answer",
+      "query": "夜间装卸班几点开始？",
+      "passages": ["夜班人员从南门进入。", "夜间装卸班每天二十一点四十五分开始。"],
+      "answerable": true,
+      "expectedAnswers": ["二十一点四十五分"]
+    },
+    {
+      "id": "qa-set-dev-029",
+      "language": "zh",
+      "category": "cross-language-answer",
+      "query": "哪个委员会批准隐私例外？",
+      "passages": ["Privacy exception requests must describe the affected data.", "The Data Ethics Committee approves privacy exceptions."],
+      "answerable": true,
+      "expectedAnswers": ["Data Ethics Committee"]
+    },
+    {
+      "id": "qa-set-dev-030",
+      "language": "zh",
+      "category": "cross-language-answer",
+      "query": "应急发电机多久测试一次？",
+      "passages": ["Generator test results are recorded in the facility log.", "The emergency generator is tested every two months."],
+      "answerable": true,
+      "expectedAnswers": ["every two months", "two months"]
+    },
+    {
+      "id": "qa-set-dev-031",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "谁批准关键数据库变更？",
+      "passages": ["数据库变更申请包含脚本和风险等级。", "批准后的变更在维护窗口执行。"],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-032",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "急救氧气瓶存放在哪里？",
+      "passages": ["氧气瓶每月检查压力。", "急救物资清单由医务人员维护。"],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-033",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "离职人员的门禁日志保留多久？",
+      "passages": ["离职人员需归还门禁卡。", "门禁日志仅供安全审计人员查看。"],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-034",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "哪家公司运输高价值艺术品？",
+      "passages": ["艺术品装箱时必须使用防震材料。", "运输文件包括估值证明和保险单。"],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-035",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "实习生可以批准采购合同吗？",
+      "passages": ["实习生入职时接受采购流程培训。", "采购合同按金额分为三个审批等级。"],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-036",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "内部草稿可以上传到个人网盘吗？",
+      "passages": ["内部草稿每页显示水印。", "个人网盘账号不得使用公司邮箱注册。"],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-037",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "现场维修预付款最高是多少？",
+      "passages": ["维修预付款申请需要成本中心。", "未使用款项应在任务结束后退回。"],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-038",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "夜间装卸班几点开始？",
+      "passages": ["夜班人员必须穿反光背心。", "装卸排班表由仓库主管每周更新。"],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-039",
+      "language": "zh",
+      "category": "cross-language-missing",
+      "query": "哪个委员会批准隐私例外？",
+      "passages": ["Privacy exception requests include a business justification.", "Approved exceptions receive a tracking identifier."],
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-set-dev-040",
+      "language": "zh",
+      "category": "cross-language-missing",
+      "query": "应急发电机多久测试一次？",
+      "passages": ["Generator tests cover fuel pressure and automatic transfer.", "Facility staff archive the completed checklist."],
+      "answerable": false,
+      "expectedAnswers": []
+    }
+  ]
+}

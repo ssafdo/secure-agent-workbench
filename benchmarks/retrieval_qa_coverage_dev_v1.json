@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 1,
+  "name": "retrieval-qa-answerability-integration-development-v1",
+  "provenance": "Author-constructed integration-development corpus created only after the Phase 33 QA calibration threshold was fixed. It is not held-out or real-user data.",
+  "answerabilityGate": {
+    "unsupportedPassedGainAtLeast": 2,
+    "supportedPassedLossAtMost": 1,
+    "negativeAnswerPassedLossAtMost": 0,
+    "totalPassedGainAtLeast": 1
+  },
+  "documents": [
+    {
+      "path": "inputs/severity-one-response.md",
+      "content": "# Severity-one response\n\nThe on-call lead must acknowledge a severity-one incident within 15 minutes. The incident channel records the acknowledgement time."
+    },
+    {
+      "path": "inputs/severity-one-containment.md",
+      "content": "# Severity-one containment\n\nThe Security Commander owns containment decisions for severity-one incidents. Containment begins after impact is confirmed."
+    },
+    {
+      "path": "inputs/visitor-badge.md",
+      "content": "# Visitor badges\n\nA visitor badge remains valid for 12 hours. The employee host submits the badge request."
+    },
+    {
+      "path": "inputs/contractor-badge.md",
+      "content": "# Contractor badges\n\nA contractor badge remains valid for five days and requires approval from the Facilities Manager."
+    },
+    {
+      "path": "inputs/media-retention.md",
+      "content": "# Media recordings\n\nApproved interview recordings are retained for 90 days in the communications archive."
+    },
+    {
+      "path": "inputs/audit-retention.md",
+      "content": "# Audit logs\n\nAdministrative audit logs are retained for 13 months in the compliance vault."
+    },
+    {
+      "path": "inputs/cold-chain-shipping.md",
+      "content": "# Cold-chain shipping\n\nArctic Express carries refrigerated parcels. Each parcel must remain between 2 and 8 degrees Celsius."
+    },
+    {
+      "path": "inputs/hazardous-shipping.md",
+      "content": "# Hazardous shipping\n\nSafeTrans carries hazardous parcels. Hazardous parcels may not travel on passenger aircraft."
+    },
+    {
+      "path": "inputs/database-backup.md",
+      "content": "# Database backups\n\nThe production backup starts at 01:00 UTC every day. Encrypted copies are kept in the recovery region."
+    },
+    {
+      "path": "inputs/restore-testing.md",
+      "content": "# Restore testing\n\nA full restoration test runs once every quarter. The resilience team records the result."
+    },
+    {
+      "path": "inputs/admin-export.md",
+      "content": "# Administrator exports\n\nAdministrators may export billing records after entering a ticket number. Export events are audited."
+    },
+    {
+      "path": "inputs/guest-export.md",
+      "content": "# Guest exports\n\nGuest accounts cannot export billing records. Guests may only view the sample dashboard."
+    },
+    {
+      "path": "inputs/plant-access.md",
+      "content": "# Plant access\n\nThe Plant Manager approves access to the assembly floor. Approved access expires after 30 days."
+    },
+    {
+      "path": "inputs/laboratory-access.md",
+      "content": "# Laboratory access\n\nThe Laboratory Director approves access to the clean laboratory. Safety training is required first."
+    },
+    {
+      "path": "inputs/pump-inspection.md",
+      "content": "# Pump inspection\n\nOperators inspect the cooling pump every eight hours and record pressure and vibration."
+    },
+    {
+      "path": "inputs/valve-inspection.md",
+      "content": "# Valve inspection\n\nTechnicians inspect the relief valve every Friday and record seal condition."
+    }
+  ],
+  "cases": [
+    {
+      "id": "qa-coverage-dev-001",
+      "language": "en",
+      "category": "multi-evidence",
+      "answerType": "affirmative",
+      "query": "Compare the timing and ownership for severity-one acknowledgement and containment.",
+      "supported": true,
+      "relevantPaths": ["inputs/severity-one-response.md", "inputs/severity-one-containment.md"]
+    },
+    {
+      "id": "qa-coverage-dev-002",
+      "language": "en",
+      "category": "multi-evidence",
+      "answerType": "affirmative",
+      "query": "How do validity periods differ for visitor badges and contractor badges?",
+      "supported": true,
+      "relevantPaths": ["inputs/visitor-badge.md", "inputs/contractor-badge.md"]
+    },
+    {
+      "id": "qa-coverage-dev-003",
+      "language": "zh",
+      "category": "multi-evidence",
+      "answerType": "affirmative",
+      "query": "采访录音和管理审计日志分别保留多久？",
+      "supported": true,
+      "relevantPaths": ["inputs/media-retention.md", "inputs/audit-retention.md"]
+    },
+    {
+      "id": "qa-coverage-dev-004",
+      "language": "zh",
+      "category": "multi-evidence",
+      "answerType": "affirmative",
+      "query": "冷藏包裹和危险品包裹分别由哪家承运商运输？",
+      "supported": true,
+      "relevantPaths": ["inputs/cold-chain-shipping.md", "inputs/hazardous-shipping.md"]
+    },
+    {
+      "id": "qa-coverage-dev-005",
+      "language": "en",
+      "category": "multi-evidence",
+      "answerType": "affirmative",
+      "query": "Compare the schedule for production backups and full restoration tests.",
+      "supported": true,
+      "relevantPaths": ["inputs/database-backup.md", "inputs/restore-testing.md"]
+    },
+    {
+      "id": "qa-coverage-dev-006",
+      "language": "en",
+      "category": "multi-evidence",
+      "answerType": "negative",
+      "query": "How do billing export permissions differ for administrators and guest accounts?",
+      "supported": true,
+      "relevantPaths": ["inputs/admin-export.md", "inputs/guest-export.md"]
+    },
+    {
+      "id": "qa-coverage-dev-007",
+      "language": "zh",
+      "category": "multi-evidence",
+      "answerType": "affirmative",
+      "query": "装配区和洁净实验室的访问分别由谁批准？",
+      "supported": true,
+      "relevantPaths": ["inputs/plant-access.md", "inputs/laboratory-access.md"]
+    },
+    {
+      "id": "qa-coverage-dev-008",
+      "language": "zh",
+      "category": "multi-evidence",
+      "answerType": "affirmative",
+      "query": "冷却泵和泄压阀分别多久检查一次？",
+      "supported": true,
+      "relevantPaths": ["inputs/pump-inspection.md", "inputs/valve-inspection.md"]
+    },
+    {
+      "id": "qa-coverage-dev-009",
+      "language": "en",
+      "category": "multi-evidence",
+      "answerType": "affirmative",
+      "query": "Compare who requests visitor badges and who approves contractor badges.",
+      "supported": true,
+      "relevantPaths": ["inputs/visitor-badge.md", "inputs/contractor-badge.md"]
+    },
+    {
+      "id": "qa-coverage-dev-010",
+      "language": "en",
+      "category": "multi-evidence",
+      "answerType": "negative",
+      "query": "How do temperature and passenger-air restrictions differ for refrigerated and hazardous parcels?",
+      "supported": true,
+      "relevantPaths": ["inputs/cold-chain-shipping.md", "inputs/hazardous-shipping.md"]
+    },
+    {
+      "id": "qa-coverage-dev-011",
+      "language": "zh",
+      "category": "multi-evidence",
+      "answerType": "affirmative",
+      "query": "生产备份和完整恢复测试分别由哪个团队或流程记录？",
+      "supported": true,
+      "relevantPaths": ["inputs/database-backup.md", "inputs/restore-testing.md"]
+    },
+    {
+      "id": "qa-coverage-dev-012",
+      "language": "zh",
+      "category": "multi-evidence",
+      "answerType": "affirmative",
+      "query": "采访录音和审计日志分别存放在哪里？",
+      "supported": true,
+      "relevantPaths": ["inputs/media-retention.md", "inputs/audit-retention.md"]
+    },
+    {
+      "id": "qa-coverage-dev-013",
+      "language": "en",
+      "category": "single-evidence",
+      "answerType": "affirmative",
+      "query": "How soon must a severity-one incident be acknowledged?",
+      "supported": true,
+      "relevantPaths": ["inputs/severity-one-response.md"]
+    },
+    {
+      "id": "qa-coverage-dev-014",
+      "language": "zh",
+      "category": "single-evidence",
+      "answerType": "affirmative",
+      "query": "承包商门禁卡有效期是多久？",
+      "supported": true,
+      "relevantPaths": ["inputs/contractor-badge.md"]
+    },
+    {
+      "id": "qa-coverage-dev-015",
+      "language": "en",
+      "category": "single-evidence",
+      "answerType": "affirmative",
+      "query": "How long are approved interview recordings retained?",
+      "supported": true,
+      "relevantPaths": ["inputs/media-retention.md"]
+    },
+    {
+      "id": "qa-coverage-dev-016",
+      "language": "zh",
+      "category": "single-evidence",
+      "answerType": "affirmative",
+      "query": "哪家承运商运输冷藏包裹？",
+      "supported": true,
+      "relevantPaths": ["inputs/cold-chain-shipping.md"]
+    },
+    {
+      "id": "qa-coverage-dev-017",
+      "language": "en",
+      "category": "single-evidence",
+      "answerType": "affirmative",
+      "query": "When does the daily production backup start?",
+      "supported": true,
+      "relevantPaths": ["inputs/database-backup.md"]
+    },
+    {
+      "id": "qa-coverage-dev-018",
+      "language": "zh",
+      "category": "single-evidence",
+      "answerType": "negative",
+      "query": "访客账号可以导出账单记录吗？",
+      "supported": true,
+      "relevantPaths": ["inputs/guest-export.md"]
+    },
+    {
+      "id": "qa-coverage-dev-019",
+      "language": "en",
+      "category": "single-evidence",
+      "answerType": "affirmative",
+      "query": "Who approves clean laboratory access?",
+      "supported": true,
+      "relevantPaths": ["inputs/laboratory-access.md"]
+    },
+    {
+      "id": "qa-coverage-dev-020",
+      "language": "zh",
+      "category": "single-evidence",
+      "answerType": "affirmative",
+      "query": "冷却泵多久检查一次？",
+      "supported": true,
+      "relevantPaths": ["inputs/pump-inspection.md"]
+    },
+    {
+      "id": "qa-coverage-dev-021",
+      "language": "en",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "Compare the badge colors used for visitors and contractors.",
+      "supported": false,
+      "relevantPaths": []
+    },
+    {
+      "id": "qa-coverage-dev-022",
+      "language": "zh",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "采访录音和审计日志分别由谁批准删除？",
+      "supported": false,
+      "relevantPaths": []
+    },
+    {
+      "id": "qa-coverage-dev-023",
+      "language": "en",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "Which insurers cover refrigerated and hazardous parcels respectively?",
+      "supported": false,
+      "relevantPaths": []
+    },
+    {
+      "id": "qa-coverage-dev-024",
+      "language": "zh",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "生产备份和恢复测试分别使用什么软件工具？",
+      "supported": false,
+      "relevantPaths": []
+    },
+    {
+      "id": "qa-coverage-dev-025",
+      "language": "en",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "What training provider certifies the Plant Manager and Laboratory Director?",
+      "supported": false,
+      "relevantPaths": []
+    },
+    {
+      "id": "qa-coverage-dev-026",
+      "language": "zh",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "冷却泵和泄压阀分别由哪家厂商生产？",
+      "supported": false,
+      "relevantPaths": []
+    },
+    {
+      "id": "qa-coverage-dev-027",
+      "language": "en",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "What phone number should be called for a severity-one incident?",
+      "supported": false,
+      "relevantPaths": []
+    },
+    {
+      "id": "qa-coverage-dev-028",
+      "language": "zh",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "访客门禁卡是什么颜色？",
+      "supported": false,
+      "relevantPaths": []
+    },
+    {
+      "id": "qa-coverage-dev-029",
+      "language": "en",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "Which encryption algorithm protects archived interview recordings?",
+      "supported": false,
+      "relevantPaths": []
+    },
+    {
+      "id": "qa-coverage-dev-030",
+      "language": "zh",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "危险品包裹的保险费是多少？",
+      "supported": false,
+      "relevantPaths": []
+    },
+    {
+      "id": "qa-coverage-dev-031",
+      "language": "en",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "May guest accounts export inventory records?",
+      "supported": false,
+      "relevantPaths": []
+    },
+    {
+      "id": "qa-coverage-dev-032",
+      "language": "zh",
+      "category": "unsupported",
+      "answerType": "unanswerable",
+      "query": "洁净实验室门禁在周末是否有效？",
+      "supported": false,
+      "relevantPaths": []
+    }
+  ]
+}

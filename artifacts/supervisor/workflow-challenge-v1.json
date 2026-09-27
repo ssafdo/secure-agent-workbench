@@ -1,0 +1,947 @@
+{
+  "schemaVersion": 1,
+  "dataset": {
+    "path": "benchmarks/supervisor_workflow_challenge_v1.json",
+    "sha256": "ba230cf42b03db86c091d745e9ad55609f0d474942a7dac829ef94c48969d756",
+    "documentDataset": "retrieval_challenge_v1.json"
+  },
+  "single": {
+    "passed": 8,
+    "cases": 24,
+    "successRate": 0.333333,
+    "successRate95CI": {
+      "low": 0.179722,
+      "high": 0.532937
+    },
+    "averageToolCalls": 6.792,
+    "averageDurationMs": 28.353,
+    "averageCitationPrecision": 0.375,
+    "languageSlices": {
+      "en": {
+        "cases": 12,
+        "passed": 4,
+        "passRate": 0.333333
+      },
+      "zh": {
+        "cases": 12,
+        "passed": 4,
+        "passRate": 0.333333
+      }
+    },
+    "categorySlices": {
+      "comparison": {
+        "cases": 3,
+        "passed": 3,
+        "passRate": 1.0
+      },
+      "evidence": {
+        "cases": 8,
+        "passed": 0,
+        "passRate": 0.0
+      },
+      "multi-evidence": {
+        "cases": 2,
+        "passed": 0,
+        "passRate": 0.0
+      },
+      "synthesis": {
+        "cases": 5,
+        "passed": 5,
+        "passRate": 1.0
+      },
+      "unsupported": {
+        "cases": 6,
+        "passed": 0,
+        "passRate": 0.0
+      }
+    },
+    "failures": [
+      {
+        "id": "flow-001",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "en",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 84.336
+      },
+      {
+        "id": "flow-002",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 56.675
+      },
+      {
+        "id": "flow-003",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "en",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 60.942
+      },
+      {
+        "id": "flow-004",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 35.195
+      },
+      {
+        "id": "flow-005",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "en",
+        "category": "multi-evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 8,
+        "durationMs": 43.691
+      },
+      {
+        "id": "flow-006",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "multi-evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 8,
+        "durationMs": 58.559
+      },
+      {
+        "id": "flow-007",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "en",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 24.586
+      },
+      {
+        "id": "flow-008",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 15.644
+      },
+      {
+        "id": "flow-009",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "en",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 15.854
+      },
+      {
+        "id": "flow-010",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 15.601
+      },
+      {
+        "id": "flow-011",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "en",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 20.388
+      },
+      {
+        "id": "flow-012",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "zh",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 17.357
+      },
+      {
+        "id": "flow-013",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "en",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 15.752
+      },
+      {
+        "id": "flow-014",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "zh",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 16.186
+      },
+      {
+        "id": "flow-015",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "en",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 16.378
+      },
+      {
+        "id": "flow-016",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "zh",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 15.578
+      }
+    ],
+    "caseResults": [
+      {
+        "id": "flow-001",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "en",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 84.336
+      },
+      {
+        "id": "flow-002",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 56.675
+      },
+      {
+        "id": "flow-003",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "en",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 60.942
+      },
+      {
+        "id": "flow-004",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 35.195
+      },
+      {
+        "id": "flow-005",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "en",
+        "category": "multi-evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 8,
+        "durationMs": 43.691
+      },
+      {
+        "id": "flow-006",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "multi-evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 8,
+        "durationMs": 58.559
+      },
+      {
+        "id": "flow-007",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "en",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 24.586
+      },
+      {
+        "id": "flow-008",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 15.644
+      },
+      {
+        "id": "flow-009",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "en",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 15.854
+      },
+      {
+        "id": "flow-010",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 0.0,
+        "toolCalls": 7,
+        "durationMs": 15.601
+      },
+      {
+        "id": "flow-011",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "en",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 20.388
+      },
+      {
+        "id": "flow-012",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "zh",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 17.357
+      },
+      {
+        "id": "flow-013",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "en",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 15.752
+      },
+      {
+        "id": "flow-014",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "zh",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 16.186
+      },
+      {
+        "id": "flow-015",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "en",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 16.378
+      },
+      {
+        "id": "flow-016",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "zh",
+        "category": "unsupported",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": 1.0,
+        "toolCalls": 7,
+        "durationMs": 15.578
+      },
+      {
+        "id": "flow-017",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "synthesis",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": null,
+        "toolCalls": 7,
+        "durationMs": 15.075
+      },
+      {
+        "id": "flow-018",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "synthesis",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 14.204
+      },
+      {
+        "id": "flow-019",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "comparison",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 24.448
+      },
+      {
+        "id": "flow-020",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "comparison",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 29.273
+      },
+      {
+        "id": "flow-021",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "synthesis",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 23.444
+      },
+      {
+        "id": "flow-022",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "synthesis",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 21.614
+      },
+      {
+        "id": "flow-023",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "comparison",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 24.267
+      },
+      {
+        "id": "flow-024",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "synthesis",
+        "specialist": "single-research",
+        "routingCorrect": false,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 15.431
+      }
+    ]
+  },
+  "supervisor": {
+    "passed": 19,
+    "cases": 24,
+    "successRate": 0.791667,
+    "successRate95CI": {
+      "low": 0.595295,
+      "high": 0.907552
+    },
+    "averageToolCalls": 3.375,
+    "averageDurationMs": 18.121,
+    "averageCitationPrecision": 0.453125,
+    "languageSlices": {
+      "en": {
+        "cases": 12,
+        "passed": 11,
+        "passRate": 0.916667
+      },
+      "zh": {
+        "cases": 12,
+        "passed": 8,
+        "passRate": 0.666667
+      }
+    },
+    "categorySlices": {
+      "comparison": {
+        "cases": 3,
+        "passed": 3,
+        "passRate": 1.0
+      },
+      "evidence": {
+        "cases": 8,
+        "passed": 6,
+        "passRate": 0.75
+      },
+      "multi-evidence": {
+        "cases": 2,
+        "passed": 1,
+        "passRate": 0.5
+      },
+      "synthesis": {
+        "cases": 5,
+        "passed": 5,
+        "passRate": 1.0
+      },
+      "unsupported": {
+        "cases": 6,
+        "passed": 4,
+        "passRate": 0.666667
+      }
+    },
+    "failures": [
+      {
+        "id": "flow-004",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.0,
+        "toolCalls": 2,
+        "durationMs": 12.532
+      },
+      {
+        "id": "flow-006",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "multi-evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.0,
+        "toolCalls": 2,
+        "durationMs": 22.894
+      },
+      {
+        "id": "flow-010",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.0,
+        "toolCalls": 2,
+        "durationMs": 10.799
+      },
+      {
+        "id": "flow-011",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "en",
+        "category": "unsupported",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.0,
+        "toolCalls": 2,
+        "durationMs": 12.397
+      },
+      {
+        "id": "flow-016",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "zh",
+        "category": "unsupported",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.0,
+        "toolCalls": 2,
+        "durationMs": 27.013
+      }
+    ],
+    "caseResults": [
+      {
+        "id": "flow-001",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.25,
+        "toolCalls": 2,
+        "durationMs": 16.034
+      },
+      {
+        "id": "flow-002",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.5,
+        "toolCalls": 2,
+        "durationMs": 16.998
+      },
+      {
+        "id": "flow-003",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.25,
+        "toolCalls": 2,
+        "durationMs": 17.671
+      },
+      {
+        "id": "flow-004",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.0,
+        "toolCalls": 2,
+        "durationMs": 12.532
+      },
+      {
+        "id": "flow-005",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "multi-evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.5,
+        "toolCalls": 2,
+        "durationMs": 27.336
+      },
+      {
+        "id": "flow-006",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "multi-evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.0,
+        "toolCalls": 2,
+        "durationMs": 22.894
+      },
+      {
+        "id": "flow-007",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.25,
+        "toolCalls": 2,
+        "durationMs": 33.012
+      },
+      {
+        "id": "flow-008",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 1.0,
+        "toolCalls": 2,
+        "durationMs": 34.459
+      },
+      {
+        "id": "flow-009",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.5,
+        "toolCalls": 2,
+        "durationMs": 13.333
+      },
+      {
+        "id": "flow-010",
+        "passed": false,
+        "failureType": "required-evidence-missing",
+        "language": "zh",
+        "category": "evidence",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.0,
+        "toolCalls": 2,
+        "durationMs": 10.799
+      },
+      {
+        "id": "flow-011",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "en",
+        "category": "unsupported",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.0,
+        "toolCalls": 2,
+        "durationMs": 12.397
+      },
+      {
+        "id": "flow-012",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "unsupported",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 1.0,
+        "toolCalls": 2,
+        "durationMs": 11.302
+      },
+      {
+        "id": "flow-013",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "unsupported",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 1.0,
+        "toolCalls": 2,
+        "durationMs": 10.786
+      },
+      {
+        "id": "flow-014",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "unsupported",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 1.0,
+        "toolCalls": 2,
+        "durationMs": 11.944
+      },
+      {
+        "id": "flow-015",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "unsupported",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 1.0,
+        "toolCalls": 2,
+        "durationMs": 20.497
+      },
+      {
+        "id": "flow-016",
+        "passed": false,
+        "failureType": "unsupported-query-not-refused",
+        "language": "zh",
+        "category": "unsupported",
+        "specialist": "retrieval",
+        "routingCorrect": true,
+        "citationPrecision": 0.0,
+        "toolCalls": 2,
+        "durationMs": 27.013
+      },
+      {
+        "id": "flow-017",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "synthesis",
+        "specialist": "synthesis",
+        "routingCorrect": true,
+        "citationPrecision": null,
+        "toolCalls": 7,
+        "durationMs": 26.661
+      },
+      {
+        "id": "flow-018",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "synthesis",
+        "specialist": "synthesis",
+        "routingCorrect": true,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 26.182
+      },
+      {
+        "id": "flow-019",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "comparison",
+        "specialist": "synthesis",
+        "routingCorrect": true,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 13.953
+      },
+      {
+        "id": "flow-020",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "comparison",
+        "specialist": "synthesis",
+        "routingCorrect": true,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 14.552
+      },
+      {
+        "id": "flow-021",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "synthesis",
+        "specialist": "synthesis",
+        "routingCorrect": true,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 13.535
+      },
+      {
+        "id": "flow-022",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "synthesis",
+        "specialist": "synthesis",
+        "routingCorrect": true,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 13.412
+      },
+      {
+        "id": "flow-023",
+        "passed": true,
+        "failureType": null,
+        "language": "en",
+        "category": "comparison",
+        "specialist": "synthesis",
+        "routingCorrect": true,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 13.232
+      },
+      {
+        "id": "flow-024",
+        "passed": true,
+        "failureType": null,
+        "language": "zh",
+        "category": "synthesis",
+        "specialist": "synthesis",
+        "routingCorrect": true,
+        "citationPrecision": null,
+        "toolCalls": 6,
+        "durationMs": 14.365
+      }
+    ]
+  },
+  "successRateDelta": 0.458334
+}

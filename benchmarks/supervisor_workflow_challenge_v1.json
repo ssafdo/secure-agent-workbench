@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 2,
+  "name": "public-supervisor-workflow-challenge-v1",
+  "documentDataset": "retrieval_challenge_v1.json",
+  "provenance": {
+    "type": "author-constructed-public-offline-benchmark",
+    "createdAfterImplementation": true,
+    "usedForModelTraining": false,
+    "limitations": "Measures deterministic workflow completion and evidence coverage, not subjective report quality or real-user satisfaction."
+  },
+  "cases": [
+    {
+      "id":"flow-001","language":"en","category":"evidence","kind":"evidence",
+      "task":"Find and cite the source that defines what happens to the session version after a failed request.",
+      "expectedSpecialist":"retrieval","expectedPaths":["inputs/session-lifecycle.md"],
+      "documentPaths":["inputs/session-lifecycle.md","inputs/project-locking.md","inputs/provider-reliability.md","inputs/audit-retention.md","inputs/access-control.md"]
+    },
+    {
+      "id":"flow-002","language":"zh","category":"evidence","kind":"evidence",
+      "task":"引用说明浏览器为什么不能提交 API 密钥的原文证据。",
+      "expectedSpecialist":"retrieval","expectedPaths":["inputs/api-credentials.md"],
+      "documentPaths":["inputs/api-credentials.md","inputs/隐私与出站边界.md","inputs/attachment-policy.md","inputs/audit-retention.md","inputs/access-control.md"]
+    },
+    {
+      "id":"flow-003","language":"en","category":"evidence","kind":"evidence",
+      "task":"Locate evidence explaining why an untrusted MCP server still needs OS-level isolation.",
+      "expectedSpecialist":"retrieval","expectedPaths":["inputs/mcp-limitations.md"],
+      "documentPaths":["inputs/mcp-limitations.md","inputs/mcp-admission.md","inputs/container-runtime.md","inputs/prompt-injection.md","inputs/supervisor-boundary.md"]
+    },
+    {
+      "id":"flow-004","language":"zh","category":"evidence","kind":"evidence",
+      "task":"查找大型工具结果进行上下文压缩时仍需保留哪些结构。",
+      "expectedSpecialist":"retrieval","expectedPaths":["inputs/context-management.md"],
+      "documentPaths":["inputs/context-management.md","inputs/audit-retention.md","inputs/budget-controls.md","inputs/session-lifecycle.md","inputs/retrieval-quality.md"]
+    },
+    {
+      "id":"flow-005","language":"en","category":"multi-evidence","kind":"evidence",
+      "task":"Cite the sources showing how both path resolution and runtime locking isolate project work.",
+      "expectedSpecialist":"retrieval","expectedPaths":["inputs/project-isolation.md","inputs/project-locking.md"],
+      "documentPaths":["inputs/project-isolation.md","inputs/project-locking.md","inputs/session-lifecycle.md","inputs/access-control.md","inputs/container-runtime.md","inputs/supervisor-boundary.md"]
+    },
+    {
+      "id":"flow-006","language":"zh","category":"multi-evidence","kind":"evidence",
+      "task":"根据资料，引用混合检索降级和写报告前引用复核的两项规则。",
+      "expectedSpecialist":"retrieval","expectedPaths":["inputs/retrieval-quality.md","inputs/citation-verification.md"],
+      "documentPaths":["inputs/retrieval-quality.md","inputs/citation-verification.md","inputs/prompt-injection.md","inputs/audit-retention.md","inputs/context-management.md","inputs/evaluation-discipline.md"]
+    },
+    {
+      "id":"flow-007","language":"en","category":"evidence","kind":"evidence",
+      "task":"Which source states that specialists cannot reset permissions or tool-step budgets? Quote it.",
+      "expectedSpecialist":"retrieval","expectedPaths":["inputs/supervisor-boundary.md"],
+      "documentPaths":["inputs/supervisor-boundary.md","inputs/project-locking.md","inputs/budget-controls.md","inputs/access-control.md","inputs/evaluation-discipline.md"]
+    },
+    {
+      "id":"flow-008","language":"zh","category":"evidence","kind":"evidence",
+      "task":"定位说明托管模型数据出站边界的资料。",
+      "expectedSpecialist":"retrieval","expectedPaths":["inputs/隐私与出站边界.md"],
+      "documentPaths":["inputs/隐私与出站边界.md","inputs/api-credentials.md","inputs/attachment-policy.md","inputs/provider-reliability.md","inputs/project-isolation.md"]
+    },
+    {
+      "id":"flow-009","language":"en","category":"evidence","kind":"evidence",
+      "task":"Verify the required container network and filesystem restrictions with source citations.",
+      "expectedSpecialist":"retrieval","expectedPaths":["inputs/container-runtime.md"],
+      "documentPaths":["inputs/container-runtime.md","inputs/mcp-limitations.md","inputs/project-isolation.md","inputs/attachment-policy.md","inputs/access-control.md"]
+    },
+    {
+      "id":"flow-010","language":"zh","category":"evidence","kind":"evidence",
+      "task":"引用解释为什么揭盲数据不能再作为新盲测结果的原文。",
+      "expectedSpecialist":"retrieval","expectedPaths":["inputs/evaluation-discipline.md"],
+      "documentPaths":["inputs/evaluation-discipline.md","inputs/retrieval-quality.md","inputs/audit-retention.md","inputs/supervisor-boundary.md","inputs/session-lifecycle.md"]
+    },
+    {
+      "id":"flow-011","language":"en","category":"unsupported","kind":"unsupported",
+      "task":"Which source gives the production database connection string?",
+      "expectedSpecialist":"retrieval","expectedPaths":[],
+      "documentPaths":["inputs/api-credentials.md","inputs/project-isolation.md","inputs/audit-retention.md","inputs/provider-reliability.md","inputs/backup-scope.md"]
+    },
+    {
+      "id":"flow-012","language":"zh","category":"unsupported","kind":"unsupported",
+      "task":"查证资料中承诺的 99.99% 服务可用性。",
+      "expectedSpecialist":"retrieval","expectedPaths":[],
+      "documentPaths":["inputs/provider-reliability.md","inputs/backup-scope.md","inputs/evaluation-discipline.md","inputs/audit-retention.md","inputs/budget-controls.md"]
+    },
+    {
+      "id":"flow-013","language":"en","category":"unsupported","kind":"unsupported",
+      "task":"Find the source that names the Kubernetes production namespace.",
+      "expectedSpecialist":"retrieval","expectedPaths":[],
+      "documentPaths":["inputs/container-runtime.md","inputs/project-isolation.md","inputs/mcp-limitations.md","inputs/attachment-policy.md","inputs/supervisor-boundary.md"]
+    },
+    {
+      "id":"flow-014","language":"zh","category":"unsupported","kind":"unsupported",
+      "task":"哪份资料给出了付费用户的每分钟请求额度？",
+      "expectedSpecialist":"retrieval","expectedPaths":[],
+      "documentPaths":["inputs/budget-controls.md","inputs/provider-reliability.md","inputs/access-control.md","inputs/session-lifecycle.md","inputs/evaluation-discipline.md"]
+    },
+    {
+      "id":"flow-015","language":"en","category":"unsupported","kind":"unsupported",
+      "task":"Verify the phone number used for emergency security escalation.",
+      "expectedSpecialist":"retrieval","expectedPaths":[],
+      "documentPaths":["inputs/audit-retention.md","inputs/prompt-injection.md","inputs/api-credentials.md","inputs/backup-scope.md","inputs/access-control.md"]
+    },
+    {
+      "id":"flow-016","language":"zh","category":"unsupported","kind":"unsupported",
+      "task":"引用手机端离线缓存保留期限的规定。",
+      "expectedSpecialist":"retrieval","expectedPaths":[],
+      "documentPaths":["inputs/attachment-policy.md","inputs/session-lifecycle.md","inputs/隐私与出站边界.md","inputs/context-management.md","inputs/project-isolation.md"]
+    },
+    {
+      "id":"flow-017","language":"en","category":"synthesis","kind":"synthesis",
+      "task":"Prepare a consolidated security briefing across every supplied document, including permissions, isolation and residual risks.",
+      "expectedSpecialist":"synthesis",
+      "expectedPaths":["inputs/access-control.md","inputs/container-runtime.md","inputs/mcp-admission.md","inputs/mcp-limitations.md","inputs/prompt-injection.md"],
+      "documentPaths":["inputs/access-control.md","inputs/container-runtime.md","inputs/mcp-admission.md","inputs/mcp-limitations.md","inputs/prompt-injection.md"]
+    },
+    {
+      "id":"flow-018","language":"zh","category":"synthesis","kind":"synthesis",
+      "task":"整合全部给定资料，形成包含会话、上下文和预算控制的完整运行机制报告。",
+      "expectedSpecialist":"synthesis",
+      "expectedPaths":["inputs/session-lifecycle.md","inputs/context-management.md","inputs/budget-controls.md","inputs/project-locking.md"],
+      "documentPaths":["inputs/session-lifecycle.md","inputs/context-management.md","inputs/budget-controls.md","inputs/project-locking.md"]
+    },
+    {
+      "id":"flow-019","language":"en","category":"comparison","kind":"synthesis",
+      "task":"Compare all supplied policies and write a cross-document report on model, MCP and container failure boundaries.",
+      "expectedSpecialist":"synthesis",
+      "expectedPaths":["inputs/provider-reliability.md","inputs/mcp-limitations.md","inputs/container-runtime.md","inputs/budget-controls.md"],
+      "documentPaths":["inputs/provider-reliability.md","inputs/mcp-limitations.md","inputs/container-runtime.md","inputs/budget-controls.md"]
+    },
+    {
+      "id":"flow-020","language":"zh","category":"comparison","kind":"synthesis",
+      "task":"对比所有上传资料，写一份检索、引用和提示注入防护的综合分析。",
+      "expectedSpecialist":"synthesis",
+      "expectedPaths":["inputs/retrieval-quality.md","inputs/citation-verification.md","inputs/prompt-injection.md","inputs/evaluation-discipline.md"],
+      "documentPaths":["inputs/retrieval-quality.md","inputs/citation-verification.md","inputs/prompt-injection.md","inputs/evaluation-discipline.md"]
+    },
+    {
+      "id":"flow-021","language":"en","category":"synthesis","kind":"synthesis",
+      "task":"Write a complete operational overview using every source, with sections for data ingress, egress, storage and audit.",
+      "expectedSpecialist":"synthesis",
+      "expectedPaths":["inputs/attachment-policy.md","inputs/隐私与出站边界.md","inputs/audit-retention.md","inputs/project-isolation.md"],
+      "documentPaths":["inputs/attachment-policy.md","inputs/隐私与出站边界.md","inputs/audit-retention.md","inputs/project-isolation.md"]
+    },
+    {
+      "id":"flow-022","language":"zh","category":"synthesis","kind":"synthesis",
+      "task":"根据全部资料编写项目治理简报，覆盖权限、路由、评估纪律和备份责任边界。",
+      "expectedSpecialist":"synthesis",
+      "expectedPaths":["inputs/access-control.md","inputs/supervisor-boundary.md","inputs/evaluation-discipline.md","inputs/backup-scope.md"],
+      "documentPaths":["inputs/access-control.md","inputs/supervisor-boundary.md","inputs/evaluation-discipline.md","inputs/backup-scope.md"]
+    },
+    {
+      "id":"flow-023","language":"en","category":"comparison","kind":"synthesis",
+      "task":"Analyze all provided materials and prepare a detailed comparison of project isolation, execution isolation and MCP isolation.",
+      "expectedSpecialist":"synthesis",
+      "expectedPaths":["inputs/project-isolation.md","inputs/container-runtime.md","inputs/mcp-admission.md","inputs/mcp-limitations.md"],
+      "documentPaths":["inputs/project-isolation.md","inputs/container-runtime.md","inputs/mcp-admission.md","inputs/mcp-limitations.md"]
+    },
+    {
+      "id":"flow-024","language":"zh","category":"synthesis","kind":"synthesis",
+      "task":"审阅所有给定文档并形成一份完整报告，说明凭证、数据出站、审计和引用可信度。",
+      "expectedSpecialist":"synthesis",
+      "expectedPaths":["inputs/api-credentials.md","inputs/隐私与出站边界.md","inputs/audit-retention.md","inputs/citation-verification.md"],
+      "documentPaths":["inputs/api-credentials.md","inputs/隐私与出站边界.md","inputs/audit-retention.md","inputs/citation-verification.md"]
+    }
+  ]
+}

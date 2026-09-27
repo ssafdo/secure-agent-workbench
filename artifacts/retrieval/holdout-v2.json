@@ -1,0 +1,2639 @@
+{
+  "schemaVersion": 1,
+  "dataset": {
+    "path": "benchmarks/retrieval_holdout_v2.json",
+    "sha256": "e292881b96acf742f88c71346e823a6222fbd39fb067ceab49a099efab796fdd"
+  },
+  "lexical": {
+    "mode": "lexical",
+    "cases": 32,
+    "supportedCases": 24,
+    "recallAt1": 0.333333,
+    "recallAt3": 0.416667,
+    "top1HitRate": 0.416667,
+    "top1HitRate95CI": {
+      "low": 0.244676,
+      "high": 0.611653
+    },
+    "allRelevantInTop3Rate": 0.375,
+    "allRelevantInTop3Rate95CI": {
+      "low": 0.211594,
+      "high": 0.5729
+    },
+    "mrr": 0.430556,
+    "citationCorrectness": 1.0,
+    "unsupportedAccuracy": 0.25,
+    "passed": 11,
+    "passRate": 0.34375,
+    "passRate95CI": {
+      "low": 0.204104,
+      "high": 0.516889
+    },
+    "languageSlices": {
+      "en": {
+        "cases": 17,
+        "passed": 8,
+        "passRate": 0.470588,
+        "passRate95CI": {
+          "low": 0.261651,
+          "high": 0.690368
+        }
+      },
+      "zh": {
+        "cases": 15,
+        "passed": 3,
+        "passRate": 0.2,
+        "passRate95CI": {
+          "low": 0.070475,
+          "high": 0.451854
+        }
+      }
+    },
+    "categorySlices": {
+      "cross-language": {
+        "cases": 8,
+        "passed": 0,
+        "passRate": 0.0,
+        "passRate95CI": {
+          "low": 0.0,
+          "high": 0.324408
+        }
+      },
+      "hard-negative": {
+        "cases": 5,
+        "passed": 5,
+        "passRate": 1.0,
+        "passRate95CI": {
+          "low": 0.565518,
+          "high": 1.0
+        }
+      },
+      "multi-evidence": {
+        "cases": 8,
+        "passed": 3,
+        "passRate": 0.375,
+        "passRate95CI": {
+          "low": 0.136844,
+          "high": 0.694258
+        }
+      },
+      "paraphrase": {
+        "cases": 3,
+        "passed": 1,
+        "passRate": 0.333333,
+        "passRate95CI": {
+          "low": 0.061492,
+          "high": 0.79234
+        }
+      },
+      "unsupported": {
+        "cases": 8,
+        "passed": 2,
+        "passRate": 0.25,
+        "passRate95CI": {
+          "low": 0.071479,
+          "high": 0.590725
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "test-001",
+        "mode": "lexical",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/data-export.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/accessible-support.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/data-export.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/accessible-support.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 3.588872,
+        "topSemanticScore": null,
+        "scoreMargin": 0.003179
+      },
+      {
+        "id": "test-002",
+        "mode": "lexical",
+        "paths": [
+          "inputs/促销规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": null,
+        "scoreMargin": 1.0
+      },
+      {
+        "id": "test-004",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-006",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-008",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-010",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-012",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-014",
+        "mode": "lexical",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/data-export.md",
+          "inputs/warranty.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/data-export.md",
+          "inputs/warranty.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 4.174886,
+        "topSemanticScore": null,
+        "scoreMargin": 0.438325
+      },
+      {
+        "id": "test-015",
+        "mode": "lexical",
+        "paths": [
+          "inputs/account-recovery.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/merchant-disputes.md"
+        ],
+        "chunkPaths": [
+          "inputs/account-recovery.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/merchant-disputes.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 2.390406,
+        "topSemanticScore": null,
+        "scoreMargin": 0.148751
+      },
+      {
+        "id": "test-016",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-017",
+        "mode": "lexical",
+        "paths": [
+          "inputs/order-cancellation.md"
+        ],
+        "chunkPaths": [
+          "inputs/order-cancellation.md",
+          "inputs/order-cancellation.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 4.174886,
+        "topSemanticScore": null,
+        "scoreMargin": 0.434802
+      },
+      {
+        "id": "test-018",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-019",
+        "mode": "lexical",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/account-recovery.md",
+          "inputs/refund-policy.md",
+          "inputs/warranty.md",
+          "inputs/accessible-support.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/account-recovery.md",
+          "inputs/refund-policy.md",
+          "inputs/warranty.md",
+          "inputs/accessible-support.md"
+        ],
+        "firstRelevantRank": 3,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 5.623703,
+        "topSemanticScore": null,
+        "scoreMargin": 0.220127
+      },
+      {
+        "id": "test-020",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-024",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-025",
+        "mode": "lexical",
+        "paths": [
+          "inputs/privacy-contacts.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md"
+        ],
+        "chunkPaths": [
+          "inputs/privacy-contacts.md",
+          "inputs/privacy-contacts.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 9.618761,
+        "topSemanticScore": null,
+        "scoreMargin": 0.581717
+      },
+      {
+        "id": "test-027",
+        "mode": "lexical",
+        "paths": [
+          "inputs/return-shipping.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "chunkPaths": [
+          "inputs/return-shipping.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 2.647094,
+        "topSemanticScore": null,
+        "scoreMargin": 0.07911
+      },
+      {
+        "id": "test-028",
+        "mode": "lexical",
+        "paths": [
+          "inputs/促销规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": null,
+        "scoreMargin": 1.0
+      },
+      {
+        "id": "test-029",
+        "mode": "lexical",
+        "paths": [
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md",
+          "inputs/subscription-changes.md"
+        ],
+        "chunkPaths": [
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md",
+          "inputs/subscription-changes.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 2.390406,
+        "topSemanticScore": null,
+        "scoreMargin": 0.075623
+      },
+      {
+        "id": "test-031",
+        "mode": "lexical",
+        "paths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/privacy-contacts.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/privacy-contacts.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 2.684382,
+        "topSemanticScore": null,
+        "scoreMargin": 0.0
+      },
+      {
+        "id": "test-032",
+        "mode": "lexical",
+        "paths": [
+          "inputs/促销规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": null,
+        "scoreMargin": 1.0
+      }
+    ],
+    "caseResults": [
+      {
+        "id": "test-001",
+        "mode": "lexical",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/data-export.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/accessible-support.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/data-export.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/accessible-support.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 3.588872,
+        "topSemanticScore": null,
+        "scoreMargin": 0.003179
+      },
+      {
+        "id": "test-002",
+        "mode": "lexical",
+        "paths": [
+          "inputs/促销规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": null,
+        "scoreMargin": 1.0
+      },
+      {
+        "id": "test-003",
+        "mode": "lexical",
+        "paths": [
+          "inputs/return-shipping.md"
+        ],
+        "chunkPaths": [
+          "inputs/return-shipping.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 5.294188,
+        "topSemanticScore": null,
+        "scoreMargin": 1.0
+      },
+      {
+        "id": "test-004",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-005",
+        "mode": "lexical",
+        "paths": [
+          "inputs/subscription-changes.md",
+          "inputs/privacy-contacts.md",
+          "inputs/warranty.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/subscription-changes.md",
+          "inputs/subscription-changes.md",
+          "inputs/privacy-contacts.md",
+          "inputs/warranty.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 6.928218,
+        "topSemanticScore": null,
+        "scoreMargin": 0.282395
+      },
+      {
+        "id": "test-006",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-007",
+        "mode": "lexical",
+        "paths": [
+          "inputs/data-export.md",
+          "inputs/account-deletion.md",
+          "inputs/account-recovery.md",
+          "inputs/support-escalation.md"
+        ],
+        "chunkPaths": [
+          "inputs/data-export.md",
+          "inputs/account-deletion.md",
+          "inputs/account-recovery.md",
+          "inputs/account-recovery.md",
+          "inputs/support-escalation.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 5.922393,
+        "topSemanticScore": null,
+        "scoreMargin": 0.54674
+      },
+      {
+        "id": "test-008",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-009",
+        "mode": "lexical",
+        "paths": [
+          "inputs/support-escalation.md",
+          "inputs/account-deletion.md",
+          "inputs/account-recovery.md",
+          "inputs/data-export.md"
+        ],
+        "chunkPaths": [
+          "inputs/support-escalation.md",
+          "inputs/account-deletion.md",
+          "inputs/account-recovery.md",
+          "inputs/account-recovery.md",
+          "inputs/data-export.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 6.156653,
+        "topSemanticScore": null,
+        "scoreMargin": 0.563987
+      },
+      {
+        "id": "test-010",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-011",
+        "mode": "lexical",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md",
+          "inputs/warranty.md",
+          "inputs/data-export.md",
+          "inputs/merchant-disputes.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md",
+          "inputs/warranty.md",
+          "inputs/data-export.md",
+          "inputs/merchant-disputes.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 9.632671,
+        "topSemanticScore": null,
+        "scoreMargin": 0.744499
+      },
+      {
+        "id": "test-012",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-013",
+        "mode": "lexical",
+        "paths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/merchant-disputes.md",
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/merchant-disputes.md",
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 8.561341,
+        "topSemanticScore": null,
+        "scoreMargin": 0.524467
+      },
+      {
+        "id": "test-014",
+        "mode": "lexical",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/data-export.md",
+          "inputs/warranty.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/data-export.md",
+          "inputs/warranty.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 4.174886,
+        "topSemanticScore": null,
+        "scoreMargin": 0.438325
+      },
+      {
+        "id": "test-015",
+        "mode": "lexical",
+        "paths": [
+          "inputs/account-recovery.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/merchant-disputes.md"
+        ],
+        "chunkPaths": [
+          "inputs/account-recovery.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/merchant-disputes.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 2.390406,
+        "topSemanticScore": null,
+        "scoreMargin": 0.148751
+      },
+      {
+        "id": "test-016",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-017",
+        "mode": "lexical",
+        "paths": [
+          "inputs/order-cancellation.md"
+        ],
+        "chunkPaths": [
+          "inputs/order-cancellation.md",
+          "inputs/order-cancellation.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 4.174886,
+        "topSemanticScore": null,
+        "scoreMargin": 0.434802
+      },
+      {
+        "id": "test-018",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-019",
+        "mode": "lexical",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/account-recovery.md",
+          "inputs/refund-policy.md",
+          "inputs/warranty.md",
+          "inputs/accessible-support.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/account-recovery.md",
+          "inputs/refund-policy.md",
+          "inputs/warranty.md",
+          "inputs/accessible-support.md"
+        ],
+        "firstRelevantRank": 3,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 1.0,
+        "topLexicalScore": 5.623703,
+        "topSemanticScore": null,
+        "scoreMargin": 0.220127
+      },
+      {
+        "id": "test-020",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-021",
+        "mode": "lexical",
+        "paths": [
+          "inputs/merchant-disputes.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/warranty.md"
+        ],
+        "chunkPaths": [
+          "inputs/merchant-disputes.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/merchant-disputes.md",
+          "inputs/warranty.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 9.89707,
+        "topSemanticScore": null,
+        "scoreMargin": 0.40348
+      },
+      {
+        "id": "test-022",
+        "mode": "lexical",
+        "paths": [
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/礼品卡规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md",
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 7.765661,
+        "topSemanticScore": null,
+        "scoreMargin": 0.117828
+      },
+      {
+        "id": "test-023",
+        "mode": "lexical",
+        "paths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-support.md",
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 1.0,
+        "topLexicalScore": 2.688076,
+        "topSemanticScore": null,
+        "scoreMargin": 0.001374
+      },
+      {
+        "id": "test-024",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-025",
+        "mode": "lexical",
+        "paths": [
+          "inputs/privacy-contacts.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md"
+        ],
+        "chunkPaths": [
+          "inputs/privacy-contacts.md",
+          "inputs/privacy-contacts.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 9.618761,
+        "topSemanticScore": null,
+        "scoreMargin": 0.581717
+      },
+      {
+        "id": "test-026",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-027",
+        "mode": "lexical",
+        "paths": [
+          "inputs/return-shipping.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "chunkPaths": [
+          "inputs/return-shipping.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 2.647094,
+        "topSemanticScore": null,
+        "scoreMargin": 0.07911
+      },
+      {
+        "id": "test-028",
+        "mode": "lexical",
+        "paths": [
+          "inputs/促销规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": null,
+        "scoreMargin": 1.0
+      },
+      {
+        "id": "test-029",
+        "mode": "lexical",
+        "paths": [
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md",
+          "inputs/subscription-changes.md"
+        ],
+        "chunkPaths": [
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md",
+          "inputs/subscription-changes.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 2.390406,
+        "topSemanticScore": null,
+        "scoreMargin": 0.075623
+      },
+      {
+        "id": "test-030",
+        "mode": "lexical",
+        "paths": [],
+        "chunkPaths": [],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": true,
+        "failureType": null,
+        "topScore": null,
+        "topLexicalScore": null,
+        "topSemanticScore": null,
+        "scoreMargin": null
+      },
+      {
+        "id": "test-031",
+        "mode": "lexical",
+        "paths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/privacy-contacts.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/privacy-contacts.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 2.684382,
+        "topSemanticScore": null,
+        "scoreMargin": 0.0
+      },
+      {
+        "id": "test-032",
+        "mode": "lexical",
+        "paths": [
+          "inputs/促销规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 1.0,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": null,
+        "scoreMargin": 1.0
+      }
+    ]
+  },
+  "model": {
+    "repository": "cnmoro/multilingual-e5-small-distilled-16m",
+    "revision": "813d48d449f24bb69be047693d48eb8a680239c6",
+    "license": "MIT",
+    "fileSha256": {
+      "config.json": "9c7891dba00700a8cec22be0ecd9d971c549bb35e57b255f3f3761c882edbd0d",
+      "model.safetensors": "3a24fd8f112b71957ff37da56e1d20dc0c046c19eb610a10bf1a569522438588",
+      "tokenizer.json": "cd98e5698b201ba914efb8c18b6709fa8735ab71dcad8d2b431e52e8bf68d932"
+    }
+  },
+  "hybrid": {
+    "mode": "hybrid",
+    "cases": 32,
+    "supportedCases": 24,
+    "recallAt1": 0.416667,
+    "recallAt3": 0.5625,
+    "top1HitRate": 0.5,
+    "top1HitRate95CI": {
+      "low": 0.314274,
+      "high": 0.685726
+    },
+    "allRelevantInTop3Rate": 0.458333,
+    "allRelevantInTop3Rate95CI": {
+      "low": 0.278913,
+      "high": 0.649251
+    },
+    "mrr": 0.605556,
+    "citationCorrectness": 1.0,
+    "unsupportedAccuracy": 0.0,
+    "passed": 11,
+    "passRate": 0.34375,
+    "passRate95CI": {
+      "low": 0.204104,
+      "high": 0.516889
+    },
+    "languageSlices": {
+      "en": {
+        "cases": 17,
+        "passed": 8,
+        "passRate": 0.470588,
+        "passRate95CI": {
+          "low": 0.261651,
+          "high": 0.690368
+        }
+      },
+      "zh": {
+        "cases": 15,
+        "passed": 3,
+        "passRate": 0.2,
+        "passRate95CI": {
+          "low": 0.070475,
+          "high": 0.451854
+        }
+      }
+    },
+    "categorySlices": {
+      "cross-language": {
+        "cases": 8,
+        "passed": 1,
+        "passRate": 0.125,
+        "passRate95CI": {
+          "low": 0.022417,
+          "high": 0.470888
+        }
+      },
+      "hard-negative": {
+        "cases": 5,
+        "passed": 5,
+        "passRate": 1.0,
+        "passRate95CI": {
+          "low": 0.565518,
+          "high": 1.0
+        }
+      },
+      "multi-evidence": {
+        "cases": 8,
+        "passed": 3,
+        "passRate": 0.375,
+        "passRate95CI": {
+          "low": 0.136844,
+          "high": 0.694258
+        }
+      },
+      "paraphrase": {
+        "cases": 3,
+        "passed": 2,
+        "passRate": 0.666667,
+        "passRate95CI": {
+          "low": 0.20766,
+          "high": 0.938508
+        }
+      },
+      "unsupported": {
+        "cases": 8,
+        "passed": 0,
+        "passRate": 0.0,
+        "passRate95CI": {
+          "low": 0.0,
+          "high": 0.324408
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "test-001",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/account-recovery.md",
+          "inputs/data-export.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/support-escalation.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/account-recovery.md",
+          "inputs/data-export.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/support-escalation.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 5,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.797634,
+        "topLexicalScore": 3.265743,
+        "topSemanticScore": 0.705728,
+        "scoreMargin": 0.007534
+      },
+      {
+        "id": "test-002",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/return-shipping.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/return-shipping.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.78744,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": 0.613527,
+        "scoreMargin": 0.465482
+      },
+      {
+        "id": "test-006",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.215473,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.39177,
+        "scoreMargin": 0.050236
+      },
+      {
+        "id": "test-008",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/warranty.md",
+          "inputs/礼品卡规则.md",
+          "inputs/account-deletion.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/warranty.md",
+          "inputs/礼品卡规则.md",
+          "inputs/account-deletion.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 4,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.262811,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.477837,
+        "scoreMargin": 0.061304
+      },
+      {
+        "id": "test-010",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/privacy-contacts.md",
+          "inputs/warranty.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/privacy-contacts.md",
+          "inputs/warranty.md"
+        ],
+        "firstRelevantRank": 4,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.201947,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.367176,
+        "scoreMargin": 0.047372
+      },
+      {
+        "id": "test-012",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/order-cancellation.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/order-cancellation.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.292729,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.532234,
+        "scoreMargin": 0.105383
+      },
+      {
+        "id": "test-014",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/warranty.md",
+          "inputs/data-export.md",
+          "inputs/refund-policy.md",
+          "inputs/accessible-support.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/warranty.md",
+          "inputs/data-export.md",
+          "inputs/refund-policy.md",
+          "inputs/accessible-support.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.624079,
+        "topLexicalScore": 4.174886,
+        "topSemanticScore": 0.316507,
+        "scoreMargin": 0.203923
+      },
+      {
+        "id": "test-015",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/account-recovery.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/merchant-disputes.md",
+          "inputs/return-shipping.md",
+          "inputs/warranty.md"
+        ],
+        "chunkPaths": [
+          "inputs/account-recovery.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/merchant-disputes.md",
+          "inputs/return-shipping.md",
+          "inputs/warranty.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.799339,
+        "topLexicalScore": 2.390406,
+        "topSemanticScore": 0.635161,
+        "scoreMargin": 0.11071
+      },
+      {
+        "id": "test-017",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/order-cancellation.md",
+          "inputs/account-deletion.md",
+          "inputs/invoice-corrections.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "chunkPaths": [
+          "inputs/order-cancellation.md",
+          "inputs/order-cancellation.md",
+          "inputs/account-deletion.md",
+          "inputs/invoice-corrections.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.732017,
+        "topLexicalScore": 4.174886,
+        "topSemanticScore": 0.512759,
+        "scoreMargin": 0.120149
+      },
+      {
+        "id": "test-018",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/account-deletion.md",
+          "inputs/account-recovery.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/account-deletion.md",
+          "inputs/促销规则.md",
+          "inputs/account-recovery.md"
+        ],
+        "firstRelevantRank": 3,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.356756,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.648647,
+        "scoreMargin": 0.110712
+      },
+      {
+        "id": "test-019",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md",
+          "inputs/account-recovery.md",
+          "inputs/warranty.md",
+          "inputs/return-shipping.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md",
+          "inputs/account-recovery.md",
+          "inputs/warranty.md",
+          "inputs/return-shipping.md"
+        ],
+        "firstRelevantRank": 2,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.691619,
+        "topLexicalScore": 5.623703,
+        "topSemanticScore": 0.439307,
+        "scoreMargin": 0.008112
+      },
+      {
+        "id": "test-020",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/account-recovery.md",
+          "inputs/礼品卡规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/account-recovery.md",
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/礼品卡规则.md"
+        ],
+        "firstRelevantRank": 2,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.266869,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.485216,
+        "scoreMargin": 0.081046
+      },
+      {
+        "id": "test-024",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/privacy-contacts.md",
+          "inputs/account-deletion.md",
+          "inputs/礼品卡规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/privacy-contacts.md",
+          "inputs/account-deletion.md",
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 2,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.217519,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.395489,
+        "scoreMargin": 0.017877
+      },
+      {
+        "id": "test-025",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/privacy-contacts.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/accessible-support.md"
+        ],
+        "chunkPaths": [
+          "inputs/privacy-contacts.md",
+          "inputs/privacy-contacts.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/accessible-support.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.884408,
+        "topLexicalScore": 9.618761,
+        "topSemanticScore": 0.789832,
+        "scoreMargin": 0.429401
+      },
+      {
+        "id": "test-026",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/refund-policy.md",
+          "inputs/order-cancellation.md",
+          "inputs/privacy-contacts.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/refund-policy.md",
+          "inputs/order-cancellation.md",
+          "inputs/privacy-contacts.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.176429,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.32078,
+        "scoreMargin": 0.020335
+      },
+      {
+        "id": "test-027",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/return-shipping.md",
+          "inputs/merchant-disputes.md",
+          "inputs/order-cancellation.md",
+          "inputs/data-export.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/return-shipping.md",
+          "inputs/merchant-disputes.md",
+          "inputs/order-cancellation.md",
+          "inputs/data-export.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.723592,
+        "topLexicalScore": 2.437682,
+        "topSemanticScore": 0.562166,
+        "scoreMargin": 0.045771
+      },
+      {
+        "id": "test-028",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/data-export.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md",
+          "inputs/data-export.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.78215,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": 0.603909,
+        "scoreMargin": 0.529289
+      },
+      {
+        "id": "test-029",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md",
+          "inputs/subscription-changes.md",
+          "inputs/refund-policy.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "chunkPaths": [
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md",
+          "inputs/subscription-changes.md",
+          "inputs/refund-policy.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.777681,
+        "topLexicalScore": 2.390406,
+        "topSemanticScore": 0.595783,
+        "scoreMargin": 0.036457
+      },
+      {
+        "id": "test-030",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/warranty.md",
+          "inputs/data-export.md"
+        ],
+        "chunkPaths": [
+          "inputs/warranty.md",
+          "inputs/data-export.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.186952,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.339913,
+        "scoreMargin": 0.018917
+      },
+      {
+        "id": "test-031",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/support-escalation.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.56794,
+        "topLexicalScore": 2.684382,
+        "topSemanticScore": 0.214436,
+        "scoreMargin": 0.049022
+      },
+      {
+        "id": "test-032",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.65123,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": 0.365873,
+        "scoreMargin": 0.65123
+      }
+    ],
+    "caseResults": [
+      {
+        "id": "test-001",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/account-recovery.md",
+          "inputs/data-export.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/support-escalation.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/account-recovery.md",
+          "inputs/data-export.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/support-escalation.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 5,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.797634,
+        "topLexicalScore": 3.265743,
+        "topSemanticScore": 0.705728,
+        "scoreMargin": 0.007534
+      },
+      {
+        "id": "test-002",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/return-shipping.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/return-shipping.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.78744,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": 0.613527,
+        "scoreMargin": 0.465482
+      },
+      {
+        "id": "test-003",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/return-shipping.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/invoice-corrections.md",
+          "inputs/order-cancellation.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/return-shipping.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/invoice-corrections.md",
+          "inputs/order-cancellation.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.755262,
+        "topLexicalScore": 5.294188,
+        "topSemanticScore": 0.555022,
+        "scoreMargin": 0.375917
+      },
+      {
+        "id": "test-004",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/account-recovery.md",
+          "inputs/促销规则.md",
+          "inputs/privacy-contacts.md",
+          "inputs/return-shipping.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/account-recovery.md",
+          "inputs/促销规则.md",
+          "inputs/privacy-contacts.md",
+          "inputs/return-shipping.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.226525,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.411864,
+        "scoreMargin": 0.000279
+      },
+      {
+        "id": "test-005",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/subscription-changes.md",
+          "inputs/privacy-contacts.md",
+          "inputs/account-recovery.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/subscription-changes.md",
+          "inputs/subscription-changes.md",
+          "inputs/privacy-contacts.md",
+          "inputs/account-recovery.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.613567,
+        "topLexicalScore": 4.971724,
+        "topSemanticScore": 0.528446,
+        "scoreMargin": 0.024867
+      },
+      {
+        "id": "test-006",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.215473,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.39177,
+        "scoreMargin": 0.050236
+      },
+      {
+        "id": "test-007",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/data-export.md",
+          "inputs/account-recovery.md",
+          "inputs/account-deletion.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/data-export.md",
+          "inputs/account-recovery.md",
+          "inputs/account-deletion.md",
+          "inputs/account-recovery.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "paraphrase",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.743568,
+        "topLexicalScore": 5.922393,
+        "topSemanticScore": 0.533761,
+        "scoreMargin": 0.362925
+      },
+      {
+        "id": "test-008",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/warranty.md",
+          "inputs/礼品卡规则.md",
+          "inputs/account-deletion.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/warranty.md",
+          "inputs/礼品卡规则.md",
+          "inputs/account-deletion.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 4,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.262811,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.477837,
+        "scoreMargin": 0.061304
+      },
+      {
+        "id": "test-009",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/refund-policy.md",
+          "inputs/data-export.md",
+          "inputs/account-deletion.md"
+        ],
+        "chunkPaths": [
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/refund-policy.md",
+          "inputs/data-export.md",
+          "inputs/account-deletion.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.756155,
+        "topLexicalScore": 6.156653,
+        "topSemanticScore": 0.556646,
+        "scoreMargin": 0.402005
+      },
+      {
+        "id": "test-010",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/privacy-contacts.md",
+          "inputs/warranty.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/privacy-contacts.md",
+          "inputs/warranty.md"
+        ],
+        "firstRelevantRank": 4,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.201947,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.367176,
+        "scoreMargin": 0.047372
+      },
+      {
+        "id": "test-011",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md",
+          "inputs/merchant-disputes.md",
+          "inputs/invoice-corrections.md",
+          "inputs/order-cancellation.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md",
+          "inputs/merchant-disputes.md",
+          "inputs/invoice-corrections.md",
+          "inputs/order-cancellation.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.901112,
+        "topLexicalScore": 9.632671,
+        "topSemanticScore": 0.820203,
+        "scoreMargin": 0.452165
+      },
+      {
+        "id": "test-012",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/order-cancellation.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/order-cancellation.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.292729,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.532234,
+        "scoreMargin": 0.105383
+      },
+      {
+        "id": "test-013",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-support.md",
+          "inputs/merchant-disputes.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-support.md",
+          "inputs/merchant-disputes.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "hard-negative",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.83184,
+        "topLexicalScore": 8.561341,
+        "topSemanticScore": 0.694255,
+        "scoreMargin": 0.278303
+      },
+      {
+        "id": "test-014",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/warranty.md",
+          "inputs/data-export.md",
+          "inputs/refund-policy.md",
+          "inputs/accessible-support.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/warranty.md",
+          "inputs/data-export.md",
+          "inputs/refund-policy.md",
+          "inputs/accessible-support.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.624079,
+        "topLexicalScore": 4.174886,
+        "topSemanticScore": 0.316507,
+        "scoreMargin": 0.203923
+      },
+      {
+        "id": "test-015",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/account-recovery.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/merchant-disputes.md",
+          "inputs/return-shipping.md",
+          "inputs/warranty.md"
+        ],
+        "chunkPaths": [
+          "inputs/account-recovery.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/merchant-disputes.md",
+          "inputs/return-shipping.md",
+          "inputs/warranty.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "cross-language",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.799339,
+        "topLexicalScore": 2.390406,
+        "topSemanticScore": 0.635161,
+        "scoreMargin": 0.11071
+      },
+      {
+        "id": "test-016",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/privacy-contacts.md",
+          "inputs/accessible-support.md",
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/privacy-contacts.md",
+          "inputs/accessible-support.md",
+          "inputs/促销规则.md",
+          "inputs/accessible-support.md",
+          "inputs/礼品卡规则.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "paraphrase",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.23628,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.429599,
+        "scoreMargin": 0.014634
+      },
+      {
+        "id": "test-017",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/order-cancellation.md",
+          "inputs/account-deletion.md",
+          "inputs/invoice-corrections.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "chunkPaths": [
+          "inputs/order-cancellation.md",
+          "inputs/order-cancellation.md",
+          "inputs/account-deletion.md",
+          "inputs/invoice-corrections.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.732017,
+        "topLexicalScore": 4.174886,
+        "topSemanticScore": 0.512759,
+        "scoreMargin": 0.120149
+      },
+      {
+        "id": "test-018",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/account-deletion.md",
+          "inputs/account-recovery.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/account-deletion.md",
+          "inputs/促销规则.md",
+          "inputs/account-recovery.md"
+        ],
+        "firstRelevantRank": 3,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.356756,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.648647,
+        "scoreMargin": 0.110712
+      },
+      {
+        "id": "test-019",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md",
+          "inputs/account-recovery.md",
+          "inputs/warranty.md",
+          "inputs/return-shipping.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md",
+          "inputs/account-recovery.md",
+          "inputs/warranty.md",
+          "inputs/return-shipping.md"
+        ],
+        "firstRelevantRank": 2,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.691619,
+        "topLexicalScore": 5.623703,
+        "topSemanticScore": 0.439307,
+        "scoreMargin": 0.008112
+      },
+      {
+        "id": "test-020",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/account-recovery.md",
+          "inputs/礼品卡规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/account-recovery.md",
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/礼品卡规则.md"
+        ],
+        "firstRelevantRank": 2,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.266869,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.485216,
+        "scoreMargin": 0.081046
+      },
+      {
+        "id": "test-021",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/merchant-disputes.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/merchant-disputes.md",
+          "inputs/delivery-exceptions.md",
+          "inputs/merchant-disputes.md",
+          "inputs/refund-policy.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.785255,
+        "topLexicalScore": 9.89707,
+        "topSemanticScore": 0.609554,
+        "scoreMargin": 0.154253
+      },
+      {
+        "id": "test-022",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.810664,
+        "topLexicalScore": 6.85065,
+        "topSemanticScore": 0.752158,
+        "scoreMargin": 0.02654
+      },
+      {
+        "id": "test-023",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/accessible-support.md",
+          "inputs/account-recovery.md",
+          "inputs/support-escalation.md"
+        ],
+        "firstRelevantRank": 1,
+        "language": "en",
+        "category": "multi-evidence",
+        "passed": true,
+        "failureType": null,
+        "topScore": 0.786009,
+        "topLexicalScore": 2.688076,
+        "topSemanticScore": 0.610925,
+        "scoreMargin": 0.047833
+      },
+      {
+        "id": "test-024",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/privacy-contacts.md",
+          "inputs/account-deletion.md",
+          "inputs/礼品卡规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/privacy-contacts.md",
+          "inputs/account-deletion.md",
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 2,
+        "language": "zh",
+        "category": "multi-evidence",
+        "passed": false,
+        "failureType": "required-documents-not-covered-in-top-3",
+        "topScore": 0.217519,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.395489,
+        "scoreMargin": 0.017877
+      },
+      {
+        "id": "test-025",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/privacy-contacts.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/accessible-support.md"
+        ],
+        "chunkPaths": [
+          "inputs/privacy-contacts.md",
+          "inputs/privacy-contacts.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/accessible-support.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.884408,
+        "topLexicalScore": 9.618761,
+        "topSemanticScore": 0.789832,
+        "scoreMargin": 0.429401
+      },
+      {
+        "id": "test-026",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/refund-policy.md",
+          "inputs/order-cancellation.md",
+          "inputs/privacy-contacts.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/refund-policy.md",
+          "inputs/order-cancellation.md",
+          "inputs/privacy-contacts.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.176429,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.32078,
+        "scoreMargin": 0.020335
+      },
+      {
+        "id": "test-027",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/return-shipping.md",
+          "inputs/merchant-disputes.md",
+          "inputs/order-cancellation.md",
+          "inputs/data-export.md"
+        ],
+        "chunkPaths": [
+          "inputs/delivery-exceptions.md",
+          "inputs/return-shipping.md",
+          "inputs/merchant-disputes.md",
+          "inputs/order-cancellation.md",
+          "inputs/data-export.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.723592,
+        "topLexicalScore": 2.437682,
+        "topSemanticScore": 0.562166,
+        "scoreMargin": 0.045771
+      },
+      {
+        "id": "test-028",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/data-export.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md",
+          "inputs/礼品卡规则.md",
+          "inputs/促销规则.md",
+          "inputs/data-export.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.78215,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": 0.603909,
+        "scoreMargin": 0.529289
+      },
+      {
+        "id": "test-029",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md",
+          "inputs/subscription-changes.md",
+          "inputs/refund-policy.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "chunkPaths": [
+          "inputs/account-recovery.md",
+          "inputs/return-shipping.md",
+          "inputs/subscription-changes.md",
+          "inputs/refund-policy.md",
+          "inputs/delivery-exceptions.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.777681,
+        "topLexicalScore": 2.390406,
+        "topSemanticScore": 0.595783,
+        "scoreMargin": 0.036457
+      },
+      {
+        "id": "test-030",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/warranty.md",
+          "inputs/data-export.md"
+        ],
+        "chunkPaths": [
+          "inputs/warranty.md",
+          "inputs/data-export.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.186952,
+        "topLexicalScore": 0.0,
+        "topSemanticScore": 0.339913,
+        "scoreMargin": 0.018917
+      },
+      {
+        "id": "test-031",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/refund-policy.md"
+        ],
+        "chunkPaths": [
+          "inputs/accessible-support.md",
+          "inputs/support-escalation.md",
+          "inputs/account-recovery.md",
+          "inputs/support-escalation.md",
+          "inputs/refund-policy.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "en",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.56794,
+        "topLexicalScore": 2.684382,
+        "topSemanticScore": 0.214436,
+        "scoreMargin": 0.049022
+      },
+      {
+        "id": "test-032",
+        "mode": "hybrid",
+        "paths": [
+          "inputs/促销规则.md"
+        ],
+        "chunkPaths": [
+          "inputs/促销规则.md"
+        ],
+        "firstRelevantRank": 0,
+        "language": "zh",
+        "category": "unsupported",
+        "passed": false,
+        "failureType": "unsupported-query-returned-evidence",
+        "topScore": 0.65123,
+        "topLexicalScore": 1.475008,
+        "topSemanticScore": 0.365873,
+        "scoreMargin": 0.65123
+      }
+    ]
+  }
+}

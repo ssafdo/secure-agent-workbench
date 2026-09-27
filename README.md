@@ -24,6 +24,7 @@
 - 文本附件桥：浏览器导入 `.md/.txt`、同名更新、20 份/单份 200 KB 边界和 Markdown 报告下载
 - 本地检索引擎：按段落/大小分块、英文词与中文双字检索、BM25 风格排序、`path#Lx-Ly` 引用和逐条源文校验
 - 可选 `model2vec==0.9.0` 多语 embedding；模型提交与三个运行文件 SHA-256 固定，普通请求绝不自动下载模型
+- 可选 ONNX 多语 cross-encoder 独立验证查询与候选证据；模型提交和运行文件 SHA-256 固定，验证失败时关闭证据而不是宽松降级
 - 混合检索显式报告 `hybrid`、`lexical` 或 `lexical-fallback`；8 条固定基准比较 Recall@1、Recall@3、MRR、引用正确率和无依据拒答
 - 检索报告在没有相关证据时明确拒答；资料中的指令覆盖、密钥外传和命令执行文本只作为风险信号，不触发额外工具
 - 硬门控容器执行器：摘要锁定镜像、结构化 argv、可执行文件白名单、无网络、只读根文件系统、非 root 和资源上限
@@ -50,11 +51,30 @@
 
 ## 快速开始
 
+新机器只运行核心离线工作台时，使用 Python 3.11 或更高版本：
+
 ```powershell
-cd E:\agent\secure_agent_workbench
-$env:PYTHONPATH = "src"
+git clone https://github.com/ssafdo/secure-agent-workbench.git
+cd secure-agent-workbench
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -e .
 python -m unittest discover -s tests -v
 python -m agent_workbench demo
+python -m agent_workbench serve --port 8767
+```
+
+服务启动后访问 `http://127.0.0.1:8767/`。另开一个 PowerShell，在同一仓库运行固定项目演示：
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python scripts/run_project_demo.py --base-url http://127.0.0.1:8767 --output artifacts/demo/project-demo.json
+```
+
+下面的检索模型、MCP 和容器命令属于可选能力，需要相应依赖或本机 Docker：
+
+```powershell
 python -m agent_workbench container-doctor
 python -m agent_workbench container-smoke
 python -m pip install -e ".[mcp]"
@@ -65,6 +85,8 @@ python scripts/benchmark_supervisor_routing.py --dataset benchmarks/supervisor_n
 ```
 
 `demo` 会创建隔离项目，放入两份示例资料，调用研究 Agent 生成 `outputs/research-report.md`，并打印项目 ID、报告和 trace 位置。
+
+`run_project_demo.py` 需要本地服务已经启动。它固定验证检索引用、Supervisor 双路由和离线 ReAct 工具循环，保存 JSON 证据且不调用外部模型；真实 DeepSeek 结果仍以独立 NiceEval Run 为准。
 
 HTTP API 的 `/v1/research` 默认使用确定性基线；请求增加 `"engine": "react"` 时走离线模型协议与 ReAct 工具循环。`"engine": "react-recovery"` 是离线故障注入实验路径：首次调用一个不存在的工具，用来证明一次 Reflection 能恢复且不能绕过 Runtime 策略。FakeLLM 不伪造 token 或费用，因此离线 NiceEval 中的 usage 保持 unavailable；hosted 引擎只采用上游实际返回的 token，美元成本保持 `null`。
 
@@ -81,11 +103,32 @@ $env:PYTHONPATH = "src"
 python -m pip install -e ".[retrieval]"
 python scripts/download_retrieval_model.py --output runtime/models/potion-multilingual-128M-i8
 python scripts/benchmark_retrieval.py --model-path runtime/models/potion-multilingual-128M-i8 --require-improvement --output artifacts/retrieval/benchmark.json
+python scripts/benchmark_retrieval.py --dataset benchmarks/retrieval_challenge_v1.json --model-path runtime/models/potion-multilingual-128M-i8 --minimum-cases 40 --output artifacts/retrieval/challenge-v1.json
+python -m pip install -e ".[relevance]"
+python scripts/download_relevance_model.py --output runtime/models/mmarco-mMiniLMv2-L12-H384-v1
+python scripts/calibrate_relevance_verifier.py --dataset benchmarks/relevance_verifier_dev_v1.json --model-path runtime/models/mmarco-mMiniLMv2-L12-H384-v1 --output artifacts/retrieval/relevance-calibration-v1.json
+python scripts/download_answerability_model.py --output runtime/models/multilingual-minilm-nli
+python scripts/calibrate_answerability.py --dataset benchmarks/answerability_dev_v1.json --model-path runtime/models/multilingual-minilm-nli --output artifacts/retrieval/answerability-calibration-v1.json
+python scripts/download_qa_answerability_model.py --output runtime/models/mdeberta-v3-base-squad2-onnx
+python scripts/calibrate_qa_answerability.py --dataset benchmarks/qa_answerability_dev_v1.json --model-path runtime/models/mdeberta-v3-base-squad2-onnx --output artifacts/retrieval/qa-answerability-calibration-v1.json
 $env:AGENT_WORKBENCH_EMBEDDING_MODEL_PATH = "runtime/models/potion-multilingual-128M-i8"
+python scripts/benchmark_supervisor.py --dataset benchmarks/supervisor_workflow_challenge_v1.json --minimum-cases 24 --output artifacts/supervisor/workflow-challenge-v1.json
 python -m agent_workbench serve --port 8767
 ```
 
 固定模型为 MIT 许可的 `Tokenade/potion-multilingual-128M-i8-tokenade@ba8c5504...`，是 `minishlab/potion-multilingual-128M` 的 int8 量化版本。当前 8 条基准中，词法与混合检索的 Recall@1/MRR 分别为 `0.571429/0.571429` 和 `1.0/1.0`；这只证明当前固定样例的改进，不代表生产语料上的通用质量。
+
+规模更大的公开挑战集使用 20 份共享文档和 40 条中英问题。Hybrid RAG 的 Recall@3/MRR 为 `0.750/0.619`，高于词法的 `0.567/0.511`，但无依据拒答从 `6/10` 退化到 `0/10`，表明当前语义阈值仍需校准。24 条 Supervisor 工作流挑战中，单 Agent 与 Supervisor 分别通过 `8/24`、`19/24`，平均工具调用为 `6.792`、`3.375`；5 个失败保留在结果文件中。这两组都是作者构造的公开离线评估，不是真实用户盲测，完整口径见 `docs/evaluation-summary.md`。
+
+独立相关性验证器在 48 对开发集上固定阈值后，只对全新的 40 条 v3 held-out 运行一次：相对 E5 Hybrid，无依据拒答从 `2/10` 提升到 `9/10`，但全部必要证据覆盖从 `20/30` 降到 `13/30`，综合通过数均为 `22/40`。该候选没有发布，v3 也不再用于调参；这组负结果和完整失败列表保存在 `artifacts/retrieval/holdout-v3.json`。
+
+后续查询分解候选只在新的 32 条开发集上评估：多证据从整句验证的 `0/12` 提升到 `2/12`，但未达到预注册的至少 `+4` 门禁，因此没有创建或运行 v4 held-out。实验功能保持默认关闭，完整结果位于 `artifacts/retrieval/decomposition-development-v1.json`。
+
+完整原子覆盖候选在另一份 32 条集成开发集上将多证据通过从 `2/12` 提升到 `5/12`，但无依据拒答从 `12/12` 降到 `11/12`，自动门禁仍失败。随后使用固定 commit 与 SHA-256 的多语 NLI 模型，在全新的 48 对 calibration-only 数据上验证“段落是否真的回答所问属性”：阈值 `0.197` 时可回答召回 `22/24`，缺属性识别 `13/24`，门禁未通过。NLI 候选没有进入集成开发或 v4，生产默认保持不变；结果位于 `artifacts/retrieval/answerability-calibration-v1.json`。
+
+抽取式 QA 候选随后使用另一份全新的 48 对校准集，在阈值 `0.901` 下取得可回答召回 `21/24`、不可回答识别 `19/24`，24 个正例的抽取答案均命中标注片段，校准门禁通过。但在新的 32 条集成开发集上，完整覆盖基线与 QA 门控候选分别通过 `24/32`、`19/32`：无依据只改善 1 条，却损失 6 条有依据任务，多证据从 `7/12` 降到 `1/12`。集成门禁失败，因此仍未创建 v4，候选保持默认关闭。
+
+Phase 34 将 QA 改为证据集合整体门控，不再逐段删除证据；接口和失败关闭测试已完成。但新的 40 条集合校准集在阈值 `0.859` 下仅识别 `11/16` 个同主题缺属性负例，未达到预注册 `0.75` 门槛，因此没有创建集合级集成集或 v4。该结果说明当前通用抽取式 QA 模型本身仍不能稳定判断“证据集合是否足够回答”，不应继续在已揭示的开发集上反复调阈值。
 
 需要跨请求续接时，为 `react`、`react-recovery` 或 `hosted` 请求增加 `"sessionId"` 和 `"expectedVersion"`。首次版本为 `0`，成功响应会返回 `session.version = 1`；下一次必须传回该版本。陈旧版本返回 HTTP 409，过期会话返回 HTTP 410，客户端随后可用版本 `0` 重新开始。会话正文保存在项目内部 `.agent/sessions/`，因此当前版本不适合在磁盘不可信或多人共享的宿主机上保存敏感内容。
 
@@ -319,6 +362,7 @@ WorkspaceManager -> ProjectContext -> AgentRuntime
 - `docs/knowledge-roadmap.md`：Agent 知识整合路线
 - `docs/issues.md`：已发现的问题、风险和验证方式
 - `docs/eval-plan.md`：评测数据与指标设计
+- `docs/evaluation-summary.md`：公开挑战集结果、置信区间、失败类型与表述边界
 - `docs/blind-routing-eval.md`：私有自然任务的去敏、封存与本地盲测流程
 - `docs/routing-label-guide.md`：独立审核者使用的类别、专业 Agent 和错误成本口径
 - `scripts/blind_routing_intake.py`：固定公开数据版本的候选收集与 loopback 人工去敏审核工作台

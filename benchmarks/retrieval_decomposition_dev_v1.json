@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 2,
+  "name": "retrieval-decomposition-development-v1",
+  "provenance": {
+    "type": "author-constructed-development-only",
+    "split": "development",
+    "created": "2026-09-27",
+    "limitations": "Used only to decide whether conservative query decomposition should advance to a new held-out test. It is not final quality evidence."
+  },
+  "selectionGate": {
+    "multiEvidencePassedGainAtLeast": 4,
+    "unsupportedAccuracyMustNotDecrease": true,
+    "singleEvidencePassedLossAtMost": 1,
+    "totalPassedGainAtLeast": 3,
+    "relevanceThreshold": 0.38
+  },
+  "documents": [
+    {"path":"inputs/gauge-calibration.md","content":"Gauge calibration\n\nPressure gauges are calibrated every six months against a traceable reference. A failed gauge is tagged out immediately, and measurements made since its last successful check are reviewed."},
+    {"path":"inputs/planned-maintenance.md","content":"Planned maintenance\n\nThe line supervisor approves a maintenance shutdown. Operators isolate electrical and pneumatic energy before technicians begin work. Production restarts only after guards are restored and the area is released."},
+    {"path":"inputs/incoming-inspection.md","content":"Incoming inspection\n\nReceiving staff sample each shipment using the approved inspection plan. Material with missing certificates or failed dimensions is moved to the quarantine zone and cannot enter production."},
+    {"path":"inputs/final-release.md","content":"Final product release\n\nQuality assurance reviews test results, batch records and open deviations before release. Only an authorized quality manager may change a batch from hold to released status."},
+    {"path":"inputs/welding-safety.md","content":"Welding safety\n\nWelders wear a rated helmet, flame-resistant clothing and welding gloves. A hot-work permit and fire watch are required when welding outside the designated booth."},
+    {"path":"inputs/paint-booth.md","content":"Paint booth safety\n\nSpray painters use an air-purifying respirator, chemical-resistant gloves and eye protection. Booth ventilation must be running, and ignition sources are prohibited."},
+    {"path":"inputs/cold-storage.md","content":"Cold storage\n\nTemperature-sensitive material is stored between two and eight degrees Celsius. The monitoring system records temperature every five minutes and pages the warehouse lead after a ten-minute excursion."},
+    {"path":"inputs/ambient-storage.md","content":"Ambient warehouse storage\n\nDry components are stored below thirty degrees Celsius and sixty percent relative humidity. Pallets remain fifteen centimeters off the floor, and stock rotates by earliest expiry date."},
+    {"path":"inputs/injury-reporting.md","content":"Workplace injury reporting\n\nAn injured worker obtains first aid and notifies the shift supervisor immediately. The supervisor records the event before the shift ends and escalates any hospitalization to the safety director."},
+    {"path":"inputs/near-miss.md","content":"Near-miss reporting\n\nEvents that caused no injury but could have caused harm are submitted through the safety portal within twenty-four hours. Reports may be anonymous and are reviewed at the weekly safety meeting."},
+    {"path":"inputs/supplier-audit.md","content":"Supplier audits\n\nCritical suppliers receive an on-site audit every two years. Major findings require a corrective-action plan within thirty days and verification before the supplier returns to approved status."},
+    {"path":"inputs/change-control.md","content":"Manufacturing change control\n\nA change to material, equipment or process parameters requires risk assessment and approvals from engineering and quality. Validation is completed before the change enters routine production."},
+    {"path":"inputs/rework.md","content":"Product rework\n\nRework follows a quality-approved instruction tied to the batch record. The unit repeats all affected inspections after rework. A second rework attempt requires written approval from the quality director."},
+    {"path":"inputs/scrap.md","content":"Product scrap\n\nScrapped units are physically identified and moved to a locked cage. Inventory control records the quantity and reason. Destruction requires signatures from production and quality representatives."}
+  ],
+  "cases": [
+    {"id":"dev-001","language":"en","category":"multi-evidence","query":"Compare the timing and response rules for gauge calibration and planned maintenance.","supported":true,"relevantPaths":["inputs/gauge-calibration.md","inputs/planned-maintenance.md"]},
+    {"id":"dev-002","language":"zh","category":"multi-evidence","query":"来料检验和成品放行分别由谁执行并检查哪些材料？","supported":true,"relevantPaths":["inputs/incoming-inspection.md","inputs/final-release.md"]},
+    {"id":"dev-003","language":"en","category":"multi-evidence","query":"Compare the protective equipment and operating controls for welding safety and paint booth safety.","supported":true,"relevantPaths":["inputs/welding-safety.md","inputs/paint-booth.md"]},
+    {"id":"dev-004","language":"zh","category":"multi-evidence","query":"冷藏存储与常温存储分别要求什么温度和环境控制？","supported":true,"relevantPaths":["inputs/cold-storage.md","inputs/ambient-storage.md"]},
+    {"id":"dev-005","language":"en","category":"multi-evidence","query":"How do the deadlines and escalation paths differ for workplace injuries and near misses?","supported":true,"relevantPaths":["inputs/injury-reporting.md","inputs/near-miss.md"]},
+    {"id":"dev-006","language":"zh","category":"multi-evidence","query":"供应商审核和制造变更控制分别需要哪些批准或后续验证？","supported":true,"relevantPaths":["inputs/supplier-audit.md","inputs/change-control.md"]},
+    {"id":"dev-007","language":"en","category":"multi-evidence","query":"Compare the authorization and traceability controls for product rework and product scrap.","supported":true,"relevantPaths":["inputs/rework.md","inputs/scrap.md"]},
+    {"id":"dev-008","language":"zh","category":"multi-evidence","query":"压力表校准与来料检验分别如何处理不合格结果？","supported":true,"relevantPaths":["inputs/gauge-calibration.md","inputs/incoming-inspection.md"]},
+    {"id":"dev-009","language":"en","category":"multi-evidence","query":"How do final product release and manufacturing change control differ in required quality approval?","supported":true,"relevantPaths":["inputs/final-release.md","inputs/change-control.md"]},
+    {"id":"dev-010","language":"zh","category":"multi-evidence","query":"焊接作业和计划维护分别如何控制点火或能量危险？","supported":true,"relevantPaths":["inputs/welding-safety.md","inputs/planned-maintenance.md"]},
+    {"id":"dev-011","language":"en","category":"multi-evidence","query":"Compare monitoring and escalation for cold storage and workplace injuries.","supported":true,"relevantPaths":["inputs/cold-storage.md","inputs/injury-reporting.md"]},
+    {"id":"dev-012","language":"zh","category":"multi-evidence","query":"返工和报废分别需要怎样记录并由谁批准？","supported":true,"relevantPaths":["inputs/rework.md","inputs/scrap.md"]},
+
+    {"id":"dev-013","language":"en","category":"single-evidence","query":"What happens to a pressure gauge that fails calibration?","supported":true,"relevantPaths":["inputs/gauge-calibration.md"]},
+    {"id":"dev-014","language":"zh","category":"single-evidence","query":"来料缺少证书或尺寸不合格时放到哪里？","supported":true,"relevantPaths":["inputs/incoming-inspection.md"]},
+    {"id":"dev-015","language":"en","category":"single-evidence","query":"May production restart before machine guards and the work area are restored?","supported":true,"relevantPaths":["inputs/planned-maintenance.md"]},
+    {"id":"dev-016","language":"zh","category":"single-evidence","query":"冷藏温度超限多久后通知仓库负责人？","supported":true,"relevantPaths":["inputs/cold-storage.md"]},
+    {"id":"dev-017","language":"en","category":"single-evidence","query":"Are a respirator and chemical-resistant gloves required for spray painting?","supported":true,"relevantPaths":["inputs/paint-booth.md"]},
+    {"id":"dev-018","language":"zh","category":"single-evidence","query":"未造成伤害的险情能否匿名报告？","supported":true,"relevantPaths":["inputs/near-miss.md"]},
+    {"id":"dev-019","language":"en","category":"single-evidence","query":"Who may move a batch from hold to released status?","supported":true,"relevantPaths":["inputs/final-release.md"]},
+    {"id":"dev-020","language":"zh","category":"single-evidence","query":"第二次返工需要谁书面批准？","supported":true,"relevantPaths":["inputs/rework.md"]},
+
+    {"id":"dev-021","language":"en","category":"unsupported","query":"What company calibrates the pressure gauge references?","supported":false,"relevantPaths":[]},
+    {"id":"dev-022","language":"zh","category":"unsupported","query":"计划维护通常安排在星期几？","supported":false,"relevantPaths":[]},
+    {"id":"dev-023","language":"en","category":"unsupported","query":"What percentage of incoming shipments fail inspection each month?","supported":false,"relevantPaths":[]},
+    {"id":"dev-024","language":"zh","category":"unsupported","query":"质量经理的姓名是什么？","supported":false,"relevantPaths":[]},
+    {"id":"dev-025","language":"en","category":"unsupported","query":"Which brand of respirator is used in the paint booth?","supported":false,"relevantPaths":[]},
+    {"id":"dev-026","language":"zh","category":"unsupported","query":"冷藏仓库的制冷设备由哪家公司维修？","supported":false,"relevantPaths":[]},
+    {"id":"dev-027","language":"en","category":"unsupported","query":"How much compensation is paid after a workplace injury?","supported":false,"relevantPaths":[]},
+    {"id":"dev-028","language":"zh","category":"unsupported","query":"每周安全会议在哪个房间举行？","supported":false,"relevantPaths":[]},
+    {"id":"dev-029","language":"en","category":"unsupported","query":"What is the annual fee for a critical supplier audit?","supported":false,"relevantPaths":[]},
+    {"id":"dev-030","language":"zh","category":"unsupported","query":"变更控制系统使用哪个软件产品？","supported":false,"relevantPaths":[]},
+    {"id":"dev-031","language":"en","category":"unsupported","query":"How much revenue was lost because of scrapped units last year?","supported":false,"relevantPaths":[]},
+    {"id":"dev-032","language":"zh","category":"unsupported","query":"返工区域有多少名全职员工？","supported":false,"relevantPaths":[]}
+  ]
+}

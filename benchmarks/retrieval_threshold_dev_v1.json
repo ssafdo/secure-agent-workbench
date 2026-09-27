@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 2,
+  "name": "retrieval-threshold-calibration-dev-v1",
+  "provenance": {
+    "type": "author-constructed-calibration-only",
+    "split": "development",
+    "limitations": "Used only to choose the hybrid acceptance threshold. Scores must not be reported as held-out test performance."
+  },
+  "documents": [
+    {"path":"inputs/release-approval.md","content":"Release approval\n\nA production deployment requires one approval from the service owner and one from the on-call engineer. The author of the change cannot supply both approvals. Emergency releases use the same two-person rule."},
+    {"path":"inputs/rollback.md","content":"Rollback policy\n\nRollback starts when the error rate remains above five percent for ten minutes or when checkout availability falls below 99 percent. The release operator restores the last verified artifact and records the incident number."},
+    {"path":"inputs/canary.md","content":"Canary rollout\n\nThe first stage receives five percent of traffic for fifteen minutes. Promotion requires stable latency, error rate and saturation. A failed canary is stopped automatically and never advances to the regional stage."},
+    {"path":"inputs/database-change.md","content":"Database changes\n\nDestructive schema changes require an expand-and-contract migration. Backfills run with a fixed rate limit and a resumable cursor. Application rollback must remain possible until the old columns are no longer read."},
+    {"path":"inputs/incident-severity.md","content":"Incident severity\n\nSeverity one means complete customer outage or confirmed data loss. Severity two covers major degradation without data loss. Lower severity events stay in the team queue and do not page the executive responder."},
+    {"path":"inputs/alert-routing.md","content":"Alert routing\n\nCheckout alerts page the commerce on-call rotation. Data pipeline alerts go to analytics operations. Security alerts are sent to the security response rotation; they are not routed through the general help desk."},
+    {"path":"inputs/log-privacy.md","content":"Logging privacy\n\nLogs may contain request identifiers and coarse timing but must exclude passwords, authentication tokens, payment card numbers and full message bodies. Sensitive fields are removed before export to the central collector."},
+    {"path":"inputs/retention.md","content":"Retention periods\n\nApplication logs are retained for thirty days. Deployment audit events are retained for one year. Temporary debug captures expire after twenty-four hours and require an incident reference when enabled."},
+    {"path":"inputs/service-objectives.md","content":"Service objectives\n\nThe checkout API targets 99.9 percent monthly availability and a 400 millisecond p95 latency. These are internal objectives, not contractual customer guarantees. Error-budget exhaustion pauses feature releases."},
+    {"path":"inputs/dependency-failure.md","content":"Dependency failure\n\nCalls to the tax provider time out after two seconds and may retry once with jitter. If failures continue, checkout returns a temporary unavailable response; it must not silently use a zero tax value."},
+    {"path":"inputs/feature-flags.md","content":"Feature flags\n\nEvery temporary flag has an owner and expiry date. Permission changes and payment behavior cannot be enabled for all users without a staged rollout. Expired flags are removed rather than permanently disabled."},
+    {"path":"inputs/postmortem.md","content":"Postmortem process\n\nSeverity one and two incidents require a blameless review within five business days. The document includes a timeline, customer impact, contributing conditions and assigned corrective actions with due dates."}
+  ],
+  "cases": [
+    {"id":"dev-001","language":"en","category":"paraphrase","query":"Who must sign off before shipping to production?","supported":true,"relevantPaths":["inputs/release-approval.md"]},
+    {"id":"dev-002","language":"zh","category":"cross-language","query":"错误率达到什么条件会触发回滚？","supported":true,"relevantPaths":["inputs/rollback.md"]},
+    {"id":"dev-003","language":"en","category":"hard-negative","query":"Can a failed five-percent rollout proceed to a region?","supported":true,"relevantPaths":["inputs/canary.md"]},
+    {"id":"dev-004","language":"zh","category":"cross-language","query":"破坏性数据库改动采用什么迁移方式？","supported":true,"relevantPaths":["inputs/database-change.md"]},
+    {"id":"dev-005","language":"en","category":"paraphrase","query":"Which events qualify as the highest incident class?","supported":true,"relevantPaths":["inputs/incident-severity.md"]},
+    {"id":"dev-006","language":"zh","category":"cross-language","query":"支付结算告警应该通知哪个值班组？","supported":true,"relevantPaths":["inputs/alert-routing.md"]},
+    {"id":"dev-007","language":"en","category":"hard-negative","query":"May exported logs contain complete user messages and access tokens?","supported":true,"relevantPaths":["inputs/log-privacy.md"]},
+    {"id":"dev-008","language":"zh","category":"cross-language","query":"部署审计事件保存多久？","supported":true,"relevantPaths":["inputs/retention.md"]},
+    {"id":"dev-009","language":"en","category":"hard-negative","query":"Is the monthly availability target a contractual guarantee?","supported":true,"relevantPaths":["inputs/service-objectives.md"]},
+    {"id":"dev-010","language":"zh","category":"cross-language","query":"税务服务持续失败时能不能把税额默认为零？","supported":true,"relevantPaths":["inputs/dependency-failure.md"]},
+    {"id":"dev-011","language":"en","category":"paraphrase","query":"What metadata must accompany a short-lived product toggle?","supported":true,"relevantPaths":["inputs/feature-flags.md"]},
+    {"id":"dev-012","language":"zh","category":"cross-language","query":"重大事故复盘需要包含哪些部分？","supported":true,"relevantPaths":["inputs/postmortem.md"]},
+    {"id":"dev-013","language":"en","category":"multi-evidence","query":"How do deployment approval and staged rollout reduce release risk?","supported":true,"relevantPaths":["inputs/release-approval.md","inputs/canary.md"]},
+    {"id":"dev-014","language":"zh","category":"multi-evidence","query":"事故等级如何影响告警和事后复盘？","supported":true,"relevantPaths":["inputs/incident-severity.md","inputs/postmortem.md"]},
+    {"id":"dev-015","language":"en","category":"multi-evidence","query":"Compare how ordinary logs and temporary debug captures are governed.","supported":true,"relevantPaths":["inputs/log-privacy.md","inputs/retention.md"]},
+    {"id":"dev-016","language":"zh","category":"multi-evidence","query":"发布失败时回滚策略和数据库兼容性有什么关系？","supported":true,"relevantPaths":["inputs/rollback.md","inputs/database-change.md"]},
+    {"id":"dev-017","language":"en","category":"unsupported","query":"Which Slack channel receives database alerts?","supported":false,"relevantPaths":[]},
+    {"id":"dev-018","language":"zh","category":"unsupported","query":"公司法务负责人的姓名是什么？","supported":false,"relevantPaths":[]},
+    {"id":"dev-019","language":"en","category":"unsupported","query":"What cloud region hosts the checkout database?","supported":false,"relevantPaths":[]},
+    {"id":"dev-020","language":"zh","category":"unsupported","query":"每月发布窗口固定在星期几？","supported":false,"relevantPaths":[]},
+    {"id":"dev-021","language":"en","category":"unsupported","query":"How much revenue is lost during a severity-one incident?","supported":false,"relevantPaths":[]},
+    {"id":"dev-022","language":"zh","category":"unsupported","query":"短信告警供应商是哪一家？","supported":false,"relevantPaths":[]},
+    {"id":"dev-023","language":"en","category":"unsupported","query":"What is the annual price of the logging platform?","supported":false,"relevantPaths":[]},
+    {"id":"dev-024","language":"zh","category":"unsupported","query":"哪个员工负责删除过期功能开关？","supported":false,"relevantPaths":[]}
+  ]
+}

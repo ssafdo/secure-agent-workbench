@@ -1,0 +1,410 @@
+{
+  "schemaVersion": 1,
+  "name": "answerability-calibration-v1",
+  "provenance": "Author-constructed calibration-only question-passage pairs. No case is a real-user task or held-out evidence.",
+  "selectionRule": {
+    "thresholdGrid": {
+      "start": 0.001,
+      "stop": 0.999,
+      "step": 0.001
+    },
+    "answerableRecallAtLeast": 0.8,
+    "tieBreakOrder": [
+      "worstClassRecall",
+      "balancedAccuracy",
+      "missingAttributeRecall",
+      "higherThreshold"
+    ]
+  },
+  "candidateGate": {
+    "worstClassRecallAtLeast": 0.75,
+    "topicRelatedMissingRecallAtLeast": 0.75,
+    "minimumLanguageBalancedAccuracyAtLeast": 0.7
+  },
+  "cases": [
+    {
+      "id": "answerability-dev-001",
+      "language": "en",
+      "category": "explicit-answer",
+      "query": "How long is an account locked after five failed sign-in attempts?",
+      "passage": "After five failed sign-in attempts, the account remains locked for 15 minutes.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-002",
+      "language": "en",
+      "category": "explicit-answer",
+      "query": "Where are replacement badges collected?",
+      "passage": "Replacement badges are collected from the security desk in Building C.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-003",
+      "language": "en",
+      "category": "explicit-answer",
+      "query": "What is the retention period for signed consent forms?",
+      "passage": "Signed consent forms must be retained for seven years after the study closes.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-004",
+      "language": "en",
+      "category": "explicit-answer",
+      "query": "Who approves access to the production dashboard?",
+      "passage": "The service owner approves production dashboard access before IAM provisions it.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-005",
+      "language": "en",
+      "category": "explicit-negative-answer",
+      "query": "May staff copy customer records to an offline laptop?",
+      "passage": "Customer records must never be copied to offline laptops.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-006",
+      "language": "en",
+      "category": "explicit-negative-answer",
+      "query": "Is a cancellation fee charged within the first hour?",
+      "passage": "No cancellation fee is charged when a booking is cancelled within one hour.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-007",
+      "language": "en",
+      "category": "explicit-negative-answer",
+      "query": "Can interns deploy directly to production?",
+      "passage": "Interns are prohibited from deploying directly to production.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-008",
+      "language": "en",
+      "category": "explicit-negative-answer",
+      "query": "Does the basic plan include telephone support?",
+      "passage": "Telephone support is not included in the basic plan.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-009",
+      "language": "en",
+      "category": "cross-language-answer",
+      "query": "Which carrier handles refrigerated parcels?",
+      "passage": "冷藏包裹统一由北方冷链承运。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-010",
+      "language": "en",
+      "category": "cross-language-answer",
+      "query": "At what time does the nightly backup begin?",
+      "passage": "夜间备份每天北京时间 23:30 开始。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-011",
+      "language": "en",
+      "category": "cross-language-answer",
+      "query": "Who owns annual safety training?",
+      "passage": "年度安全培训由环境健康与安全部负责。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-012",
+      "language": "en",
+      "category": "cross-language-answer",
+      "query": "What is the maximum meal reimbursement per person?",
+      "passage": "每人每餐最高可报销 120 元。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-013",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "How long is an account locked after five failed sign-in attempts?",
+      "passage": "After repeated sign-in failures, users must verify their identity before resetting a password.",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-014",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Where are replacement badges collected?",
+      "passage": "Replacement badge requests require a manager-approved form and the old badge number.",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-015",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "What is the retention period for signed consent forms?",
+      "passage": "Signed consent forms may be viewed only by the principal investigator and the audit team.",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-016",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Who approves access to the production dashboard?",
+      "passage": "Production dashboard access is reviewed quarterly and removed when an employee changes teams.",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-017",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "May staff copy customer records to an offline laptop?",
+      "passage": "Offline laptops are inventoried monthly and must carry an asset label.",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-018",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Is a cancellation fee charged within the first hour?",
+      "passage": "Booking cancellations are submitted through the customer portal and receive a tracking number.",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-019",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Can interns deploy directly to production?",
+      "passage": "Intern deployment activity is included in the weekly engineering audit report.",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-020",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Does the basic plan include telephone support?",
+      "passage": "Basic plan customers can review invoices and update their billing address online.",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-021",
+      "language": "en",
+      "category": "cross-language-missing",
+      "query": "Which carrier handles refrigerated parcels?",
+      "passage": "冷藏包裹发出前必须记录温度并贴上易腐标签。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-022",
+      "language": "en",
+      "category": "cross-language-missing",
+      "query": "At what time does the nightly backup begin?",
+      "passage": "夜间备份保存在两个独立区域，并执行每周恢复演练。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-023",
+      "language": "en",
+      "category": "cross-language-missing",
+      "query": "Who owns annual safety training?",
+      "passage": "年度安全培训涵盖消防疏散、化学品标识和事故报告。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-024",
+      "language": "en",
+      "category": "cross-language-missing",
+      "query": "What is the maximum meal reimbursement per person?",
+      "passage": "餐费报销必须附发票，并注明参会人员和业务目的。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-025",
+      "language": "zh",
+      "category": "explicit-answer",
+      "query": "实验室访客证的有效期是多久？",
+      "passage": "实验室访客证自签发起有效期为八小时。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-026",
+      "language": "zh",
+      "category": "explicit-answer",
+      "query": "设备故障后应联系哪个团队？",
+      "passage": "设备故障后应联系现场可靠性工程团队。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-027",
+      "language": "zh",
+      "category": "explicit-answer",
+      "query": "差旅预付款需要提前几天申请？",
+      "passage": "差旅预付款至少应在出发前五个工作日申请。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-028",
+      "language": "zh",
+      "category": "explicit-answer",
+      "query": "纸质档案存放在哪个房间？",
+      "passage": "纸质档案统一存放在行政楼 204 档案室。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-029",
+      "language": "zh",
+      "category": "explicit-negative-answer",
+      "query": "承包商可以使用员工停车区吗？",
+      "passage": "承包商不得使用员工停车区。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-030",
+      "language": "zh",
+      "category": "explicit-negative-answer",
+      "query": "过期样品还能用于正式检测吗？",
+      "passage": "过期样品禁止用于任何正式检测。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-031",
+      "language": "zh",
+      "category": "explicit-negative-answer",
+      "query": "基础账号是否支持导出审计日志？",
+      "passage": "基础账号不支持导出审计日志。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-032",
+      "language": "zh",
+      "category": "explicit-negative-answer",
+      "query": "未培训人员可以操作叉车吗？",
+      "passage": "未完成培训的人员不得操作叉车。",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-033",
+      "language": "zh",
+      "category": "cross-language-answer",
+      "query": "海外快件由哪家承运商处理？",
+      "passage": "All international express parcels are handled by Atlas Courier.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-034",
+      "language": "zh",
+      "category": "cross-language-answer",
+      "query": "每周维护窗口在星期几？",
+      "passage": "The weekly maintenance window is scheduled for Sunday.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-035",
+      "language": "zh",
+      "category": "cross-language-answer",
+      "query": "谁负责批准媒体采访？",
+      "passage": "The Communications Director approves all media interviews.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-036",
+      "language": "zh",
+      "category": "cross-language-answer",
+      "query": "服务器机房的最低温度是多少？",
+      "passage": "The server room must remain at or above 18 degrees Celsius.",
+      "answerable": true
+    },
+    {
+      "id": "answerability-dev-037",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "实验室访客证的有效期是多久？",
+      "passage": "实验室访客证需要由接待员工申请，并在入口处核验身份证件。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-038",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "设备故障后应联系哪个团队？",
+      "passage": "设备故障后必须立即停机，并在工单中记录错误代码。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-039",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "差旅预付款需要提前几天申请？",
+      "passage": "差旅预付款申请必须填写成本中心和预计支出项目。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-040",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "纸质档案存放在哪个房间？",
+      "passage": "纸质档案借阅需要登记编号、借阅人和归还日期。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-041",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "承包商可以使用员工停车区吗？",
+      "passage": "承包商车辆必须登记车牌，并在挡风玻璃处展示临时通行证。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-042",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "过期样品还能用于正式检测吗？",
+      "passage": "过期样品必须贴红色标签并移入待处置区域。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-043",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "基础账号是否支持导出审计日志？",
+      "passage": "基础账号的审计日志在控制台中保留三十天。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-044",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "未培训人员可以操作叉车吗？",
+      "passage": "叉车培训记录由仓库管理员每季度复核一次。",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-045",
+      "language": "zh",
+      "category": "cross-language-missing",
+      "query": "海外快件由哪家承运商处理？",
+      "passage": "International parcels require a customs declaration and a commercial invoice.",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-046",
+      "language": "zh",
+      "category": "cross-language-missing",
+      "query": "每周维护窗口在星期几？",
+      "passage": "The maintenance window includes database patching and cache validation.",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-047",
+      "language": "zh",
+      "category": "cross-language-missing",
+      "query": "谁负责批准媒体采访？",
+      "passage": "Media interview requests must include the topic, outlet, and proposed publication date.",
+      "answerable": false
+    },
+    {
+      "id": "answerability-dev-048",
+      "language": "zh",
+      "category": "cross-language-missing",
+      "query": "服务器机房的最低温度是多少？",
+      "passage": "The server room temperature is measured by two independent sensors.",
+      "answerable": false
+    }
+  ]
+}

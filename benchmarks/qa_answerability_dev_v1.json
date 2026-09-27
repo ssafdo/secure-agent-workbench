@@ -1,0 +1,459 @@
+{
+  "schemaVersion": 1,
+  "name": "extractive-qa-answerability-calibration-v1",
+  "provenance": "Author-constructed calibration-only pairs created after Phase 32 was closed. No Phase 32 case, held-out case, or real-user task is reused.",
+  "selectionRule": {
+    "thresholdGrid": {
+      "start": 0.001,
+      "stop": 0.999,
+      "step": 0.001
+    },
+    "answerableRecallAtLeast": 0.8,
+    "tieBreakOrder": [
+      "worstClassRecall",
+      "balancedAccuracy",
+      "unanswerableRecall",
+      "higherThreshold"
+    ]
+  },
+  "candidateGate": {
+    "worstClassRecallAtLeast": 0.75,
+    "successfulAnswerRecallAtLeast": 0.7,
+    "topicRelatedMissingRecallAtLeast": 0.75,
+    "minimumLanguageBalancedAccuracyAtLeast": 0.7
+  },
+  "cases": [
+    {
+      "id": "qa-answerability-dev-001",
+      "language": "en",
+      "category": "direct-answer",
+      "query": "Who authorizes an emergency vendor account?",
+      "passage": "An emergency vendor account must be authorized by the Procurement Director before activation.",
+      "answerable": true,
+      "expectedAnswers": ["Procurement Director"]
+    },
+    {
+      "id": "qa-answerability-dev-002",
+      "language": "en",
+      "category": "direct-answer",
+      "query": "Where are chemical spill kits stored?",
+      "passage": "Chemical spill kits are stored in the yellow cabinet beside the north exit.",
+      "answerable": true,
+      "expectedAnswers": ["yellow cabinet beside the north exit", "yellow cabinet"]
+    },
+    {
+      "id": "qa-answerability-dev-003",
+      "language": "en",
+      "category": "direct-answer",
+      "query": "Which team owns the quarterly access review?",
+      "passage": "The Identity Governance team owns the quarterly access review and records each decision.",
+      "answerable": true,
+      "expectedAnswers": ["Identity Governance team", "Identity Governance"]
+    },
+    {
+      "id": "qa-answerability-dev-004",
+      "language": "en",
+      "category": "direct-answer",
+      "query": "What temperature must frozen vaccines maintain?",
+      "passage": "Frozen vaccines must remain at minus 20 degrees Celsius during storage and transport.",
+      "answerable": true,
+      "expectedAnswers": ["minus 20 degrees Celsius", "20 degrees Celsius"]
+    },
+    {
+      "id": "qa-answerability-dev-005",
+      "language": "en",
+      "category": "numeric-answer",
+      "query": "How long are calibration certificates retained?",
+      "passage": "Calibration certificates are retained for ten years after the equipment is retired.",
+      "answerable": true,
+      "expectedAnswers": ["ten years"]
+    },
+    {
+      "id": "qa-answerability-dev-006",
+      "language": "en",
+      "category": "numeric-answer",
+      "query": "When does the overnight settlement batch begin?",
+      "passage": "The overnight settlement batch begins at 01:15 UTC on business days.",
+      "answerable": true,
+      "expectedAnswers": ["01:15 UTC", "01:15"]
+    },
+    {
+      "id": "qa-answerability-dev-007",
+      "language": "en",
+      "category": "numeric-answer",
+      "query": "What is the freight lift's maximum payload?",
+      "passage": "The freight lift has a maximum payload of 850 kilograms.",
+      "answerable": true,
+      "expectedAnswers": ["850 kilograms", "850"]
+    },
+    {
+      "id": "qa-answerability-dev-008",
+      "language": "en",
+      "category": "numeric-answer",
+      "query": "How quickly must a severity-one incident be acknowledged?",
+      "passage": "A severity-one incident must be acknowledged within 20 minutes.",
+      "answerable": true,
+      "expectedAnswers": ["20 minutes"]
+    },
+    {
+      "id": "qa-answerability-dev-009",
+      "language": "en",
+      "category": "explicit-negative-answer",
+      "query": "May unsigned scripts run in the production environment?",
+      "passage": "Unsigned scripts are not permitted in the production environment.",
+      "answerable": true,
+      "expectedAnswers": ["not permitted", "Unsigned scripts are not permitted"]
+    },
+    {
+      "id": "qa-answerability-dev-010",
+      "language": "en",
+      "category": "explicit-negative-answer",
+      "query": "Can a trial account export billing records?",
+      "passage": "A trial account cannot export billing records.",
+      "answerable": true,
+      "expectedAnswers": ["cannot", "cannot export billing records"]
+    },
+    {
+      "id": "qa-answerability-dev-011",
+      "language": "en",
+      "category": "cross-language-answer",
+      "query": "Which group approves encryption exceptions?",
+      "passage": "加密例外必须由信息安全委员会批准。",
+      "answerable": true,
+      "expectedAnswers": ["信息安全委员会"]
+    },
+    {
+      "id": "qa-answerability-dev-012",
+      "language": "en",
+      "category": "cross-language-answer",
+      "query": "What is the expense submission deadline?",
+      "passage": "费用报销应在次月第三个工作日前提交。",
+      "answerable": true,
+      "expectedAnswers": ["次月第三个工作日"]
+    },
+    {
+      "id": "qa-answerability-dev-013",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Who authorizes an emergency vendor account?",
+      "passage": "Emergency vendor accounts expire after 72 hours and are reviewed in the monthly supplier report.",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-014",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Where are chemical spill kits stored?",
+      "passage": "Chemical spill kits contain absorbent pads, gloves, disposal bags, and warning signs.",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-015",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "Which team owns the quarterly access review?",
+      "passage": "The quarterly access review covers privileged, dormant, and third-party accounts.",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-016",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "What temperature must frozen vaccines maintain?",
+      "passage": "Frozen vaccines are checked at receipt and placed in a monitored container immediately.",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-017",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "How long are calibration certificates retained?",
+      "passage": "Calibration certificates must list the instrument number, test method, and technician signature.",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-018",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "When does the overnight settlement batch begin?",
+      "passage": "The overnight settlement batch reconciles card payments and flags unmatched transactions.",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-019",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "What is the freight lift's maximum payload?",
+      "passage": "The freight lift is inspected monthly and requires a key for after-hours use.",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-020",
+      "language": "en",
+      "category": "topic-related-missing",
+      "query": "How quickly must a severity-one incident be acknowledged?",
+      "passage": "Severity-one incidents open a dedicated bridge and notify service leadership.",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-021",
+      "language": "en",
+      "category": "cross-language-missing",
+      "query": "May unsigned scripts run in the production environment?",
+      "passage": "生产脚本必须记录版本号、提交人和最近一次测试日期。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-022",
+      "language": "en",
+      "category": "cross-language-missing",
+      "query": "Can a trial account export billing records?",
+      "passage": "试用账号可以查看示例仪表盘，并在到期前升级套餐。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-023",
+      "language": "en",
+      "category": "cross-language-missing",
+      "query": "Which group approves encryption exceptions?",
+      "passage": "加密例外申请应说明业务理由、影响范围和计划结束日期。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-024",
+      "language": "en",
+      "category": "cross-language-missing",
+      "query": "What is the expense submission deadline?",
+      "passage": "费用报销材料包括发票、出差审批单和付款证明。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-025",
+      "language": "zh",
+      "category": "direct-answer",
+      "query": "谁负责批准高风险实验？",
+      "passage": "高风险实验必须由实验伦理委员会批准后才能开始。",
+      "answerable": true,
+      "expectedAnswers": ["实验伦理委员会"]
+    },
+    {
+      "id": "qa-answerability-dev-026",
+      "language": "zh",
+      "category": "direct-answer",
+      "query": "备用钥匙存放在哪里？",
+      "passage": "备用钥匙存放在一楼值班室的上锁抽屉中。",
+      "answerable": true,
+      "expectedAnswers": ["一楼值班室的上锁抽屉", "上锁抽屉"]
+    },
+    {
+      "id": "qa-answerability-dev-027",
+      "language": "zh",
+      "category": "direct-answer",
+      "query": "哪个部门负责处理出口许可证？",
+      "passage": "出口许可证由贸易合规部统一处理。",
+      "answerable": true,
+      "expectedAnswers": ["贸易合规部"]
+    },
+    {
+      "id": "qa-answerability-dev-028",
+      "language": "zh",
+      "category": "direct-answer",
+      "query": "会议录音保存在哪里？",
+      "passage": "会议录音保存在受限的法务证据库中。",
+      "answerable": true,
+      "expectedAnswers": ["法务证据库", "受限的法务证据库"]
+    },
+    {
+      "id": "qa-answerability-dev-029",
+      "language": "zh",
+      "category": "numeric-answer",
+      "query": "临时门禁权限最长可以开通多久？",
+      "passage": "临时门禁权限最长可以开通十四天。",
+      "answerable": true,
+      "expectedAnswers": ["十四天"]
+    },
+    {
+      "id": "qa-answerability-dev-030",
+      "language": "zh",
+      "category": "numeric-answer",
+      "query": "冷却泵多久检查一次？",
+      "passage": "冷却泵每六小时检查一次，并记录压力读数。",
+      "answerable": true,
+      "expectedAnswers": ["每六小时", "六小时"]
+    },
+    {
+      "id": "qa-answerability-dev-031",
+      "language": "zh",
+      "category": "numeric-answer",
+      "query": "发票差异超过多少金额需要复核？",
+      "passage": "发票差异超过五百元时必须由财务主管复核。",
+      "answerable": true,
+      "expectedAnswers": ["五百元"]
+    },
+    {
+      "id": "qa-answerability-dev-032",
+      "language": "zh",
+      "category": "numeric-answer",
+      "query": "访客预约最晚应提前多久提交？",
+      "passage": "访客预约最晚应提前二十四小时提交。",
+      "answerable": true,
+      "expectedAnswers": ["二十四小时"]
+    },
+    {
+      "id": "qa-answerability-dev-033",
+      "language": "zh",
+      "category": "explicit-negative-answer",
+      "query": "共享账号可以访问工资数据吗？",
+      "passage": "共享账号不得访问任何工资数据。",
+      "answerable": true,
+      "expectedAnswers": ["不得", "不得访问任何工资数据"]
+    },
+    {
+      "id": "qa-answerability-dev-034",
+      "language": "zh",
+      "category": "explicit-negative-answer",
+      "query": "损坏的电池可以放入普通垃圾箱吗？",
+      "passage": "损坏的电池禁止放入普通垃圾箱。",
+      "answerable": true,
+      "expectedAnswers": ["禁止", "禁止放入普通垃圾箱"]
+    },
+    {
+      "id": "qa-answerability-dev-035",
+      "language": "zh",
+      "category": "cross-language-answer",
+      "query": "谁签署年度审计报告？",
+      "passage": "The Chief Audit Executive signs the annual audit report.",
+      "answerable": true,
+      "expectedAnswers": ["Chief Audit Executive"]
+    },
+    {
+      "id": "qa-answerability-dev-036",
+      "language": "zh",
+      "category": "cross-language-answer",
+      "query": "数据库快照几点创建？",
+      "passage": "The database snapshot is created at 02:40 UTC every day.",
+      "answerable": true,
+      "expectedAnswers": ["02:40 UTC", "02:40"]
+    },
+    {
+      "id": "qa-answerability-dev-037",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "谁负责批准高风险实验？",
+      "passage": "高风险实验申请必须列出实验材料、风险等级和应急措施。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-038",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "备用钥匙存放在哪里？",
+      "passage": "备用钥匙每月清点一次，领用时必须登记姓名和时间。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-039",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "哪个部门负责处理出口许可证？",
+      "passage": "出口许可证申请需要提供产品分类、目的地和最终用户信息。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-040",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "会议录音保存在哪里？",
+      "passage": "会议录音只能由主持人发起，并在开始前通知所有参会者。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-041",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "临时门禁权限最长可以开通多久？",
+      "passage": "临时门禁权限需要填写访问区域、申请理由和担保人。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-042",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "冷却泵多久检查一次？",
+      "passage": "冷却泵检查项目包括压力、振动和密封状态。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-043",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "发票差异超过多少金额需要复核？",
+      "passage": "发票差异复核需要核对采购订单、收货记录和税率。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-044",
+      "language": "zh",
+      "category": "topic-related-missing",
+      "query": "访客预约最晚应提前多久提交？",
+      "passage": "访客预约需要填写访问目的、接待人和证件号码。",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-045",
+      "language": "zh",
+      "category": "cross-language-missing",
+      "query": "共享账号可以访问工资数据吗？",
+      "passage": "Shared accounts are reviewed every month and must have an assigned owner.",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-046",
+      "language": "zh",
+      "category": "cross-language-missing",
+      "query": "损坏的电池可以放入普通垃圾箱吗？",
+      "passage": "Damaged batteries must be labeled with the discovery date and storage location.",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-047",
+      "language": "zh",
+      "category": "cross-language-missing",
+      "query": "谁签署年度审计报告？",
+      "passage": "The annual audit report includes scope, findings, owners, and target dates.",
+      "answerable": false,
+      "expectedAnswers": []
+    },
+    {
+      "id": "qa-answerability-dev-048",
+      "language": "zh",
+      "category": "cross-language-missing",
+      "query": "数据库快照几点创建？",
+      "passage": "The database snapshot is encrypted and copied to a separate recovery region.",
+      "answerable": false,
+      "expectedAnswers": []
+    }
+  ]
+}

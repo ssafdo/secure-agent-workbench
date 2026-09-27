@@ -15,7 +15,7 @@
 | COST-001 | Mitigated | Medium | 模型调用可能突破 token/金额预算 | ReAct 已按 provider 实测 usage 执行调用数、token 和金额上限；真实 Provider 接入时复验 |
 | FILE-001 | Partial | High | 文本附件已有名称、扩展名、数量、大小和项目路径校验，但尚无恶意内容扫描 | 当前只允许 `.md/.txt` 和单份 200 KB；后续加入内容扫描与真实身份归属 |
 | NET-001 | Open | Critical | 真实 Agent 可能外传数据或遭受 SSRF | hosted Provider 仅接受管理员环境中的固定 Base URL，但进程尚无操作系统级出站白名单 |
-| EVAL-001 | Partial | Medium | 任务质量案例数量不足 | NiceEval 已覆盖 deterministic、ReAct、hosted、会话恢复、DeepSeek 与真实容器基线；后续扩展到至少 20 条业务案例 |
+| EVAL-001 | Partial | Medium | 作者构造的离线评估不能代表真实用户任务质量 | 已增加 40 条共享语料检索挑战和 24 条端到端工作流挑战，并报告置信区间与失败列表；仍需全新授权自然任务盲测和开放式报告人工 rubric |
 | MODEL-001 | Mitigated | High | 模型返回畸形 tool call、重复 ID 或未知工具 | 严格解析响应；未知工具进入统一 runtime 失败轨迹；已有负向测试 |
 | MODEL-002 | Mitigated | High | 模型循环可能无限运行或消耗失控 | 已限制调用、工具步数、token、金额和轮次，并加入请求超时、有限重试和熔断 |
 | COST-002 | Open | Medium | Responses API usage 不直接提供美元费用 | `costUSD` 显式为 null；接入受控价格表前不执行美元预算断言 |
@@ -31,8 +31,13 @@
 | EXEC-001 | Mitigated | Critical | 模型可能通过 Shell 字符串、PATH 或任意二进制扩大执行面 | 只接受 argv 数组与纯文件名白名单；镜像摘要锁定；execute 权限和批准双重门控 |
 | EXEC-002 | Partial | High | Docker daemon、镜像供应链或宿主配置错误会削弱容器边界 | 使用 `scratch` 与本地静态 runner；doctor、真实冒烟、SBOM、构建证明与 CI 校验已完成，GitHub OIDC attestation 已配置但待远端首次签发 |
 | CI-001 | Partial | Medium | 个人账号私有仓库不支持 GitHub Artifact Attestations，已验证证据包不能等同于 OIDC 签名 | 私有仓库继续上传校验后的证据 artifact 并明确 notice；仓库公开或迁移到支持该功能的组织后才启用 provenance/SBOM attestation |
-| RAG-001 | Mitigated | Medium | 词法/中文双字基线对同义表达或跨语言问题可能漏召回 | 可选的校验和固定多语 embedding 与混合重排已接入；8 条固定集 Recall@1/MRR 从 0.571429 提升到 1.0，CI 要求改进且 NiceEval 断言未回退 |
-| RAG-004 | Partial | Medium | 当前 8 条检索基准规模小，固定阈值可能不能代表真实长文档与领域语料 | 保留显式模式和回退诊断；后续扩展到至少 50 条分领域语料，报告 Precision@K、延迟与内存并重新校准阈值 |
+| RAG-001 | Mitigated | Medium | 词法/中文双字基线对同义表达或跨语言问题可能漏召回 | 可选的校验和固定多语 embedding 与混合重排已接入；40 条共享语料挑战中 Recall@3 从 0.567 提升到 0.750、MRR 从 0.511 提升到 0.619 |
+| RAG-004 | Partial | High | Hybrid 分数不能稳定区分相关证据与无依据查询 | 独立 cross-encoder 在新开发集校准后，于 v3 将 E5 无依据拒答从 `2/10` 提升至 `9/10`；但必要证据覆盖从 `20/30` 降到 `13/30`，综合通过均为 `22/40`，因此仍拒绝发布并保持默认模型不变 |
+| RAG-005 | Open | High | 独立相关性验证器对跨语言和多证据查询过度过滤 | 新开发集上的保守查询分解仅将多证据通过从 `0/12` 提升到 `2/12`，未达到预注册 `+4` 门禁，因此未消耗 v4；下一候选需要独立校准原子句分数或采用能直接评估证据集合覆盖的模型 |
+| RAG-006 | Open | High | 原子问句的主题相关证据可能仍未回答所问属性 | 完整覆盖候选将多证据从 `2/12` 提升到 `5/12`，但把无依据拒答从 `12/12` 降到 `11/12`；候选未过自动门禁且未消耗 v4，下一步需独立验证属性级蕴含 |
+| RAG-007 | Open | High | 通用多语 NLI 不能稳定判断段落是否足以回答问题 | 48 对独立校准中可回答召回 `22/24`，但缺属性识别仅 `13/24`、最差类别召回 `0.541667`；候选未进入集成开发或 v4，下一步应评估专门训练的 answerability 模型或结构化属性抽取，而不是继续调同一校准集 |
+| RAG-008 | Open | High | 抽取式 QA 的单段校准性能不能迁移到多证据集合 | QA 候选在新校准集通过门禁，但集成开发中只把无依据拒答提高 `1/12`，同时令多证据通过从 `7/12` 降到 `1/12`、有依据任务损失 6 条；候选未发布，下一步应采用证据集合级验证而不是逐段硬过滤 |
+| RAG-009 | Open | High | 通用抽取式 QA 对合并证据仍会从同主题文本强行抽取答案 | 集合级模式避免逐段删除证据，但新 40 条校准集中同主题缺属性识别仅 `11/16`，未过预注册门禁；停止继续调当前模型和数据，当前版本保留为已知限制 |
 | RAG-002 | Mitigated | High | 检索结果可能伪造路径、行号或正文，造成不可追溯引用 | 写报告前重新读取项目内源文件，逐条核对路径、行范围、citation 标签和正文；伪造引用有负向测试 |
 | RAG-003 | Partial | Critical | 资料中的 Prompt Injection 可能诱导模型泄密或调用高风险工具 | 当前确定性检索引擎不执行资料指令，风险模式只作诊断；权限、工具白名单和无宿主 Shell 仍是安全边界，hosted RAG 需单独攻防评估 |
 | EXEC-003 | Mitigated | High | 容器超时后可能残留进程，输出可能耗尽内存 | 随机容器名、超时 `rm -f`、CPU/内存/PID 限制和 stdout/stderr 截断均有测试 |

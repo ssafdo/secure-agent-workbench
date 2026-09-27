@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 2,
+  "name": "retrieval-complete-coverage-development-v1",
+  "provenance": {
+    "type": "author-constructed-development-only",
+    "split": "development",
+    "created": "2026-09-27",
+    "createdAfterCalibration": "artifacts/retrieval/atomic-relevance-calibration-v1.json",
+    "limitations": "Used only to decide whether complete atomic-query coverage may advance to held-out v4."
+  },
+  "selectionGate": {
+    "multiEvidencePassedGainAtLeast": 4,
+    "unsupportedAccuracyMustNotDecrease": true,
+    "singleEvidencePassedLossAtMost": 1,
+    "totalPassedGainAtLeast": 3,
+    "ordinaryRelevanceThreshold": 0.38,
+    "atomicRelevanceThreshold": 0.072,
+    "allAtomicQueriesMustBeCovered": true
+  },
+  "documents": [
+    {"path":"inputs/purchase-requisition.md","content":"Purchase requisitions\n\nA department manager approves requisitions up to ten thousand dollars. Larger requests also require finance approval. Every requisition states the business purpose, cost center and requested delivery date."},
+    {"path":"inputs/purchase-order.md","content":"Purchase orders\n\nA procurement officer converts an approved requisition into a purchase order. Orders above fifty thousand dollars require the procurement director's signature before they are sent to a supplier."},
+    {"path":"inputs/supplier-onboarding.md","content":"Supplier onboarding\n\nNew suppliers provide tax registration, banking evidence and a signed code of conduct. Compliance screens sanctions before procurement activates the supplier record."},
+    {"path":"inputs/supplier-payment.md","content":"Supplier payment\n\nAccounts payable releases payment after matching the purchase order, receipt and invoice. Bank-detail changes require callback verification using the supplier's previously registered phone number."},
+    {"path":"inputs/goods-receipt.md","content":"Goods receipt\n\nWarehouse staff count delivered units and record visible damage before accepting a shipment. Quantity differences are placed on receipt hold and reported to the buyer."},
+    {"path":"inputs/invoice-dispute.md","content":"Invoice disputes\n\nAccounts payable sends price or tax discrepancies to the buyer within two business days. The disputed amount remains blocked until procurement documents a resolution."},
+    {"path":"inputs/cycle-count.md","content":"Inventory cycle counts\n\nHigh-value items are counted monthly and ordinary stock quarterly. A variance above two percent triggers a recount by a different employee and review by inventory control."},
+    {"path":"inputs/stock-adjustment.md","content":"Stock adjustments\n\nAn inventory supervisor approves adjustments below five hundred dollars. Larger adjustments require finance approval. The record includes the reason, item number and supporting count sheet."},
+    {"path":"inputs/return-to-supplier.md","content":"Return to supplier\n\nQuality authorizes a supplier return after documenting the defect. Warehouse staff isolate the material and procurement obtains a return number before shipment."},
+    {"path":"inputs/customer-return.md","content":"Customer returns\n\nCustomer service issues a return authorization within thirty days of delivery. Warehouse staff inspect the returned product, and finance processes an approved credit within five business days."},
+    {"path":"inputs/sole-source.md","content":"Sole-source purchases\n\nA requester documents why competition is unavailable. The department head and procurement director approve the justification before an order is created. Price reasonableness must still be recorded."},
+    {"path":"inputs/competitive-bid.md","content":"Competitive bidding\n\nPurchases above twenty-five thousand dollars require at least three written bids unless an approved exception applies. Procurement records the evaluation criteria and award decision."},
+    {"path":"inputs/obsolete-stock.md","content":"Obsolete inventory\n\nInventory control identifies stock with no demand for twelve months. The department owner chooses transfer, sale or disposal. Destruction requires signatures from inventory control and finance."},
+    {"path":"inputs/emergency-purchase.md","content":"Emergency purchasing\n\nAn emergency order may proceed to protect people, property or essential operations. The duty manager gives verbal approval, and the requester submits written justification within one business day."}
+  ],
+  "cases": [
+    {"id":"coverage-dev-001","language":"en","category":"multi-evidence","query":"Compare approval requirements for purchase requisitions and purchase orders.","supported":true,"relevantPaths":["inputs/purchase-requisition.md","inputs/purchase-order.md"]},
+    {"id":"coverage-dev-002","language":"zh","category":"multi-evidence","query":"供应商准入和供应商付款分别需要验证哪些资料？","supported":true,"relevantPaths":["inputs/supplier-onboarding.md","inputs/supplier-payment.md"]},
+    {"id":"coverage-dev-003","language":"en","category":"multi-evidence","query":"How do the controls for goods receipt and invoice disputes differ?","supported":true,"relevantPaths":["inputs/goods-receipt.md","inputs/invoice-dispute.md"]},
+    {"id":"coverage-dev-004","language":"zh","category":"multi-evidence","query":"循环盘点和库存调整分别在什么情况下需要复核或额外批准？","supported":true,"relevantPaths":["inputs/cycle-count.md","inputs/stock-adjustment.md"]},
+    {"id":"coverage-dev-005","language":"en","category":"multi-evidence","query":"Compare authorization and handling for supplier returns and customer returns.","supported":true,"relevantPaths":["inputs/return-to-supplier.md","inputs/customer-return.md"]},
+    {"id":"coverage-dev-006","language":"zh","category":"multi-evidence","query":"单一来源采购和竞争性招标分别需要哪些理由或材料？","supported":true,"relevantPaths":["inputs/sole-source.md","inputs/competitive-bid.md"]},
+    {"id":"coverage-dev-007","language":"en","category":"multi-evidence","query":"Compare approval and documentation for stock adjustments and obsolete-stock destruction.","supported":true,"relevantPaths":["inputs/stock-adjustment.md","inputs/obsolete-stock.md"]},
+    {"id":"coverage-dev-008","language":"zh","category":"multi-evidence","query":"普通采购申请和紧急采购分别由谁批准并何时补齐文件？","supported":true,"relevantPaths":["inputs/purchase-requisition.md","inputs/emergency-purchase.md"]},
+    {"id":"coverage-dev-009","language":"en","category":"multi-evidence","query":"How do supplier onboarding and sole-source purchasing differ in compliance and approval?","supported":true,"relevantPaths":["inputs/supplier-onboarding.md","inputs/sole-source.md"]},
+    {"id":"coverage-dev-010","language":"zh","category":"multi-evidence","query":"收货差异和发票差异分别由谁处理，期间如何冻结？","supported":true,"relevantPaths":["inputs/goods-receipt.md","inputs/invoice-dispute.md"]},
+    {"id":"coverage-dev-011","language":"en","category":"multi-evidence","query":"Compare timing and financial actions for customer returns and obsolete inventory.","supported":true,"relevantPaths":["inputs/customer-return.md","inputs/obsolete-stock.md"]},
+    {"id":"coverage-dev-012","language":"zh","category":"multi-evidence","query":"采购订单和供应商付款分别依赖哪些前置单据？","supported":true,"relevantPaths":["inputs/purchase-order.md","inputs/supplier-payment.md"]},
+
+    {"id":"coverage-dev-013","language":"en","category":"single-evidence","query":"Who approves a requisition above ten thousand dollars?","supported":true,"relevantPaths":["inputs/purchase-requisition.md"]},
+    {"id":"coverage-dev-014","language":"zh","category":"single-evidence","query":"供应商银行信息变更如何核验？","supported":true,"relevantPaths":["inputs/supplier-payment.md"]},
+    {"id":"coverage-dev-015","language":"en","category":"single-evidence","query":"What happens when delivered quantities do not match?","supported":true,"relevantPaths":["inputs/goods-receipt.md"]},
+    {"id":"coverage-dev-016","language":"zh","category":"single-evidence","query":"高价值库存多久盘点一次？","supported":true,"relevantPaths":["inputs/cycle-count.md"]},
+    {"id":"coverage-dev-017","language":"en","category":"single-evidence","query":"What must procurement obtain before shipping a supplier return?","supported":true,"relevantPaths":["inputs/return-to-supplier.md"]},
+    {"id":"coverage-dev-018","language":"zh","category":"single-evidence","query":"超过两万五千美元的采购通常需要几份书面报价？","supported":true,"relevantPaths":["inputs/competitive-bid.md"]},
+    {"id":"coverage-dev-019","language":"en","category":"single-evidence","query":"When is inventory considered obsolete?","supported":true,"relevantPaths":["inputs/obsolete-stock.md"]},
+    {"id":"coverage-dev-020","language":"zh","category":"single-evidence","query":"紧急采购书面说明最迟何时提交？","supported":true,"relevantPaths":["inputs/emergency-purchase.md"]},
+
+    {"id":"coverage-dev-021","language":"en","category":"unsupported","query":"Which software system creates purchase requisition numbers?","supported":false,"relevantPaths":[]},
+    {"id":"coverage-dev-022","language":"zh","category":"unsupported","query":"采购总监叫什么名字？","supported":false,"relevantPaths":[]},
+    {"id":"coverage-dev-023","language":"en","category":"unsupported","query":"What fee is charged to onboard a new supplier?","supported":false,"relevantPaths":[]},
+    {"id":"coverage-dev-024","language":"zh","category":"unsupported","query":"供应商付款通常在每周哪一天执行？","supported":false,"relevantPaths":[]},
+    {"id":"coverage-dev-025","language":"en","category":"unsupported","query":"How many damaged shipments arrived last year?","supported":false,"relevantPaths":[]},
+    {"id":"coverage-dev-026","language":"zh","category":"unsupported","query":"发票争议团队有多少名员工？","supported":false,"relevantPaths":[]},
+    {"id":"coverage-dev-027","language":"en","category":"unsupported","query":"Which barcode scanner is used during cycle counts?","supported":false,"relevantPaths":[]},
+    {"id":"coverage-dev-028","language":"zh","category":"unsupported","query":"客户退货仓库位于哪条街？","supported":false,"relevantPaths":[]},
+    {"id":"coverage-dev-029","language":"en","category":"unsupported","query":"Compare annual software fees for requisitions and purchase orders.","supported":false,"relevantPaths":[]},
+    {"id":"coverage-dev-030","language":"zh","category":"unsupported","query":"供应商退货和客户退货分别使用哪家快递公司？","supported":false,"relevantPaths":[]},
+    {"id":"coverage-dev-031","language":"en","category":"unsupported","query":"Compare last year's savings from sole-source purchases and competitive bids.","supported":false,"relevantPaths":[]},
+    {"id":"coverage-dev-032","language":"zh","category":"unsupported","query":"报废库存和紧急采购分别造成了多少年度损失？","supported":false,"relevantPaths":[]}
+  ]
+}

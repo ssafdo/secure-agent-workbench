@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 2,
+  "name": "public-retrieval-challenge-v1",
+  "provenance": {
+    "type": "author-constructed-public-offline-benchmark",
+    "createdAfterImplementation": true,
+    "usedForModelTraining": false,
+    "limitations": "This is a frozen public challenge set, not an independent blind test or real-user dataset."
+  },
+  "documents": [
+    {
+      "path": "inputs/access-control.md",
+      "content": "Access control policy\n\nRead-only project tools may run without interruption. Any operation that creates or changes a project artifact requires an explicit approval attached to that individual call. A previous approval cannot be reused for another write.\n\nAdministrative access to the host is outside the workbench permission model and is never delegated to an agent."
+    },
+    {
+      "path": "inputs/api-credentials.md",
+      "content": "Credential handling standard\n\nProvider credentials are loaded from server-side environment variables. They must not be accepted in browser payloads, written into prompts, copied into traces, or returned by an API response.\n\nRotating a credential does not authorize a model to inspect the new value."
+    },
+    {
+      "path": "inputs/session-lifecycle.md",
+      "content": "Session lifecycle\n\nA new conversation starts at version zero. A successful continuation must present the current version and advances it by one. Stale concurrent updates are rejected, while failed requests do not advance the stored version.\n\nExpired sessions are removed according to the configured time-to-live policy."
+    },
+    {
+      "path": "inputs/audit-retention.md",
+      "content": "Audit and retention\n\nEach attempted tool call records its tool name, status, elapsed time and sanitized error type in append-only JSONL. Raw prompts, source contents, credentials and free-form tool output are excluded from the trace.\n\nRetention duration is deployment-specific; this document does not promise permanent storage."
+    },
+    {
+      "path": "inputs/container-runtime.md",
+      "content": "Container execution profile\n\nExecution is disabled by default. When enabled by an operator, the container uses a digest-pinned local image, no network, a read-only root filesystem, a non-root numeric user, dropped capabilities and bounded CPU, memory, process count and output.\n\nOnly project inputs, work and outputs are mounted; the Docker socket and host secrets are never mounted."
+    },
+    {
+      "path": "inputs/mcp-admission.md",
+      "content": "MCP admission policy\n\nOnly operator-configured stdio servers and explicitly allowlisted read-only tools are admitted. Discovered input schemas and safety annotations are validated, and the complete tool definition fingerprint is checked again immediately before every call.\n\nRemote tool descriptions are replaced with short local descriptions before they enter model context."
+    },
+    {
+      "path": "inputs/mcp-limitations.md",
+      "content": "MCP residual risks\n\nThe SDK applies the application output limit after parsing a complete protocol message. An untrusted server could therefore consume host memory before the limit is evaluated.\n\nServers outside the operator trust boundary require separate container or microVM isolation with operating-system resource limits."
+    },
+    {
+      "path": "inputs/retrieval-quality.md",
+      "content": "Retrieval quality controls\n\nThe lexical baseline combines English tokens and Chinese bigrams. Optional local embeddings add semantic similarity and rerank the same chunks; an initialization or encoding error must be reported as lexical-fallback rather than hidden.\n\nRecall at k and reciprocal rank are measured on frozen cases, not inferred from answer fluency."
+    },
+    {
+      "path": "inputs/citation-verification.md",
+      "content": "Citation verification\n\nA retrieval result is not trusted merely because a tool returned it. Before writing a report, the agent reopens the project-relative source and verifies the path, start line, end line, citation label and exact quoted text.\n\nClaims without matching supplied evidence must be refused rather than filled from model memory."
+    },
+    {
+      "path": "inputs/provider-reliability.md",
+      "content": "Hosted provider reliability\n\nTransient provider failures use a small bounded retry policy. Three consecutive logical failures open an in-process circuit breaker for thirty seconds; after cooldown, only a probe request is allowed.\n\nPermanent protocol errors are surfaced immediately and are not retried."
+    },
+    {
+      "path": "inputs/budget-controls.md",
+      "content": "Trajectory budgets\n\nEvery model trajectory has independent limits for model calls, turns, input tokens, output tokens and reported dollar cost. Tool steps are counted separately by the runtime. Crossing either budget stops execution instead of silently continuing.\n\nIf a provider omits monetary cost, the value remains unavailable rather than being recorded as zero."
+    },
+    {
+      "path": "inputs/context-management.md",
+      "content": "Context management\n\nSystem instructions and recent conversational turns are retained first. Older history may be summarized, while a large structured tool result is trimmed without removing its JSON wrapper, status, error fields, or leading and trailing evidence.\n\nTool calls and their corresponding results are treated as atomic groups during compaction."
+    },
+    {
+      "path": "inputs/attachment-policy.md",
+      "content": "Attachment bridge\n\nThe browser may read user-selected UTF-8 Markdown and text files and send their contents to the same-origin service. It does not transmit the local absolute path. The service repeats project-relative path checks and a 200 KB per-file limit.\n\nPDF, Office documents, archives and executable files are not accepted by the current bridge."
+    },
+    {
+      "path": "inputs/project-isolation.md",
+      "content": "Project isolation\n\nProject identity is derived from user, conversation and feature identifiers. File resolution rejects absolute paths, parent traversal and links that escape the assigned project root. Different conversations receive different project directories.\n\nThe browser cannot choose a server-side workspace directory."
+    },
+    {
+      "path": "inputs/project-locking.md",
+      "content": "Concurrency control\n\nEach project has a runtime-owned execution lock. A specialist handoff reuses the same runtime and lock; delegation cannot create a second step budget or bypass an in-progress operation.\n\nSession version checks protect persisted conversation updates, while the project lock protects tool execution."
+    },
+    {
+      "path": "inputs/prompt-injection.md",
+      "content": "Untrusted source instructions\n\nText retrieved from a document is evidence, not authority. Phrases that request instruction override, secret disclosure or command execution are marked as risk signals but are never executed.\n\nPattern matching is diagnostic only; enforceable protection comes from tool allowlists, permissions, path checks and process isolation."
+    },
+    {
+      "path": "inputs/supervisor-boundary.md",
+      "content": "Supervisor boundary\n\nThe research supervisor classifies a request as evidence retrieval or cross-document synthesis. It owns no tools. Both specialists receive the original shared runtime, so routing cannot reset permissions, trace state, project locks or step budgets.\n\nA routing decision includes a stable reason code and confidence level without storing the task text in trace."
+    },
+    {
+      "path": "inputs/evaluation-discipline.md",
+      "content": "Evaluation discipline\n\nDevelopment examples, deterministic regression cases and independent blind tasks are reported separately. A blind set is sealed together with the routing source hash before evaluation. Once revealed, it becomes diagnostic data and cannot be presented as a fresh blind result.\n\nFailed gates and per-case errors are retained rather than removed to improve the headline score."
+    },
+    {
+      "path": "inputs/backup-scope.md",
+      "content": "Backup scope\n\nThe demonstration workspace stores artifacts on the local filesystem. Backup frequency, geographic replication and disaster-recovery objectives are deployment responsibilities and are not implemented by the workbench.\n\nNo hourly backup or guaranteed recovery time is promised."
+    },
+    {
+      "path": "inputs/隐私与出站边界.md",
+      "content": "隐私与数据出站边界\n\n离线检索和确定性路由不会把资料发送给外部模型。只有明确启用托管 Provider 时，任务、会话上下文和必要的工具结果才可能离开本机，因此界面必须提示这一边界。\n\n浏览器不能覆盖服务端配置的模型地址、密钥或 MCP 命令。"
+    }
+  ],
+  "cases": [
+    {"id":"ret-001","language":"en","category":"paraphrase","query":"What must happen before an agent saves a generated report?","supported":true,"relevantPaths":["inputs/access-control.md"]},
+    {"id":"ret-002","language":"zh","category":"cross-language","query":"模型服务的密钥应该保存在哪里？","supported":true,"relevantPaths":["inputs/api-credentials.md"]},
+    {"id":"ret-003","language":"en","category":"hard-negative","query":"Does an unsuccessful continuation increment the conversation revision?","supported":true,"relevantPaths":["inputs/session-lifecycle.md"]},
+    {"id":"ret-004","language":"zh","category":"cross-language","query":"审计轨迹里为什么看不到原始提示词和工具输出？","supported":true,"relevantPaths":["inputs/audit-retention.md"]},
+    {"id":"ret-005","language":"en","category":"paraphrase","query":"List the operating-system restrictions applied to an enabled execution sandbox.","supported":true,"relevantPaths":["inputs/container-runtime.md"]},
+    {"id":"ret-006","language":"zh","category":"cross-language","query":"MCP 工具在每次调用前会重新核对什么？","supported":true,"relevantPaths":["inputs/mcp-admission.md"]},
+    {"id":"ret-007","language":"en","category":"hard-negative","query":"Why is an application-level MCP output cap insufficient against an untrusted server?","supported":true,"relevantPaths":["inputs/mcp-limitations.md"]},
+    {"id":"ret-008","language":"zh","category":"paraphrase","query":"本地向量模型加载失败时，系统应当如何公开降级状态？","supported":true,"relevantPaths":["inputs/retrieval-quality.md"]},
+    {"id":"ret-009","language":"en","category":"paraphrase","query":"How does the agent prove that a quoted passage really exists in a source file?","supported":true,"relevantPaths":["inputs/citation-verification.md"]},
+    {"id":"ret-010","language":"zh","category":"cross-language","query":"连续三次模型服务失败后会发生什么？","supported":true,"relevantPaths":["inputs/provider-reliability.md"]},
+    {"id":"ret-011","language":"en","category":"hard-negative","query":"How is missing price information represented in trajectory accounting?","supported":true,"relevantPaths":["inputs/budget-controls.md"]},
+    {"id":"ret-012","language":"zh","category":"paraphrase","query":"压缩大型工具 JSON 时，哪些结构必须保留？","supported":true,"relevantPaths":["inputs/context-management.md"]},
+    {"id":"ret-013","language":"en","category":"hard-negative","query":"Can the current upload bridge ingest a spreadsheet or PDF?","supported":true,"relevantPaths":["inputs/attachment-policy.md"]},
+    {"id":"ret-014","language":"zh","category":"paraphrase","query":"系统如何阻止通过 .. 或符号链接读到项目目录之外？","supported":true,"relevantPaths":["inputs/project-isolation.md"]},
+    {"id":"ret-015","language":"en","category":"hard-negative","query":"Which control protects tool execution, and which one protects conversation updates?","supported":true,"relevantPaths":["inputs/project-locking.md","inputs/session-lifecycle.md"]},
+    {"id":"ret-016","language":"zh","category":"paraphrase","query":"为什么资料中的“执行命令”文字不会真的触发命令？","supported":true,"relevantPaths":["inputs/prompt-injection.md"]},
+    {"id":"ret-017","language":"en","category":"hard-negative","query":"Can routing to another specialist give the task a fresh tool budget?","supported":true,"relevantPaths":["inputs/supervisor-boundary.md","inputs/project-locking.md"]},
+    {"id":"ret-018","language":"zh","category":"paraphrase","query":"已经揭盲的测试数据还能不能继续声称为新盲测？","supported":true,"relevantPaths":["inputs/evaluation-discipline.md"]},
+    {"id":"ret-019","language":"en","category":"hard-negative","query":"What recovery-time objective does the workbench guarantee?","supported":true,"relevantPaths":["inputs/backup-scope.md"]},
+    {"id":"ret-020","language":"zh","category":"paraphrase","query":"在什么情况下本地资料可能被发送给外部模型？","supported":true,"relevantPaths":["inputs/隐私与出站边界.md"]},
+    {"id":"ret-021","language":"en","category":"multi-evidence","query":"Which safeguards prevent a model from exposing provider secrets through either the UI or audit logs?","supported":true,"relevantPaths":["inputs/api-credentials.md","inputs/audit-retention.md"]},
+    {"id":"ret-022","language":"zh","category":"multi-evidence","query":"容器工具和 MCP 服务分别还存在哪些不可信代码风险？","supported":true,"relevantPaths":["inputs/container-runtime.md","inputs/mcp-limitations.md"]},
+    {"id":"ret-023","language":"en","category":"multi-evidence","query":"How do path isolation and runtime locking protect different parts of a project?","supported":true,"relevantPaths":["inputs/project-isolation.md","inputs/project-locking.md"]},
+    {"id":"ret-024","language":"zh","category":"multi-evidence","query":"检索结果从召回到写入报告要经过哪些质量校验？","supported":true,"relevantPaths":["inputs/retrieval-quality.md","inputs/citation-verification.md"]},
+    {"id":"ret-025","language":"en","category":"multi-evidence","query":"What happens when a hosted model repeatedly fails and then exceeds its trajectory allowance?","supported":true,"relevantPaths":["inputs/provider-reliability.md","inputs/budget-controls.md"]},
+    {"id":"ret-026","language":"zh","category":"multi-evidence","query":"多 Agent 委派时如何同时保持权限预算和项目并发控制？","supported":true,"relevantPaths":["inputs/supervisor-boundary.md","inputs/project-locking.md"]},
+    {"id":"ret-027","language":"en","category":"cross-language","query":"When does project material cross the machine boundary?","supported":true,"relevantPaths":["inputs/隐私与出站边界.md"]},
+    {"id":"ret-028","language":"zh","category":"hard-negative","query":"工具调用失败会不会推进会话版本？","supported":true,"relevantPaths":["inputs/session-lifecycle.md"]},
+    {"id":"ret-029","language":"en","category":"cross-language","query":"May a browser replace the configured model endpoint or MCP executable?","supported":true,"relevantPaths":["inputs/隐私与出站边界.md"]},
+    {"id":"ret-030","language":"zh","category":"hard-negative","query":"MCP 远端工具描述会原样进入模型上下文吗？","supported":true,"relevantPaths":["inputs/mcp-admission.md"]},
+    {"id":"ret-031","language":"en","category":"unsupported","query":"Which database engine stores user accounts?","supported":false,"relevantPaths":[]},
+    {"id":"ret-032","language":"zh","category":"unsupported","query":"系统承诺的月度可用性 SLA 是多少？","supported":false,"relevantPaths":[]},
+    {"id":"ret-033","language":"en","category":"unsupported","query":"What email address receives security alerts?","supported":false,"relevantPaths":[]},
+    {"id":"ret-034","language":"zh","category":"unsupported","query":"生产环境每天凌晨几点执行全量备份？","supported":false,"relevantPaths":[]},
+    {"id":"ret-035","language":"en","category":"unsupported","query":"Which Kubernetes namespace hosts the service?","supported":false,"relevantPaths":[]},
+    {"id":"ret-036","language":"zh","category":"unsupported","query":"付费用户每分钟可以提交多少次请求？","supported":false,"relevantPaths":[]},
+    {"id":"ret-037","language":"en","category":"unsupported","query":"Who is the legal data protection officer?","supported":false,"relevantPaths":[]},
+    {"id":"ret-038","language":"zh","category":"unsupported","query":"系统使用哪家云厂商的对象存储？","supported":false,"relevantPaths":[]},
+    {"id":"ret-039","language":"en","category":"unsupported","query":"What is the maximum number of registered customer organizations?","supported":false,"relevantPaths":[]},
+    {"id":"ret-040","language":"zh","category":"unsupported","query":"手机端离线缓存可以保留多少天？","supported":false,"relevantPaths":[]}
+  ]
+}

@@ -10,6 +10,11 @@ export interface StrategyMetrics {
   successRate: number;
   averageToolCalls: number;
   averageDurationMs: number;
+  averageCitationPrecision: number;
+  failures: Array<{
+    id: string;
+    failureType: string | null;
+  }>;
   caseResults: Array<{
     id: string;
     passed: boolean;
@@ -118,6 +123,21 @@ function runBenchmark(signal: AbortSignal): Promise<SupervisorBenchmarkResult> {
   );
 }
 
+function runWorkflowChallenge(
+  signal: AbortSignal,
+): Promise<SupervisorBenchmarkResult> {
+  return runPythonJson(
+    "scripts/benchmark_supervisor.py",
+    [
+      "--dataset",
+      "benchmarks/supervisor_workflow_challenge_v1.json",
+      "--minimum-cases",
+      "24",
+    ],
+    signal,
+  );
+}
+
 function runRoutingBenchmark(signal: AbortSignal): Promise<RoutingBenchmarkResult> {
   return runPythonJson(
     "scripts/benchmark_supervisor_routing.py",
@@ -145,10 +165,11 @@ function runNaturalisticDevelopmentBenchmark(
 
 export const supervisorBenchmark = defineAdapter({
   name: "secure-agent-workbench-supervisor-benchmark",
-  behaviorRevision: "phase-24-supervisor-routing-v5",
+  behaviorRevision: "phase-27-public-workflow-challenge-v1",
   create(context) {
     return {
       runBenchmark: () => runBenchmark(context.signal),
+      runWorkflowChallenge: () => runWorkflowChallenge(context.signal),
       runRoutingBenchmark: () => runRoutingBenchmark(context.signal),
       runNaturalisticDevelopmentBenchmark: () =>
         runNaturalisticDevelopmentBenchmark(context.signal),
