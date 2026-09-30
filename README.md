@@ -47,7 +47,7 @@
 - `blind_routing_review.py` 提供本机逐条标注界面；不接触模型/API，令牌只放在 URL fragment，输入输出强制位于 private 目录
 - 模型格式错误、未知工具、无限循环、预算越界和未批准写入回归测试
 - 无模型、无网络即可运行的安全与主流程测试
-- 项目演示、架构讲解、失败复盘和项目说明见 `private project notes`
+
 
 ## 快速开始
 
