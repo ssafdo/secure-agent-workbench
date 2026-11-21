@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "baseUrl": "http://127.0.0.1:8767",
+  "scenarios": {
+    "retrievalCitation": {
+      "passed": true,
+      "projectId": "fc17183c66eae527cc96e19dcb5df4bf",
+      "retrievalMode": "lexical",
+      "citations": [
+        {
+          "citation": "inputs/migration-plan.md#L1-L2",
+          "path": "inputs/migration-plan.md",
+          "startLine": 1,
+          "endLine": 2,
+          "text": "迁移采用分阶段发布。若新版本五分钟错误率超过 2%，立即回滚到稳定版本。\nAPI 密钥只能保存在服务端环境变量中，不得返回浏览器。",
+          "score": 1.0,
+          "lexicalScore": 0.63834,
+          "semanticScore": null,
+          "relevanceScore": null,
+          "answerabilityScore": null,
+          "matchedQueryVariant": null,
+          "instructionRisk": false,
+          "riskSignals": []
+        }
+      ]
+    },
+    "supervisorRouting": {
+      "passed": true,
+      "retrieval": {
+        "specialist": "retrieval",
+        "reason": "evidence-grounded-query",
+        "signalCount": 1,
+        "confidence": "high",
+        "synthesisSignalCount": 0,
+        "retrievalSignalCount": 2
+      },
+      "synthesis": {
+        "specialist": "synthesis",
+        "reason": "cross-source-synthesis",
+        "signalCount": 3,
+        "confidence": "high",
+        "synthesisSignalCount": 3,
+        "retrievalSignalCount": 0
+      }
+    },
+    "offlineReAct": {
+      "passed": true,
+      "projectId": "6942379564ab871203cded4ba42e76cd",
+      "actions": [
+        "list_files",
+        "read_text",
+        "read_text",
+        "write_text"
+      ],
+      "modelUsage": {
+        "calls": 4,
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "costUSD": 0.0
+      }
+    }
+  },
+  "deepSeekEvidence": {
+    "mode": "existing-niceeval-run",
+    "runId": "c642a27e-f821-4d14-afef-cda5288d0765",
+    "note": "This deterministic project demo does not call an external model."
+  }
+}

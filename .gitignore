@@ -17,3 +17,4 @@ artifacts/private/
 htmlcov/
 .mypy_cache/
 .ruff_cache/
+.private/

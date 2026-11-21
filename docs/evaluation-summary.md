@@ -254,7 +254,7 @@ python scripts/calibrate_qa_answerability.py `
   --output artifacts/retrieval/qa-evidence-set-calibration-v1.json
 ```
 
-发布版本到此停止扩展检索验证器。后续若继续研究，应使用专门的长上下文集合回答性模型或生成式判别器，并重新建立数据，而不是继续在当前三份已揭示数据上调参。
+当前发布版本到此停止扩展检索验证器。后续若继续研究，应使用专门的长上下文集合回答性模型或生成式判别器，并重新建立数据，而不是继续在当前三份已揭示数据上调参。
 
 ## Supervisor 工作流挑战集 v1
 
